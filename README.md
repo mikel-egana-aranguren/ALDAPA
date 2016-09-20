@@ -1,2 +1,2 @@
 # ALDAPA
-Assistant for Linked Data Production Automation
+Assistant for Linked Data Production Automation 
