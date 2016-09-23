@@ -3,9 +3,10 @@ language: java
 jdk: oraclejdk8
 
 script: 
-	- mvn test
-	- mvn package
+- mvn test
+- mvn package
 
-#branches:
-#	only
-#	- development
+branches:
+only
+- master # checking
+- development
