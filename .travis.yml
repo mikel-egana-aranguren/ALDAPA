@@ -2,8 +2,10 @@ language: java
 
 jdk: oraclejdk8
 
-script: mvn test
+script: 
+	- mvn test
+	- mvn package
 
-branches:
-	only
-	- development
+#branches:
+#	only
+#	- development

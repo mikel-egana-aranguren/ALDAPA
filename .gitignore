@@ -4,7 +4,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.ear
 
@@ -12,6 +12,17 @@
 hs_err_pid*
 
 
-/target/
-!/target/*jar
-!/target/site/*
+
+# ?????!!!!!!!! :-(
+
+#/target/
+#!/target/*.jar
+#!/target/site/*
+
+
+/target/surefire-reports
+/target/classes
+/target/maven-archiver
+/target/maven-status
+/.classpath
+/.project
