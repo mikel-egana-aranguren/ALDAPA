@@ -7,6 +7,6 @@ script:
 - mvn package
 
 branches:
-only
-- master # checking
-- development
+  only:
+  - master
+  - development
