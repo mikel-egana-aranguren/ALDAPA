@@ -22,7 +22,6 @@ public class ConfigurationProperties extends Properties {
 
 	public ConfigurationProperties() {
 		super();
-//		logger.info;
 	}
 
 	/**
