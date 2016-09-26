@@ -9,7 +9,7 @@ import java.io.InputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import es.eurohelp.opendata.aldapa.api.configuration.test.ConfigurationPropertiesTest;
+
 
 /**
  * @author megana
