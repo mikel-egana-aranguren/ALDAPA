@@ -18,25 +18,34 @@ import es.eurohelp.opendata.aldapa.api.configuration.test.ConfigurationPropertie
 public class ConfigurationManager {
 
 	/**
-	 * 
+	 * A configuration manager can only have one configuration
 	 */
 	
 	final static Logger logger = LogManager.getLogger(ConfigurationManager.class);
 	
+	private ConfigurationProperties config_props;
+	private boolean configured = false;
+	
 	public ConfigurationManager() {
-		
+		config_props = new ConfigurationProperties();
 	}
 	
 	public void loadDefaultConfiguration (){}
 	
-	public void loadConfigurationFromInputStream (InputStream inStream){
-		ConfigurationProperties config_props = new ConfigurationProperties();
-		try {
+	public void loadConfigurationFromFile (String resource_path) throws ManagerAlreadyConfiguredException, IOException{
+		if (!configured){
+			InputStream inStream = ConfigurationManager.class.getResourceAsStream(resource_path);
 			config_props.load(inStream);
-		} catch (IOException e) {
-			logger.catching(e);
-			e.printStackTrace();
+			configured = true;
+			logger.info("Manager configured");
+		}
+		else{
+			logger.info("Manager already configured");
+			throw new ManagerAlreadyConfiguredException();
 		}
 	}
-
+	
+	public String getConfigurationValueBypropertyName (String PropertyName) {
+		return (String) config_props.get(PropertyName);
+	}
 }
