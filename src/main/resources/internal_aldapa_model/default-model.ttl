@@ -1,0 +1,2 @@
+<urn:aldapa:project:default-project> rdf:type foaf:Project
+<urn:aldapa:project:default-project> owl:sameAs 

@@ -1,0 +1,1 @@
+RETRIEVE_PROJECTS = SELECT ?project WHERE {?project owl:sameAs ?dcat_catalog . ?dcat_catalog rdf:type dcat:catalog}

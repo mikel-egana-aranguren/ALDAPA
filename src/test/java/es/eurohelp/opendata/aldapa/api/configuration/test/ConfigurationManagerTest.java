@@ -54,8 +54,8 @@ public class ConfigurationManagerTest {
 	@Test
 	public final void testLoadConfigurationFromFile() {
 		try {
-			test_manager.loadConfigurationFromFile("/aldapa-configuration.properties");
-			assertEquals("urn:aldapa:",test_manager.getConfigurationValueBypropertyName("INTERNAL_BASE"));
+			test_manager.loadConfigurationFromFile("/configuration/aldapa-default-configuration.properties");
+			assertEquals("urn:aldapa:",test_manager.getConfigurationValueBypropertyName("BASE"));
 		} catch (ManagerAlreadyConfiguredException e) {
 			logger.catching(e);
 		} catch (IOException e) {
