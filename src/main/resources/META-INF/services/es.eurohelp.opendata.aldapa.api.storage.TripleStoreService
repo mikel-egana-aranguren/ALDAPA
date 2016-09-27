@@ -1,0 +1,2 @@
+es.eurohelp.opendata.aldapa.impl.storage.StardogTripleStore
+es.eurohelp.opendata.aldapa.impl.storage.BlazegraphTripleStore
