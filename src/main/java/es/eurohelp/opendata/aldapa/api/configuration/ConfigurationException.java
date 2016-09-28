@@ -4,7 +4,10 @@
 package es.eurohelp.opendata.aldapa.api.configuration;
 
 /**
- * @author megana
+ * 
+ * An exception related to the configuration of the API
+ * 
+ * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class ConfigurationException extends Exception {

@@ -1,1 +1,3 @@
 es.eurohelp.opendata.aldapa.api.configuration
+es.eurohelp.opendata.aldapa.api.storage
+es.eurohelp.opendata.aldapa.impl.storage

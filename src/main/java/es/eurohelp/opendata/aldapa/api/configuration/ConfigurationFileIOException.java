@@ -4,24 +4,18 @@
 package es.eurohelp.opendata.aldapa.api.configuration;
 
 /**
- * @author megana
+ * 
+ * An IO exception related to the properties file holding the configuration
+ * 
+ * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class ConfigurationFileIOException extends ConfigurationException {
 
-	/**
-	 * 
-	 */
-	public ConfigurationFileIOException() {
-		// TODO Auto-generated constructor stub
-	}
+	private static final String MESSAGE = "IO problem with configuration file";
 
-	/**
-	 * @param message
-	 */
-	public ConfigurationFileIOException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
+	public ConfigurationFileIOException() {
+		super(MESSAGE);
 	}
 
 	/**
@@ -29,7 +23,6 @@ public class ConfigurationFileIOException extends ConfigurationException {
 	 */
 	public ConfigurationFileIOException(Throwable cause) {
 		super(cause);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -38,7 +31,6 @@ public class ConfigurationFileIOException extends ConfigurationException {
 	 */
 	public ConfigurationFileIOException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -50,7 +42,5 @@ public class ConfigurationFileIOException extends ConfigurationException {
 	public ConfigurationFileIOException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
-		// TODO Auto-generated constructor stub
 	}
-
 }
