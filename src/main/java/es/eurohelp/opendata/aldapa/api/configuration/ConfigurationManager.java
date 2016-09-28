@@ -40,7 +40,7 @@ public class ConfigurationManager {
 			try {
 				configurationProperties.load(inStream);
 			} catch (IOException e) {
-				throw new ConfigurationFileIOException(e.getMessage(), e.getCause());
+				throw new ConfigurationFileIOException(e.getMessage(), e);
 			}
 			configured = true;
 			LOGGER.info("Manager configured");
