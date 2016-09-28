@@ -21,31 +21,32 @@ public class ConfigurationManager {
 	 * A configuration manager can only have one configuration
 	 */
 	
-	final static Logger logger = LogManager.getLogger(ConfigurationManager.class);
+	private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
 	
-	private ConfigurationProperties config_props;
+	private ConfigurationProperties configurationProperties;
 	private boolean configured = false;
 	
 	public ConfigurationManager() {
-		config_props = new ConfigurationProperties();
+		configurationProperties = new ConfigurationProperties();
 	}
 	
-	public void loadDefaultConfiguration (){}
+	public void loadDefaultConfiguration (){
+		// load default configuration
+	}
 	
-	public void loadConfigurationFromFile (String resource_path) throws ManagerAlreadyConfiguredException, IOException{
+	public void loadConfigurationFromFile (String resourcePath) throws Exception{
 		if (!configured){
-			InputStream inStream = ConfigurationManager.class.getResourceAsStream(resource_path);
-			config_props.load(inStream);
+			InputStream inStream = ConfigurationManager.class.getResourceAsStream(resourcePath);
+			configurationProperties.load(inStream);
 			configured = true;
-			logger.info("Manager configured");
-		}
-		else{
-			logger.info("Manager already configured");
+			LOGGER.info("Manager configured");
+		} else {
+			LOGGER.info("Manager already configured");
 			throw new ManagerAlreadyConfiguredException();
 		}
 	}
 	
 	public String getConfigurationValueBypropertyName (String PropertyName) {
-		return (String) config_props.get(PropertyName);
+		return (String) configurationProperties.get(PropertyName);
 	}
 }

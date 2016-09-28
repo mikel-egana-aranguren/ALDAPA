@@ -21,7 +21,7 @@ import es.eurohelp.opendata.aldapa.api.configuration.ManagerAlreadyConfiguredExc
 public class ConfigurationManagerTest {
 
 	
-	final static Logger logger = LogManager.getLogger(ConfigurationManagerTest.class);
+	private final static Logger LOGGER = LogManager.getLogger(ConfigurationManagerTest.class);
 	
 	/**
 	 * Test method for {@link es.eurohelp.opendata.aldapa.api.configuration.ConfigurationManager#ConfigurationManager()}.
@@ -55,11 +55,13 @@ public class ConfigurationManagerTest {
 	public final void testLoadConfigurationFromFile() {
 		try {
 			test_manager.loadConfigurationFromFile("/configuration/aldapa-default-configuration.properties");
-			assertEquals("urn:aldapa:",test_manager.getConfigurationValueBypropertyName("BASE"));
+			assertEquals("urn:aldapa:",test_manager.getConfigurationValueBypropertyName("INTERNAL_BASE"));
 		} catch (ManagerAlreadyConfiguredException e) {
-			logger.catching(e);
+			LOGGER.catching(e);
 		} catch (IOException e) {
-			logger.catching(e);
+			LOGGER.catching(e);
+		} catch (Exception e) {
+			LOGGER.catching(e);
 		}
 	}
 }

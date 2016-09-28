@@ -15,7 +15,7 @@ import es.eurohelp.opendata.aldapa.api.storage.TripleStoreService;
  */
 public class StardogTripleStore implements TripleStoreService {
 	
-	final static Logger logger = LogManager.getLogger(StardogTripleStore.class);
+	private static final Logger LOGGER = LogManager.getLogger(StardogTripleStore.class);
 
 	/**
 	 * 
@@ -28,6 +28,6 @@ public class StardogTripleStore implements TripleStoreService {
 	 * @see es.eurohelp.opendata.aldapa.api.storage.TripleStoreService#loadRDF4JModel(org.eclipse.rdf4j.model.Model)
 	 */
 	public void loadRDF4JModel(Model model) {
-		logger.info(StardogTripleStore.class.getName());
+		LOGGER.info(StardogTripleStore.class.getName());
 	}
 }
