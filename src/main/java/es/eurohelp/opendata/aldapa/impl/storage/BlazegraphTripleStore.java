@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 
-import es.eurohelp.opendata.aldapa.api.configuration.ConfigurationManager;
 import es.eurohelp.opendata.aldapa.api.storage.TripleStoreService;
 
 /**

@@ -11,6 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
+import es.eurohelp.opendata.aldapa.api.configuration.ConfigurationException;
+import es.eurohelp.opendata.aldapa.api.configuration.ConfigurationFileIOException;
 import es.eurohelp.opendata.aldapa.api.configuration.ConfigurationManager;
 import es.eurohelp.opendata.aldapa.api.configuration.ManagerAlreadyConfiguredException;
 
@@ -56,12 +58,8 @@ public class ConfigurationManagerTest {
 		try {
 			test_manager.loadConfigurationFromFile("/configuration/aldapa-default-configuration.properties");
 			assertEquals("urn:aldapa:",test_manager.getConfigurationValueBypropertyName("INTERNAL_BASE"));
-		} catch (ManagerAlreadyConfiguredException e) {
+		} catch (ConfigurationException e) {
 			LOGGER.catching(e);
-		} catch (IOException e) {
-			LOGGER.catching(e);
-		} catch (Exception e) {
-			LOGGER.catching(e);
-		}
+		} 
 	}
 }

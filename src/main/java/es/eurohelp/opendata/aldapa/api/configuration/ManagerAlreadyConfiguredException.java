@@ -7,15 +7,15 @@ package es.eurohelp.opendata.aldapa.api.configuration;
  * @author megana
  *
  */
-public class ManagerAlreadyConfiguredException extends Exception {
+public class ManagerAlreadyConfiguredException extends ConfigurationException {
 
 	/**
 	 * 
 	 */
 	
-	private final static String message = "Manager already configured";
+	private final static String MESSAGE = "Manager already configured";
 	
-	public ManagerAlreadyConfiguredException() {
-		super(message);
+	protected ManagerAlreadyConfiguredException() {
+		super(MESSAGE);
 	}
 }

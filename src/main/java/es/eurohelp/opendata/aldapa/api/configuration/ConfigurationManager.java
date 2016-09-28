@@ -34,10 +34,14 @@ public class ConfigurationManager {
 		// load default configuration
 	}
 	
-	public void loadConfigurationFromFile (String resourcePath) throws Exception{
+	public void loadConfigurationFromFile (String resourcePath) throws ConfigurationException {
 		if (!configured){
 			InputStream inStream = ConfigurationManager.class.getResourceAsStream(resourcePath);
-			configurationProperties.load(inStream);
+			try {
+				configurationProperties.load(inStream);
+			} catch (IOException e) {
+				throw new ConfigurationFileIOException(e.getMessage(), e.getCause());
+			}
 			configured = true;
 			LOGGER.info("Manager configured");
 		} else {
@@ -46,7 +50,7 @@ public class ConfigurationManager {
 		}
 	}
 	
-	public String getConfigurationValueBypropertyName (String PropertyName) {
-		return (String) configurationProperties.get(PropertyName);
+	public String getConfigurationValueBypropertyName (String propertyName) {
+		return (String) configurationProperties.get(propertyName);
 	}
 }
