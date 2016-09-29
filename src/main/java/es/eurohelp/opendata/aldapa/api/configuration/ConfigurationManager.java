@@ -41,7 +41,7 @@ public class ConfigurationManager {
      * 
      * Load a configuration file from a path
      * 
-     * @param resourcePath the path of the configuration file, in java properties format
+     * @param resourcePath the resource path of the configuration file, eg /configuration/aldapa-default-configuration.properties. The file should have a Java properties format
      * 
      */
 	

@@ -1,2 +1,19 @@
-<urn:aldapa:project:default-project> rdf:type foaf:Project
-<urn:aldapa:project:default-project> owl:sameAs 
+# This is the default internal model for ALDAPA. 
+
+# It stores projects, file paths, pipelines, and the data itself through named graphs
+
+# URIs are taken from aldapa-default-configuration.properties
+
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl:<http://www.w3.org/2002/07/owl#>
+PREFIX foaf:<http://xmlns.com/foaf/0.1/>
+PREFIX dcat:<http://www.w3.org/ns/dcat#>
+
+<urn:aldapa:project:PROYECT_NAME> rdf:type foaf:Project ;
+	owl:sameAs <http://opendata.eurohelp.es/catalog/CATALOG_NAME> .
+	
+<http://opendata.eurohelp.es/catalog/CATALOG_NAME> rdf:type dcat:Catalog ;
+	dcat:dataset <http://opendata.eurohelp.es/dataset/DATASET_NAME> .
+	
+<http://opendata.eurohelp.es/dataset/DATASET_NAME> rdf:type dcat:Dataset .	
+
