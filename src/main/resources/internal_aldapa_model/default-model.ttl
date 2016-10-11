@@ -4,16 +4,31 @@
 
 # URIs are taken from aldapa-default-configuration.properties
 
+# This is orientative and incomplete (see TODOs)
+
 PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl:<http://www.w3.org/2002/07/owl#>
 PREFIX foaf:<http://xmlns.com/foaf/0.1/>
 PREFIX dcat:<http://www.w3.org/ns/dcat#>
 
+
+# The project is the catalog
+
+# TODO: Look at DCAT vocabulary overview (https://www.w3.org/TR/vocab-dcat/#vocabulary-overview) and complete things like dct:title etc 
+# TODO: A nice mechanism for parametrising INSERT queries when metadata (e.g. dct:title) is incomplete (see issue #5)
+
 <urn:aldapa:project:PROYECT_NAME> rdf:type foaf:Project ;
-	owl:sameAs <http://opendata.eurohelp.es/catalog/CATALOG_NAME> .
+	owl:sameAs <http://opendata.eurohelp.es/catalog/CATALOG_NAME> .	
 	
 <http://opendata.eurohelp.es/catalog/CATALOG_NAME> rdf:type dcat:Catalog ;
 	dcat:dataset <http://opendata.eurohelp.es/dataset/DATASET_NAME> .
 	
-<http://opendata.eurohelp.es/dataset/DATASET_NAME> rdf:type dcat:Dataset .	
+<http://opendata.eurohelp.es/dataset/DATASET_NAME> rdf:type dcat:Dataset ;
+	dcat:distribution <http://opendata.eurohelp.es/distribution/RDF_DUMP_DISTRIBUTION_NAME> ;
+	dcat:distribution <http://opendata.eurohelp.es/distribution/SPARQL_ENDPOINT_DISTRIBUTION_NAME> ;	
+	dcat:distribution <http://opendata.eurohelp.es/distribution/LINKED_DATA_SERVER_DISTRIBUTION_NAME> .
+	
+# TODO: void
+# TODO: prov
+# TODO: named graphs for data, how do they relate to DCAT and void?		
 
