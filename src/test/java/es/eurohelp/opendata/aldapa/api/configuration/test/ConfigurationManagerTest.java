@@ -3,63 +3,57 @@
  */
 package es.eurohelp.opendata.aldapa.api.configuration.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.io.IOException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
-import es.eurohelp.opendata.aldapa.api.configuration.ConfigurationException;
-import es.eurohelp.opendata.aldapa.api.configuration.ConfigurationFileIOException;
-import es.eurohelp.opendata.aldapa.api.configuration.ConfigurationManager;
-import es.eurohelp.opendata.aldapa.api.configuration.ManagerAlreadyConfiguredException;
+import es.eurohelp.opendata.aldapa.exception.ConfigurationFileIOException;
+import es.eurohelp.opendata.aldapa.util.ConfigurationManager;
 
 /**
  * @author megana
  *
  */
 public class ConfigurationManagerTest {
+	
 
-	
-	private final static Logger LOGGER = LogManager.getLogger(ConfigurationManagerTest.class);
-	
-	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.api.configuration.ConfigurationManager#ConfigurationManager()}.
-	 */
-	
 	ConfigurationManager test_manager = null;
-	
-	public ConfigurationManagerTest() {
-		test_manager = new ConfigurationManager();
-		assertNotNull(test_manager);
+
+	/**
+	 * Constructor for ConfigurationManagerTest
+	 * 
+	 * @throws ConfigurationFileIOException
+	 */
+	public ConfigurationManagerTest() throws ConfigurationFileIOException {
+		test_manager = ConfigurationManager.getInstance();
 	}
-	
+
+	/**
+	 * Test method for {@link ConfigurationManager#ConfigurationManager()}
+	 * .
+	 */
 	@Test
 	public final void testConfigurationManager() {
 		assertNotNull(test_manager);
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.api.configuration.ConfigurationManager#loadDefaultConfiguration()}.
+	 * Test method for {@link ConfigurationManager#getAppConfigProperty(java.lang.String)}.
 	 */
 	@Test
-	public final void testLoadDefaultConfiguration() {
-		// TODO 
-		// fail("Not yet implemented"); 
+	public final void testGetAppConfigProperty() {
+		String aldapaConfigFile = test_manager.getAppConfigProperty("ALDAPA_CONFIG_FILE");
+		assertNotNull(aldapaConfigFile);
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.api.configuration.ConfigurationManager#loadConfigurationFromFile(java.lang.String)}.
+	 * Test method for {@link ConfigurationManager#getAldapaConfigProperty(java.lang.String)}.
 	 */
 	@Test
-	public final void testLoadConfigurationFromFile() {
-		try {
-			test_manager.loadConfigurationFromFile("/configuration/aldapa-default-configuration.properties");
-			assertEquals("urn:aldapa:",test_manager.getConfigurationValueBypropertyName("INTERNAL_BASE"));
-		} catch (ConfigurationException e) {
-			LOGGER.catching(e);
-		} 
+	public final void testGetAldapaConfigProperty() {
+		String aldapaInternalBase = test_manager.getAldapaConfigProperty("INTERNAL_BASE");
+		assertNotNull(aldapaInternalBase);
+		assertEquals("urn:aldapa:", aldapaInternalBase);
 	}
 }

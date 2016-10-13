@@ -3,8 +3,6 @@
  */
 package es.eurohelp.opendata.aldapa.api.storage.test;
 
-import static org.junit.Assert.*;
-
 import java.util.ServiceLoader;
 
 import org.apache.logging.log4j.LogManager;
