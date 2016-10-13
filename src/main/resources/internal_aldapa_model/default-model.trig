@@ -1,12 +1,17 @@
-# This is the default internal model for ALDAPA. 
+############################
+#
+# ALDAPA internal model	
+#
+#
+# This is the default internal model for ALDAPA: It stores projects, file paths, URI families, pipelines, and the data itself through named graphs.
+# This file is maintained for documentation purposes, in order to have an explicit, version-controlled representation of the model, it is not loaded into ALDAPA: the model itself is loaded by other means.
+# URIs are taken from the file resources/configuration/aldapa-default-configuration.properties and are parametrised with actual names during execution, when the model is loaded.
+# This model is orientative: is is still very incomplete (see TODOs), and very preliminary (e.g. the modelling may change, especially around the dcat:Dataset as a named graph decision)
+#
+############################
 
-# It stores projects, file paths, pipelines, and the data itself through named graphs
-
-# URIs are taken from aldapa-default-configuration.properties
-
-# This file is orientative and incomplete (see TODOs), very preliminary (esp. the modelling around the dcat:Dataset as a named graph)
-
-
+############################
+# 
 # Common prefixes
 
 PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -15,29 +20,44 @@ PREFIX foaf:<http://xmlns.com/foaf/0.1/>
 PREFIX dcat:<http://www.w3.org/ns/dcat#>
 PREFIX void:<http://rdfs.org/ns/void#>
 
-# ALDAPA prefixes (TODO: take these from configuration file)
+# ALDAPA prefixes 
 
-# The project is the catalog
+PREFIX project:<urn:aldapa:project:>
+PREFIX catalog:<http://opendata.eurohelp.es/catalog/>
+PREFIX dataset:<http://opendata.eurohelp.es/dataset/>
+PREFIX distribution:<http://opendata.eurohelp.es/distribution/>
+PREFIX resource:<http://opendata.eurohelp.es/resource/>
+PREFIX property:<http://opendata.eurohelp.es/property/>
 
-# TODO: Look at DCAT vocabulary overview (https://www.w3.org/TR/vocab-dcat/#vocabulary-overview) and complete things like dct:title etc 
-# TODO: A nice mechanism for parametrising INSERT queries when metadata (e.g. dct:title) is incomplete (see issue #5)
+# Metadata goes into the default graph
 
-<urn:aldapa:project:PROYECT_NAME> rdf:type foaf:Project ;
-	owl:sameAs <http://opendata.eurohelp.es/catalog/CATALOG_NAME> .	
+project:PROJECT_NAME rdf:type foaf:Project ;
+	owl:sameAs catalog:CATALOG_NAME .	
 	
-<http://opendata.eurohelp.es/catalog/CATALOG_NAME> rdf:type dcat:Catalog ;
-	dcat:dataset <http://opendata.eurohelp.es/dataset/DATASET_NAME> .
+catalog:CATALOG_NAME rdf:type dcat:Catalog ;
+	dcat:dataset dataset:DATASET_NAME .
 	
-<http://opendata.eurohelp.es/dataset/DATASET_NAME> rdf:type dcat:Dataset ;
+dataset:DATASET_NAME rdf:type dcat:Dataset ;
 	rdf:type void:Dataset . 
-	dcat:distribution <http://opendata.eurohelp.es/distribution/RDF_DUMP_DISTRIBUTION_NAME> .
-	dcat:distribution <http://opendata.eurohelp.es/distribution/SPARQL_ENDPOINT_DISTRIBUTION_NAME> .	
-	dcat:distribution <http://opendata.eurohelp.es/distribution/LINKED_DATA_SERVER_DISTRIBUTION_NAME> .
+	dcat:distribution distribution:RDF_DUMP_DISTRIBUTION_NAME .
+	dcat:distribution distribution:SPARQL_ENDPOINT_DISTRIBUTION_NAME .	
+	dcat:distribution distribution:LINKED_DATA_SERVER_DISTRIBUTION_NAME .
+
+# A dcat:Dataset is also the URI of the named graph to store actual data 
+
+dataset:DATASET_NAME {
+	resource:resource_002 property:property_001 resource:resource_003 . 
+	resource:resource_003 owl:sameAs <http://dbpedia.org/resource/Bilbao> .
+}
+
+#
+############################
+
+############################
+#
+# TODO: complete DCAT modelling (through SPARQL decorators?). A nice mechanism for parametrising INSERT queries when metadata (e.g. dct:title) is incomplete (see issue #5) is needed	
+# TODO: complete VoID modelling 
+# TODO: complete PROV modelling (e.g. when a CSV is converted)
+# TODO: take ALDAPA prefixes from configuration file
 	
-	
-# A dcat:Dataset is also the URI of the named graph to store actual data 	
-	
-# TODO: void
-# TODO: prov
-# TODO: named graphs for data, how do they relate to DCAT and void?		
 
