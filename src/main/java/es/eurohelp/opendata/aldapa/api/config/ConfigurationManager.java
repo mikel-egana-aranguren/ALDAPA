@@ -1,10 +1,11 @@
-package es.eurohelp.opendata.aldapa.util;
+package es.eurohelp.opendata.aldapa.api.config;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 import es.eurohelp.opendata.aldapa.exception.ConfigurationFileIOException;
+import es.eurohelp.opendata.aldapa.util.FileUtils;
 
 /**
  * 
@@ -101,9 +102,9 @@ public class ConfigurationManager {
 	 * Retrieves a configuration value () by the key (e.g. ALDAPA_CONFIG_FILE)
 	 * 
 	 * @param propertyName
-	 *            the configuration property name
+	 *            the configuration property name.
 	 * 
-	 * @return the configuration value for that property key
+	 * @return the configuration value for that property key. <em> null</em> if the property is not found.
 	 */
 	public String getAppConfigProperty(String key) {
 		return this.appConfigProperties.getProperty(key);
@@ -114,7 +115,7 @@ public class ConfigurationManager {
 	 * 
 	 * @param key
 	 *            the key of the property to search for.
-	 * @return the ALDAPA configuration value for that property key.
+	 * @return the ALDAPA configuration value for that property key. <em> null</em> if the property is not found.
 	 *
 	 * @author acarbajo
 	 */
