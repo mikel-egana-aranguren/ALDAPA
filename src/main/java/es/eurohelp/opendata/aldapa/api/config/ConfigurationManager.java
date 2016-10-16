@@ -71,28 +71,38 @@ public class ConfigurationManager {
 	 *             expection will occur when any of the configuration properties' file is not successfully loaded.
 	 */
 	private void loadProperties() throws ConfigurationFileIOException {
-		InputStream inStream = FileUtils.getInstance().getInputStream(ConfigurationManager.CONFIGURATION_PROPERTIES);
+		InputStream appConfigInStream = FileUtils.getInstance().getInputStream(ConfigurationManager.CONFIGURATION_PROPERTIES);
 
 		try {
-			appConfigProperties.load(inStream);
-		} catch (IOException e) {
-			throw new ConfigurationFileIOException(e.getMessage(), e);
-		}
-		
-		try {
-			appConfigProperties.load(inStream);
+			appConfigProperties.load(appConfigInStream);
 		} catch (IOException e) {
 			throw new ConfigurationFileIOException("Failed to load " + ConfigurationManager.CONFIGURATION_PROPERTIES + " file.", e);
+		} finally {
+			try {
+				if (appConfigInStream != null) {
+					appConfigInStream.close();
+				}
+			} catch (IOException ignore) {
+				// close quietly
+			}
 		}
 
 		String configFile = appConfigProperties.getProperty(ConfigurationManager.ALDAPA_CONFIG_FILE_PROPERTY);
 
 		if (null != configFile) {
-			inStream = FileUtils.getInstance().getInputStream(configFile);
+			InputStream aldapaConfigInStream = FileUtils.getInstance().getInputStream(configFile);
 			try {
-				aldapaConfigProperties.load(inStream);
+				aldapaConfigProperties.load(aldapaConfigInStream);
 			} catch (IOException e) {
-				throw new ConfigurationFileIOException("Failed to load ALDAPA config file. Specified value was: " + configFile, e);
+				throw new ConfigurationFileIOException("Failed to load ALDAPA config file. Specified file path was: " + configFile, e);
+			} finally {
+				try {
+					if (aldapaConfigInStream != null) {
+						aldapaConfigInStream.close();
+					}
+				} catch (IOException ignore) {
+					// close quietly
+				}
 			}
 		}
 	}
