@@ -13,7 +13,7 @@ public class ConfigurationFileIOException extends ConfigurationException {
 	 * serialVersionUID (type: {@link long})
 	 */
 	private static final long serialVersionUID = 7661895710448417371L;
-	
+
 	private static final String MESSAGE = "IO problem with configuration file";
 
 	/**
@@ -73,8 +73,7 @@ public class ConfigurationFileIOException extends ConfigurationException {
 	 *            whether or not the stack trace should
 	 *            be writable
 	 */
-	public ConfigurationFileIOException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
+	public ConfigurationFileIOException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }

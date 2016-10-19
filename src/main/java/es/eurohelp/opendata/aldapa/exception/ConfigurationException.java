@@ -13,7 +13,7 @@ public class ConfigurationException extends Exception {
 	 * serialVersionUID (type: {@link long})
 	 */
 	private static final long serialVersionUID = -8184966583886906920L;
-	
+
 	/**
 	 * Constructs a new ConfigurationException exception without detail message.
 	 */

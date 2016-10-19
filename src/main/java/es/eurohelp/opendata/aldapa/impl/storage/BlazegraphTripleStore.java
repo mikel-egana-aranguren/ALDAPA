@@ -14,7 +14,7 @@ import es.eurohelp.opendata.aldapa.api.storage.TripleStoreService;
  *
  */
 public class BlazegraphTripleStore implements TripleStoreService {
-	
+
 	private static final Logger LOGGER = LogManager.getLogger(BlazegraphTripleStore.class);
 
 	/**
@@ -24,7 +24,8 @@ public class BlazegraphTripleStore implements TripleStoreService {
 		// TODO Auto-generated constructor stub
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see es.eurohelp.opendata.aldapa.api.storage.TripleStoreService#loadRDF4JModel(org.eclipse.rdf4j.model.Model)
 	 */
 	public void loadRDF4JModel(Model model) {

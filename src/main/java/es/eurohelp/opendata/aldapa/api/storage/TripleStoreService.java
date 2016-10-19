@@ -10,5 +10,5 @@ import org.eclipse.rdf4j.model.Model;
  *
  */
 public interface TripleStoreService {
-	public void loadRDF4JModel (Model model);
+	public void loadRDF4JModel(Model model);
 }

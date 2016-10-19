@@ -16,19 +16,19 @@ import es.eurohelp.opendata.aldapa.api.storage.TripleStoreService;
  *
  */
 public class TripleStoreServicesLoader {
-	
+
 	final static Logger logger = LogManager.getLogger(TripleStoreServicesLoader.class);
 
 	@Test
 	public final void test() {
-		
+
 		logger.info("Testing triple store service");
-		ServiceLoader <TripleStoreService> serviceLoader = ServiceLoader.load(TripleStoreService.class);
+		ServiceLoader<TripleStoreService> serviceLoader = ServiceLoader.load(TripleStoreService.class);
 		for (TripleStoreService triple_store : serviceLoader) {
 			logger.info("Loading triple store service");
 			triple_store.loadRDF4JModel(null);
 		}
-		
+
 		// fail("Not yet implemented"); // TODO
 	}
 

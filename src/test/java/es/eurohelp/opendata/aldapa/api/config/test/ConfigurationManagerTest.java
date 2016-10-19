@@ -17,7 +17,6 @@ import es.eurohelp.opendata.aldapa.exception.ConfigurationFileIOException;
  *
  */
 public class ConfigurationManagerTest {
-	
 
 	ConfigurationManager test_manager = null;
 
@@ -57,7 +56,7 @@ public class ConfigurationManagerTest {
 		assertNotNull(aldapaConfigFile);
 		Assert.assertTrue(aldapaConfigFile.endsWith(".properties"));
 	}
-	
+
 	/**
 	 * Test method for {@link ConfigurationManager#getAldapaConfigProperty(java.lang.String)}.
 	 */
@@ -66,7 +65,7 @@ public class ConfigurationManagerTest {
 		String aldapaConfigName = test_manager.getAldapaConfigProperty("CONFIG_NAME");
 		assertNotNull(aldapaConfigName);
 	}
-	
+
 	/**
 	 * Testing ALDAPA URI is present in ALDAPA configuration file.
 	 */
