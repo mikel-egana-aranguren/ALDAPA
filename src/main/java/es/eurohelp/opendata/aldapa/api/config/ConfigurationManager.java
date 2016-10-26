@@ -12,6 +12,8 @@ import es.eurohelp.opendata.aldapa.util.FileUtils;
  * A configuration manager holds the app and the ALDAPA configuration properties.
  * 
  * @author Mikel Egaña Aranguren, Eurohelp consulting S.L.
+ * 
+ * @author Arkaitz Carbajo, Eurohelp consulting S.L.
  *
  */
 public class ConfigurationManager {

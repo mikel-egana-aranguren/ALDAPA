@@ -3,7 +3,7 @@
  */
 package es.eurohelp.opendata.aldapa.api.storage;
 
-import org.eclipse.rdf4j.model.Model;
+import org.openrdf.model.Model;
 
 /**
  * @author megana
@@ -11,4 +11,5 @@ import org.eclipse.rdf4j.model.Model;
  */
 public interface TripleStoreService {
 	public void loadRDF4JModel(Model model);
+	public String getTripleStoreName (); 
 }
