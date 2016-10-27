@@ -9,8 +9,8 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Assert;
 import org.junit.Test;
 
-import es.eurohelp.opendata.aldapa.api.config.ConfigurationManager;
-import es.eurohelp.opendata.aldapa.exception.ConfigurationFileIOException;
+import es.eurohelp.opendata.aldapa.ConfigurationFileIOException;
+import es.eurohelp.opendata.aldapa.ConfigurationManager;
 
 /**
  * @author megana

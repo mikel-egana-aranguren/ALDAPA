@@ -1,10 +1,9 @@
-package es.eurohelp.opendata.aldapa.api.config;
+package es.eurohelp.opendata.aldapa;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import es.eurohelp.opendata.aldapa.exception.ConfigurationFileIOException;
 import es.eurohelp.opendata.aldapa.util.FileUtils;
 
 /**

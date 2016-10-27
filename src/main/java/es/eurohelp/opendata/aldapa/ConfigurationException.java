@@ -1,4 +1,4 @@
-package es.eurohelp.opendata.aldapa.exception;
+package es.eurohelp.opendata.aldapa;
 
 /**
  * 
@@ -7,7 +7,7 @@ package es.eurohelp.opendata.aldapa.exception;
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *
  */
-public class ConfigurationException extends Exception {
+public class ConfigurationException extends AldapaException {
 
 	/**
 	 * serialVersionUID (type: {@link long})

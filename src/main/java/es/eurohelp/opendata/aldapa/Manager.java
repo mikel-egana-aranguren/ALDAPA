@@ -1,9 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa.api;
-
-import es.eurohelp.opendata.aldapa.api.config.ConfigurationManager;
+package es.eurohelp.opendata.aldapa;
 
 /**
  * 
@@ -26,7 +24,7 @@ public class Manager {
 	}
 	
 	public void addProject (String project_name){
-		
+		 
 	}
 
 }

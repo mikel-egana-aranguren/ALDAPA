@@ -1,8 +1,8 @@
-package es.eurohelp.opendata.aldapa.exception;
+package es.eurohelp.opendata.aldapa;
 
 /**
  * 
- * An IO exception related to the properties file holding the configuration
+ * An IO exception related to the file holding the configuration
  * 
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *

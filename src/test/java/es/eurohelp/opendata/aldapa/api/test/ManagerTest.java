@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import es.eurohelp.opendata.aldapa.api.Manager;
+import es.eurohelp.opendata.aldapa.Manager;
 
 /**
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
@@ -24,7 +24,7 @@ public class ManagerTest {
 
 	/**
 	 * Test method for
-	 * {@link es.eurohelp.opendata.aldapa.api.Manager#Manager(es.eurohelp.opendata.aldapa.api.config.ConfigurationManager)}
+	 * {@link es.eurohelp.opendata.aldapa.Manager#Manager(es.eurohelp.opendata.aldapa.api.config.ConfigurationManager)}
 	 * .
 	 */
 	@Test
@@ -33,7 +33,7 @@ public class ManagerTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.api.Manager#addProject(java.lang.String)}.
+	 * Test method for {@link es.eurohelp.opendata.aldapa.Manager#addProject(java.lang.String)}.
 	 */
 	@Test
 	public final void testAddProject() {
