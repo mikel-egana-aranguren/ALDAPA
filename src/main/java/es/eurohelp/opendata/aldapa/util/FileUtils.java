@@ -1,6 +1,10 @@
 package es.eurohelp.opendata.aldapa.util;
 
+import java.io.IOException;
 import java.io.InputStream;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Contains utilities for workings with files.
@@ -11,6 +15,7 @@ import java.io.InputStream;
 public class FileUtils {
 
 	private static FileUtils INSTANCE = null;
+	private static final Logger LOGGER = LogManager.getLogger(FileUtils.class);
 
 	/**
 	 * Private constructor for FileUtils
@@ -37,7 +42,8 @@ public class FileUtils {
 	 * Returns an input stream for reading the specified resource.
 	 * 
 	 * @param name
-	 *            the resource name
+	 *            the resource name, e.g. configuration/aldapa-default-configuration.yml
+	 *            
 	 * @return an input stream for reading the resource
 	 *
 	 * @author acarbajo

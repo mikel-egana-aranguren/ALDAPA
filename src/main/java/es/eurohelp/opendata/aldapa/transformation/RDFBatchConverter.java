@@ -13,6 +13,6 @@ import org.openrdf.model.Model;
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *
  */
-public interface BatchConverter {
-	public Model transform (InputStream inputstream) throws IOException;
+public interface RDFBatchConverter {
+	public Model transform  (InputStream inputstream) throws IOException;
 }
