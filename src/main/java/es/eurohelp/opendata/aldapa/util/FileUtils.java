@@ -48,8 +48,8 @@ public class FileUtils {
 	 *
 	 * @author acarbajo
 	 */
+	
 	public InputStream getInputStream(String name) {
 		return FileUtils.class.getClassLoader().getResourceAsStream(name);
 	}
-
 }

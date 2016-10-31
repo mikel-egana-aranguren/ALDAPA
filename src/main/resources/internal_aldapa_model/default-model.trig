@@ -29,19 +29,19 @@ PREFIX distribution:<http://opendata.eurohelp.es/distribution/>
 PREFIX resource:<http://opendata.eurohelp.es/resource/>
 PREFIX property:<http://opendata.eurohelp.es/property/>
 
-# Metadata goes into the default graph
+# Metadata goes into the aldapa named graph
 
-project:PROJECT_NAME rdf:type foaf:Project ;
-	owl:sameAs catalog:CATALOG_NAME .	
-	
-catalog:CATALOG_NAME rdf:type dcat:Catalog ;
-	dcat:dataset dataset:DATASET_NAME .
-	
-dataset:DATASET_NAME rdf:type dcat:Dataset ;
-	rdf:type void:Dataset . 
-	dcat:distribution distribution:RDF_DUMP_DISTRIBUTION_NAME .
-	dcat:distribution distribution:SPARQL_ENDPOINT_DISTRIBUTION_NAME .	
-	dcat:distribution distribution:LINKED_DATA_SERVER_DISTRIBUTION_NAME .
+<urn:aldapa:metadata> {
+	project:PROJECT_NAME rdf:type foaf:Project ;
+		owl:sameAs catalog:CATALOG_NAME .	
+	catalog:CATALOG_NAME rdf:type dcat:Catalog ;
+		dcat:dataset dataset:DATASET_NAME .
+	dataset:DATASET_NAME rdf:type dcat:Dataset ;
+		rdf:type void:Dataset . 
+		dcat:distribution distribution:RDF_DUMP_DISTRIBUTION_NAME .
+		dcat:distribution distribution:SPARQL_ENDPOINT_DISTRIBUTION_NAME .	
+		dcat:distribution distribution:LINKED_DATA_SERVER_DISTRIBUTION_NAME .
+}
 
 # A dcat:Dataset is also the URI of the named graph to store actual data 
 
