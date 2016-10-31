@@ -1,6 +1,3 @@
- /**
- * 
- */
 package es.eurohelp.opendata.aldapa.util;
 
 /**

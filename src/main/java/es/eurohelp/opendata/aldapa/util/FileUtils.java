@@ -1,10 +1,7 @@
 package es.eurohelp.opendata.aldapa.util;
 
-import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * Contains utilities for workings with files.
@@ -15,7 +12,6 @@ import org.apache.logging.log4j.Logger;
 public class FileUtils {
 
 	private static FileUtils INSTANCE = null;
-	private static final Logger LOGGER = LogManager.getLogger(FileUtils.class);
 
 	/**
 	 * Private constructor for FileUtils

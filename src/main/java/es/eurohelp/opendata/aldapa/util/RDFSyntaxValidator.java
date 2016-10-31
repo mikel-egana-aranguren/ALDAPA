@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.eurohelp.opendata.aldapa.util;
 
 import java.io.IOException;
@@ -10,13 +7,14 @@ import java.util.Iterator;
 import org.openrdf.model.Model;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
-import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.Rio;
 import org.openrdf.rio.UnsupportedRDFormatException;
 
 /**
+ * 
+ * Just a script for making sure that a file complies with a given syntax
+ * 
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *
  */
@@ -30,7 +28,6 @@ public class RDFSyntaxValidator {
 	 */
 	public static void main(String[] args) {
 		InputStream inStream = FileUtils.getInstance().getInputStream("internal_aldapa_model/default-model.trig");		
-
 		try {
 			Model results = Rio.parse(inStream, "http://example.com", RDFFormat.TRIG);
 	        Iterator<Statement> model_iterator = results.iterator();

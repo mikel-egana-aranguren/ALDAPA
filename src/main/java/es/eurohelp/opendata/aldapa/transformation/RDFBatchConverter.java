@@ -1,4 +1,3 @@
-
 package es.eurohelp.opendata.aldapa.transformation;
 
 import java.io.IOException;

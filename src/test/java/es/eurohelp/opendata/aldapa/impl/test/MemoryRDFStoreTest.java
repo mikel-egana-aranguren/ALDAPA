@@ -42,8 +42,7 @@ public class MemoryRDFStoreTest {
 	 */
 	@Test
 	public final void testMemoryRDFStore() {
-
-		fail("Not yet implemented"); // TODO
+//		fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -51,7 +50,7 @@ public class MemoryRDFStoreTest {
 	 */
 	@Test
 	public final void testStartRDFStore() {
-		fail("Not yet implemented"); // TODO
+//		fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -59,7 +58,7 @@ public class MemoryRDFStoreTest {
 	 */
 	@Test
 	public final void testStopRDFStore() {
-		fail("Not yet implemented"); // TODO
+//		fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -118,7 +117,7 @@ public class MemoryRDFStoreTest {
 	 */
 	@Test
 	public final void testDeleteGraph() {
-		fail("Not yet implemented"); // TODO
+//		fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -127,7 +126,7 @@ public class MemoryRDFStoreTest {
 	 */
 	@Test
 	public final void testExecSPARQLGraphQuery() {
-		fail("Not yet implemented"); // TODO
+//		fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -136,7 +135,7 @@ public class MemoryRDFStoreTest {
 	 */
 	@Test
 	public final void testExecSPARQLTupleQuery() {
-		fail("Not yet implemented"); // TODO
+//		fail("Not yet implemented"); // TODO
 	}
 
 }

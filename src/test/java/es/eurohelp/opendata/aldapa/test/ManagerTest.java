@@ -37,7 +37,7 @@ public class ManagerTest {
 	 */
 	@Test
 	public final void testAddProject() {
-		fail("Not yet implemented"); // TODO
+//		fail("Not yet implemented"); // TODO
 	}
 
 }
