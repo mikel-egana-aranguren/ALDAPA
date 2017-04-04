@@ -13,5 +13,5 @@ import org.openrdf.model.Model;
  *
  */
 public interface RDFBatchConverter {
-	public Model transform  (InputStream inputstream) throws IOException;
+	public Model transform  (InputStream datasource, InputStream mapping) throws IOException;
 }

@@ -1,0 +1,8 @@
+PREFIX owl:<http://www.w3.org/2002/07/owl#>
+PREFIX dcat:<http://www.w3.org/ns/dcat#>
+
+SELECT ?project 
+WHERE {
+	?project owl:sameAs ?dcat_catalog . 
+	?dcat_catalog rdf:type dcat:catalog
+}

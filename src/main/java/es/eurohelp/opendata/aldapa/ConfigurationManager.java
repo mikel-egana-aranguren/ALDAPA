@@ -17,8 +17,9 @@ import es.eurohelp.opendata.aldapa.util.FileUtils;
  */
 public class ConfigurationManager {
 
-	private static String CONFIGURATION_PROPERTIES = "configuration.properties";
+	private static String CONFIGURATION_FILES = "configuration.yml";
 	private static String ALDAPA_CONFIG_FILE_PROPERTY = "ALDAPA_CONFIG_FILE";
+	private static String TRIPLE_STORE_CONFIG_FILE_PROPERTY = "TRIPLE_STORE_CONFIG_FILE";
 
 	/**
 	 * INSTANCE of ConfigurationManager (type: {@link ConfigurationManager})

@@ -1,0 +1,5 @@
+ALDAPA_CONFIG_FILE: configuration/aldapa-default-configuration.yml
+TRIPLE_STORE_CONFIG_FILE: configuration/triple-store-default-configuration.yml
+#CONVERTER_CONFIG_FILE
+#LINK_DISCOVERY_CONFIG_FILE
+#QUALITY_CONFIG_FILE    
