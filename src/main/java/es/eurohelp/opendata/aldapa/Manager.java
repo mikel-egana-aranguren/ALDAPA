@@ -3,6 +3,9 @@
  */
 package es.eurohelp.opendata.aldapa;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * 
  * Main entry-point for the ALDAPA API. A manager is responsible for creating projects and executing pipelines
@@ -13,6 +16,8 @@ package es.eurohelp.opendata.aldapa;
 public class Manager {
 
 	private ConfigurationManager configmanager;
+	
+	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
 
 	/**
 	 * 

@@ -6,8 +6,8 @@ package es.eurohelp.opendata.aldapa.impl.storage;
 import java.io.FileOutputStream;
 import java.util.Iterator;
 
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openrdf.model.Model;
 import org.openrdf.model.Statement;
 import org.openrdf.query.GraphQueryResult;
@@ -36,12 +36,13 @@ public class MemoryRDFStore implements RDFStore {
 	 * 
 	 */
 
-//	private static final Logger LOGGER = LogManager.getLogger(MemoryRDFStore.class);
+	private static final Logger LOGGER = LogManager.getLogger(MemoryRDFStore.class);
 
 	Repository repo;
 	RepositoryConnection conn;
 
 	public MemoryRDFStore() {
+		LOGGER.info("Creating SailRepository(MemoryStore)");
 		repo = new SailRepository(new MemoryStore());
 	}
 
@@ -50,6 +51,7 @@ public class MemoryRDFStore implements RDFStore {
 	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#startRDFStore()
 	 */
 	public void startRDFStore() {
+		LOGGER.info("Initialising and connecting to SailRepository(MemoryStore)");
 		repo.initialize();
 		conn = repo.getConnection();
 		conn.begin();
@@ -60,6 +62,7 @@ public class MemoryRDFStore implements RDFStore {
 	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#stopRDFStore()
 	 */
 	public void stopRDFStore() {
+		LOGGER.info("Closing connection and shutting down SailRepository(MemoryStore)");
 		conn.close();
 		repo.shutDown();
 	}
@@ -69,14 +72,16 @@ public class MemoryRDFStore implements RDFStore {
 	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#saveModel(org.openrdf.model.Model)
 	 */
 	public void saveModel(Model model) throws RDFStoreException {
-
+		LOGGER.info("Adding model to SailRepository(MemoryStore)");
 		// TODO: is there any way of adding a whole model to the repo?
 		Iterator<Statement> model_iterator = model.iterator();
 		while (model_iterator.hasNext()) {
 			Statement stment = model_iterator.next();
 			if (stment.getContext() != null) {
+				LOGGER.info("Adding triple " + stment + " to context " + stment.getContext());
 				conn.add(stment, stment.getContext());
 			} else {
+				LOGGER.info("Adding triple " + stment);
 				conn.add(stment);
 			}
 		}
@@ -99,7 +104,6 @@ public class MemoryRDFStore implements RDFStore {
 	 */
 	public void deleteGraph(String graphUri) throws RDFStoreException {
 		// TODO Auto-generated method stub
-
 	}
 
 	/*
@@ -119,5 +123,4 @@ public class MemoryRDFStore implements RDFStore {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

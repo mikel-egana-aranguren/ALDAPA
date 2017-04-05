@@ -28,7 +28,7 @@ import es.eurohelp.opendata.aldapa.util.FileUtils;
  */
 public class MemoryRDFStoreTest {
 
-	private final String aldapa_model_file = "internal_aldapa_model/default-model.trig";
+	private final String aldapa_model_file = "model/default-model.trig";
 	private final int model_size = 11;
 	private final String graphURI = "urn:aldapa:metadata";
 //	private final String graphURI = "http://opendata.eurohelp.es/dataset/DATASET_NAME";

@@ -2,13 +2,20 @@ package es.eurohelp.opendata.aldapa;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import es.eurohelp.opendata.aldapa.util.FileUtils;
+import es.eurohelp.opendata.aldapa.util.YAMLUtils;
 
 /**
  * 
- * A configuration manager holds the app and the ALDAPA configuration properties.
+ * A configuration manager holds the configuration properties. The main file should contain pointers to other 
+ * files, each file having the configuration of each module. See configuration.yml and the folder configuration for details
  * 
  * @author Mikel Egaña Aranguren, Eurohelp consulting S.L.
  * 
@@ -17,9 +24,18 @@ import es.eurohelp.opendata.aldapa.util.FileUtils;
  */
 public class ConfigurationManager {
 
-	private static String CONFIGURATION_FILES = "configuration.yml";
-	private static String ALDAPA_CONFIG_FILE_PROPERTY = "ALDAPA_CONFIG_FILE";
-	private static String TRIPLE_STORE_CONFIG_FILE_PROPERTY = "TRIPLE_STORE_CONFIG_FILE";
+	private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
+	
+	/**
+	 * The configuration is stored in a HashMap:
+	 * 
+	 * file name - file content
+	 * 
+	 * The file file content is also a HashMap, containing the actual configuration values
+	 * 
+	 */
+	
+	private HashMap<String,HashMap<String,String>> main_config_file;
 
 	/**
 	 * INSTANCE of ConfigurationManager (type: {@link ConfigurationManager})
@@ -27,84 +43,70 @@ public class ConfigurationManager {
 	private static ConfigurationManager INSTANCE = null;
 
 	/**
-	 * Contains configuration properties that could be dependent on environment.
-	 * appConfigProperties (type: {@link Properties})
-	 */
-	private Properties appConfigProperties = new Properties();
-
-	/**
-	 * Holds the ALDAPA configuration properties to be loaded.
-	 * aldapaConfigProperties (type: {@link Properties})
-	 */
-	private Properties aldapaConfigProperties = new Properties();
-
-	/**
-	 * private constructor for ConfigurationManager.
+	 * 
+	 * Private constructor for ConfigurationManager.
+	 * 
+	 * @param the main config file name
+	 * @throws IOException 
 	 * 
 	 * @throws ConfigurationFileIOException
 	 *             if it is unable to load app and ALDAPA config properties
 	 * 
 	 */
-	private ConfigurationManager() throws ConfigurationFileIOException {
-		this.loadProperties();
+	private ConfigurationManager(String config_file_name) throws ConfigurationFileIOException, IOException {
+		this.loadProperties(config_file_name);
 	}
 
 	/**
+	 * 
 	 * Retrieves the only instance of this Singleton class.
 	 * 
+	 * @param the main config file name
 	 * @return the only instance of ConfigurationManager.
-	 *
 	 * @author acarbajo
 	 * @throws ConfigurationFileIOException
+	 * @throws IOException 
 	 */
-	public synchronized static ConfigurationManager getInstance() throws ConfigurationFileIOException {
+	public synchronized static ConfigurationManager getInstance(String configuration_file_name) throws ConfigurationFileIOException, IOException {
 		if (null == INSTANCE) {
-			INSTANCE = new ConfigurationManager();
+			INSTANCE = new ConfigurationManager(configuration_file_name);
 		}
 		return INSTANCE;
 	}
 
 	/**
-	 * Loads config properties file from the path specified in property CONFIG_FILE in config.properties file.
-	 * If not specified, it will load /configuration/aldapa-default-configuration.properties
+	 * Loads config properties from the specified file.
+	 * If not specified, it will load confgiuration.yml
 	 *
+	 * @param the main config file name
 	 * @author acarbajo
 	 * @throws ConfigurationFileIOException
 	 *             expection will occur when any of the configuration properties' file is not successfully loaded.
 	 */
-	private void loadProperties() throws ConfigurationFileIOException {
-		InputStream appConfigInStream = FileUtils.getInstance().getInputStream(ConfigurationManager.CONFIGURATION_PROPERTIES);
+	private void loadProperties(String configuration_file_name) throws ConfigurationFileIOException, IOException {
+		InputStream configInStream = FileUtils.getInstance().getInputStream(configuration_file_name);
 
 		try {
-			appConfigProperties.load(appConfigInStream);
-		} catch (IOException e) {
-			throw new ConfigurationFileIOException("Failed to load " + ConfigurationManager.CONFIGURATION_PROPERTIES + " file.", e);
+			
+			main_config_file = new HashMap<String, HashMap<String,String>>();
+			YAMLUtils yaml_utils = new YAMLUtils();
+			HashMap<String,String> provisional_main_config_file = yaml_utils.parseSimpleYAML(configInStream);
+			
+			for (Map.Entry<String, String> entry : provisional_main_config_file.entrySet()) {
+			    String key = entry.getKey();
+			    String value = entry.getValue();
+				
+				LOGGER.info("Key = " + key + ", Value = " + value);
+				InputStream config2InStream = FileUtils.getInstance().getInputStream(value);
+			    main_config_file.put(key, yaml_utils.parseSimpleYAML(config2InStream));
+			}
 		} finally {
 			try {
-				if (appConfigInStream != null) {
-					appConfigInStream.close();
+				if (configInStream != null) {
+					configInStream.close();
 				}
 			} catch (IOException ignore) {
 				// close quietly
-			}
-		}
-
-		String configFile = appConfigProperties.getProperty(ConfigurationManager.ALDAPA_CONFIG_FILE_PROPERTY);
-
-		if (null != configFile) {
-			InputStream aldapaConfigInStream = FileUtils.getInstance().getInputStream(configFile);
-			try {
-				aldapaConfigProperties.load(aldapaConfigInStream);
-			} catch (IOException e) {
-				throw new ConfigurationFileIOException("Failed to load ALDAPA config file. Specified file path was: " + configFile, e);
-			} finally {
-				try {
-					if (aldapaConfigInStream != null) {
-						aldapaConfigInStream.close();
-					}
-				} catch (IOException ignore) {
-					// close quietly
-				}
 			}
 		}
 	}
@@ -113,25 +115,14 @@ public class ConfigurationManager {
 	 * 
 	 * Retrieves a configuration value () by the key (e.g. ALDAPA_CONFIG_FILE)
 	 * 
+	 * @param module (file) name
+	 * 
 	 * @param propertyName
 	 *            the configuration property name.
 	 * 
 	 * @return the configuration value for that property key. <em> null</em> if the property is not found.
 	 */
-	public String getAppConfigProperty(String key) {
-		return this.appConfigProperties.getProperty(key);
-	}
-
-	/**
-	 * Retrieves an ALDAPA configuration value (e.g. urn:aldapa:) by the key (e.g. INTERNAL_BASE).
-	 * 
-	 * @param key
-	 *            the key of the property to search for.
-	 * @return the ALDAPA configuration value for that property key. <em> null</em> if the property is not found.
-	 *
-	 * @author acarbajo
-	 */
-	public String getAldapaConfigProperty(String key) {
-		return this.aldapaConfigProperties.getProperty(key);
+	public String getConfigPropertyValue(String module,String property) {
+		return (main_config_file.get(module)).get(property);
 	}
 }
