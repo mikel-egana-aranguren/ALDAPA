@@ -8,17 +8,16 @@ import java.util.Iterator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openrdf.model.Model;
-import org.openrdf.model.Statement;
-import org.openrdf.query.GraphQueryResult;
-import org.openrdf.query.TupleQueryResult;
-import org.openrdf.repository.Repository;
-import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.rio.RDFFormat;
-//import org.openrdf.rio.trig.TriGWriter;
-import org.openrdf.rio.turtle.TurtleWriter;
-import org.openrdf.sail.memory.MemoryStore;
-import org.openrdf.repository.sail.SailRepository;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Statement;
+import org.eclipse.rdf4j.query.GraphQueryResult;
+import org.eclipse.rdf4j.query.TupleQueryResult;
+import org.eclipse.rdf4j.repository.Repository;
+import org.eclipse.rdf4j.repository.RepositoryConnection;
+import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
+import org.eclipse.rdf4j.repository.sail.SailRepository;
+import org.eclipse.rdf4j.sail.memory.MemoryStore;
 
 import es.eurohelp.opendata.aldapa.storage.RDFStore;
 import es.eurohelp.opendata.aldapa.storage.RDFStoreException;

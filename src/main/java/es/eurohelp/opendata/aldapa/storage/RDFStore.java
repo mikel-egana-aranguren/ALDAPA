@@ -3,10 +3,11 @@ package es.eurohelp.opendata.aldapa.storage;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-import org.openrdf.model.Model;
-import org.openrdf.query.GraphQueryResult;
-import org.openrdf.query.TupleQueryResult;
-import org.openrdf.rio.RDFFormat;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.query.GraphQueryResult;
+import org.eclipse.rdf4j.query.TupleQueryResult;
+import org.eclipse.rdf4j.rio.RDFFormat;
+
 
 /**
  * 

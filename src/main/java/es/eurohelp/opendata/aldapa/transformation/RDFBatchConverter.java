@@ -3,7 +3,8 @@ package es.eurohelp.opendata.aldapa.transformation;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.openrdf.model.Model;
+import org.eclipse.rdf4j.model.Model;
+
 
 /**
  * 

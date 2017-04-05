@@ -27,11 +27,11 @@
 			<artifactId>snakeyaml</artifactId>
 			<version>1.17</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.openrdf.sesame/sesame-runtime -->
+		<!-- https://mvnrepository.com/artifact/org.eclipse.rdf4j/rdf4j-runtime -->
 		<dependency>
-			<groupId>org.openrdf.sesame</groupId>
-			<artifactId>sesame-runtime</artifactId>
-			<version>4.1.2</version>
+			<groupId>org.eclipse.rdf4j</groupId>
+			<artifactId>rdf4j-runtime</artifactId>
+			<version>2.2</version>
 		</dependency>
 	</dependencies>
 	<build>
