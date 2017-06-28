@@ -28,8 +28,23 @@ public class Manager {
 		this.configmanager = configuredconfigmanager;
 	}
 	
-	public void addProject (String project_name){
-		 
+	/**
+	 * 
+	 * Adds a new project
+	 * 
+	 * @param project_name the name of the new project that will be used to generate the project URI, according to the configuration
+	 * @return the URI of the newly adde project
+	 * @throws AldapaException 
+	 * 
+	 */
+	
+	public String addProject (String project_name) throws ProjectExistsException {
+		
+		// URLIFY name
+		
+		// Check if exists in RDF store
+		
+		return null;
 	}
 
 }

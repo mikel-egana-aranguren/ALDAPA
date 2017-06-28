@@ -42,7 +42,7 @@ public class URIUtils {
 	
 	/**
 	 * 
-	 * Converts a String to a URI or a form suitable to be included as part of a URI
+	 * Converts a String to a URI or a form suitable to be included as part of a URI. Thus it converts "(",")"," ","/",".",":" to "-"
 	 * 
 	 * @param targetstring the string to be converted
 	 * 
@@ -56,8 +56,7 @@ public class URIUtils {
 			return targetstring;
 		}
 		else{
-			// TODO: URIfy
-			return "";
+			return targetstring.replaceAll("\\(|\\)|\\s|\\/|\\.|:","-");
 		}
 	} 
 }

@@ -2,8 +2,11 @@ package es.eurohelp.opendata.aldapa.storage;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.eclipse.rdf4j.model.vocabulary.RDFS;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
@@ -104,4 +107,18 @@ public interface RDFStore {
 	 */
 	
 	public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) throws RDFStoreException;
+	
+	public void addRDFTYPETriple(String subject, String object, String ctxt) throws RDFStoreException;
+	
+	public void addRDFSLABELTriple(String subject, String label, String ctxt) throws RDFStoreException;
+	
+	public void addDataTripleXSDInt(String subject, String prop, int value, String ctxt) throws RDFStoreException;
+	
+	public void addDataTripleXSDdouble(String subject, String prop, double value, String ctxt) throws RDFStoreException;
+	
+	public void addDataTripleXSDdecimal(String subject, String prop, BigDecimal value, String ctxt) throws RDFStoreException;
+	
+	public void addDataTripleXSDString(String subject, String prop, String value, String ctxt) throws RDFStoreException;
+	
+	public void addTriple(String subject, String prop, String object, String ctxt) throws RDFStoreException;
 }

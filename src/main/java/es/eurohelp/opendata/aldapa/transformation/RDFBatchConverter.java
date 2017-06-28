@@ -15,4 +15,5 @@ import org.eclipse.rdf4j.model.Model;
  */
 public interface RDFBatchConverter {
 	public Model transform  (InputStream datasource, InputStream mapping) throws IOException;
+	public Model transform  (InputStream datasource) throws IOException;
 }
