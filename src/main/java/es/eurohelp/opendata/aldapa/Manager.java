@@ -33,18 +33,25 @@ public class Manager {
 	 * Adds a new project
 	 * 
 	 * @param project_name the name of the new project that will be used to generate the project URI, according to the configuration
-	 * @return the URI of the newly adde project
+	 * @return the URI of the newly addeD project
 	 * @throws AldapaException 
 	 * 
 	 */
 	
 	public String addProject (String project_name) throws ProjectExistsException {
 		
-		// URLIFY name
+		// URIFY name
 		
-		// Check if exists in RDF store
+		// Check if exists in RDF store with SPARQL query, throw Exception
+		// (simply use same name for file, not resolver!, but replace strings)
 		
-		return null;
+		// Add with turtle
+		// (simply use same name for file, not resolver!, but replace strings)
+		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+	}
+	
+	public void deleteProject (String project_URI){
+		throw new UnsupportedOperationException("This functionality has not been implemented yet");
 	}
 
 }

@@ -37,6 +37,12 @@ public class ManagerTest {
 	 */
 	@Test
 	public final void testAddProject() {
+		// Creat storage
+		
+		// add project
+		
+		// query for projects
+		
 //		fail("Not yet implemented"); // TODO
 	}
 

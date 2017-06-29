@@ -4,6 +4,7 @@
 package es.eurohelp.opendata.aldapa.impl.storage;
 
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
 import java.util.Iterator;
 
 import org.apache.logging.log4j.LogManager;
@@ -102,7 +103,7 @@ public class MemoryRDFStore implements RDFStore {
 	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#deleteGraph(java.lang.String)
 	 */
 	public void deleteGraph(String graphUri) throws RDFStoreException {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("This functionality has not been implemented yet");
 	}
 
 	/*
@@ -110,8 +111,7 @@ public class MemoryRDFStore implements RDFStore {
 	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#execSPARQLGraphQuery(java.lang.String)
 	 */
 	public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("This functionality has not been implemented yet");
 	}
 
 	/*
@@ -119,7 +119,6 @@ public class MemoryRDFStore implements RDFStore {
 	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#execSPARQLTupleQuery(java.lang.String)
 	 */
 	public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) throws RDFStoreException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("This functionality has not been implemented yet");
 	}
 }

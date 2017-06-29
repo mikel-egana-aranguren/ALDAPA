@@ -1,17 +1,17 @@
 package es.eurohelp.opendata.aldapa.util;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 /**
  * 
- * Utils for parsing and generating correct URIs.
+ * Utils for generating valid URIs.
  * 
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class URIUtils {
 
-	/**
-	 * 
-	 */
 	public URIUtils() {
 
 	}
@@ -20,43 +20,47 @@ public class URIUtils {
 	 * 
 	 * Verifies the validity of a complete URI
 	 * 
-	 * @return true if the URI is valid, false if it is not 
+	 * @param uri
+	 *            the URI to verify
+	 * @return true if the URI is valid, false if it is not
+	 * @throws URISyntaxException
 	 *
 	 */
 
-	public boolean parseURI() {
-		return false;
+	public boolean validateURI(String uri) throws URISyntaxException {
+		boolean valid = false;
+		try {
+			new URI(uri);
+			valid = true;
+		} catch (URISyntaxException e) {
+			throw e;
+		}
+		return valid;
 	}
-	
-	/**
-	 * 
-	 * Verifies the validity of a single string that will probably be included in a larger URI
-	 * 
-	 * @return true if the String is valid, false if it is not 
-	 *
-	 */
 
-	public boolean parseString(String targetstring) {
-		return false;
-	}
-	
 	/**
 	 * 
-	 * Converts a String to a URI or a form suitable to be included as part of a URI. Thus it converts "(",")"," ","/",".",":" to "-"
+	 * Converts a String to a form suitable to be included as part of a URI. The default should suffice in many cases
 	 * 
-	 * @param targetstring the string to be converted
+	 * @param regexp the regular expression that captures the characters to replace. If null is provided, the default is "\\(|\\)|\\s|\\/|\\.|:", thus
+	 * capturing "(",")"," ","/",".".
+	 * 
+	 * @param replacement the character to replace the captured ones with. If null is provided, the default is "-"
+	 * 
+	 * @param targetstring
+	 *            the string to be converted
 	 * 
 	 * @return the converted string
 	 *
 	 */
 
-	public String URIfy(String targetstring) {
-		
-		if (this.parseString(targetstring)){
-			return targetstring;
+	public String URIfy(String regexp, String replacement, String targetstring) {
+		if(regexp == null){
+			regexp = "\\(|\\)|\\s|\\/|\\.|:";
 		}
-		else{
-			return targetstring.replaceAll("\\(|\\)|\\s|\\/|\\.|:","-");
+		if(replacement == null){
+			replacement = "-";
 		}
-	} 
+		return targetstring.replaceAll(regexp, replacement);
+	}
 }

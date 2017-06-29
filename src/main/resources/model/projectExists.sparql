@@ -1,0 +1,6 @@
+ASK 
+WHERE {
+	{+PROJECT_URI+ ?p ?o}
+	UNION 
+	{?s ?r +PROJECT_URI+}
+}
