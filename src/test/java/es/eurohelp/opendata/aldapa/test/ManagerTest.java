@@ -5,9 +5,14 @@ package es.eurohelp.opendata.aldapa.test;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
+import es.eurohelp.opendata.aldapa.ConfigurationFileIOException;
+import es.eurohelp.opendata.aldapa.ConfigurationManager;
 import es.eurohelp.opendata.aldapa.Manager;
+import es.eurohelp.opendata.aldapa.ProjectExistsException;
 
 /**
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
@@ -16,10 +21,23 @@ import es.eurohelp.opendata.aldapa.Manager;
 public class ManagerTest {
 
 	Manager manager = null;
+	ConfigurationManager config = null;
 
 	public ManagerTest() {
-		// TODO: provide Configuration Manager
-		manager = new Manager(null);
+		try {
+			config = ConfigurationManager.getInstance("configuration.yml");
+			manager = new Manager(config);
+		} catch (ConfigurationFileIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -37,13 +55,19 @@ public class ManagerTest {
 	 */
 	@Test
 	public final void testAddProject() {
-		// Creat storage
-		
+		String project_name = "DonostiParkings";
 		// add project
 		
-		// query for projects
+		// query for the project
 		
-//		fail("Not yet implemented"); // TODO
+		// write project	
+		try {
+			manager.addProject(project_name);
+		} catch (ProjectExistsException e) {
+			e.printStackTrace();
+		}
+	
+		
+		fail("Not yet implemented");
 	}
-
 }
