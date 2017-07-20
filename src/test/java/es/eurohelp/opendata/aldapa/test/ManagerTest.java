@@ -76,6 +76,6 @@ public class ManagerTest {
 		
 		// write project	
 
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
 	}
 }
