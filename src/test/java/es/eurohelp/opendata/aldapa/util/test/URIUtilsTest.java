@@ -37,7 +37,7 @@ public class URIUtilsTest {
 	@Test
 	public void testValidateURI() {
 		try {
-			assertTrue(uri_utils.validateURI("urn:aldapa:project:parkings-donosti"));
+			assertEquals("urn:aldapa:project:parkings-donosti",uri_utils.validateURI("urn:aldapa:project:parkings-donosti"));
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}

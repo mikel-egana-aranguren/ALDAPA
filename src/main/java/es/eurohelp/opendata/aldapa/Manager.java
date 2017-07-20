@@ -6,6 +6,7 @@ package es.eurohelp.opendata.aldapa;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
@@ -17,6 +18,7 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
 import es.eurohelp.opendata.aldapa.storage.RDFStore;
+import es.eurohelp.opendata.aldapa.storage.RDFStoreException;
 import es.eurohelp.opendata.aldapa.util.FileUtils;
 import es.eurohelp.opendata.aldapa.util.URIUtils;
 
@@ -58,41 +60,61 @@ public class Manager {
 	 * @param project_name the name of the new project that will be used to generate the project URI, according to the configuration
 	 * @return the URI of the newly added project
 	 * @throws IOException 
+	 * @throws RDFStoreException 
+	 * @throws URISyntaxException 
 	 * @throws AldapaException 
 	 * 
 	 */
 	
-	public String addProject (String project_name) throws ProjectExistsException, IOException {
-		LOGGER.info("Adding project with name: " + project_name);
-		// URIFY name
+	public String addProject (String project_name) throws ProjectExistsException, IOException, RDFStoreException, URISyntaxException {
+		LOGGER.info("Project name: " + project_name);
+		
+		// Create Project URI
 		URIUtils uri_utils = new URIUtils();
-		String ProjectURIFriendlyName =  uri_utils.URIfy(null, null, project_name);
+		String projectURIFriendlyName =  uri_utils.URIfy(null, null, project_name);
+		String project_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "PROJECT_BASE");
+		String projectURI = uri_utils.validateURI(project_base_uri + projectURIFriendlyName);
+		
+		LOGGER.info("Project uri: " + projectURI);
 		
 		// Check if exists in RDF store with SPARQL query, throw Exception
 		
-		// Add project
+		// Load addProject.ttl file and resolve tokens
+		InputStream inputStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.addProject.getMethodFileName());
+		String resolved_addproject_ttl = fileTokenResolver(
+				inputStream, 
+				MethodFileToken.project_uri.getmethodFileToken(), 
+				projectURI);
 		
-		// Get addProject file: replace token
-		
-		InputStream inputStream = FileUtils.getInstance().getInputStream(
-				AldapaMethodRDFFile.addProject.getMethodFileName());
-		
-		String unresolved_addproject_ttl = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-		String resolved_addproject_ttl = unresolved_addproject_ttl.replaceAll(MethodFileToken.project_name.getmethodFileToken(), ProjectURIFriendlyName);
-		LOGGER.info("Def triples to add project: " + resolved_addproject_ttl);
-		
+		// Add project to store
 		InputStream modelInputStream = new StringBufferInputStream(resolved_addproject_ttl);
-		
 		Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
-		
-		// Load resolvedAddProjectfile
-		
-		
-		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+				
+		store.saveModel(model);
+		LOGGER.info("Project added to store");
+		return projectURI;
 	}
 	
 	public void deleteProject (String project_URI){
 		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+	}
+	
+	/**
+	 * 
+	 * Resolves the tokens of a file with the replacements
+	 * 
+	 * @param in the InputStream with the file
+	 * @param token the token to search for in the file
+	 * @param replacement the value to replace the token with
+	 * @return the new file content, resolved
+	 * @throws IOException 
+	 * 
+	 */
+	
+	private String fileTokenResolver(InputStream in, String token, String replacement) throws IOException{
+		String unresolved_string = IOUtils.toString(in, StandardCharsets.UTF_8);
+		String resolved_string = unresolved_string.replaceAll(token, "<" + replacement + ">");
+		return resolved_string;
 	}
 
 }

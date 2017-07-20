@@ -80,7 +80,7 @@ public interface RDFStore {
 	
 	/**
 	 * 
-	 * Executes a SPARQL query that will return, if succesful, a set of RDF statements and their Graph (context), if any
+	 * Executes a SPARQL query that will return, if successful, a set of RDF statements and their Graph (context), if any
 	 * 
 	 * @param pSPARQLquery
 	 *            the SPARQL query
@@ -93,7 +93,7 @@ public interface RDFStore {
 
 	/**
 	 * 
-	 * Executes a SPARQL query that will return, if sucesful, a set of bindings (results as variables and associated entities)
+	 * Executes a SPARQL query that will return, if successful, a set of bindings (results as variables and associated entities)
 	 * 
 	 * @param pSPARQLquery
 	 *            the SPARQL query

@@ -9,6 +9,7 @@ package es.eurohelp.opendata.aldapa;
  */
 public enum MethodFileToken {
 	project_name("PROJECT_NAME"),
+	project_uri("PROJECT_URI"),
 	dataset_name("DATASET_NAME")
 	;
 	

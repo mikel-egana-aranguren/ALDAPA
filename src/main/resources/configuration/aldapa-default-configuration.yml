@@ -4,8 +4,8 @@ comment: A configuration suitable for most cases
 author: Mikel Egana Aranguren
 
 # ALDAPA URIs
-INTERNAL_BASE: "urn:aldapa:" # (Quoted due to colons)
-PROJECT: ${INTERNAL_BASE}:project:+PROJECT_NAME+
+INTERNAL_BASE: "http://lod.eurohelp.es/aldapa/" # (Quoted due to colons)
+PROJECT_BASE: "http://lod.eurohelp.es/aldapa/project/"
 
 # DOMAIN URIs
 BASE: http://opendata.eurohelp.es/

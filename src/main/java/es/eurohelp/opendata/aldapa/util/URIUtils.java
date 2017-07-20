@@ -27,15 +27,13 @@ public class URIUtils {
 	 *
 	 */
 
-	public boolean validateURI(String uri) throws URISyntaxException {
-		boolean valid = false;
+	public String validateURI(String uri) throws URISyntaxException {
 		try {
 			new URI(uri);
-			valid = true;
 		} catch (URISyntaxException e) {
 			throw e;
 		}
-		return valid;
+		return uri;
 	}
 
 	/**

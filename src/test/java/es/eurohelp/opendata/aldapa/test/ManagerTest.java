@@ -6,6 +6,7 @@ package es.eurohelp.opendata.aldapa.test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import org.junit.Test;
 
@@ -13,6 +14,7 @@ import es.eurohelp.opendata.aldapa.ConfigurationFileIOException;
 import es.eurohelp.opendata.aldapa.ConfigurationManager;
 import es.eurohelp.opendata.aldapa.Manager;
 import es.eurohelp.opendata.aldapa.ProjectExistsException;
+import es.eurohelp.opendata.aldapa.storage.RDFStoreException;
 
 /**
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
@@ -56,12 +58,17 @@ public class ManagerTest {
 	@Test
 	public final void testAddProject() {
 		String project_name = "Donosti Parkings!!???";
+		String project_uri = null;
 		// add project
 		try {
-			manager.addProject(project_name);
+			project_uri = manager.addProject(project_name);
 		} catch (ProjectExistsException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RDFStoreException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 
@@ -69,8 +76,6 @@ public class ManagerTest {
 		
 		// write project	
 
-	
-		
 		fail("Not yet implemented");
 	}
 }

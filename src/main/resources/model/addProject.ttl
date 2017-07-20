@@ -1,13 +1,4 @@
-# Common prefixes
-
 PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl:<http://www.w3.org/2002/07/owl#>
 PREFIX foaf:<http://xmlns.com/foaf/0.1/>
-PREFIX dcat:<http://www.w3.org/ns/dcat#>
-PREFIX void:<http://rdfs.org/ns/void#>
 
-# ALDAPA prefixes 
-
-PREFIX project: <urn:aldapa:project:>
-
-project:PROJECT_NAME rdf:type foaf:Project .
+PROJECT_URI rdf:type foaf:Project .
