@@ -8,6 +8,6 @@ PREFIX void:<http://rdfs.org/ns/void#>
 
 # ALDAPA prefixes 
 
-PREFIX project:<urn:aldapa:project:>
+PREFIX project: <urn:aldapa:project:>
 
 project:PROJECT_NAME rdf:type foaf:Project .

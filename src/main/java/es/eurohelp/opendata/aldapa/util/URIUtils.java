@@ -55,12 +55,33 @@ public class URIUtils {
 	 */
 
 	public String URIfy(String regexp, String replacement, String targetstring) {
+		String result;
+		
+		// Main replacement and collapse contigous replacement characters
 		if(regexp == null){
-			regexp = "\\(|\\)|\\s|\\/|\\.|:";
+			regexp = "\\(|\\)|\\s|\\/|\\.|:|!|\\?|\\[|\\]|;|\\+|_|\\*";
 		}
 		if(replacement == null){
 			replacement = "-";
 		}
-		return targetstring.replaceAll(regexp, replacement);
+		String tmp_result = 
+				targetstring.replaceAll(regexp, replacement)
+					.replaceAll("[-]{2,}", replacement);
+		
+		// Delete first replacement character, if any
+		if(tmp_result.startsWith(replacement)){
+			tmp_result = tmp_result.substring(1);
+		}
+		
+		// Delete last replacement character, if any
+		if(tmp_result.endsWith(replacement)){
+			tmp_result = tmp_result.substring(0, tmp_result.length()-1);
+		}
+		
+		// Make everything lowercase
+		tmp_result = tmp_result.toLowerCase();
+		
+		result = tmp_result;
+		return result;
 	}
 }

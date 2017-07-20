@@ -76,7 +76,7 @@ public class ConfigurationManager {
 
 	/**
 	 * Loads config properties from the specified file.
-	 * If not specified, it will load confgiuration.yml
+	 * If not specified, it will load configuration.yml
 	 *
 	 * @param the main config file name
 	 * @author acarbajo

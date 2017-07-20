@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa.test;
+package es.eurohelp.opendata.aldapa.util.test;
 
 import static org.junit.Assert.*;
 

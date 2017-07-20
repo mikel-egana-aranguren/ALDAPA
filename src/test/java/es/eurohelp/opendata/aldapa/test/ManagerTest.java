@@ -55,17 +55,20 @@ public class ManagerTest {
 	 */
 	@Test
 	public final void testAddProject() {
-		String project_name = "DonostiParkings";
+		String project_name = "Donosti Parkings!!???";
 		// add project
-		
-		// query for the project
-		
-		// write project	
 		try {
 			manager.addProject(project_name);
 		} catch (ProjectExistsException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+
+		// query for the project
+		
+		// write project	
+
 	
 		
 		fail("Not yet implemented");
