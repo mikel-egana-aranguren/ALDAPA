@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 import org.junit.Test;
-import org.yaml.snakeyaml.Yaml;
 
 import es.eurohelp.opendata.aldapa.util.FileUtils;
 import es.eurohelp.opendata.aldapa.util.YAMLUtils;

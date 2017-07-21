@@ -80,10 +80,10 @@ public class Manager {
 		// Check if exists in RDF store with SPARQL query, throw Exception
 		
 		// Load addProject.ttl file and resolve tokens
-		InputStream inputStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.addProject.getMethodFileName());
+		InputStream inputStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.addProject.toString());
 		String resolved_addproject_ttl = fileTokenResolver(
 				inputStream, 
-				MethodFileToken.project_uri.getmethodFileToken(), 
+				MethodFileToken.project_uri.toString(), 
 				projectURI);
 		
 		// Add project to store
@@ -92,7 +92,13 @@ public class Manager {
 				
 		store.saveModel(model);
 		LOGGER.info("Project added to store");
+
 		return projectURI;
+	}
+	
+	public void flushGraph(String fileName) throws RDFStoreException, IOException{
+		FileUtils fileutils = FileUtils.getInstance();
+		store.flushGraph(null, fileutils.getFileOutputStream(fileName), RDFFormat.TURTLE);
 	}
 	
 	public void deleteProject (String project_URI){
@@ -101,7 +107,7 @@ public class Manager {
 	
 	/**
 	 * 
-	 * Resolves the tokens of a file with the replacements
+	 * Resolves the tokens of a file with the replacement URIs
 	 * 
 	 * @param in the InputStream with the file
 	 * @param token the token to search for in the file

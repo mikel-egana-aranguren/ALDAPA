@@ -18,13 +18,9 @@ public enum AldapaMethodRDFFile {
 	addDataset("model/addDataset.ttl")
 	;
 	
-	private String methodFileName;
+	public final String methodFileName;
 	
 	private AldapaMethodRDFFile(String methodFileName) {
 		this.methodFileName = methodFileName;
-	}
-
-	public final String getMethodFileName() {
-		return methodFileName;
 	}
 }

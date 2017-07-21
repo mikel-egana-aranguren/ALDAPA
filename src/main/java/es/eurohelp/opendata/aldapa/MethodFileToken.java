@@ -13,13 +13,10 @@ public enum MethodFileToken {
 	dataset_name("DATASET_NAME")
 	;
 	
-	private String methodFileToken;
+	public final String methodFileToken;
 	
 	private MethodFileToken(String methodFileToken) {
 		this.methodFileToken = methodFileToken;
 	}
 
-	public final String getmethodFileToken() {
-		return methodFileToken;
-	}
 }

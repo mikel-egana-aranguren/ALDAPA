@@ -62,6 +62,7 @@ public class ManagerTest {
 		// add project
 		try {
 			project_uri = manager.addProject(project_name);
+			manager.flushGraph("C:\\Users\\megana\\git\\ALDAPA\\data\\project-created.ttl");
 		} catch (ProjectExistsException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -74,7 +75,9 @@ public class ManagerTest {
 
 		// query for the project
 		
-		// write project	
+		// write project
+		
+		
 
 //		fail("Not yet implemented");
 	}
