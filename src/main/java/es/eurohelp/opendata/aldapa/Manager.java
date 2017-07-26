@@ -33,15 +33,16 @@ public class Manager {
 
 	private ConfigurationManager configmanager;
 	private RDFStore store;
-	
+
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
 
 	/**
 	 * 
-	 * @param configuredconfigmanager an already configured ConfigurationManger, holding the necessary configuration
-	 * @throws ClassNotFoundException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @param configuredconfigmanager
+	 *            an already configured ConfigurationManger, holding the necessary configuration
+	 * @throws ClassNotFoundException
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 * 
 	 */
 	public Manager(ConfigurationManager configuredconfigmanager) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -52,73 +53,84 @@ public class Manager {
 		store = (RDFStore) store_class.newInstance();
 		store.startRDFStore();
 	}
-	
+
 	/**
 	 * 
 	 * Adds a new project
 	 * 
-	 * @param project_name the name of the new project that will be used to generate the project URI, according to the configuration
+	 * @param project_name
+	 *            the name of the new project that will be used to generate the project URI, according to the
+	 *            configuration
 	 * @return the URI of the newly added project
-	 * @throws IOException 
-	 * @throws RDFStoreException 
-	 * @throws URISyntaxException 
-	 * @throws AldapaException 
+	 * @throws IOException
+	 * @throws RDFStoreException
+	 * @throws URISyntaxException
+	 * @throws AldapaException
 	 * 
 	 */
-	
-	public String addProject (String project_name) throws ProjectExistsException, IOException, RDFStoreException, URISyntaxException {
+
+	public String addProject(String project_name) throws ProjectExistsException, IOException, RDFStoreException, URISyntaxException {
 		LOGGER.info("Project name: " + project_name);
-		
+
 		// Create Project URI
 		URIUtils uri_utils = new URIUtils();
-		String projectURIFriendlyName =  uri_utils.URIfy(null, null, project_name);
+		String projectURIFriendlyName = uri_utils.URIfy(null, null, project_name);
 		String project_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "PROJECT_BASE");
 		String projectURI = uri_utils.validateURI(project_base_uri + projectURIFriendlyName);
-		
+
 		LOGGER.info("Project uri: " + projectURI);
-		
+
 		// Check if exists in RDF store with SPARQL query, throw Exception
-		
-		// Load addProject.ttl file and resolve tokens
-		InputStream inputStream = FileUtils.getInstance().getInputStream(
-				AldapaMethodRDFFile.addProject.methodFileName);
-		String resolved_addproject_ttl = fileTokenResolver(
-				inputStream, 
-				MethodFileToken.project_uri.getValue(), 
-				projectURI);
-		
-		// Add project to store
-		InputStream modelInputStream = new StringBufferInputStream(resolved_addproject_ttl);
-		Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
-				
-		store.saveModel(model);
-		LOGGER.info("Project added to store");
+		InputStream queryStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.projectExists.getValue());
+
+		String resolved_project_exists_sparql = fileTokenResolver(queryStream, MethodFileToken.project_uri.getValue(), projectURI);
+
+		Boolean project_exists = store.execSPARQLBooleanQuery(resolved_project_exists_sparql);
+
+		if (project_exists) {
+			LOGGER.info("Project already exists");
+			throw new ProjectExistsException();
+		} else {
+			// Load addProject.ttl file and resolve tokens
+			InputStream inputStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.addProject.getValue());
+			String resolved_addproject_ttl = fileTokenResolver(inputStream, MethodFileToken.project_uri.getValue(), projectURI);
+
+			// Add project to store
+			InputStream modelInputStream = new StringBufferInputStream(resolved_addproject_ttl);
+			Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
+
+			store.saveModel(model);
+			LOGGER.info("Project added to store");
+		}
 
 		return projectURI;
 	}
-	
-	public void flushGraph(String fileName) throws RDFStoreException, IOException{
+
+	public void flushGraph(String fileName) throws RDFStoreException, IOException {
 		FileUtils fileutils = FileUtils.getInstance();
 		store.flushGraph(null, fileutils.getFileOutputStream(fileName), RDFFormat.TURTLE);
 	}
-	
-	public void deleteProject (String project_URI){
+
+	public void deleteProject(String project_URI) {
 		throw new UnsupportedOperationException("This functionality has not been implemented yet");
 	}
-	
+
 	/**
 	 * 
 	 * Resolves the tokens of a file with the replacement URIs
 	 * 
-	 * @param in the InputStream with the file
-	 * @param token the token to search for in the file
-	 * @param replacement the value to replace the token with
+	 * @param in
+	 *            the InputStream with the file
+	 * @param token
+	 *            the token to search for in the file
+	 * @param replacement
+	 *            the value to replace the token with
 	 * @return the new file content, resolved
-	 * @throws IOException 
+	 * @throws IOException
 	 * 
 	 */
-	
-	private String fileTokenResolver(InputStream in, String token, String replacement) throws IOException{
+
+	private String fileTokenResolver(InputStream in, String token, String replacement) throws IOException {
 		String unresolved_string = IOUtils.toString(in, StandardCharsets.UTF_8);
 		String resolved_string = unresolved_string.replaceAll(token, "<" + replacement + ">");
 		return resolved_string;

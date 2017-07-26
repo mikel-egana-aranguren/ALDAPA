@@ -104,4 +104,17 @@ public interface RDFStore {
 	
 	public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) throws RDFStoreException;
 	
+	/**
+	 * 
+	 * Executes a SPARQL query that will return, if successful, either true or false (ASK)
+	 * 
+	 * @param pSPARQLquery
+	 *            the SPARQL query
+	 *            
+	 * @return the result as a boolean
+	 *
+	 */
+	
+	public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException;
+	
 }

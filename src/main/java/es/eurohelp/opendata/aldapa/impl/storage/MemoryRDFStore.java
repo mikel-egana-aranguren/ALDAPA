@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
+import org.eclipse.rdf4j.query.BooleanQuery;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.Repository;
@@ -187,5 +188,14 @@ public class MemoryRDFStore implements RDFStore {
 	 */
 	public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) throws RDFStoreException {
 		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+	}
+
+	/* (non-Javadoc)
+	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#execSPARQLBooleanQuery(java.lang.String)
+	 */
+	@Override
+	public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException {
+		BooleanQuery query = conn.prepareBooleanQuery(pSPARQLquery);
+		return query.evaluate();
 	}
 }

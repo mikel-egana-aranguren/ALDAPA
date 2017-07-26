@@ -76,13 +76,13 @@ public class MemoryRDFStoreTest {
 			assertEquals(model_size, model.size());
 			mem_store.stopRDFStore();
 		} catch (RDFParseException e) {
-			LOGGER.catching(e);
+			System.out.println(e);
 		} catch (UnsupportedRDFormatException e) {
-			LOGGER.catching(e);
+			System.out.println(e);
 		} catch (IOException e) {
-			LOGGER.catching(e);
+			System.out.println(e);
 		} catch (RDFStoreException e) {
-			LOGGER.catching(e);
+			System.out.println(e);
 		}
 	}
 
@@ -102,13 +102,13 @@ public class MemoryRDFStoreTest {
 			mem_store.flushGraph(graphURI, new FileOutputStream(aldapa_model_output_file), output_rdf_format);
 			mem_store.stopRDFStore();
 		} catch (RDFParseException e) {
-			LOGGER.catching(e);
+			System.out.println(e);
 		} catch (UnsupportedRDFormatException e) {
-			LOGGER.catching(e);
+			System.out.println(e);
 		} catch (IOException e) {
-			LOGGER.catching(e);
+			System.out.println(e);
 		} catch (RDFStoreException e) {
-			LOGGER.catching(e);
+			System.out.println(e);
 		}
 	}
 
@@ -137,5 +137,32 @@ public class MemoryRDFStoreTest {
 	public final void testExecSPARQLTupleQuery() {
 //		fail("Not yet implemented"); // TODO
 	}
-
+	
+	@Test
+	public final void testExecSPARQLBooleanQuery(){
+		boolean query_result = false;
+		try {
+			MemoryRDFStore mem_store = new MemoryRDFStore();
+			mem_store.startRDFStore();
+			InputStream inStream = FileUtils.getInstance().getInputStream(aldapa_model_file);
+			Model model = Rio.parse(inStream, "http://opendata.eurohelp.es/aldapa/testFlushGraph", RDFFormat.TRIG);
+			mem_store.saveModel(model);
+			query_result = mem_store.execSPARQLBooleanQuery(
+					"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+					+ "PREFIX foaf:<http://xmlns.com/foaf/0.1/> "
+					+ "ASK WHERE { "
+					+ "?project rdf:type foaf:Project . "
+					+ "}");
+			mem_store.stopRDFStore();
+		} catch (RDFParseException e) {
+			System.out.println(e);
+		} catch (UnsupportedRDFormatException e) {
+			System.out.println(e);
+		} catch (IOException e) {
+			System.out.println(e);
+		} catch (RDFStoreException e) {
+			System.out.println(e);
+		}
+		assertTrue(query_result);
+	}
 }
