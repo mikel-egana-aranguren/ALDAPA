@@ -1,9 +1,15 @@
 Configuration
 =============
 
+## Do not touch
+
+ALDAPA has a certain structure that should not be changed:
+
+* 'model/addProject.ttl'.
+
 ## File structure
 
-File structure shoudl remain:
+File structure should remain:
 
 '''
 ALDAPA_CONFIG_FILE: configuration/aldapa-default-configuration.yml
