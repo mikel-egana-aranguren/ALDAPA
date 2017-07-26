@@ -80,10 +80,11 @@ public class Manager {
 		// Check if exists in RDF store with SPARQL query, throw Exception
 		
 		// Load addProject.ttl file and resolve tokens
-		InputStream inputStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.addProject.toString());
+		InputStream inputStream = FileUtils.getInstance().getInputStream(
+				AldapaMethodRDFFile.addProject.methodFileName);
 		String resolved_addproject_ttl = fileTokenResolver(
 				inputStream, 
-				MethodFileToken.project_uri.toString(), 
+				MethodFileToken.project_uri.getValue(), 
 				projectURI);
 		
 		// Add project to store

@@ -19,4 +19,7 @@ public enum MethodFileToken {
 		this.methodFileToken = methodFileToken;
 	}
 
+	public String getValue() {
+		return methodFileToken;
+	}
 }
