@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa;
+package es.eurohelp.lod.aldapa;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,10 +17,10 @@ import org.eclipse.rdf4j.model.util.URIUtil;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
-import es.eurohelp.opendata.aldapa.storage.RDFStore;
-import es.eurohelp.opendata.aldapa.storage.RDFStoreException;
-import es.eurohelp.opendata.aldapa.util.FileUtils;
-import es.eurohelp.opendata.aldapa.util.URIUtils;
+import es.eurohelp.lod.aldapa.storage.RDFStore;
+import es.eurohelp.lod.aldapa.storage.RDFStoreException;
+import es.eurohelp.lod.aldapa.util.FileUtils;
+import es.eurohelp.lod.aldapa.util.URIUtils;
 
 /**
  * 
@@ -83,7 +83,7 @@ public class Manager {
 		// Check if exists in RDF store with SPARQL query, throw Exception
 		InputStream queryStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.projectExists.getValue());
 
-		String resolved_project_exists_sparql = fileTokenResolver(queryStream, MethodFileToken.project_uri.getValue(), projectURI);
+		String resolved_project_exists_sparql = FileUtils.fileTokenResolver(queryStream, MethodFileToken.project_uri.getValue(), projectURI);
 
 		Boolean project_exists = store.execSPARQLBooleanQuery(resolved_project_exists_sparql);
 
@@ -93,7 +93,7 @@ public class Manager {
 		} else {
 			// Load addProject.ttl file and resolve tokens
 			InputStream inputStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.addProject.getValue());
-			String resolved_addproject_ttl = fileTokenResolver(inputStream, MethodFileToken.project_uri.getValue(), projectURI);
+			String resolved_addproject_ttl = FileUtils.fileTokenResolver(inputStream, MethodFileToken.project_uri.getValue(), projectURI);
 
 			// Add project to store
 			InputStream modelInputStream = new StringBufferInputStream(resolved_addproject_ttl);
@@ -114,26 +114,4 @@ public class Manager {
 	public void deleteProject(String project_URI) {
 		throw new UnsupportedOperationException("This functionality has not been implemented yet");
 	}
-
-	/**
-	 * 
-	 * Resolves the tokens of a file with the replacement URIs
-	 * 
-	 * @param in
-	 *            the InputStream with the file
-	 * @param token
-	 *            the token to search for in the file
-	 * @param replacement
-	 *            the value to replace the token with
-	 * @return the new file content, resolved
-	 * @throws IOException
-	 * 
-	 */
-
-	private String fileTokenResolver(InputStream in, String token, String replacement) throws IOException {
-		String unresolved_string = IOUtils.toString(in, StandardCharsets.UTF_8);
-		String resolved_string = unresolved_string.replaceAll(token, "<" + replacement + ">");
-		return resolved_string;
-	}
-
 }

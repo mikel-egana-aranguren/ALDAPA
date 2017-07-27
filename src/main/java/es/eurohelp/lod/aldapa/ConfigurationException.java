@@ -1,4 +1,4 @@
-package es.eurohelp.opendata.aldapa;
+package es.eurohelp.lod.aldapa;
 
 /**
  * 

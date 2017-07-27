@@ -1,4 +1,4 @@
-package es.eurohelp.opendata.aldapa.util;
+package es.eurohelp.lod.aldapa.util;
 
 import java.net.URI;
 import java.net.URISyntaxException;

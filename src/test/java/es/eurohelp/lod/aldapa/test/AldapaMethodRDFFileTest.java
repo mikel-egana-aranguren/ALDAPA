@@ -1,13 +1,13 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa.test;
+package es.eurohelp.lod.aldapa.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import es.eurohelp.opendata.aldapa.AldapaMethodRDFFile;
+import es.eurohelp.lod.aldapa.AldapaMethodRDFFile;
 
 /**
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.

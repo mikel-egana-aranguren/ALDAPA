@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa.util.test;
+package es.eurohelp.lod.aldapa.util.test;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,7 @@ import java.net.URISyntaxException;
 
 import org.junit.Test;
 
-import es.eurohelp.opendata.aldapa.util.URIUtils;
+import es.eurohelp.lod.aldapa.util.URIUtils;
 
 /**
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
@@ -24,7 +24,7 @@ public class URIUtilsTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.util.URIUtils#URIUtils()}.
+	 * Test method for {@link es.eurohelp.lod.aldapa.util.URIUtils#URIUtils()}.
 	 */
 	@Test
 	public void testURIUtils() {
@@ -32,7 +32,7 @@ public class URIUtilsTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.util.URIUtils#validateURI(java.lang.String)}.
+	 * Test method for {@link es.eurohelp.lod.aldapa.util.URIUtils#validateURI(java.lang.String)}.
 	 */
 	@Test
 	public void testValidateURI() {
@@ -44,7 +44,7 @@ public class URIUtilsTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.util.URIUtils#URIfy(java.lang.String, java.lang.String, java.lang.String)}.
+	 * Test method for {@link es.eurohelp.lod.aldapa.util.URIUtils#URIfy(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	public void testURIfy() {

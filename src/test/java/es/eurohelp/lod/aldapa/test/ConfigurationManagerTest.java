@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa.test;
+package es.eurohelp.lod.aldapa.test;
 
 import static org.junit.Assert.*;
 
@@ -9,8 +9,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import es.eurohelp.opendata.aldapa.ConfigurationFileIOException;
-import es.eurohelp.opendata.aldapa.ConfigurationManager;
+import es.eurohelp.lod.aldapa.ConfigurationFileIOException;
+import es.eurohelp.lod.aldapa.ConfigurationManager;
 
 /**
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
@@ -21,7 +21,7 @@ public class ConfigurationManagerTest {
 	
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.ConfigurationManager#getInstance(java.lang.String)}.
+	 * Test method for {@link es.eurohelp.lod.aldapa.ConfigurationManager#getInstance(java.lang.String)}.
 	 */
 	@Test
 	public final void testGetInstance() {
@@ -37,7 +37,7 @@ public class ConfigurationManagerTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.ConfigurationManager#getConfigPropertyValue(java.lang.String, java.lang.String)}.
+	 * Test method for {@link es.eurohelp.lod.aldapa.ConfigurationManager#getConfigPropertyValue(java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	public final void testGetConfigPropertyValue() {

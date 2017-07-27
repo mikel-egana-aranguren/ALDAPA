@@ -5,4 +5,4 @@
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *
  */
-package es.eurohelp.opendata.aldapa;
+package es.eurohelp.lod.aldapa;

@@ -1,9 +1,9 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa.storage;
+package es.eurohelp.lod.aldapa.storage;
 
-import es.eurohelp.opendata.aldapa.AldapaException;
+import es.eurohelp.lod.aldapa.AldapaException;
 
 /**
  * 

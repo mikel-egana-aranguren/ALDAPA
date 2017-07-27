@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa.util;
+package es.eurohelp.lod.aldapa.util;
 
 import java.math.BigDecimal;
 
@@ -12,7 +12,7 @@ import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.RDFS;
 
-import es.eurohelp.opendata.aldapa.storage.RDFStoreException;
+import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 
 /**
  * 

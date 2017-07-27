@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa.impl.test;
+package es.eurohelp.lod.aldapa.impl.test;
 
 import static org.junit.Assert.*;
 
@@ -18,9 +18,9 @@ import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.rio.UnsupportedRDFormatException;
 import org.junit.Test;
 
-import es.eurohelp.opendata.aldapa.impl.storage.MemoryRDFStore;
-import es.eurohelp.opendata.aldapa.storage.RDFStoreException;
-import es.eurohelp.opendata.aldapa.util.FileUtils;
+import es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore;
+import es.eurohelp.lod.aldapa.storage.RDFStoreException;
+import es.eurohelp.lod.aldapa.util.FileUtils;
 
 /**
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
@@ -38,7 +38,7 @@ public class MemoryRDFStoreTest {
 	private static final Logger LOGGER = LogManager.getLogger(MemoryRDFStoreTest.class);
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.impl.storage.MemoryRDFStore#MemoryRDFStore()}.
+	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#MemoryRDFStore()}.
 	 */
 	@Test
 	public final void testMemoryRDFStore() {
@@ -46,7 +46,7 @@ public class MemoryRDFStoreTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.impl.storage.MemoryRDFStore#startRDFStore()}.
+	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#startRDFStore()}.
 	 */
 	@Test
 	public final void testStartRDFStore() {
@@ -54,7 +54,7 @@ public class MemoryRDFStoreTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.impl.storage.MemoryRDFStore#stopRDFStore()}.
+	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#stopRDFStore()}.
 	 */
 	@Test
 	public final void testStopRDFStore() {
@@ -63,7 +63,7 @@ public class MemoryRDFStoreTest {
 
 	/**
 	 * Test method for
-	 * {@link es.eurohelp.opendata.aldapa.impl.storage.MemoryRDFStore#saveModel(org.openrdf.model.Model)}.
+	 * {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#saveModel(org.openrdf.model.Model)}.
 	 */
 	@Test
 	public final void testSaveModel() {
@@ -88,7 +88,7 @@ public class MemoryRDFStoreTest {
 
 	/**
 	 * Test method for
-	 * {@link es.eurohelp.opendata.aldapa.impl.storage.MemoryRDFStore#flushGraph(java.lang.String, java.io.FileOutputStream, org.openrdf.rio.RDFFormat)}
+	 * {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#flushGraph(java.lang.String, java.io.FileOutputStream, org.openrdf.rio.RDFFormat)}
 	 * .
 	 */
 	@Test
@@ -113,7 +113,7 @@ public class MemoryRDFStoreTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.impl.storage.MemoryRDFStore#deleteGraph(java.lang.String)}.
+	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#deleteGraph(java.lang.String)}.
 	 */
 	@Test
 	public final void testDeleteGraph() {
@@ -122,7 +122,7 @@ public class MemoryRDFStoreTest {
 
 	/**
 	 * Test method for
-	 * {@link es.eurohelp.opendata.aldapa.impl.storage.MemoryRDFStore#execSPARQLGraphQuery(java.lang.String)}.
+	 * {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#execSPARQLGraphQuery(java.lang.String)}.
 	 */
 	@Test
 	public final void testExecSPARQLGraphQuery() {
@@ -131,7 +131,7 @@ public class MemoryRDFStoreTest {
 
 	/**
 	 * Test method for
-	 * {@link es.eurohelp.opendata.aldapa.impl.storage.MemoryRDFStore#execSPARQLTupleQuery(java.lang.String)}.
+	 * {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#execSPARQLTupleQuery(java.lang.String)}.
 	 */
 	@Test
 	public final void testExecSPARQLTupleQuery() {

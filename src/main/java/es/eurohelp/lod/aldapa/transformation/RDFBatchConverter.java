@@ -1,4 +1,4 @@
-package es.eurohelp.opendata.aldapa.transformation;
+package es.eurohelp.lod.aldapa.transformation;
 
 import java.io.IOException;
 import java.io.InputStream;

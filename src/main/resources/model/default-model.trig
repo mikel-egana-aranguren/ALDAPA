@@ -5,7 +5,7 @@
 #
 # This is the default internal model for ALDAPA: It stores projects, file paths, URI families, pipelines, and the data itself through named graphs.
 # This file is maintained for documentation purposes, in order to have an explicit, version-controlled representation of the model, it is not loaded into ALDAPA: the model itself is loaded by other means.
-# URIs are taken from the file resources/configuration/aldapa-default-configuration.properties and are parametrised with actual names during execution, when the model is loaded.
+# URIs are taken from the file resources/configuration/aldapa-default-configuration.yml and are parametrised with actual names during execution, when the model is loaded.
 # This model is orientative: is is still very incomplete (see TODOs), and very preliminary (e.g. the modelling may change, especially around the dcat:Dataset as a named graph decision)
 #
 ############################
@@ -19,23 +19,25 @@ PREFIX owl:<http://www.w3.org/2002/07/owl#>
 PREFIX foaf:<http://xmlns.com/foaf/0.1/>
 PREFIX dcat:<http://www.w3.org/ns/dcat#>
 PREFIX void:<http://rdfs.org/ns/void#>
+PREFIX dbpedia:<http://dbpedia.org/ontology/>
+PREFIX schema:<http://schema.org/>
 
 # ALDAPA prefixes 
 
-PREFIX project:<urn:aldapa:project:>
-PREFIX catalog:<http://opendata.eurohelp.es/catalog/>
-PREFIX dataset:<http://opendata.eurohelp.es/dataset/>
-PREFIX distribution:<http://opendata.eurohelp.es/distribution/>
+PREFIX project:<http://lod.eurohelp.es/aldapa/project/>
+PREFIX catalog:<http://lod.eurohelp.es/aldapa/catalog/>
+PREFIX dataset:<http://lod.eurohelp.es/aldapa/dataset/>
+PREFIX distribution:<http://lod.eurohelp.es/aldapa/distribution/>
 PREFIX resource:<http://opendata.eurohelp.es/resource/>
 PREFIX property:<http://opendata.eurohelp.es/property/>
 
 # Metadata goes into the aldapa named graph
 
 <urn:aldapa:metadata> {
-	project:PROJECT_NAME rdf:type foaf:Project ;
-		owl:sameAs catalog:CATALOG_NAME .	
+	project:PROJECT_NAME rdf:type foaf:Project .	
 	catalog:CATALOG_NAME rdf:type dcat:Catalog ;
-		dcat:dataset dataset:DATASET_NAME .
+		dcat:dataset dataset:DATASET_NAME ;
+		schema:isPartOf project:PROJECT_NAME .
 	dataset:DATASET_NAME rdf:type dcat:Dataset ;
 		rdf:type void:Dataset . 
 		dcat:distribution distribution:RDF_DUMP_DISTRIBUTION_NAME .
@@ -55,7 +57,7 @@ dataset:DATASET_NAME {
 
 ############################
 #
-# TODO: complete DCAT modelling (through SPARQL decorators?). A nice mechanism for parametrising INSERT queries when metadata (e.g. dct:title) is incomplete (see issue #5) is needed	
+# TODO: complete DCAT modelling 
 # TODO: complete VoID modelling 
 # TODO: complete PROV modelling (e.g. when a CSV is converted)
 # TODO: take ALDAPA prefixes from configuration file

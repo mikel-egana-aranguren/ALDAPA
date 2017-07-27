@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa.util.test;
+package es.eurohelp.lod.aldapa.util.test;
 
 import static org.junit.Assert.*;
 
@@ -10,8 +10,8 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import es.eurohelp.opendata.aldapa.util.FileUtils;
-import es.eurohelp.opendata.aldapa.util.YAMLUtils;
+import es.eurohelp.lod.aldapa.util.FileUtils;
+import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
@@ -20,7 +20,7 @@ import es.eurohelp.opendata.aldapa.util.YAMLUtils;
 public class YAMLUtilsTest {
 
 	/**
-	 * Test method for {@link es.eurohelp.opendata.aldapa.util.YAMLUtils#parseSimpleYAML(java.io.InputStream)}.
+	 * Test method for {@link es.eurohelp.lod.aldapa.util.YAMLUtils#parseSimpleYAML(java.io.InputStream)}.
 	 */
 	@Test
 	public final void testParseSimpleYAML() {

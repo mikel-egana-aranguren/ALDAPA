@@ -1,4 +1,4 @@
-package es.eurohelp.opendata.aldapa;
+package es.eurohelp.lod.aldapa;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,8 +9,8 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import es.eurohelp.opendata.aldapa.util.FileUtils;
-import es.eurohelp.opendata.aldapa.util.YAMLUtils;
+import es.eurohelp.lod.aldapa.util.FileUtils;
+import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
  * 

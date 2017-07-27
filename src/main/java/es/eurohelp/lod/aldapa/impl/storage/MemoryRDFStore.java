@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa.impl.storage;
+package es.eurohelp.lod.aldapa.impl.storage;
 
 import java.io.FileOutputStream;
 import java.util.Iterator;
@@ -31,9 +31,9 @@ import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
 import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.sail.memory.MemoryStore;
 
-import es.eurohelp.opendata.aldapa.storage.RDFStore;
-import es.eurohelp.opendata.aldapa.storage.RDFStoreException;
-import es.eurohelp.opendata.aldapa.util.MIMEType;
+import es.eurohelp.lod.aldapa.storage.RDFStore;
+import es.eurohelp.lod.aldapa.storage.RDFStoreException;
+import es.eurohelp.lod.aldapa.util.MIMEType;
 
 /**
  * 

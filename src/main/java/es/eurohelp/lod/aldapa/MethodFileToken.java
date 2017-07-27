@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.opendata.aldapa;
+package es.eurohelp.lod.aldapa;
 
 /**
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.

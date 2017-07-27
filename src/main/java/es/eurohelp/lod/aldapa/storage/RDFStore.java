@@ -1,4 +1,4 @@
-package es.eurohelp.opendata.aldapa.storage;
+package es.eurohelp.lod.aldapa.storage;
 
 import java.io.FileOutputStream;
 

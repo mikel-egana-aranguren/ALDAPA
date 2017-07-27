@@ -1,4 +1,4 @@
-package es.eurohelp.opendata.aldapa.util;
+package es.eurohelp.lod.aldapa.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+
+import org.apache.commons.io.IOUtils;
 
 
 /**
@@ -71,5 +74,26 @@ public class FileUtils {
 			file.createNewFile();
 		}
 		return new FileOutputStream(file);
+	}
+	
+	/**
+	 * 
+	 * Resolves the tokens of a file with the replacement URIs
+	 * 
+	 * @param in
+	 *            the InputStream with the file
+	 * @param token
+	 *            the token to search for in the file
+	 * @param replacement
+	 *            the value to replace the token with
+	 * @return the new file content, resolved
+	 * @throws IOException
+	 * 
+	 */
+
+	public static String fileTokenResolver(InputStream in, String token, String replacement) throws IOException {
+		String unresolved_string = IOUtils.toString(in, StandardCharsets.UTF_8);
+		String resolved_string = unresolved_string.replaceAll(token, "<" + replacement + ">");
+		return resolved_string;
 	}
 }
