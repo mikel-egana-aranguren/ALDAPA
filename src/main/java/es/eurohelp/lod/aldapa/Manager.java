@@ -7,13 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.util.URIUtil;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
@@ -52,6 +49,7 @@ public class Manager {
 		Class<?> store_class = Class.forName(store_plugin_name);
 		store = (RDFStore) store_class.newInstance();
 		store.startRDFStore();
+		LOGGER.info("Triple Store started" );
 	}
 
 	/**
@@ -82,7 +80,6 @@ public class Manager {
 
 		// Check if exists in RDF store with SPARQL query, throw Exception
 		InputStream queryStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.projectExists.getValue());
-
 		String resolved_project_exists_sparql = FileUtils.fileTokenResolver(queryStream, MethodFileToken.project_uri.getValue(), projectURI);
 
 		Boolean project_exists = store.execSPARQLBooleanQuery(resolved_project_exists_sparql);
@@ -106,12 +103,67 @@ public class Manager {
 		return projectURI;
 	}
 
-	public void flushGraph(String fileName) throws RDFStoreException, IOException {
+	/**
+	 * 
+	 * Write a Graph into a file
+	 * 
+	 * parama graphuri the Named Graph URI, it can be null
+	 * @param fileName
+	 * @throws RDFStoreException
+	 * @throws IOException
+	 */
+	public void flushGraph(String graphuri, String fileName) throws RDFStoreException, IOException {
 		FileUtils fileutils = FileUtils.getInstance();
-		store.flushGraph(null, fileutils.getFileOutputStream(fileName), RDFFormat.TURTLE);
+		store.flushGraph(graphuri, fileutils.getFileOutputStream(fileName), RDFFormat.TURTLE);
 	}
 
+	/**
+	 * 
+	 * Delete a project. This will delete a project and all its metadata (Catalogs, Datasets etc.) and the data within its dataset
+	 * 
+	 * @param project_URI
+	 */
 	public void deleteProject(String project_URI) {
 		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+	}
+	
+	public void deleteCatalog(String catalog_URI) {
+		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+	}
+
+	/**
+	 * 
+	 * Adds a new catalog in a project
+	 * 
+	 * @param catalog_name 
+	 * 			the name of the new catalog that will be used to generate the URI, according to the configuration
+	 * @param project_uri
+	 * 			the project that this catalog belongs to
+	 * @return Catalog URI
+	 * @throws CatalogExistsException 
+	 * @throws IOException 
+	 * @throws RDFStoreException 
+	 * @throws ProjectNotFoundException 
+	 */
+	public String addCatalog(String catalog_name, String project_uri) throws CatalogExistsException, IOException, RDFStoreException, ProjectNotFoundException {
+
+		// Project should exist
+		InputStream queryStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.projectExists.getValue());
+		String resolved_project_exists_sparql = FileUtils.fileTokenResolver(queryStream, MethodFileToken.project_uri.getValue(), project_uri);
+		Boolean project_exists = store.execSPARQLBooleanQuery(resolved_project_exists_sparql);
+
+		// Catalog should not exist
+		Boolean catalog_exists = false;
+		if (!project_exists) {
+			LOGGER.info("Project does not exist: " + project_uri);
+			throw new ProjectNotFoundException(project_uri);
+		} else if (catalog_exists){
+			LOGGER.info("Catalog already exists: " + project_uri);
+			throw new CatalogExistsException();
+		}
+		else{
+			// Add catalog
+		}
+		return null;
 	}
 }

@@ -1,16 +1,16 @@
-/**
- * 
- */
 package es.eurohelp.lod.aldapa;
 
 /**
+ * 
+ * The tokens to resolve in a Method File with string provided by the user
+ * 
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *
  */
 public enum MethodFileToken {
-	project_name("PROJECT_NAME"),
 	project_uri("PROJECT_URI"),
-	dataset_name("DATASET_NAME")
+	catalog_uri("CATALOG_URI"),
+	dataset_uri("DATASET_URI"),
 	;
 	
 	public final String methodFileToken;

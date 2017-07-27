@@ -10,10 +10,12 @@ import java.net.URISyntaxException;
 
 import org.junit.Test;
 
+import es.eurohelp.lod.aldapa.CatalogExistsException;
 import es.eurohelp.lod.aldapa.ConfigurationFileIOException;
 import es.eurohelp.lod.aldapa.ConfigurationManager;
 import es.eurohelp.lod.aldapa.Manager;
 import es.eurohelp.lod.aldapa.ProjectExistsException;
+import es.eurohelp.lod.aldapa.ProjectNotFoundException;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 
 /**
@@ -57,12 +59,12 @@ public class ManagerTest {
 	 */
 	@Test
 	public final void testAddProject() {
-		String project_name = "Donosti Parkings!!???";
+		String project_name = "Donosti movilidad";
 		String project_uri = null;
 		try {
 			project_uri = manager.addProject(project_name);
-			manager.flushGraph("C:\\Users\\megana\\git\\ALDAPA\\data\\project-created.ttl");
-			assertEquals("http://lod.eurohelp.es/aldapa/project/donosti-parkings", project_uri);
+			manager.flushGraph(null, "C:\\Users\\megana\\git\\ALDAPA\\data\\project-created.ttl");
+			assertEquals("http://lod.eurohelp.es/aldapa/project/donosti-movilidad", project_uri);
 		} catch (ProjectExistsException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -70,6 +72,26 @@ public class ManagerTest {
 		} catch (RDFStoreException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public final void testAddCatalog() {
+		String catalog_name = "Donosti Parkings!!???";
+		String catalog_uri = null;
+		String project_uri = "http://lod.eurohelp.es/aldapa/project/donosti-movilidad";
+		try {
+			catalog_uri = manager.addCatalog(catalog_name, project_uri);
+			manager.flushGraph(null, "C:\\Users\\megana\\git\\ALDAPA\\data\\catalog-created.ttl");
+			assertEquals("http://lod.eurohelp.es/aldapa/catalog/donosti-parkings", catalog_uri);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RDFStoreException e) {
+			e.printStackTrace();
+		} catch (CatalogExistsException e) {
+			e.printStackTrace();
+		} catch (ProjectNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

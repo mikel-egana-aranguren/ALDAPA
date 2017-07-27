@@ -9,8 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFParseException;
@@ -29,13 +27,9 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
 public class MemoryRDFStoreTest {
 
 	private final String aldapa_model_file = "model/default-model.trig";
-	private final int model_size = 11;
-	private final String graphURI = "urn:aldapa:metadata";
-//	private final String graphURI = "http://opendata.eurohelp.es/dataset/DATASET_NAME";
+	private final String graphURI = "http://lod.eurohelp.es/graph/graph001";
 	private final String aldapa_model_output_file = "data/default-model-output.ttl";
 	private final RDFFormat output_rdf_format = RDFFormat.TURTLE;
-	
-	private static final Logger LOGGER = LogManager.getLogger(MemoryRDFStoreTest.class);
 
 	/**
 	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#MemoryRDFStore()}.
@@ -73,7 +67,7 @@ public class MemoryRDFStoreTest {
 			InputStream inStream = FileUtils.getInstance().getInputStream(aldapa_model_file);
 			Model model = Rio.parse(inStream, "http://opendata.eurohelp.es/aldapa/testSaveModel", RDFFormat.TRIG);
 			mem_store.saveModel(model);
-			assertEquals(model_size, model.size());
+			assertNotNull(model);
 			mem_store.stopRDFStore();
 		} catch (RDFParseException e) {
 			System.out.println(e);
@@ -145,7 +139,7 @@ public class MemoryRDFStoreTest {
 			MemoryRDFStore mem_store = new MemoryRDFStore();
 			mem_store.startRDFStore();
 			InputStream inStream = FileUtils.getInstance().getInputStream(aldapa_model_file);
-			Model model = Rio.parse(inStream, "http://opendata.eurohelp.es/aldapa/testFlushGraph", RDFFormat.TRIG);
+			Model model = Rio.parse(inStream, "http://lod.eurohelp.es/aldapa/testFlushGraph", RDFFormat.TRIG);
 			mem_store.saveModel(model);
 			query_result = mem_store.execSPARQLBooleanQuery(
 					"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
