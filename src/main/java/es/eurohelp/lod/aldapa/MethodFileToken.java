@@ -2,7 +2,7 @@ package es.eurohelp.lod.aldapa;
 
 /**
  * 
- * The tokens to resolve in a Method File with string provided by the user
+ * The tokens to resolve in a Method File with the string provided by the user
  * 
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *

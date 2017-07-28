@@ -112,7 +112,7 @@ public class ConfigurationManager {
 
 	/**
 	 * 
-	 * Retrieves a configuration value () by the key (e.g. ALDAPA_CONFIG_FILE)
+	 * Retrieves a configuration value of a given property (eg "pluginClassName") in a file (eg "TRIPLE_STORE_CONFIG_FILE") 
 	 * 
 	 * @param module (file) name
 	 * 

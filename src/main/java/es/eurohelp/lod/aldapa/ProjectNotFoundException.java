@@ -15,6 +15,10 @@ public class ProjectNotFoundException extends AldapaException {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = -5210009709496905104L;
+	/**
+	 * 
+	 */
 	
 	private static String message = "The project does not exist in the RDF Store";
 

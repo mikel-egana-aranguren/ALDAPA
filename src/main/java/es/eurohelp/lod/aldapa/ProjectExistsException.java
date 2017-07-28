@@ -17,12 +17,13 @@ public class ProjectExistsException extends AldapaException {
 	 */
 	private static final long serialVersionUID = 6817129335618315038L;
 	
-	private String message = "The project URI already exists in the RDF Store";
+	private final static String message = "The project URI already exists in the RDF Store";
 
 	/**
 	 * 
 	 */
 	public ProjectExistsException() {
+		super(message);
 	}
 
 	/**
@@ -30,7 +31,6 @@ public class ProjectExistsException extends AldapaException {
 	 */
 	public ProjectExistsException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -46,7 +46,6 @@ public class ProjectExistsException extends AldapaException {
 	 */
 	public ProjectExistsException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -57,7 +56,6 @@ public class ProjectExistsException extends AldapaException {
 	 */
 	public ProjectExistsException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
-		// TODO Auto-generated constructor stub
 	}
 
 }
