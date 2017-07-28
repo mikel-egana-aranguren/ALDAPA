@@ -17,7 +17,8 @@ public enum AldapaMethodRDFFile {
 	addProject("model/addProject.ttl"), 
 	addCatalog("model/addCatalog.ttl"),
 	projectExists("model/projectExists.sparql"),
-	getProjects("model/getProjects.sparql")
+	getProjects("model/getProjects.sparql"), 
+	catalogExists("model/catalogExists.sparql")
 	;
 
 	public final String methodFileName;

@@ -5,6 +5,7 @@ package es.eurohelp.lod.aldapa.test;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
@@ -46,9 +47,10 @@ public class InternalModelValidSyntaxTest {
 	public void addProjectTurtle() {
 		Model results = null;
 		try {
-			InputStream inputStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.addProject.getValue());
-			String resolved_addproject_ttl = FileUtils.fileTokenResolver(inputStream, MethodFileToken.project_uri.getValue(), "http://example.com/fakeproject");
-			InputStream modelInputStream = new StringBufferInputStream(resolved_addproject_ttl);
+			FileUtils fileutils = FileUtils.getInstance();
+//			InputStream inputStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.addProject.getValue());
+			String resolved_addproject_ttl = fileutils.fileTokenResolver(AldapaMethodRDFFile.addProject.getValue(), MethodFileToken.project_uri.getValue(), "http://example.com/fakeproject");
+			InputStream modelInputStream = new ByteArrayInputStream(resolved_addproject_ttl.getBytes());
 			results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 		} catch (RDFParseException e) {
 			e.printStackTrace();

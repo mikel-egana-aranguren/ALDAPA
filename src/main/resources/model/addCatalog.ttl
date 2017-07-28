@@ -3,5 +3,4 @@ PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX schema: <http://schema.org/>
 
 CATALOG_URI rdf:type dcat:Catalog ;
-		dcat:dataset DATASET_URI ;
 		schema:isPartOf PROJECT_URI .

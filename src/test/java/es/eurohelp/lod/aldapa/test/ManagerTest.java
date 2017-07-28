@@ -23,6 +23,9 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
  *
  */
 public class ManagerTest {
+	
+	private final String project_name = "Donosti movilidad";
+	private final String catalog_name = "Donosti Parkings!!???";
 
 	Manager manager = null;
 	ConfigurationManager config = null;
@@ -59,7 +62,7 @@ public class ManagerTest {
 	 */
 	@Test
 	public final void testAddProject() {
-		String project_name = "Donosti movilidad";
+
 		String project_uri = null;
 		try {
 			project_uri = manager.addProject(project_name);
@@ -78,10 +81,9 @@ public class ManagerTest {
 	
 	@Test
 	public final void testAddCatalog() {
-		String catalog_name = "Donosti Parkings!!???";
 		String catalog_uri = null;
-		String project_uri = "http://lod.eurohelp.es/aldapa/project/donosti-movilidad";
 		try {
+			String project_uri = manager.addProject(project_name);
 			catalog_uri = manager.addCatalog(catalog_name, project_uri);
 			manager.flushGraph(null, "C:\\Users\\megana\\git\\ALDAPA\\data\\catalog-created.ttl");
 			assertEquals("http://lod.eurohelp.es/aldapa/catalog/donosti-parkings", catalog_uri);
@@ -92,6 +94,10 @@ public class ManagerTest {
 		} catch (CatalogExistsException e) {
 			e.printStackTrace();
 		} catch (ProjectNotFoundException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (ProjectExistsException e) {
 			e.printStackTrace();
 		}
 	}

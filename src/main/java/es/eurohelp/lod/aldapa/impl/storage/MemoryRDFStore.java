@@ -6,7 +6,6 @@ package es.eurohelp.lod.aldapa.impl.storage;
 import java.io.FileOutputStream;
 import java.util.Iterator;
 
-import org.apache.http.entity.mime.MIME;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;

@@ -3,10 +3,11 @@
  */
 package es.eurohelp.lod.aldapa;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringBufferInputStream;
 import java.net.URISyntaxException;
+import java.util.EnumMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +31,8 @@ public class Manager {
 
 	private ConfigurationManager configmanager;
 	private RDFStore store;
+	private FileUtils fileutils;
+	private URIUtils uri_utils;
 
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
 
@@ -44,6 +47,8 @@ public class Manager {
 	 */
 	public Manager(ConfigurationManager configuredconfigmanager) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		configmanager = configuredconfigmanager;
+		fileutils = FileUtils.getInstance();
+		uri_utils = new URIUtils();
 		String store_plugin_name = configmanager.getConfigPropertyValue("TRIPLE_STORE_CONFIG_FILE", "pluginClassName");
 		LOGGER.info("Triple Store plugin name: " + store_plugin_name);
 		Class<?> store_class = Class.forName(store_plugin_name);
@@ -71,7 +76,6 @@ public class Manager {
 		LOGGER.info("Project name: " + project_name);
 
 		// Create Project URI
-		URIUtils uri_utils = new URIUtils();
 		String projectURIFriendlyName = uri_utils.URIfy(null, null, project_name);
 		String project_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "PROJECT_BASE");
 		String projectURI = uri_utils.validateURI(project_base_uri + projectURIFriendlyName);
@@ -79,8 +83,8 @@ public class Manager {
 		LOGGER.info("Project uri: " + projectURI);
 
 		// Check if exists in RDF store with SPARQL query, throw Exception
-		InputStream queryStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.projectExists.getValue());
-		String resolved_project_exists_sparql = FileUtils.fileTokenResolver(queryStream, MethodFileToken.project_uri.getValue(), projectURI);
+//		InputStream queryStream = fileutils.getInputStream(AldapaMethodRDFFile.projectExists.getValue());
+		String resolved_project_exists_sparql = fileutils.fileTokenResolver(AldapaMethodRDFFile.projectExists.getValue(), MethodFileToken.project_uri.getValue(), projectURI);
 
 		Boolean project_exists = store.execSPARQLBooleanQuery(resolved_project_exists_sparql);
 
@@ -89,11 +93,10 @@ public class Manager {
 			throw new ProjectExistsException();
 		} else {
 			// Load addProject.ttl file and resolve tokens
-			InputStream inputStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.addProject.getValue());
-			String resolved_addproject_ttl = FileUtils.fileTokenResolver(inputStream, MethodFileToken.project_uri.getValue(), projectURI);
+			String resolved_addproject_ttl = fileutils.fileTokenResolver(AldapaMethodRDFFile.addProject.getValue(), MethodFileToken.project_uri.getValue(), projectURI);
 
 			// Add project to store
-			InputStream modelInputStream = new StringBufferInputStream(resolved_addproject_ttl);
+			InputStream modelInputStream = new ByteArrayInputStream(resolved_addproject_ttl.getBytes() );
 			Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 
 			store.saveModel(model);
@@ -144,26 +147,50 @@ public class Manager {
 	 * @throws IOException 
 	 * @throws RDFStoreException 
 	 * @throws ProjectNotFoundException 
+	 * @throws URISyntaxException 
 	 */
-	public String addCatalog(String catalog_name, String project_uri) throws CatalogExistsException, IOException, RDFStoreException, ProjectNotFoundException {
+	public String addCatalog(String catalog_name, String project_uri) throws CatalogExistsException, IOException, RDFStoreException, ProjectNotFoundException, URISyntaxException {
 
 		// Project should exist
-		InputStream queryStream = FileUtils.getInstance().getInputStream(AldapaMethodRDFFile.projectExists.getValue());
-		String resolved_project_exists_sparql = FileUtils.fileTokenResolver(queryStream, MethodFileToken.project_uri.getValue(), project_uri);
+		String resolved_project_exists_sparql = fileutils.fileTokenResolver(AldapaMethodRDFFile.projectExists.getValue(), MethodFileToken.project_uri.getValue(), project_uri);
 		Boolean project_exists = store.execSPARQLBooleanQuery(resolved_project_exists_sparql);
 
+		LOGGER.info("Catalog name: " + catalog_name);
+
+		// Create catalog URI
+		String catalogURIFriendlyName = uri_utils.URIfy(null, null, catalog_name);
+		String catalog_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "CATALOG_BASE");
+		String catalog_uri = uri_utils.validateURI(catalog_base_uri + catalogURIFriendlyName);
+
+		LOGGER.info("Catalog uri: " + catalog_uri);
+		
 		// Catalog should not exist
-		Boolean catalog_exists = false;
+		EnumMap<MethodFileToken, String> token_replacement_map = new EnumMap<>(MethodFileToken.class);
+		token_replacement_map.put(MethodFileToken.project_uri, project_uri);
+		token_replacement_map.put(MethodFileToken.catalog_uri, catalog_uri);
+		
+		String resolved_catalog_exists_sparql = fileutils.fileMultipleTokenResolver(
+				AldapaMethodRDFFile.catalogExists.getValue(), token_replacement_map);
+		Boolean catalog_exists = store.execSPARQLBooleanQuery(resolved_catalog_exists_sparql);
 		if (!project_exists) {
 			LOGGER.info("Project does not exist: " + project_uri);
 			throw new ProjectNotFoundException(project_uri);
 		} else if (catalog_exists){
-			LOGGER.info("Catalog already exists: " + project_uri);
+			LOGGER.info("Catalog already exists: " + catalog_uri);
 			throw new CatalogExistsException();
 		}
 		else{
 			// Add catalog
+			String resolved_addcatalog_ttl = fileutils.fileMultipleTokenResolver(
+					AldapaMethodRDFFile.addProject.getValue(), token_replacement_map);
+
+			// Add catalog to store
+			InputStream modelInputStream = new ByteArrayInputStream(resolved_addcatalog_ttl.getBytes() );
+			Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
+
+			store.saveModel(model);
+			LOGGER.info("Catalog added to store");
 		}
-		return null;
+		return catalog_uri;
 	}
 }
