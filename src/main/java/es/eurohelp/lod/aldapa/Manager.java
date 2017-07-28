@@ -182,7 +182,7 @@ public class Manager {
 		else{
 			// Add catalog
 			String resolved_addcatalog_ttl = fileutils.fileMultipleTokenResolver(
-					AldapaMethodRDFFile.addProject.getValue(), token_replacement_map);
+					AldapaMethodRDFFile.addCatalog.getValue(), token_replacement_map);
 
 			// Add catalog to store
 			InputStream modelInputStream = new ByteArrayInputStream(resolved_addcatalog_ttl.getBytes() );
