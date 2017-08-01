@@ -38,7 +38,7 @@ import es.eurohelp.lod.aldapa.util.MIMEType;
  * 
  * A simple memory store that does not persist data, based on RDF4J. To persis data, use flushGraph.
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class MemoryRDFStore implements RDFStore {

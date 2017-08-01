@@ -4,7 +4,7 @@ package es.eurohelp.lod.aldapa;
  * 
  * An IO exception related to the file holding the configuration
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class ConfigurationFileIOException extends ConfigurationException {

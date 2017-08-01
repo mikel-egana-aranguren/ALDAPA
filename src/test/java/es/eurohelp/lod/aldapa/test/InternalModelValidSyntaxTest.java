@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringBufferInputStream;
 import java.util.EnumMap;
 
 import org.eclipse.rdf4j.model.Model;
@@ -23,7 +22,7 @@ import es.eurohelp.lod.aldapa.MethodFileToken;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 
 /**
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class InternalModelValidSyntaxTest {

@@ -14,7 +14,7 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class YAMLUtilsTest {

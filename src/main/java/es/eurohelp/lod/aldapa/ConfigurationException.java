@@ -4,7 +4,7 @@ package es.eurohelp.lod.aldapa;
  * 
  * An exception related to the configuration of the API
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class ConfigurationException extends AldapaException {

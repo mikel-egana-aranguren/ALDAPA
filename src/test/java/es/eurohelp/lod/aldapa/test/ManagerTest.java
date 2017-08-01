@@ -21,7 +21,7 @@ import es.eurohelp.lod.aldapa.ProjectNotFoundException;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 
 /**
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class ManagerTest {

@@ -12,7 +12,7 @@ import org.junit.Test;
 import es.eurohelp.lod.aldapa.util.URIUtils;
 
 /**
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class URIUtilsTest {

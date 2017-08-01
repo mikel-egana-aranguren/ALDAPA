@@ -9,7 +9,7 @@ import es.eurohelp.lod.aldapa.AldapaException;
  * 
  * An Exception related to RDF storage. The RDFStore implementor will subclass this Exception to capture Exceptions from RDF Stores.
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class RDFStoreException extends AldapaException {

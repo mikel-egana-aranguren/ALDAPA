@@ -7,7 +7,7 @@ package es.eurohelp.lod.aldapa.util;
  * 
  * MIMEtypes related to common RDF formats
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public enum MIMEType {

@@ -4,7 +4,7 @@
 package es.eurohelp.lod.aldapa;
 
 /**
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class DatasetExistsException extends Exception {

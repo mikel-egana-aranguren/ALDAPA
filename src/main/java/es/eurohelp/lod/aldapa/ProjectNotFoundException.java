@@ -7,7 +7,7 @@ package es.eurohelp.lod.aldapa;
  * 
  * The project does not exist in the RDF Store
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class ProjectNotFoundException extends AldapaException {

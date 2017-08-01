@@ -24,7 +24,7 @@ import es.eurohelp.lod.aldapa.util.URIUtils;
  * 
  * Main entry-point for the ALDAPA API. A manager is responsible for creating projects and executing pipelines
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class Manager {

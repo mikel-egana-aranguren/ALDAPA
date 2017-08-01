@@ -10,7 +10,7 @@ import org.eclipse.rdf4j.model.Model;
  * 
  * Converts a data source into RDF, in batch mode, i.e., executes a pre-defined pipeline
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public interface RDFBatchConverter {

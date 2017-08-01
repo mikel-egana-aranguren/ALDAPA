@@ -7,7 +7,7 @@ package es.eurohelp.lod.aldapa;
  * 
  * The catalog URI already exists
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class CatalogExistsException extends AldapaException {

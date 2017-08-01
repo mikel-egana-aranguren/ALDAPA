@@ -18,7 +18,7 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
  * 
  * An utility class for adding triples easily to a Model with a single Named Graph. TripleAdder stores the model (either provided or created anew), modifies it, and it can be retrieved by the getModel method. The methods reflect the most used triples at Eurohelp: more will be added as needed.
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class TripleAdder {

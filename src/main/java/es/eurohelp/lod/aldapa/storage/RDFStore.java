@@ -12,7 +12,7 @@ import org.eclipse.rdf4j.rio.RDFFormat;
  * 
  * An RDF store is anything that stores RDF: Triple Store, memory store, NoSQL DB, file store, etc.
  * 
- * @author Mikel Egaña Aranguren, Eurohelp S.L.
+ * @author Mikel Egana Aranguren, Eurohelp S.L.
  *
  */
 public interface RDFStore {

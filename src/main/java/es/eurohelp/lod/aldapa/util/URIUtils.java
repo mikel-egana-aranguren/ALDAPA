@@ -7,7 +7,7 @@ import java.net.URISyntaxException;
  * 
  * Utils for generating valid URIs.
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class URIUtils {

@@ -16,7 +16,7 @@ import es.eurohelp.lod.aldapa.util.YAMLUtils;
  * A configuration manager holds the configuration properties. The main file should contain pointers to other 
  * files, each file having the configuration of each module. See configuration.yml and the folder configuration for details
  * 
- * @author Mikel Egaña Aranguren, Eurohelp consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp consulting S.L.
  * 
  * @author Arkaitz Carbajo, Eurohelp consulting S.L.
  *

@@ -10,7 +10,7 @@ import es.eurohelp.lod.aldapa.storage.RDFStore;
  * Analyses existing RDF for quality issues, in terms of the data itself (e.g. there are no 0 values)
  * or in terms of Linked Data quality (e.g. all entities should have rdf:type and rdfs:label predicates)
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 

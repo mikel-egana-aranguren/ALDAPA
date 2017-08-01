@@ -13,7 +13,7 @@ import es.eurohelp.lod.aldapa.ConfigurationFileIOException;
 import es.eurohelp.lod.aldapa.ConfigurationManager;
 
 /**
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public class ConfigurationManagerTest {

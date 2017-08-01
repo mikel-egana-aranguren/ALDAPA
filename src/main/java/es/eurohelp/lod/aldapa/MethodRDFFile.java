@@ -10,7 +10,7 @@ package es.eurohelp.lod.aldapa;
  * can be executed by ALDAPA by simply parametrising their inner tokens (PROJECT_NAME, ...) so that less code is written
  * (hopefully). Also, that means that new RDF is not necessarily translated into more code.
  * 
- * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
+ * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 public enum MethodRDFFile {
