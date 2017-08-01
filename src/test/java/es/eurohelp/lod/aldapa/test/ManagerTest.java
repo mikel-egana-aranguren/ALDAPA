@@ -113,7 +113,7 @@ public class ManagerTest {
 			String dataset_name = "donOsti parkings Febr";
 			String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
 			manager.flushGraph(null, "C:\\Users\\megana\\git\\ALDAPA\\data\\dataset-created.ttl");
-			assertEquals("http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-january", dataset_uri);
+			assertEquals("http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr", dataset_uri);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (RDFStoreException e) {

@@ -232,9 +232,7 @@ public class Manager {
 		String resolved_dataset_exists_sparql = fileutils.fileMultipleTokenResolver(
 				MethodRDFFile.datasetExists.getValue(), token_replacement_map);
 		
-		
-		
-		Boolean dataset_exists = store.execSPARQLBooleanQuery(resolved_catalog_exists_sparql);
+		Boolean dataset_exists = store.execSPARQLBooleanQuery(resolved_dataset_exists_sparql);
 		if (!catalog_exists) {
 			LOGGER.info("Project does not exist: " + catalog_uri);
 			throw new CatalogNotFoundException(catalog_uri);

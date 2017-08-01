@@ -26,7 +26,7 @@ public class YAMLUtils {
 	
 	public HashMap<String,String> parseSimpleYAML (InputStream in){
 		Yaml yaml = new Yaml();
-		HashMap<String,String> yaml_values = yaml.loadAs(in, HashMap.class);
+		HashMap<String, String> yaml_values = yaml.loadAs(in, HashMap.class);
 		return yaml_values;
 	}
 	
