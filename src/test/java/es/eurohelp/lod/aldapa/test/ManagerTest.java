@@ -11,8 +11,10 @@ import java.net.URISyntaxException;
 import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.CatalogExistsException;
+import es.eurohelp.lod.aldapa.CatalogNotFoundException;
 import es.eurohelp.lod.aldapa.ConfigurationFileIOException;
 import es.eurohelp.lod.aldapa.ConfigurationManager;
+import es.eurohelp.lod.aldapa.DatasetExistsException;
 import es.eurohelp.lod.aldapa.Manager;
 import es.eurohelp.lod.aldapa.ProjectExistsException;
 import es.eurohelp.lod.aldapa.ProjectNotFoundException;
@@ -98,6 +100,35 @@ public class ManagerTest {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (ProjectExistsException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public final void testAddDataset() {
+		String catalog_uri = null;
+		try {
+			String project_uri = manager.addProject(project_name);
+			catalog_uri = manager.addCatalog(catalog_name, project_uri);
+			String dataset_name = "donOsti parkings Febr";
+			String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
+			manager.flushGraph(null, "C:\\Users\\megana\\git\\ALDAPA\\data\\dataset-created.ttl");
+			assertEquals("http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-january", dataset_uri);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RDFStoreException e) {
+			e.printStackTrace();
+		} catch (CatalogExistsException e) {
+			e.printStackTrace();
+		} catch (ProjectNotFoundException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (ProjectExistsException e) {
+			e.printStackTrace();
+		} catch (DatasetExistsException e) {
+			e.printStackTrace();
+		} catch (CatalogNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

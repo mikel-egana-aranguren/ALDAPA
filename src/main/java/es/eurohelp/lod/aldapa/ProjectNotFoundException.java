@@ -29,7 +29,7 @@ public class ProjectNotFoundException extends AldapaException {
 	}
 
 	/**
-	 * @param project URI
+	 * @param project_uri the project URI
 	 */
 	public ProjectNotFoundException(String project_uri) {
 		super(message +": " + project_uri);

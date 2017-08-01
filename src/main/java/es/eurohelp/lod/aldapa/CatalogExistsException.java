@@ -17,7 +17,7 @@ public class CatalogExistsException extends AldapaException {
 	 * 
 	 */
 	private static final long serialVersionUID = 8838479828879881381L;
-	private String message = "The catalog URI already exists in the RDF Store";
+	private static String message = "The catalog URI already exists in the RDF Store";
 
 	/**
 	 * 
@@ -26,10 +26,10 @@ public class CatalogExistsException extends AldapaException {
 	}
 
 	/**
-	 * @param message
+	 * @param catalog_uri the catalog URI
 	 */
-	public CatalogExistsException(String message) {
-		super(message);
+	public CatalogExistsException(String catalog_uri) {
+		super(message +": " + catalog_uri);
 	}
 
 	/**

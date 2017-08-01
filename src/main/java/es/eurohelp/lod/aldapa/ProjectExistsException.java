@@ -27,10 +27,10 @@ public class ProjectExistsException extends AldapaException {
 	}
 
 	/**
-	 * @param message
+	 * @param project_uri the project URI
 	 */
-	public ProjectExistsException(String message) {
-		super(message);
+	public ProjectExistsException(String project_uri) {
+		super(message +": " + project_uri);
 	}
 
 	/**

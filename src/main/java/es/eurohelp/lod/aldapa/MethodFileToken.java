@@ -11,6 +11,7 @@ public enum MethodFileToken {
 	project_uri("PROJECT_URI"),
 	catalog_uri("CATALOG_URI"),
 	dataset_uri("DATASET_URI"),
+	graph_uri("GRAPH_URI"),
 	;
 	
 	public final String methodFileToken;

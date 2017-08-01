@@ -13,17 +13,20 @@ package es.eurohelp.lod.aldapa;
  * @author Mikel Egaña Aranguren, Eurohelp Consulting S.L.
  *
  */
-public enum AldapaMethodRDFFile {
+public enum MethodRDFFile {
 	addProject("model/addProject.ttl"), 
 	addCatalog("model/addCatalog.ttl"),
 	projectExists("model/projectExists.sparql"),
 	getProjects("model/getProjects.sparql"), 
-	catalogExists("model/catalogExists.sparql")
+	catalogExists("model/catalogExists.sparql"),
+	datasetExists("model/datasetExists.sparql"),
+	addDataset("model/addDataset.ttl"),
+	addNamedGraph("model/addNamedGraph.ttl")
 	;
 
 	public final String methodFileName;
 
-	private AldapaMethodRDFFile(String methodFileName) {
+	private MethodRDFFile(String methodFileName) {
 		this.methodFileName = methodFileName;
 	}
 

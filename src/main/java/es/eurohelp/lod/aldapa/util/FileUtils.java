@@ -9,7 +9,7 @@ import java.util.EnumMap;
 
 import org.apache.commons.io.IOUtils;
 
-import es.eurohelp.lod.aldapa.AldapaMethodRDFFile;
+import es.eurohelp.lod.aldapa.MethodRDFFile;
 import es.eurohelp.lod.aldapa.MethodFileToken;
 
 /**

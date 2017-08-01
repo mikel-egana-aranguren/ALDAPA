@@ -84,7 +84,7 @@ public class Manager {
 
 		// Check if exists in RDF store with SPARQL query, throw Exception
 //		InputStream queryStream = fileutils.getInputStream(AldapaMethodRDFFile.projectExists.getValue());
-		String resolved_project_exists_sparql = fileutils.fileTokenResolver(AldapaMethodRDFFile.projectExists.getValue(), MethodFileToken.project_uri.getValue(), projectURI);
+		String resolved_project_exists_sparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(), MethodFileToken.project_uri.getValue(), projectURI);
 
 		Boolean project_exists = store.execSPARQLBooleanQuery(resolved_project_exists_sparql);
 
@@ -93,7 +93,7 @@ public class Manager {
 			throw new ProjectExistsException();
 		} else {
 			// Load addProject.ttl file and resolve tokens
-			String resolved_addproject_ttl = fileutils.fileTokenResolver(AldapaMethodRDFFile.addProject.getValue(), MethodFileToken.project_uri.getValue(), projectURI);
+			String resolved_addproject_ttl = fileutils.fileTokenResolver(MethodRDFFile.addProject.getValue(), MethodFileToken.project_uri.getValue(), projectURI);
 
 			// Add project to store
 			InputStream modelInputStream = new ByteArrayInputStream(resolved_addproject_ttl.getBytes() );
@@ -136,7 +136,7 @@ public class Manager {
 
 	/**
 	 * 
-	 * Adds a new catalog in a project
+	 * Adds a new catalog in a project. See model/default-model.trig for details
 	 * 
 	 * @param catalog_name 
 	 * 			the name of the new catalog that will be used to generate the URI, according to the configuration
@@ -152,7 +152,7 @@ public class Manager {
 	public String addCatalog(String catalog_name, String project_uri) throws CatalogExistsException, IOException, RDFStoreException, ProjectNotFoundException, URISyntaxException {
 
 		// Project should exist
-		String resolved_project_exists_sparql = fileutils.fileTokenResolver(AldapaMethodRDFFile.projectExists.getValue(), MethodFileToken.project_uri.getValue(), project_uri);
+		String resolved_project_exists_sparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(), MethodFileToken.project_uri.getValue(), project_uri);
 		Boolean project_exists = store.execSPARQLBooleanQuery(resolved_project_exists_sparql);
 
 		LOGGER.info("Catalog name: " + catalog_name);
@@ -170,7 +170,7 @@ public class Manager {
 		token_replacement_map.put(MethodFileToken.catalog_uri, catalog_uri);
 		
 		String resolved_catalog_exists_sparql = fileutils.fileMultipleTokenResolver(
-				AldapaMethodRDFFile.catalogExists.getValue(), token_replacement_map);
+				MethodRDFFile.catalogExists.getValue(), token_replacement_map);
 		Boolean catalog_exists = store.execSPARQLBooleanQuery(resolved_catalog_exists_sparql);
 		if (!project_exists) {
 			LOGGER.info("Project does not exist: " + project_uri);
@@ -182,7 +182,7 @@ public class Manager {
 		else{
 			// Add catalog
 			String resolved_addcatalog_ttl = fileutils.fileMultipleTokenResolver(
-					AldapaMethodRDFFile.addCatalog.getValue(), token_replacement_map);
+					MethodRDFFile.addCatalog.getValue(), token_replacement_map);
 
 			// Add catalog to store
 			InputStream modelInputStream = new ByteArrayInputStream(resolved_addcatalog_ttl.getBytes() );
@@ -192,5 +192,68 @@ public class Manager {
 			LOGGER.info("Catalog added to store");
 		}
 		return catalog_uri;
+	}
+	
+	/**
+	 * 
+	 * Adds a new dataset in a catalog. See model/default-model.trig for details
+	 * 
+	 * @param dataset_name 
+	 * 			the name of the new dataset that will be used to generate the URI, according to the configuration
+	 * @param catalog_uri
+	 * 			the catalog that this dataset belongs to
+	 * @return Dataset URI
+	 * @throws DatasetExistsException 
+	 * @throws IOException 
+	 * @throws RDFStoreException 
+	 * @throws CatalogNotFoundException 
+	 * @throws URISyntaxException 
+	 */
+	public String addDataset(String dataset_name, String catalog_uri) throws DatasetExistsException, IOException, RDFStoreException, CatalogNotFoundException, URISyntaxException {
+
+		// Catalog should exist
+		String resolved_catalog_exists_sparql = fileutils.fileTokenResolver(MethodRDFFile.catalogExists.getValue(), MethodFileToken.catalog_uri.getValue(), catalog_uri);
+		Boolean catalog_exists = store.execSPARQLBooleanQuery(resolved_catalog_exists_sparql);
+
+		LOGGER.info("Dataset name: " + dataset_name);
+
+		// Create dataset URI
+		String datasetURIFriendlyName = uri_utils.URIfy(null, null, dataset_name);
+		String dataset_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "DATASET_BASE");
+		String dataset_uri = uri_utils.validateURI(dataset_base_uri + datasetURIFriendlyName);
+
+		LOGGER.info("Dataset uri: " + dataset_uri);
+		
+		// Dataset should not exist
+		EnumMap<MethodFileToken, String> token_replacement_map = new EnumMap<>(MethodFileToken.class);
+		token_replacement_map.put(MethodFileToken.catalog_uri,  catalog_uri);
+		token_replacement_map.put(MethodFileToken.dataset_uri, dataset_uri);
+		
+		String resolved_dataset_exists_sparql = fileutils.fileMultipleTokenResolver(
+				MethodRDFFile.datasetExists.getValue(), token_replacement_map);
+		
+		
+		
+		Boolean dataset_exists = store.execSPARQLBooleanQuery(resolved_catalog_exists_sparql);
+		if (!catalog_exists) {
+			LOGGER.info("Project does not exist: " + catalog_uri);
+			throw new CatalogNotFoundException(catalog_uri);
+		} else if (dataset_exists){
+			LOGGER.info("Dataset already exists: " + dataset_uri);
+			throw new DatasetExistsException();
+		}
+		else{
+			// Add dataset
+			String resolved_adddataset_ttl = fileutils.fileMultipleTokenResolver(
+					MethodRDFFile.addDataset.getValue(), token_replacement_map);
+
+			// Add dataset to store
+			InputStream modelInputStream = new ByteArrayInputStream(resolved_adddataset_ttl.getBytes() );
+			Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
+
+			store.saveModel(model);
+			LOGGER.info("Dataset added to store");
+		}
+		return dataset_uri;
 	}
 }
