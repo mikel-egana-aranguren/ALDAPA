@@ -6,7 +6,7 @@ jdk: oraclejdk8
 
 script: 
 - mvn test
-- mvn package
+- mvn build
 - mvn cobertura:cobertura
 
 branches:
