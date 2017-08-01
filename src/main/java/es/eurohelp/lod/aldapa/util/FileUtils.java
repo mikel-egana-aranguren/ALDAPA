@@ -60,11 +60,11 @@ public class FileUtils {
 	/**
 	 * Returns a FileOutputStream stream for writing to a File. If the file does not exist, it creates it.
 	 * 
-	 * @param name
-	 *            the file name, including path
+	 * @param fileName
+	 *            the file name including path
 	 * 
 	 * @return a FileOutputStream stream for writing to the specified file
-	 * @throws IOException
+	 * @throws IOException input/output problem with the file to write to
 	 *
 	 */
 
@@ -87,7 +87,7 @@ public class FileUtils {
 	 * @param replacement
 	 *            the value to replace the token with
 	 * @return the new file content, resolved
-	 * @throws IOException
+	 * @throws IOException input/output exception regarding the target file
 	 * 
 	 */
 
@@ -101,10 +101,10 @@ public class FileUtils {
 	/**
 	 *  Resolves the occurrences of multiple tokens of a file with the replacement URIs
 	 * 
-	 * @param file_name
+	 * @param file_name the name of the file with the actual content
 	 * @param token_replacement_map a map containing pairs of tokens and replacements
 	 * @return the new file content, resolved
-	 * @throws IOException
+	 * @throws IOException input/output exception regarding the target file
 	 */
 	public String fileMultipleTokenResolver(String file_name, EnumMap<MethodFileToken, String> token_replacement_map) throws IOException { 
 		InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(file_name);

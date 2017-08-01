@@ -31,6 +31,7 @@ public class RDFStoreException extends AldapaException {
 	/**
 	 * @param cause
 	 */
+
 	public RDFStoreException(Throwable cause) {
 		super(cause);
 	}

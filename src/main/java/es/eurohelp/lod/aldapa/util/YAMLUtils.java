@@ -20,7 +20,7 @@ public class YAMLUtils {
 	/**
 	 * Given a simple YAML file ("key: value"), load it as HashMap.
 	 * 
-	 * @param an input stream with the YAML file.
+	 * @param in input stream with the YAML file.
 	 * @return a HashMap with the content from the file.
 	 */
 	
@@ -34,8 +34,9 @@ public class YAMLUtils {
 	/**
 	 * Given a complex YAML file, load it as the Bean that corresponds to it.
 	 * 
-	 * @param an input stream with the YAML file.
-	 * @return an Object with the content from the file.
+	 * @param in input stream with the YAML file
+	 * @param object the bean that the YAML file corresponds to
+	 * @return object Object with the content from the file
 	 */
 	
 	public Object parseYAMLIntoObject (InputStream in, Object object){

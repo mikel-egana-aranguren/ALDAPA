@@ -12,8 +12,6 @@ import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.RDFS;
 
-import es.eurohelp.lod.aldapa.storage.RDFStoreException;
-
 /**
  * 
  * An utility class for adding triples easily to a Model with a single Named Graph. TripleAdder stores the model (either provided or created anew), modifies it, and it can be retrieved by the getModel method. The methods reflect the most used triples at Eurohelp: more will be added as needed.
@@ -60,10 +58,6 @@ public class TripleAdder {
 	 * @param subject the subject URI
 	 * 
 	 * @param object the object URI
-	 * 
-	 * @param ctxt the URI of the named graph, the "context"
-	 * 
-	 * @throws RDFStoreException
 	 *            
 	 */
 	
@@ -93,7 +87,7 @@ public class TripleAdder {
 	 * 
 	 * @param subject the subject URI
 	 * 
-	 * @param comment the comment value
+	 * @param label the label value
 	 * 
 	 * @param lang the comment value language
 	 *            
@@ -187,6 +181,7 @@ public class TripleAdder {
 	 * 
 	 * Retrieve the modified Model
 	 * 
+	 * @return the modified Model
 	 */
 	
 	public Model getModel (){

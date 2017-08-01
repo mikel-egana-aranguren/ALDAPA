@@ -22,8 +22,8 @@ public class URIUtils {
 	 * 
 	 * @param uri
 	 *            the URI to verify
-	 * @return true if the URI is valid, false if it is not
-	 * @throws URISyntaxException
+	 * @return the URI to verify
+	 * @throws URISyntaxException the URI is invalid
 	 *
 	 */
 

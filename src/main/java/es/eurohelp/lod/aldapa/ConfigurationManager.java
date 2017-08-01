@@ -60,11 +60,11 @@ public class ConfigurationManager {
 	 * 
 	 * Retrieves the only instance of this Singleton class.
 	 * 
-	 * @param the main config file name
+	 * @param configuration_file_name the main config file name
 	 * @return the only instance of ConfigurationManager.
 	 * @author acarbajo
-	 * @throws ConfigurationFileIOException
-	 * @throws IOException 
+	 * @throws ConfigurationFileIOException an I/O exception pertaining to the confgi file
+	 * @throws IOException a general I/O exception
 	 */
 	public synchronized static ConfigurationManager getInstance(String configuration_file_name) throws ConfigurationFileIOException, IOException {
 		if (null == INSTANCE) {
@@ -116,7 +116,7 @@ public class ConfigurationManager {
 	 * 
 	 * @param module (file) name
 	 * 
-	 * @param propertyName
+	 * @param property
 	 *            the configuration property name.
 	 * 
 	 * @return the configuration value for that property key. <em> null</em> if the property is not found.

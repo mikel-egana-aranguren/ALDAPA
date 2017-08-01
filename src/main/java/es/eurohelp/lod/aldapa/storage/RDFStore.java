@@ -40,8 +40,7 @@ public interface RDFStore {
 	 * @param model
 	 *            a RDF4J model containing RDF graphs
 	 *            
-	 * @return (does this return a boolean if sucessful? )
-	 *
+	 * @throws an RDF Store exception
 	 */
 	
 	public void saveModel(Model model) throws RDFStoreException;
@@ -59,8 +58,7 @@ public interface RDFStore {
 	 * @param format           
 	 *            the format of the RDF file: JSONLD, RDFXML, etc. 
 	 *            
-	 * @return (does this return a boolean if sucessful? )
-	 *
+	 * @throws an RDF Store exception
 	 */
 	
 	public void flushGraph (String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws RDFStoreException;
@@ -71,8 +69,8 @@ public interface RDFStore {
 	 * 
 	 * @param graphUri
 	 *            the URI to identify the named Graph
-	 *            
-	 * @return (does this return a boolean if sucessful? )
+	 * 
+	 * @throws an RDF Store exception
 	 *
 	 */
 		
@@ -86,6 +84,8 @@ public interface RDFStore {
 	 *            the SPARQL query
 	 *            
 	 * @return the result as a GraphQueryResult object
+	 * 
+	 * @throws an RDF Store exception
 	 *
 	 */
 
@@ -99,6 +99,8 @@ public interface RDFStore {
 	 *            the SPARQL query
 	 *            
 	 * @return the result as a TupleQueryResult object
+	 * 
+	 * @throws an RDF Store exception
 	 *
 	 */
 	
@@ -112,6 +114,8 @@ public interface RDFStore {
 	 *            the SPARQL query
 	 *            
 	 * @return the result as a boolean
+	 * 
+	 * @throws an RDF Store exception
 	 *
 	 */
 	
