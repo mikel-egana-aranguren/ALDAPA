@@ -11,8 +11,8 @@ script:
 
 branches:
   only:
-  - master
   - development
+  - feature-CSV2RDF
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
