@@ -6,12 +6,10 @@ jdk: oraclejdk8
 
 script: 
 - mvn test
-- mvn build
 - mvn cobertura:cobertura
 
 branches:
   only:
-  - development
   - feature-CSV2RDF
 
 after_success:
