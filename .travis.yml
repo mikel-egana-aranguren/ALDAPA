@@ -5,9 +5,7 @@ sudo: false
 jdk: oraclejdk8
 
 script: 
-- mvn clean
-- mvn test
-- mvn package
+- mvn clean install site
 - mvn cobertura:cobertura
 
 branches:
