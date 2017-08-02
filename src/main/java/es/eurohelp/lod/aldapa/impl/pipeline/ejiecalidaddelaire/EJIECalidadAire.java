@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.lod.aldapa.impl.pipeline;
+package es.eurohelp.lod.aldapa.impl.pipeline.ejiecalidaddelaire;
 
 /**
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.

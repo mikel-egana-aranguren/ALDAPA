@@ -14,6 +14,14 @@ import org.eclipse.rdf4j.model.Model;
  *
  */
 public interface RDFBatchConverter {
-	public Model transform  (InputStream datasource, InputStream mapping) throws IOException;
-	public Model transform  (InputStream datasource) throws IOException;
+	/**
+	 * @param datasource the CSV containing the data
+	 * @param namedGraphURI the URI of the named graph that will hold the data. If null is passed, no graph will be used
+	 * @return an RDF4J model containing the RDF data originated from the CSV
+	 * @throws IOException
+	 */
+	
+	public void setDataSource(InputStream datasource);
+	public Model getTransformedModel(String namedGraphURI);
+	
 }

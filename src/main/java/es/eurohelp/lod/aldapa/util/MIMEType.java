@@ -44,17 +44,3 @@ public enum MIMEType {
 		return mimetypefound;
 	}
 }
-
-// public final class MIMETypes {
-// public static final String JSONLD = "application/ld+json";
-// public static final String N3 = "text/n3" ;
-// public static final String TRIX = "application/trix" ;
-// public static final String TRIG = "application/trig" ;
-// public static final String BINARY = "application/x-binary-rdf" ;
-// public static final String NQUADS = "application/n-quads" ;
-// public static final String RDFJSON = "application/rdf+json" ;
-// public static final String RDFA = "application/xhtml+xml" ;
-// public static final String NTRIPLES = "application/n-triples " ;
-// public static final String TURTLE = "text/turtle" ;
-// public static final String RDFXML = "application/rdf+xml" ;
-// }
