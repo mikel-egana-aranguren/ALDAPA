@@ -36,7 +36,7 @@ import es.eurohelp.lod.aldapa.util.MIMEType;
 
 /**
  * 
- * A simple memory store that does not persist data, based on RDF4J. To persis data, use flushGraph.
+ * A simple memory store that does not persist data, based on RDF4J. To persist  data, use flushGraph.
  * 
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
@@ -134,7 +134,7 @@ public class MemoryRDFStore implements RDFStore {
 				break;
 			case TRIG:
 				rdfwriter = new TriGWriter(outputstream);
-				LOGGER.info("TriGWriter");
+				LOGGER.info("TriGWriter chosen");
 				break;
 			case NQUADS:
 				rdfwriter = new NQuadsWriter(outputstream);

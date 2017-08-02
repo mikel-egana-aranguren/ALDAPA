@@ -4,9 +4,6 @@
 	<groupId>ALDAPA</groupId>
 	<artifactId>Base-API</artifactId>
 	<version>0.0.1</version>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -30,12 +27,6 @@
 			<artifactId>snakeyaml</artifactId>
 			<version>1.17</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.eclipse.rdf4j/rdf4j-runtime -->
-		<dependency>
-			<groupId>org.eclipse.rdf4j</groupId>
-			<artifactId>rdf4j-runtime</artifactId>
-			<version>2.2.2</version>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -47,6 +38,18 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-nop</artifactId>
 			<version>1.7.10</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.eclipse.rdf4j/rdf4j-runtime -->
+		<dependency>
+			<groupId>org.eclipse.rdf4j</groupId>
+			<artifactId>rdf4j-runtime</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.eclipse.rdf4j/rdf4j-rio-api -->
+		<dependency>
+			<groupId>org.eclipse.rdf4j</groupId>
+			<artifactId>rdf4j-rio-api</artifactId>
+			<version>2.2.2</version>
 		</dependency>
 	</dependencies>
 	<build>
