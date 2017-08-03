@@ -1,5 +1,6 @@
 package es.eurohelp.lod.aldapa.transformation;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -13,15 +14,18 @@ import org.eclipse.rdf4j.model.Model;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public interface RDFBatchConverter {
+public interface CSV2RDFBatchConverter {
 	/**
-	 * @param datasource the CSV containing the data
+	 * @param file_path the CSV file path containing the data
+	 * @param model An RDF4J Model to populate with data
 	 * @param namedGraphURI the URI of the named graph that will hold the data. If null is passed, no graph will be used
-	 * @return an RDF4J model containing the RDF data originated from the CSV
+	 * @return the modified RDF4J model containing the RDF data originated from the CSV
+	 * @throws FileNotFoundException 
 	 * @throws IOException
 	 */
 	
-	public void setDataSource(InputStream datasource);
+	public void setDataSource(String file_path) throws IOException;
+	public void setModel (Model model);
 	public Model getTransformedModel(String namedGraphURI);
 	
 }

@@ -9,7 +9,7 @@ import java.io.InputStream;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public interface RDFBatchMappingConverter extends RDFBatchConverter {
+public interface CSV2RDFBatchMappingConverter extends CSV2RDFBatchConverter {
 	
 	/**
 	 * set the mapping from CSV to RDF
