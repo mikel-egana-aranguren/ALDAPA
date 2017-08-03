@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.lod.aldapa;
+package es.eurohelp.lod.aldapa.core.exception;
 
 /**
  * 

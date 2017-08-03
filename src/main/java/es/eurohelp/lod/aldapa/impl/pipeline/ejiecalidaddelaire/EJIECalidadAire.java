@@ -9,4 +9,7 @@ package es.eurohelp.lod.aldapa.impl.pipeline.ejiecalidaddelaire;
  */
 public class EJIECalidadAire {
 
+	public void run(){
+		
+	}
 }

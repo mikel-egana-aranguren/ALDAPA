@@ -5,7 +5,6 @@ PREFIX void: <http://rdfs.org/ns/void#>
 
 ASK 
 WHERE {
-	CATALOG_URI dcat:dataset DATASET_URI .
 	DATASET_URI rdf:type dcat:Distribution, void:Dataset, schema:Distribution .
 }
 

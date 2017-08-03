@@ -1,13 +1,16 @@
-package es.eurohelp.lod.aldapa;
+package es.eurohelp.lod.aldapa.core;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
+import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
@@ -26,15 +29,19 @@ public class ConfigurationManager {
 	private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
 	
 	/**
-	 * The configuration is stored in a HashMap:
+	 * The configuration is stored in a HashTable:
 	 * 
 	 * file name - file content
 	 * 
-	 * The file file content is also a HashMap, containing the actual configuration values
+	 * The file file content is a HashMap, containing the actual configuration values:
+	 * 
+	 * config property - config value
+	 * 
+	 * See 'configuration.yml' for examples
 	 * 
 	 */
 	
-	private HashMap<String,HashMap<String,String>> main_config_file;
+	private Hashtable<String,HashMap<String,String>> main_config_file;
 
 	/**
 	 * INSTANCE of ConfigurationManager (type: {@link ConfigurationManager})
@@ -87,7 +94,7 @@ public class ConfigurationManager {
 
 		try {
 			
-			main_config_file = new HashMap<String, HashMap<String,String>>();
+			main_config_file = new Hashtable<String, HashMap<String,String>>();
 			YAMLUtils yaml_utils = new YAMLUtils();
 			HashMap<String,String> provisional_main_config_file = yaml_utils.parseSimpleYAML(configInStream);
 			
@@ -120,8 +127,15 @@ public class ConfigurationManager {
 	 *            the configuration property name.
 	 * 
 	 * @return the configuration value for that property key. <em> null</em> if the property is not found.
+	 * @throws ConfigurationException 
 	 */
-	public String getConfigPropertyValue(String module,String property) {
-		return (main_config_file.get(module)).get(property);
+	public String getConfigPropertyValue(String module,String property) throws ConfigurationException {
+		String prop_value = (main_config_file.get(module)).get(property);
+		if(prop_value == null){
+			throw new ConfigurationException("Property or value not found");
+		}
+		else{
+			return prop_value;
+		}
 	}
 }

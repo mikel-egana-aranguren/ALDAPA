@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.lod.aldapa;
+package es.eurohelp.lod.aldapa.core;
 
 /**
  * 
@@ -20,6 +20,7 @@ public enum MethodRDFFile {
 	getProjects("model/getProjects.sparql"), 
 	catalogExists("model/catalogExists.sparql"),
 	datasetExists("model/datasetExists.sparql"),
+	namedGraphExists("model/namedGraphExists.sparql"),
 	addDataset("model/addDataset.ttl"),
 	addNamedGraph("model/addNamedGraph.ttl")
 	;

@@ -16,7 +16,7 @@ import es.eurohelp.lod.aldapa.util.URIUtils;
  *
  */
 public class URIUtilsTest {
-	
+
 	URIUtils uri_utils = null;
 
 	public URIUtilsTest() {
@@ -33,25 +33,23 @@ public class URIUtilsTest {
 
 	/**
 	 * Test method for {@link es.eurohelp.lod.aldapa.util.URIUtils#validateURI(java.lang.String)}.
+	 * @throws URISyntaxException 
 	 */
 	@Test
-	public void testValidateURI() {
-		try {
-			assertEquals("urn:aldapa:project:parkings-donosti",uri_utils.validateURI("urn:aldapa:project:parkings-donosti"));
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
+	public void testValidateURI() throws URISyntaxException {
+		assertEquals("urn:aldapa:project:parkings-donosti", uri_utils.validateURI("urn:aldapa:project:parkings-donosti"));
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.util.URIUtils#URIfy(java.lang.String, java.lang.String, java.lang.String)}.
+	 * Test method for
+	 * {@link es.eurohelp.lod.aldapa.util.URIUtils#URIfy(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	public void testURIfy() {
 		String name = " Parkings  ( ) / . donosti : ! ? [ ] ; + _ *";
 		String urified_name = uri_utils.URIfy(null, null, name);
 		System.out.println(urified_name);
-		assertEquals("parkings-donosti",urified_name);
+		assertEquals("parkings-donosti", urified_name);
 	}
 
 }

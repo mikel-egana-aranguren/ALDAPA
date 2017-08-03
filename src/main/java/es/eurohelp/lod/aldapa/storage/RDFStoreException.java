@@ -3,7 +3,7 @@
  */
 package es.eurohelp.lod.aldapa.storage;
 
-import es.eurohelp.lod.aldapa.AldapaException;
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 
 /**
  * 

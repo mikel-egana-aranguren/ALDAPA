@@ -9,7 +9,7 @@ import java.util.EnumMap;
 
 import org.apache.commons.io.IOUtils;
 
-import es.eurohelp.lod.aldapa.MethodFileToken;
+import es.eurohelp.lod.aldapa.core.MethodFileToken;
 
 /**
  * Contains utilities for workings with files.
