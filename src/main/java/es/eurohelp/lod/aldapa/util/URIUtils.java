@@ -27,7 +27,7 @@ public class URIUtils {
 	 *
 	 */
 
-	public String validateURI(String uri) throws URISyntaxException {
+	public static String validateURI(String uri) throws URISyntaxException {
 		try {
 			new URI(uri);
 		} catch (URISyntaxException e) {
@@ -52,12 +52,12 @@ public class URIUtils {
 	 *
 	 */
 
-	public String URIfy(String regexp, String replacement, String targetstring) {
+	public static String URIfy(String regexp, String replacement, String targetstring) {
 		String result;
 		
 		// Main replacement and collapse contigous replacement characters
 		if(regexp == null){
-			regexp = "\\(|\\)|\\s|\\/|\\.|:|!|\\?|\\[|\\]|;|\\+|_|\\*";
+			regexp = "\\(|\\)|\\s|\\/|\\.|:|!|\\?|\\[|\\]|;|\\+|_|\\*|ª|º";
 		}
 		if(replacement == null){
 			replacement = "-";
@@ -65,6 +65,15 @@ public class URIUtils {
 		String tmp_result = 
 				targetstring.replaceAll(regexp, replacement)
 					.replaceAll("[-]{2,}", replacement);
+		
+		// Replace especial characters
+		tmp_result = tmp_result.replaceAll("á|Á", "a");
+		tmp_result = tmp_result.replaceAll("é|É", "e");
+		tmp_result = tmp_result.replaceAll("í|Í", "i");
+		tmp_result = tmp_result.replaceAll("ó|Ó", "o");
+		tmp_result = tmp_result.replaceAll("ú|Ú", "u");
+		tmp_result = tmp_result.replaceAll("ñ|Ñ", "n");
+		tmp_result = tmp_result.replaceAll("ü|Ü", "u");
 		
 		// Delete first replacement character, if any
 		if(tmp_result.startsWith(replacement)){

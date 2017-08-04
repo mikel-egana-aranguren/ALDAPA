@@ -42,7 +42,6 @@ public class Manager {
 	private ConfigurationManager configmanager;
 	private RDFStore store;
 	private FileUtils fileutils;
-	private URIUtils uri_utils;
 
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
 
@@ -59,7 +58,6 @@ public class Manager {
 	public Manager(ConfigurationManager configuredconfigmanager) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException {
 		configmanager = configuredconfigmanager;
 		fileutils = FileUtils.getInstance();
-		uri_utils = new URIUtils();
 		String store_plugin_name = configmanager.getConfigPropertyValue("TRIPLE_STORE_CONFIG_FILE", "pluginClassName");
 		LOGGER.info("Triple Store plugin name: " + store_plugin_name);
 		Class<?> store_class = Class.forName(store_plugin_name);
@@ -88,9 +86,9 @@ public class Manager {
 		LOGGER.info("Project name: " + project_name);
 
 		// Create Project URI
-		String projectURIFriendlyName = uri_utils.URIfy(null, null, project_name);
+		String projectURIFriendlyName = URIUtils.URIfy(null, null, project_name);
 		String project_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "PROJECT_BASE");
-		String projectURI = uri_utils.validateURI(project_base_uri + projectURIFriendlyName);
+		String projectURI = URIUtils.validateURI(project_base_uri + projectURIFriendlyName);
 
 		LOGGER.info("Project uri: " + projectURI);
 
@@ -177,9 +175,9 @@ public class Manager {
 		LOGGER.info("Catalog name: " + catalog_name);
 
 		// Create catalog URI
-		String catalogURIFriendlyName = uri_utils.URIfy(null, null, catalog_name);
+		String catalogURIFriendlyName = URIUtils.URIfy(null, null, catalog_name);
 		String catalog_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "CATALOG_BASE");
-		String catalog_uri = uri_utils.validateURI(catalog_base_uri + catalogURIFriendlyName);
+		String catalog_uri = URIUtils.validateURI(catalog_base_uri + catalogURIFriendlyName);
 
 		LOGGER.info("Catalog uri: " + catalog_uri);
 
@@ -236,9 +234,9 @@ public class Manager {
 		LOGGER.info("Dataset name: " + dataset_name);
 
 		// Create dataset URI
-		String datasetURIFriendlyName = uri_utils.URIfy(null, null, dataset_name);
+		String datasetURIFriendlyName = URIUtils.URIfy(null, null, dataset_name);
 		String dataset_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "DATASET_BASE");
-		String dataset_uri = uri_utils.validateURI(dataset_base_uri + datasetURIFriendlyName);
+		String dataset_uri = URIUtils.validateURI(dataset_base_uri + datasetURIFriendlyName);
 
 		LOGGER.info("Dataset uri: " + dataset_uri);
 
@@ -298,9 +296,9 @@ public class Manager {
 		LOGGER.info("Graph name: " + graph_name);
 
 		// Create graph URI
-		String graphURIFriendlyName = uri_utils.URIfy(null, null, graph_name);
+		String graphURIFriendlyName = URIUtils.URIfy(null, null, graph_name);
 		String graph_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "GRAPH_BASE");
-		String graph_uri = uri_utils.validateURI(graph_base_uri + graphURIFriendlyName);
+		String graph_uri = URIUtils.validateURI(graph_base_uri + graphURIFriendlyName);
 
 		LOGGER.info("Graph uri: " + graph_uri);
 

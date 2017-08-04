@@ -6,12 +6,15 @@ package es.eurohelp.lod.aldapa.impl.test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.Iterator;
 
-import org.junit.After;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.impl.TreeModel;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import es.eurohelp.lod.aldapa.impl.transformation.EJIECalidadAireConverter;
+import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EJIECalidadAireConverter;
 
 /**
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
@@ -19,43 +22,24 @@ import es.eurohelp.lod.aldapa.impl.transformation.EJIECalidadAireConverter;
  */
 public class EJIECalidadAireConverterTest {
 	private EJIECalidadAireConverter converter;
-	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.transformation.EJIECalidadAireConverter#EJIECalidadAireConverter()}.
-	 * @throws IOException 
-	 */
+	private Model model;
+	private static final String csv_file = "C:\\Users\\megana\\git\\ALDAPA\\data\\OpenDataEuskadiCalidadDelAire\\estaciones.csv";
+	
 	@Before
+	public void setUp (){
+		this.converter = new EJIECalidadAireConverter();
+		this.model = new TreeModel();
+	}
+
 	@Test
 	public void testEJIECalidadAireConverter() throws IOException {
-		converter = new EJIECalidadAireConverter();
-		assertNotNull(converter);
-	}
-
-	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.transformation.EJIECalidadAireConverter#setDataSource(java.lang.String)}.
-	 * @throws IOException 
-	 */
-	@Test
-	public void testSetDataSource() throws IOException {
-		String csv_file = "C:\\Users\\megana\\git\\ALDAPA\\data\\OpenDataEuskadiCalidadDelAire\\estaciones.csv";
 		converter.setDataSource(csv_file);
-//		fail("Not yet implemented");
+		converter.setModel(model);
+		Model new_model = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
+		Iterator new_model_iterator = new_model.iterator();
+		while(new_model_iterator.hasNext()){
+			System.out.println(new_model_iterator.next());
+		}
+		assertNotNull(new_model);
 	}
-
-//	/**
-//	 * Test method for {@link es.eurohelp.lod.aldapa.impl.transformation.EJIECalidadAireConverter#setModel(org.eclipse.rdf4j.model.Model)}.
-//	 */
-//	@Test
-//	public void testSetModel() {
-////		fail("Not yet implemented");
-//	}
-
-	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.transformation.EJIECalidadAireConverter#getTransformedModel(java.lang.String)}.
-	 */
-	@Test
-	public void testGetTransformedModel() {
-		converter.getTransformedModel("mygraph");
-//		fail("Not yet implemented");
-	}
-
 }
