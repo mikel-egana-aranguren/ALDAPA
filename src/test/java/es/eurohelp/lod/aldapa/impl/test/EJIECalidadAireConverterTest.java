@@ -24,7 +24,8 @@ import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EJIECalidadAir
 public class EJIECalidadAireConverterTest {
 	private EJIECalidadAireConverter converter;
 	private Model model;
-	private static final String csv_file = "C:\\Users\\megana\\git\\ALDAPA\\data\\OpenDataEuskadiCalidadDelAire\\estaciones.csv";
+//	private static final String csv_file = "C:\\Users\\megana\\git\\ALDAPA\\data\\OpenDataEuskadiCalidadDelAire\\estaciones.csv";
+	private static final String csv_file = "data/OpenDataEuskadiCalidadDelAire/estaciones.csv";
 	
 	@Before
 	public void setUp (){
