@@ -47,6 +47,13 @@ public class EJIECalidadAire {
 		// Add namedGraph 
 		String named_graph_uri = manager.addNamedGraph("Estaciones01", dataset_uri);
 		
-		manager.flushGraph(named_graph_uri, "data/EuskadiMedioAmbienteMetadata.ttl");
+		// Add data to named graph
+		manager.addDataToNamedGraph(named_graph_uri, "data/OpenDataEuskadiCalidadDelAire/estaciones.csv");
+		
+		// Flush backbone
+		manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl");
+		
+		// Flush data from named graph
+		manager.flushGraph(named_graph_uri, "data/EuskadiMedioAmbienteData.ttl");
 	}
 }
