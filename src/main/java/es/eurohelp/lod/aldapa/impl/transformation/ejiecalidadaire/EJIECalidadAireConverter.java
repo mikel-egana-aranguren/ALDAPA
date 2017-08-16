@@ -9,12 +9,8 @@ import java.io.IOException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.util.URIUtil;
-import org.eclipse.rdf4j.rio.jsonld.JSONLDWriter;
-import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
 
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
-import es.eurohelp.lod.aldapa.util.MIMEType;
 import es.eurohelp.lod.aldapa.util.TripleAdder;
 import es.eurohelp.lod.aldapa.util.URIUtils;
 
