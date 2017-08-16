@@ -3,7 +3,6 @@
  */
 package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
 
-import es.eurohelp.lod.aldapa.util.MIMEType;
 
 /**
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
@@ -15,22 +14,15 @@ enum EUSPLACEURI {
 	gipuzkoa("http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia"),
 	alava("http://es.euskadi.eus/id/public-sector/geography/province/alava"),
 	vizcaya("http://es.euskadi.eus/id/public-sector/geography/province/vizcaya"),
-	guipuzcoa("http://es.euskadi.eus/id/public-sector/geography/province/guipuzcoa"),
-	
-//	vitoria
-//	gasteiz
-//	abantociervana
-//	abantozierbena
-//	agurain
-//	salavatierra
-//	getxo
-//	alonsotegi
-	
-	
-
-	
-	
-	;
+	guipuzcoa("http://es.euskadi.eus/id/public-sector/geography/province/guipuzcoa"),	
+	vitoria("http://es.euskadi.eus/id/public-sector/geography/town/vitoria"),
+	gasteiz("http://eu.euskadi.eus/id/public-sector/geography/town/gasteiz"),
+	abantociervana("http://es.euskadi.eus/id/public-sector/geography/town/abantociervana"),
+	abantozierbena("http://eu.euskadi.eus/id/public-sector/geography/town/abantozierbena"),
+	agurain("http://eu.euskadi.eus/id/public-sector/geography/town/agurain"),
+	salavatierra("http://es.euskadi.eus/id/public-sector/geography/town/salavatierra"),
+	getxo("http://eu.euskadi.eus/id/public-sector/geography/town/getxo"),
+	alonsotegi("http://eu.euskadi.eus/id/public-sector/geography/town/alonsotegi");
 	
 	public final String eusplaceuri;
 	

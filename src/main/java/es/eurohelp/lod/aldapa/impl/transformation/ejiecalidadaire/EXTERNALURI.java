@@ -13,6 +13,7 @@ enum EXTERNALURI {
 	long_wgs84("http://www.w3.org/2003/01/geo/wgs84_pos#long"),
 	time_minutes("http://www.w3.org/2006/time#minutes"),
 	dbo_province("http://dbpedia.org/ontology/province"),
+	schema_location("http://schema.org/location")
 	;
 	
 	public final String external_uri;

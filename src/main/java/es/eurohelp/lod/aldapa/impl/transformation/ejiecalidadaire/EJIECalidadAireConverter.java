@@ -83,6 +83,8 @@ public class EJIECalidadAireConverter implements CSV2RDFBatchConverter {
 			String Province = record.get("Province");
 			String province_uri = null;
 
+			
+			// TODO: ontologia + metodo de busqueda mediante rdfs_label
 			switch (Province) {
 				case "Araba/Álava":
 					province_uri = EUSPLACEURI.alava.getValue();
@@ -96,14 +98,31 @@ public class EJIECalidadAireConverter implements CSV2RDFBatchConverter {
 			}
 			adder.addTriple(station_uri, EXTERNALURI.dbo_province.getValue(), province_uri);
 			
+			String Town = record.get("Town");
+			String town_uri = null;
+	
+			// TODO: ontologia + metodo de busqueda mediante rdfs_label
 			
+			switch (Town) {
+				case "Vitoria-Gasteiz":
+					town_uri = EUSPLACEURI.gasteiz.getValue();
+					break;
+				case "Abanto y Ciérvana-Abanto Zierbena":
+					town_uri = EUSPLACEURI.abantozierbena.getValue();
+					break;
+				case "Agurain/Salvatierra":
+					town_uri = EUSPLACEURI.agurain.getValue();
+					break;
+				case "Getxo":
+					town_uri = EUSPLACEURI.getxo.getValue();
+					break;					
+				case "Alonsotegi":
+					town_uri = EUSPLACEURI.alonsotegi.getValue();
+					break;	
+			}
 			
-//			Vitoria-Gasteiz
-//			Abanto y Ciérvana-Abanto Zierbena
-//			Agurain/Salvatierra
-//			Getxo
-//			Alonsotegi
-
+			adder.addTriple(station_uri, EXTERNALURI.schema_location.getValue(), town_uri);
+			
 		}
 		return adder.getModel();
 	}

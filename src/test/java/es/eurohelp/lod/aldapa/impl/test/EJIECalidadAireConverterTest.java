@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.impl.TreeModel;
 
 import org.junit.Before;
@@ -36,7 +37,7 @@ public class EJIECalidadAireConverterTest {
 		converter.setDataSource(csv_file);
 		converter.setModel(model);
 		Model new_model = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
-		Iterator new_model_iterator = new_model.iterator();
+		Iterator<Statement> new_model_iterator = new_model.iterator();
 		while(new_model_iterator.hasNext()){
 			System.out.println(new_model_iterator.next());
 		}
