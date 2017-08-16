@@ -1,0 +1,5 @@
+name: EJIECalidadDelAireTransformer
+comment: a CSV2RDF transformer for EJIE Calidad del Aire datasets, only for testting purposes
+author: Mikel Egana Aranguren
+pluginClassName: es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EJIECalidadAireConverter
+    

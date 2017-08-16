@@ -13,6 +13,7 @@ import org.apache.http.MethodNotSupportedException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
@@ -27,6 +28,7 @@ import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
 import es.eurohelp.lod.aldapa.storage.RDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
+import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.URIUtils;
 
@@ -41,6 +43,7 @@ public class Manager {
 
 	private ConfigurationManager configmanager;
 	private RDFStore store;
+	private CSV2RDFBatchConverter transformer;
 	private FileUtils fileutils;
 
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
@@ -58,12 +61,22 @@ public class Manager {
 	public Manager(ConfigurationManager configuredconfigmanager) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException {
 		configmanager = configuredconfigmanager;
 		fileutils = FileUtils.getInstance();
+		
+		// Initialise Triple Store
 		String store_plugin_name = configmanager.getConfigPropertyValue("TRIPLE_STORE_CONFIG_FILE", "pluginClassName");
 		LOGGER.info("Triple Store plugin name: " + store_plugin_name);
 		Class<?> store_class = Class.forName(store_plugin_name);
 		store = (RDFStore) store_class.newInstance();
 		store.startRDFStore();
 		LOGGER.info("Triple Store started");
+		
+		// Initialise CSV2RDF transformer
+		String transformer_plugin_name = configmanager.getConfigPropertyValue("TRANSFORMER_CONFIG_FILE", "pluginClassName");
+		LOGGER.info("CSV2RDF transformer plugin name: " + transformer_plugin_name);
+		Class<?> transformer_class = Class.forName(transformer_plugin_name);
+		transformer = (CSV2RDFBatchConverter) transformer_class.newInstance();
+		LOGGER.info("CSV2RDF Transfomer loaded");
+		
 	}
 
 	/**
@@ -278,7 +291,6 @@ public class Manager {
 	 * @param dataset_uri
 	 *            the URI of the dataset that this named graph belongs to
 	 * @return the URI for the named graph
-	 * @throws MethodNotSupportedException
 	 * @throws IOException 
 	 * @throws RDFStoreException 
 	 * @throws URISyntaxException 
@@ -286,7 +298,7 @@ public class Manager {
 	 * @throws DatasetNotFoundException 
 	 * @throws NamedGraphExistsException 
 	 */
-	public String addNamedGraph(String graph_name, String dataset_uri) throws MethodNotSupportedException, IOException, RDFStoreException, URISyntaxException, ConfigurationException, DatasetNotFoundException, NamedGraphExistsException {
+	public String addNamedGraph(String graph_name, String dataset_uri) throws IOException, RDFStoreException, URISyntaxException, ConfigurationException, DatasetNotFoundException, NamedGraphExistsException {
 
 		// Dataset should exist
 		String resolved_dataset_exists_sparql = fileutils.fileTokenResolver(MethodRDFFile.datasetExists.getValue(),
@@ -341,11 +353,27 @@ public class Manager {
 	 * @param namedGraphURI
 	 *            the named Graph URI that will store the data
 	 * @param datasource
-	 *            the Input Stream containing the input data, most probably a CSV file with Open Data
-	 * @throws MethodNotSupportedException
+	 *            the path CSV file with Open Data
+	 * @throws IOException 
+	 * @throws RDFStoreException 
+	 * 
 	 */
 
-	public void addDataToNamedGraph(String namedGraphURI, InputStream datasource) throws MethodNotSupportedException {
+	public void addDataToNamedGraph(String namedGraphURI , String csv_path) throws IOException, RDFStoreException { 
+		transformer.setDataSource(csv_path);
+		transformer.setModel(new TreeModel());
+		store.saveModel(transformer.getTransformedModel(namedGraphURI));
+	}
+	
+	public void deleteDataset(String datasetURI) throws MethodNotSupportedException{
+		throw new MethodNotSupportedException("Not supported yet");
+	}
+	
+	public void deleteNamedGraphData(String namedGraphURI) throws MethodNotSupportedException{
+		throw new MethodNotSupportedException("Not supported yet");
+	}
+	
+	public void deleteNamedGraphDataAndNamedGraph (String namedGraphURI) throws MethodNotSupportedException{
 		throw new MethodNotSupportedException("Not supported yet");
 	}
 }

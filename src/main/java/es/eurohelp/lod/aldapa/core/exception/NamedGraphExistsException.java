@@ -7,7 +7,7 @@ package es.eurohelp.lod.aldapa.core.exception;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public class NamedGraphExistsException extends Exception {
+public class NamedGraphExistsException extends AldapaException {
 private static String message = "The Named Graph URI already exists in the RDF Store";
 	
 	public NamedGraphExistsException() {

@@ -1,7 +1,11 @@
 Getting Started
 ===============
 
-## Adding projects
+## Basic backbone
+
+The basic backbone comprises: project;catalog;dataset;namedgraph
+
+Yo can each separately, but appropriate exceptions will be thrown if a child is added without parent. 
 
 ## Example pipeline
 

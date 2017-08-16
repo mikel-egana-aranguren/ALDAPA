@@ -38,10 +38,10 @@ public class EJIECalidadAireConverterTest {
 		converter.setDataSource(csv_file);
 		converter.setModel(model);
 		Model new_model = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
-		Iterator<Statement> new_model_iterator = new_model.iterator();
-		while(new_model_iterator.hasNext()){
-			System.out.println(new_model_iterator.next());
-		}
+//		Iterator<Statement> new_model_iterator = new_model.iterator();
+//		while(new_model_iterator.hasNext()){
+//			System.out.println(new_model_iterator.next());
+//		}
 		assertNotNull(new_model);
 	}
 }

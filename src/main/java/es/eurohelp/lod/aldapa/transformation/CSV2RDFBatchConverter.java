@@ -2,7 +2,6 @@ package es.eurohelp.lod.aldapa.transformation;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.eclipse.rdf4j.model.Model;
 

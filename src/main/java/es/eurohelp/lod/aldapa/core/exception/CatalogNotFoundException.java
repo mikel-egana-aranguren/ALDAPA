@@ -7,7 +7,7 @@ package es.eurohelp.lod.aldapa.core.exception;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public class CatalogNotFoundException extends Exception {
+public class CatalogNotFoundException extends AldapaException {
 
 	/**
 	 * 

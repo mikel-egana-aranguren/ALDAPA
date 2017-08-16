@@ -7,7 +7,7 @@ package es.eurohelp.lod.aldapa.core.exception;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public class DatasetNotFoundException extends Exception {
+public class DatasetNotFoundException extends AldapaException {
 
 	/**
 		 * 

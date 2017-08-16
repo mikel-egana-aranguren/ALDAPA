@@ -119,6 +119,18 @@ public class EJIECalidadAireConverter implements CSV2RDFBatchConverter {
 			
 			adder.addTriple(station_uri, EXTERNALURI.schema_location.getValue(), town_uri);
 			
+			String Address = record.get("Address");
+			
+			adder.addDataTripleXSDString(station_uri, EXTERNALURI.schema_address.getValue(), Address);
+			
+			String Latitude = record.get("Latitude");
+			
+			adder.addDataTripleXSDdouble(station_uri, EXTERNALURI.lat_wgs84.getValue(), Double.valueOf(Latitude.replace(",", ".")));
+			
+			String Longitude = record.get("Longitude");
+			
+			adder.addDataTripleXSDdouble(station_uri, EXTERNALURI.long_wgs84.getValue(), Double.valueOf(Longitude.replace(",", ".")));
+			
 		}
 		return adder.getModel();
 	}

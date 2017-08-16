@@ -33,7 +33,7 @@ public class ManagerTest {
 	private final String catalog_name = "Donosti Parkings!!???";
 	private final String dataset_name = "donOsti parkings Febr";
 	private String graph_name = "donosti parkings febr 001";
-	private String test_data_output_dir = "C:\\Users\\megana\\git\\ALDAPA\\data\\";
+	private String test_data_output_dir = "data/";
 	private Manager manager = null;
 	private ConfigurationManager config = null;
 
