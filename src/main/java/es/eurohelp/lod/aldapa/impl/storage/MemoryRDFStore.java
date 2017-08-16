@@ -116,6 +116,8 @@ public class MemoryRDFStore implements RDFStore {
 				rdfwriter = new TurtleWriter(outputstream);
 				LOGGER.info("TurtleWriter chosen");
 				break;
+				
+// Look at issue 26
 //			case JSONLD:
 //				rdfwriter = new JSONLDWriter(outputstream);
 //				LOGGER.info("JSONLDwriter chosen");

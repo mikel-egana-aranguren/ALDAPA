@@ -26,6 +26,8 @@ public class URIUtilsTest {
 		assertEquals("urn:aldapa:project:parkings-donosti", URIUtils.validateURI("urn:aldapa:project:parkings-donosti"));
 	}
 
+	
+	// TRAVIS not loading the name string properly, look at issue 27
 	/**
 	 * Test method for
 	 * {@link es.eurohelp.lod.aldapa.util.URIUtils#URIfy(java.lang.String, java.lang.String, java.lang.String)}.
