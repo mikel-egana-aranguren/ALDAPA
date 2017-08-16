@@ -5,14 +5,13 @@ sudo: false
 jdk: oraclejdk8
 
 script: 
-- mvn test
-- mvn package
+- mvn clean
+- mvn install
 - mvn cobertura:cobertura
 
 branches:
   only:
-  - master
-  - development
+  - feature-CSV2RDF
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
