@@ -127,7 +127,7 @@ public class ConfigurationManager {
 	 *            the configuration property name.
 	 * 
 	 * @return the configuration value for that property key. <em> null</em> if the property is not found.
-	 * @throws ConfigurationException 
+	 * @throws ConfigurationException a configuration exception
 	 */
 	public String getConfigPropertyValue(String module,String property) throws ConfigurationException {
 		String prop_value = (main_config_file.get(module)).get(property);

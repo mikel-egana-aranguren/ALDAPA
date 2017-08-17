@@ -26,27 +26,14 @@ public class DatasetNotFoundException extends AldapaException {
 		super(message + ": " + dataset_uri);
 	}
 
-	/**
-	 * @param cause
-	 */
 	public DatasetNotFoundException(Throwable cause) {
 		super(cause);
 	}
 
-	/**
-	 * @param message
-	 * @param cause
-	 */
 	public DatasetNotFoundException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	/**
-	 * @param message
-	 * @param cause
-	 * @param enableSuppression
-	 * @param writableStackTrace
-	 */
 	public DatasetNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}

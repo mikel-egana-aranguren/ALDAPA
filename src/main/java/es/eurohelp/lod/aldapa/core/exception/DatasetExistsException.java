@@ -9,13 +9,9 @@ package es.eurohelp.lod.aldapa.core.exception;
  */
 public class DatasetExistsException extends AldapaException {
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2234576815915767365L;
-	/**
-	 * 
-	 */
+
 	private final static String message = "The dataset URI already exists in the RDF Store";
 
 	public DatasetExistsException() {
@@ -23,33 +19,20 @@ public class DatasetExistsException extends AldapaException {
 	}
 
 	/**
-	 * @param message
+	 * @param datasetURI the dataset URI
 	 */
-	public DatasetExistsException(String message) {
-		super(message);
+	public DatasetExistsException(String datasetURI) {
+		super(message +": " + datasetURI);
 	}
 
-	/**
-	 * @param cause
-	 */
 	public DatasetExistsException(Throwable cause) {
 		super(cause);
 	}
 
-	/**
-	 * @param message
-	 * @param cause
-	 */
 	public DatasetExistsException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	/**
-	 * @param message
-	 * @param cause
-	 * @param enableSuppression
-	 * @param writableStackTrace
-	 */
 	public DatasetExistsException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}

@@ -17,7 +17,6 @@ import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
-import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogExistsException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
@@ -52,10 +51,10 @@ public class Manager {
 	 * 
 	 * @param configuredconfigmanager
 	 *            an already configured ConfigurationManger, holding the necessary configuration
-	 * @throws ClassNotFoundException
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 * @throws ConfigurationException 
+	 * @throws ClassNotFoundException the plugin class was not found
+	 * @throws IllegalAccessException illegal access
+	 * @throws InstantiationException the plugin class could not be instantiated
+	 * @throws ConfigurationException the configuration is incomplete
 	 * 
 	 */
 	public Manager(ConfigurationManager configuredconfigmanager) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException {
@@ -87,11 +86,10 @@ public class Manager {
 	 *            the name of the new project that will be used to generate the project URI, according to the
 	 *            configuration
 	 * @return the URI of the newly added project
-	 * @throws IOException
-	 * @throws RDFStoreException
-	 * @throws URISyntaxException
-	 * @throws ConfigurationException 
-	 * @throws AldapaException
+	 * @throws IOException an input/output exception
+	 * @throws RDFStoreException a problem with the RDF Store
+	 * @throws URISyntaxException the URI is wrong
+	 * @throws ConfigurationException the configuration is incomplete
 	 * 
 	 */
 
@@ -135,30 +133,14 @@ public class Manager {
 	 * 
 	 * Write a Graph into a file
 	 * 
-	 * parama graphuri the Named Graph URI, it can be null
-	 * 
-	 * @param fileName
-	 * @throws RDFStoreException
-	 * @throws IOException
+	 * @param graphuri the Named Graph URI, it can be null
+	 * @param fileName the path of the file to wrtie the graph to
+	 * @throws RDFStoreException a problem with the RDF Store
+	 * @throws IOException an input/output exception
 	 */
 	public void flushGraph(String graphuri, String fileName) throws RDFStoreException, IOException {
 		FileUtils fileutils = FileUtils.getInstance();
 		store.flushGraph(graphuri, fileutils.getFileOutputStream(fileName), RDFFormat.TURTLE);
-	}
-
-	/**
-	 * 
-	 * Delete a project. This will delete a project and all its metadata (Catalogs, Datasets etc.) and the data within
-	 * its dataset
-	 * 
-	 * @param project_URI
-	 */
-	public void deleteProject(String project_URI) {
-		throw new UnsupportedOperationException("This functionality has not been implemented yet");
-	}
-
-	public void deleteCatalog(String catalog_URI) {
-		throw new UnsupportedOperationException("This functionality has not been implemented yet");
 	}
 
 	/**
@@ -170,12 +152,12 @@ public class Manager {
 	 * @param project_uri
 	 *            the project that this catalog belongs to
 	 * @return Catalog URI
-	 * @throws CatalogExistsException
-	 * @throws IOException
-	 * @throws RDFStoreException
-	 * @throws ProjectNotFoundException
-	 * @throws URISyntaxException
-	 * @throws ConfigurationException 
+	 * @throws CatalogExistsException the catalog already exists
+	 * @throws IOException an input/output exception
+	 * @throws RDFStoreException a problem with the RDF Store
+	 * @throws ProjectNotFoundException the project could not be found
+	 * @throws URISyntaxException the dataset could not be found
+	 * @throws ConfigurationException the configuration is incomplete
 	 */
 	public String addCatalog(String catalog_name, String project_uri)
 	        throws CatalogExistsException, IOException, RDFStoreException, ProjectNotFoundException, URISyntaxException, ConfigurationException {
@@ -230,12 +212,12 @@ public class Manager {
 	 * @param catalog_uri
 	 *            the catalog that this dataset belongs to
 	 * @return Dataset URI
-	 * @throws DatasetExistsException
-	 * @throws IOException
-	 * @throws RDFStoreException
-	 * @throws CatalogNotFoundException
-	 * @throws URISyntaxException
-	 * @throws ConfigurationException 
+	 * @throws DatasetExistsException the dataset already exists
+	 * @throws IOException an input/output exception
+	 * @throws RDFStoreException a problem with the RDF Store
+	 * @throws CatalogNotFoundException the catalog could not be found
+	 * @throws URISyntaxException the URI is wrong
+	 * @throws ConfigurationException the configuration is incomplete
 	 */
 	public String addDataset(String dataset_name, String catalog_uri)
 	        throws DatasetExistsException, IOException, RDFStoreException, CatalogNotFoundException, URISyntaxException, ConfigurationException {
@@ -291,12 +273,12 @@ public class Manager {
 	 * @param dataset_uri
 	 *            the URI of the dataset that this named graph belongs to
 	 * @return the URI for the named graph
-	 * @throws IOException 
-	 * @throws RDFStoreException 
-	 * @throws URISyntaxException 
-	 * @throws ConfigurationException 
-	 * @throws DatasetNotFoundException 
-	 * @throws NamedGraphExistsException 
+	 * @throws IOException an input/output exception
+	 * @throws RDFStoreException a problem with the RDF Store
+	 * @throws URISyntaxException the URI is wrong
+	 * @throws ConfigurationException the configuration is incomplete
+	 * @throws DatasetNotFoundException the dataset could not be found
+	 * @throws NamedGraphExistsException the Named Graph already exists
 	 */
 	public String addNamedGraph(String graph_name, String dataset_uri) throws IOException, RDFStoreException, URISyntaxException, ConfigurationException, DatasetNotFoundException, NamedGraphExistsException {
 
@@ -352,10 +334,10 @@ public class Manager {
 	 * 
 	 * @param namedGraphURI
 	 *            the named Graph URI that will store the data
-	 * @param datasource
+	 * @param csv_path
 	 *            the path CSV file with Open Data
-	 * @throws IOException 
-	 * @throws RDFStoreException 
+	 * @throws IOException an input/output exception
+	 * @throws RDFStoreException a problem with the RDF Store
 	 * 
 	 */
 
@@ -365,15 +347,58 @@ public class Manager {
 		store.saveModel(transformer.getTransformedModel(namedGraphURI));
 	}
 	
+	/**
+	 * @param datasetURI the dataset URI
+	 * @throws MethodNotSupportedException This functionality has not been implemented yet
+	 */
 	public void deleteDataset(String datasetURI) throws MethodNotSupportedException{
-		throw new MethodNotSupportedException("Not supported yet");
+		throw new MethodNotSupportedException("This functionality has not been implemented yet");
 	}
 	
+	/**
+	 * 
+	 * Delete the URI of a named Graph
+	 * 
+	 * @param namedGraphURI the Named Graph URI
+	 * @throws MethodNotSupportedException This functionality has not been implemented yet
+	 */
 	public void deleteNamedGraphData(String namedGraphURI) throws MethodNotSupportedException{
-		throw new MethodNotSupportedException("Not supported yet");
+		throw new MethodNotSupportedException("This functionality has not been implemented yet");
 	}
 	
+	/**
+	 * 
+	 * Delete a named graph and the triples contained in it
+	 * 
+	 * @param namedGraphURI the named Graph URI
+	 * @throws MethodNotSupportedException This functionality has not been implemented yet
+	 */
 	public void deleteNamedGraphDataAndNamedGraph (String namedGraphURI) throws MethodNotSupportedException{
-		throw new MethodNotSupportedException("Not supported yet");
+		throw new MethodNotSupportedException("This functionality has not been implemented yet");
+	}
+	
+	/**
+	 * 
+	 * Delete a project. This will delete a project and all its metadata (Catalogs, Datasets etc.) and the data within
+	 * its dataset
+	 * 
+	 * @param project_URI the project URI
+	 * @throws UnsupportedOperationException This functionality has not been implemented yet
+	 * 
+	 */
+
+	public void deleteProject(String project_URI) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+	}
+
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param catalog_URI the catalog URI
+	 * @throws UnsupportedOperationException This functionality has not been implemented yet
+	 */
+	public void deleteCatalog(String catalog_URI) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("This functionality has not been implemented yet");
 	}
 }
