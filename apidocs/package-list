@@ -1,0 +1,12 @@
+es.eurohelp.lod.aldapa.core
+es.eurohelp.lod.aldapa.core.exception
+es.eurohelp.lod.aldapa.impl
+es.eurohelp.lod.aldapa.impl.modification
+es.eurohelp.lod.aldapa.impl.pipeline
+es.eurohelp.lod.aldapa.impl.pipeline.ejiecalidaddelaire
+es.eurohelp.lod.aldapa.impl.storage
+es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire
+es.eurohelp.lod.aldapa.modification
+es.eurohelp.lod.aldapa.storage
+es.eurohelp.lod.aldapa.transformation
+es.eurohelp.lod.aldapa.util
