@@ -10,3 +10,6 @@ The main motivation for ALDAPA is to help us produce RDF at [Eurohelp Consulting
 ## Contributions
 
 Contributions can be of two kinds: new plugins and improvements of ALDAPA itself. Both kinds are wellcome so send your Pull Requests! (We try to stick to GitFlow as much as possible). 
+
+---
+[Back to index](index.md)

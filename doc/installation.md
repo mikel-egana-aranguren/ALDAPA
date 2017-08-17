@@ -3,8 +3,11 @@ Installing ALDAPA
 
 ## Maven
 
-Go to maven central and ... 
+Coming soon.
 
 ## Download
 
-You can directly download the binary distribution from the releases tab at GitHub
+You can directly download the binary distribution from the releases tab at GitHub.
+
+---
+[Back to index](index.md)

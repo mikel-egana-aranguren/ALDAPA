@@ -51,4 +51,5 @@ A Project can have different Catalogs, but a Catalog can only be related to one 
 ![Basic ALDAPA backbone](img/basic_aldapa_backbone.png)
 
 
-
+---
+[Back to index](index.md)
