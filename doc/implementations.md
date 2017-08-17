@@ -3,7 +3,7 @@ Implementations
 
 ## Overview
 
-ALDAPA comprises a core that executes pipelines, and plugins that implement the steps of such pipelines. The plugins should implement the interfaces defined at es.eurohelp.lod.aldapa.modification, es.eurohelp.lod.aldapa.storage, and es.eurohelp.lod.aldapa.transformation. When a plugin is created, it should be registered in the configuration files (and obviusly be available in the classpath).
+ALDAPA comprises a core that executes pipelines, and plugins that implement the steps of such pipelines. The plugins should implement the interfaces defined at `es.eurohelp.lod.aldapa.modification`, `es.eurohelp.lod.aldapa.storage`, and `es.eurohelp.lod.aldapa.transformation`. When a plugin is created, it should be registered in the configuration files (and obviously be available in the classpath).
 
 ## Plugin types
 
