@@ -1,2 +1,2 @@
-[Introduction](introduction.md)
-[GettingStarted](gettingstarted.md)
+1. [Introduction](introduction.md)
+2. [GettingStarted](gettingstarted.md)

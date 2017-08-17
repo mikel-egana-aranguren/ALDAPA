@@ -3,7 +3,7 @@ Getting Started
 
 ## Example pipeline
 
-The main usage of ALDAPA is to define a pipeline that converts a CSV to RDF, and pushes the RDF to a Triple Store. An example of such a pipeline is provided at [/src/main/java/es/eurohelp/lod/aldapa/impl/pipeline/ejiecalidaddelaire/EJIECalidadAire.java](/src/main/java/es/eurohelp/lod/aldapa/impl/pipeline/ejiecalidaddelaire/EJIECalidadAire.java): the pipeline takes a CSV describing air quality, downloaded from [Open Data Euskadi](http://opendata.euskadi.eus/catalogo/-/calidad-aire-en-euskadi-2017/), converts it with a bespoke parser, and stores the resulting RDF in an in-memory, temporary RDF4J store. The code reads as follows:
+The main usage of ALDAPA is to define a pipeline that converts a CSV to RDF, and pushes the RDF to a Triple Store. An example of such a pipeline is provided at [es.eurohelp.lod.aldapa.impl.pipeline.ejiecalidaddelaire.EJIECalidadAire](/src/main/java/es/eurohelp/lod/aldapa/impl/pipeline/ejiecalidaddelaire/EJIECalidadAire.java): the pipeline takes a CSV describing air quality, downloaded from [Open Data Euskadi](http://opendata.euskadi.eus/catalogo/-/calidad-aire-en-euskadi-2017/), converts it to RDF with a bespoke parser, and stores the resulting RDF in an in-memory, temporary RDF4J store. The code reads as follows:
 
 ```
 		// Load the configuration from file configuration.yml
@@ -39,17 +39,14 @@ The main usage of ALDAPA is to define a pipeline that converts a CSV to RDF, and
 
 ## Backbone metadata
 
-ALDAPA creates a "backbone" RDF into which metadata triples can be added:
+ALDAPA creates a "backbone" RDF into which metadata triples can be added (see [default-model.trig](src/main/resources/model/default-model.trig) for details):
 
-* Project
- * Catalog
-  * Dataset
-   * NamedGraph
+* Project. A foaf:project, the most general category, containing different catalogs (For example, "Environment").
+	* Catalog. A dcat:Catalog containing different datasets (For example, "Air quality").
+		* Dataset. A dcat:Distribution, void:Dataset, and schema:Distribution, containing different NamedGraphs (For example, "Air quality 2017"). 
+			* NamedGraph. The Graph containing the actual RDF data (For example, "Air quality 2017 in Gasteiz").
    
-A Project can have different Catalogs, but a Catalog can only be related to one project: the same principle applies to the whole hierarchy.     
-
-Yo can each separately, but appropriate exceptions will be thrown if a child is added without parent. 
-
+A Project can have different Catalogs, but a Catalog can only be related to one project: the same principle applies to the whole hierarchy. Therefore items can be added separately (eg different named Graphs for a dataset), but appropriate exceptions will be thrown if a child is added without a parent. 
 
 ![Basic ALDAPA backbone](img/basic_aldapa_backbone.png)
 

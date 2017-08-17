@@ -6,18 +6,10 @@ package es.eurohelp.lod.aldapa.impl.pipeline.ejiecalidaddelaire;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import org.apache.http.MethodNotSupportedException;
-
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.Manager;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
-import es.eurohelp.lod.aldapa.core.exception.CatalogExistsException;
-import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
-import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
-import es.eurohelp.lod.aldapa.core.exception.DatasetExistsException;
-import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
-import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
-import es.eurohelp.lod.aldapa.storage.RDFStoreException;
+
 
 /**
  * 
