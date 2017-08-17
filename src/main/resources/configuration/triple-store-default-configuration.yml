@@ -1,10 +1,10 @@
 # THIS CONFIGURATION
 name: InMemoryRDF4JForTests
-comment: in memory triple store that will be dumped when the program finishes
+comment: in memory triple store that will be dumped when the program finishes, only for testting purposes
 author: Mikel Egana Aranguren
 
 # Plugin with actual code for accesing the Triple Store
-pluginClassName: es.eurohelp.opendata.aldapa.impl.storage.MemoryRDFStore
+pluginClassName: es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore
     
     
 #- url: http://localhost:9999

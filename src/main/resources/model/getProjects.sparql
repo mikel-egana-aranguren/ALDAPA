@@ -1,8 +1,7 @@
-PREFIX owl:<http://www.w3.org/2002/07/owl#>
-PREFIX dcat:<http://www.w3.org/ns/dcat#>
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf:<http://xmlns.com/foaf/0.1/>
 
 SELECT ?project 
 WHERE {
-	?project owl:sameAs ?dcat_catalog . 
-	?dcat_catalog rdf:type dcat:catalog
+	?project rdf:type foaf:Project .
 }

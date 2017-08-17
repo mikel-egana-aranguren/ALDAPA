@@ -1,0 +1,6 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX schema: <http://schema.org/>
+
+CATALOG_URI rdf:type dcat:Catalog ;
+		schema:isPartOf PROJECT_URI .

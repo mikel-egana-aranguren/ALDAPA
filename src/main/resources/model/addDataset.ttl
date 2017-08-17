@@ -1,0 +1,7 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX schema: <http://schema.org/>
+PREFIX void: <http://rdfs.org/ns/void#>
+
+CATALOG_URI dcat:dataset DATASET_URI .
+DATASET_URI rdf:type dcat:Distribution, void:Dataset, schema:Distribution .
