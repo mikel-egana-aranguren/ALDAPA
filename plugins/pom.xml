@@ -2,17 +2,22 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>ALDAPA</groupId>
-		<artifactId>Base-API</artifactId>
+		<groupId>es.eurohelp.lod.aldapa</groupId>
+		<artifactId>core</artifactId>
 		<version>0.0.2</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>ALDAPA-Imp</groupId>
-	<artifactId>Plugins</artifactId>
+	<groupId>es.eurohelp.lod.aldapa</groupId>
+	<artifactId>plugins</artifactId>
 	<version>0.0.1</version>
 	<name>ALDAPA plugins</name>
 	<description>Plugins that implement ALDAPA interfaces, to be used in pipelines</description>
 	<dependencies>
+		<dependency>
+			<groupId>es.eurohelp.lod.aldapa</groupId>
+			<artifactId>core</artifactId>
+			<version>0.0.2</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
