@@ -1,0 +1,4 @@
+ALDAPA_CONFIG_FILE: configuration/aldapa-default-configuration.yml
+TRIPLE_STORE_CONFIG_FILE: configuration/RDF4JMem-configuration.yml
+TRANSFORMER_CONFIG_FILE: configuration/ejie-calidad-aire-transformer-configuration.yml
+

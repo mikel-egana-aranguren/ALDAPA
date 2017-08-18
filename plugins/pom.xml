@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>ALDAPA</groupId>
+		<artifactId>Base-API</artifactId>
+		<version>0.0.2</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<groupId>ALDAPA-Imp</groupId>
+	<artifactId>Plugins</artifactId>
+	<version>0.0.1</version>
+	<name>ALDAPA plugins</name>
+	<description>Plugins that implement ALDAPA interfaces, to be used in pipelines</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.4</version>
+		</dependency>
+	</dependencies>
+</project>

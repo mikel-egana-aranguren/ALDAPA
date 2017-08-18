@@ -5,4 +5,4 @@
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-package es.eurohelp.lod.aldapa.impl.pipeline.ejiecalidaddelaire;
+package es.eurohelp.lod.aldapa.pipeline.ejiecalidaddelaire;

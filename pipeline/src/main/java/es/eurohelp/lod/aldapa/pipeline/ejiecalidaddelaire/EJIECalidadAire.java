@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.lod.aldapa.impl.pipeline.ejiecalidaddelaire;
+package es.eurohelp.lod.aldapa.pipeline.ejiecalidaddelaire;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

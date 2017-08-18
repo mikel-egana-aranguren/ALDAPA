@@ -1,5 +1,5 @@
 
-_:node1bnlg76b6x2 <http://www.w3.org/ns/sparql-service-description#name> <http://euskadi.eus/graph/estaciones01> .
+_:node1bnqm8h7ox2 <http://www.w3.org/ns/sparql-service-description#name> <http://euskadi.eus/graph/estaciones01> .
 
 <http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> ;
 	<http://schema.org/address> "Plaza Tres de Marzo, s/n" ;
@@ -41,6 +41,6 @@ _:node1bnlg76b6x2 <http://www.w3.org/ns/sparql-service-description#name> <http:/
 	<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/estaciones> .
 
 <http://lod.eurohelp.es/aldapa/dataset/estaciones> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
-	<http://www.w3.org/ns/sparql-service-description#namedGraph> _:node1bnlg76b6x2 .
+	<http://www.w3.org/ns/sparql-service-description#namedGraph> _:node1bnqm8h7ox2 .
 
 <http://lod.eurohelp.es/aldapa/project/euskadimedioambiente> a <http://xmlns.com/foaf/0.1/Project> .
