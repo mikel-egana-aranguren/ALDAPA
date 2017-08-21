@@ -13,6 +13,9 @@ import org.eclipse.rdf4j.model.Model;
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.TripleAdder;
 import es.eurohelp.lod.aldapa.util.URIUtils;
+import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EUSURI;
+import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EXTERNALURI;
+import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.CLASSTOKEN;
 
 /**
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
