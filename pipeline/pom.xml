@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>es.eurohelp.lod.aldapa</groupId>
+		<artifactId>complete</artifactId>
+		<version>0.0.2</version>
+	</parent>
+	<groupId>es.eurohelp.lod.aldapa</groupId>
+	<artifactId>pipeline</artifactId>
+	<version>0.0.1</version>
+	<name>ALDAPA pipelines</name>
+	<description>Pipelines that use ALDAPA plugins to transform data from Open Data Euskadi to RDF</description>
+	<dependencies>
+		<dependency>
+			<groupId>es.eurohelp.lod.aldapa</groupId>
+			<artifactId>core</artifactId>
+			<version>0.0.2</version>
+		</dependency>
+	</dependencies>
+</project>

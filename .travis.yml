@@ -7,11 +7,12 @@ jdk: oraclejdk8
 script: 
 - mvn clean
 - mvn install
+- mvn jar:jar
 - mvn cobertura:cobertura
 
 branches:
   only:
-  - develop
+  - feature-maven-subprojects
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
