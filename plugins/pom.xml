@@ -14,11 +14,6 @@
 	<description>Plugins that implement ALDAPA interfaces, to be used in pipelines</description>
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-csv</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
 			<groupId>es.eurohelp.lod.aldapa</groupId>
 			<artifactId>core</artifactId>
 			<version>0.0.2</version>

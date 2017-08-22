@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
+package es.eurohelp.lod.aldapa.transformation;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +13,6 @@ import org.eclipse.rdf4j.model.Model;
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.TripleAdder;
 import es.eurohelp.lod.aldapa.util.URIUtils;
-
 
 /**
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
