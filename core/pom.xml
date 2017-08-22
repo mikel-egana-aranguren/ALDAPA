@@ -5,19 +5,25 @@
 		<groupId>es.eurohelp.lod.aldapa</groupId>
 		<artifactId>complete</artifactId>
 		<version>0.0.2</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>es.eurohelp.lod.aldapa</groupId>
 	<artifactId>core</artifactId>
 	<version>0.0.2</version>
+	<packaging>jar</packaging>
 	<name>ALDAPA core</name>
 	<description>Core ALDAPA API</description>
-	<packaging>jar</packaging>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
 		<dependency>
-			<groupId>es.eurohelp.lod.aldapa</groupId>
-			<artifactId>plugins</artifactId>
-			<version>0.0.1</version>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.17</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
 		</dependency>
 	</dependencies>
 </project>

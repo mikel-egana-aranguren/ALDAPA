@@ -5,7 +5,6 @@
 		<groupId>es.eurohelp.lod.aldapa</groupId>
 		<artifactId>complete</artifactId>
 		<version>0.0.2</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>es.eurohelp.lod.aldapa</groupId>
 	<artifactId>plugins</artifactId>
