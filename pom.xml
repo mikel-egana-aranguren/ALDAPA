@@ -10,8 +10,8 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>plugins</module>
-		<module>core</module>
 		<module>pipeline</module>
+		<module>core</module>
 	</modules>
 	<dependencies>
 		<dependency>
