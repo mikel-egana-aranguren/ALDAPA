@@ -1,0 +1,6 @@
+
+<http://lod.eurohelp.es/graph/dataset-graph001> {
+	<http://lod.eurohelp.es/resource/resource_002> <http://lod.eurohelp.es/property/property_001> <http://lod.eurohelp.es/resource/resource_003> .
+	
+	<http://lod.eurohelp.es/resource/resource_003> <http://www.w3.org/2002/07/owl#sameAs> <http://dbpedia.org/resource/Bilbao> .
+}

@@ -9,7 +9,7 @@ The main motivation for ALDAPA is to help us produce RDF at [Eurohelp Consulting
 
 ## Contributions
 
-Contributions can be of two kinds: new plugins and improvements of ALDAPA itself. Both kinds are wellcome so send your Pull Requests! (We try to stick to GitFlow as much as possible). 
+All contributions are welcome, including issues, new plugins, new pipelines and improvements of ALDAPA core itself. Please note when sending pull requests that we try to stick to [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) as much as possible. 
 
 ---
 [Back to index](index.md)

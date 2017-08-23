@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.Manager;
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogExistsException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
@@ -95,5 +96,20 @@ public class ManagerTest {
 		String named_graph_uri = manager.addNamedGraph(graph_name, dataset_uri);
 		manager.flushGraph(null, test_data_output_dir + "namedgraph-created.ttl");
 		assertEquals("http://euskadi.eus/graph/donosti-parkings-febr-001", named_graph_uri);
+	}
+	
+	@Test
+	public final void testDeleteProject () throws RDFStoreException, IOException, URISyntaxException, AldapaException {
+		String project_uri = manager.addProject(project_name);
+		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
+		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
+		String named_graph_uri = manager.addNamedGraph(graph_name, dataset_uri);
+		String project_uri2 = manager.addProject(project_name + "2");
+		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
+		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
+		String named_graph_uri2 = manager.addNamedGraph(graph_name + "2", dataset_uri2);
+		manager.flushGraph(null, test_data_output_dir + "project-before-deleted.ttl");
+		manager.deleteProject(project_uri);
+		manager.flushGraph(null, test_data_output_dir + "project-deleted.ttl");
 	}
 }

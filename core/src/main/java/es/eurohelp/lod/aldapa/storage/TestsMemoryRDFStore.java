@@ -12,11 +12,14 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.query.BooleanQuery;
 import org.eclipse.rdf4j.query.GraphQueryResult;
+import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.TupleQueryResult;
+import org.eclipse.rdf4j.query.Update;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFWriter;
+import org.eclipse.rdf4j.rio.trig.TriGWriter;
 //import org.eclipse.rdf4j.rio.binary.BinaryRDFWriter;
 //import org.eclipse.rdf4j.rio.jsonld.JSONLDWriter;
 //import org.eclipse.rdf4j.rio.n3.N3Writer;
@@ -84,7 +87,7 @@ public class TestsMemoryRDFStore implements RDFStore {
 	 */
 	public void saveModel(Model model) throws RDFStoreException {
 		LOGGER.info("Adding model to SailRepository(MemoryStore)");
-		// TODO: is there any way of adding a whole model to the repo?
+		// Issue 35
 		Iterator<Statement> model_iterator = model.iterator();
 		while (model_iterator.hasNext()) {
 			Statement stment = model_iterator.next();
@@ -116,8 +119,7 @@ public class TestsMemoryRDFStore implements RDFStore {
 				rdfwriter = new TurtleWriter(outputstream);
 				LOGGER.info("TurtleWriter chosen");
 				break;
-				
-// Look at issue 26
+		// Issue 26
 //			case JSONLD:
 //				rdfwriter = new JSONLDWriter(outputstream);
 //				LOGGER.info("JSONLDwriter chosen");
@@ -134,10 +136,10 @@ public class TestsMemoryRDFStore implements RDFStore {
 //				rdfwriter = new TriXWriter(outputstream);
 //				LOGGER.info("TriXWriter chosen");
 //				break;
-//			case TRIG:
-//				rdfwriter = new TriGWriter(outputstream);
-//				LOGGER.info("TriGWriter chosen");
-//				break;
+			case TRIG:
+				rdfwriter = new TriGWriter(outputstream);
+				LOGGER.info("TriGWriter chosen");
+				break;
 //			case NQUADS:
 //				rdfwriter = new NQuadsWriter(outputstream);
 //				LOGGER.info("NQuadsWriter chosen");
@@ -198,5 +200,10 @@ public class TestsMemoryRDFStore implements RDFStore {
 	public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException {
 		BooleanQuery query = conn.prepareBooleanQuery(pSPARQLquery);
 		return query.evaluate();
+	}
+	
+	public void execSPARQLUpdate (String pSPARQLquery){
+		Update operation = conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery);
+		operation.execute();		
 	}
 }
