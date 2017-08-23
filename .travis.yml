@@ -7,7 +7,6 @@ jdk: oraclejdk8
 script: 
 - mvn clean
 - mvn install
-- mvn jar:jar
 - mvn cobertura:cobertura
 
 branches:
