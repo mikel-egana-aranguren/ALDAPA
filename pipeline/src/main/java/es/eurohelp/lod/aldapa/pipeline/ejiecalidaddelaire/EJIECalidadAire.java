@@ -6,6 +6,8 @@ package es.eurohelp.lod.aldapa.pipeline.ejiecalidaddelaire;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import org.eclipse.rdf4j.rio.RDFFormat;
+
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.Manager;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
@@ -43,9 +45,9 @@ public class EJIECalidadAire {
 		manager.addDataToNamedGraph(named_graph_uri, "data/OpenDataEuskadiCalidadDelAire/estaciones.csv");
 		
 		// Flush backbone
-		manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl");
+		manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl", RDFFormat.TURTLE);
 		
 		// Flush data from named graph
-		manager.flushGraph(named_graph_uri, "data/EuskadiMedioAmbienteData.ttl");
+		manager.flushGraph(named_graph_uri, "data/EuskadiMedioAmbienteData.ttl", RDFFormat.TURTLE);
 	}
 }

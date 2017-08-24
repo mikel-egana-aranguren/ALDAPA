@@ -16,3 +16,8 @@
 <http://lod.eurohelp.es/aldapa/project/donosti-movilidad> a <http://xmlns.com/foaf/0.1/Project> .
 
 <http://lod.eurohelp.es/aldapa/project/donosti-movilidad2> a <http://xmlns.com/foaf/0.1/Project> .
+
+<http://opendata.eurohelp.es/resource/resource_002> <http://opendata.eurohelp.es/property/property_001> <http://opendata.eurohelp.es/resource/resource_003> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "Resource 002"@en .
+
+<http://opendata.eurohelp.es/resource/resource_003> <http://www.w3.org/2002/07/owl#sameAs> <http://dbpedia.org/resource/Bilbao> .

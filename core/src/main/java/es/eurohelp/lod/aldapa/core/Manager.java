@@ -152,9 +152,9 @@ public class Manager {
 	 * @throws IOException
 	 *             an input/output exception
 	 */
-	public void flushGraph(String graphuri, String fileName) throws RDFStoreException, IOException {
+	public void flushGraph(String graphuri, String fileName, RDFFormat format) throws RDFStoreException, IOException {
 		FileUtils fileutils = FileUtils.getInstance();
-		store.flushGraph(graphuri, fileutils.getFileOutputStream(fileName), RDFFormat.TURTLE);
+		store.flushGraph(graphuri, fileutils.getFileOutputStream(fileName), format);
 	}
 
 	/**
@@ -380,6 +380,18 @@ public class Manager {
 		transformer.setModel(new TreeModel());
 		store.saveModel(transformer.getTransformedModel(namedGraphURI));
 	}
+	
+	/**
+	 * 
+	 * Adds the data of a RDF4J Model to the store
+	 * 
+	 * @param namedGraphURI
+	 * @param model
+	 * @throws RDFStoreException 
+	 */
+	public void addData (Model model) throws RDFStoreException{
+		store.saveModel(model);
+	}
 
 	/**
 	 * 
@@ -399,7 +411,6 @@ public class Manager {
 		String resolved_delete_project_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteProject.getValue(),
 		        MethodFileToken.project_uri.getValue(), project_URI);
 		store.execSPARQLUpdate(resolved_delete_project_sparql);
-//		throw new UnsupportedOperationException("This functionality has not been implemented yet");
 	}
 
 	/**

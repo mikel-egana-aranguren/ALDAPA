@@ -1,0 +1,10 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX resource: <http://opendata.eurohelp.es/resource/>
+PREFIX property: <http://opendata.eurohelp.es/property/>
+
+<http://euskadi.eus/graph/donosti-parkings-febr-001> {
+	resource:resource_002 property:property_001 resource:resource_003 . 
+	resource:resource_002 rdfs:label "Resource 002"@en .
+	resource:resource_003 owl:sameAs <http://dbpedia.org/resource/Bilbao> .
+}
