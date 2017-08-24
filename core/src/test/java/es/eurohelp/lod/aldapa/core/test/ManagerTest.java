@@ -151,9 +151,75 @@ public class ManagerTest {
 		manager.flushGraph(null, test_data_output_dir + "catalog-before-deleted.trig", RDFFormat.TRIG);
 		manager.deleteCatalog(catalog_uri);
 		manager.flushGraph(null, test_data_output_dir + "catalog-deleted.trig", RDFFormat.TRIG);
+	}
+	
+	@Test
+	public final void testDeleteDataset () throws IOException, URISyntaxException, AldapaException {
+		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
+		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
+		String project_uri = manager.addProject(project_name);
+		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
+		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
+		String named_graph_uri = manager.addNamedGraph(graph_name, dataset_uri);
+		manager.addData(model1);
 		
+		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
+		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
+		String project_uri2 = manager.addProject(project_name + "2");
+		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
+		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
+		String named_graph_uri2 = manager.addNamedGraph(graph_name + "2", dataset_uri2);
+		manager.addData(model1);
 		
+		manager.flushGraph(null, test_data_output_dir + "dataset-before-deleted.trig", RDFFormat.TRIG);
+		manager.deleteDataset(dataset_uri);
+		manager.flushGraph(null, test_data_output_dir + "dataset-deleted.trig", RDFFormat.TRIG);
+	}
+	
+	@Test
+	public final void testDeleteNamedGraph () throws IOException, URISyntaxException, AldapaException {
+		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
+		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
+		String project_uri = manager.addProject(project_name);
+		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
+		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
+		String named_graph_uri = manager.addNamedGraph(graph_name, dataset_uri);
+		manager.addData(model1);
 		
+		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
+		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
+		String project_uri2 = manager.addProject(project_name + "2");
+		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
+		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
+		String named_graph_uri2 = manager.addNamedGraph(graph_name + "2", dataset_uri2);
+		manager.addData(model1);
 		
+		manager.flushGraph(null, test_data_output_dir + "named-graph-before-deleted.trig", RDFFormat.TRIG);
+		manager.deleteNamedGraph(named_graph_uri);
+		manager.flushGraph(null, test_data_output_dir + "named-graph-deleted.trig", RDFFormat.TRIG);
+	}
+	
+	@Test
+	public final void testDeleteDataFromNamedGraph () throws IOException, URISyntaxException, AldapaException {
+		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
+		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
+		String project_uri = manager.addProject(project_name);
+		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
+		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
+		String named_graph_uri = manager.addNamedGraph(graph_name, dataset_uri);
+		manager.addData(model1);
+		
+		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
+		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
+		String project_uri2 = manager.addProject(project_name + "2");
+		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
+		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
+		String named_graph_uri2 = manager.addNamedGraph(graph_name + "2", dataset_uri2);
+		manager.addData(model1);
+		
+		manager.flushGraph(null, test_data_output_dir + "data-named-graph-before-deleted.trig", RDFFormat.TRIG);
+		manager.deleteDataFromNamedGraph(named_graph_uri);
+		manager.flushGraph(null, test_data_output_dir + "data-named-graph-deleted.trig", RDFFormat.TRIG);
 	}
 }
+

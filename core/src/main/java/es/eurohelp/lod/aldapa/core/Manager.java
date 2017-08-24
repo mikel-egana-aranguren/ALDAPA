@@ -434,25 +434,17 @@ public class Manager {
 	/**
 	 * @param datasetURI
 	 *            the dataset URI
+	 * @throws IOException 
+	 * @throws AldapaException 
 	 * @throws MethodNotSupportedException
 	 *             This functionality has not been implemented yet
 	 */
-	public void deleteDataset(String datasetURI) throws MethodNotSupportedException {
-		throw new MethodNotSupportedException("This functionality has not been implemented yet");
+	public void deleteDataset(String datasetURI) throws IOException, AldapaException {
+		String resolved_delete_dataset_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataset.getValue(),
+		        MethodFileToken.dataset_uri.getValue(), datasetURI);
+		store.execSPARQLUpdate(resolved_delete_dataset_sparql);
 	}
-
-	/**
-	 * 
-	 * Delete the URI of a named Graph
-	 * 
-	 * @param namedGraphURI
-	 *            the Named Graph URI
-	 * @throws MethodNotSupportedException
-	 *             This functionality has not been implemented yet
-	 */
-	public void deleteNamedGraphData(String namedGraphURI) throws MethodNotSupportedException {
-		throw new MethodNotSupportedException("This functionality has not been implemented yet");
-	}
+	
 
 	/**
 	 * 
@@ -460,11 +452,30 @@ public class Manager {
 	 * 
 	 * @param namedGraphURI
 	 *            the named Graph URI
+	 * @throws IOException 
+	 * @throws AldapaException 
 	 * @throws MethodNotSupportedException
 	 *             This functionality has not been implemented yet
 	 */
-	public void deleteNamedGraphDataAndNamedGraph(String namedGraphURI) throws MethodNotSupportedException {
-		throw new MethodNotSupportedException("This functionality has not been implemented yet");
+	public void deleteNamedGraph(String namedGraphURI) throws IOException, AldapaException {
+		String resolved_delete_named_graph_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteNamedGraph.getValue(),
+		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
+		store.execSPARQLUpdate(resolved_delete_named_graph_sparql);
 	}
 
+	/**
+	 * 
+	 * Delete the triples contained in a named Graph
+	 * 
+	 * @param namedGraphURI
+	 *            the Named Graph URI
+	 * @throws MethodNotSupportedException
+	 *             This functionality has not been implemented yet
+	 * @throws IOException 
+	 */
+	public void deleteDataFromNamedGraph(String namedGraphURI) throws AldapaException, IOException {
+		String resolved_data_from_named_graph_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataFromNamedGraph.getValue(),
+		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
+		store.execSPARQLUpdate(resolved_data_from_named_graph_sparql);
+	}
 }
