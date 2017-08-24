@@ -8,12 +8,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.EnumMap;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.http.MethodNotSupportedException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.impl.TreeModel;
+import org.eclipse.rdf4j.query.BindingSet;
+import org.eclipse.rdf4j.query.TupleQuery;
+import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
@@ -381,16 +387,16 @@ public class Manager {
 		transformer.setModel(new TreeModel());
 		store.saveModel(transformer.getTransformedModel(namedGraphURI));
 	}
-	
+
 	/**
 	 * 
 	 * Adds the data of a RDF4J Model to the store
 	 * 
 	 * @param namedGraphURI
 	 * @param model
-	 * @throws RDFStoreException 
+	 * @throws RDFStoreException
 	 */
-	public void addData (Model model) throws RDFStoreException{
+	public void addData(Model model) throws RDFStoreException {
 		store.saveModel(model);
 	}
 
@@ -401,8 +407,8 @@ public class Manager {
 	 * 
 	 * @param project_URI
 	 *            the project URI
-	 * @throws IOException 
-	 * @throws RDFStoreException 
+	 * @throws IOException
+	 * @throws RDFStoreException
 	 * @throws UnsupportedOperationException
 	 *             This functionality has not been implemented yet
 	 * 
@@ -422,8 +428,8 @@ public class Manager {
 	 *            the catalog URI
 	 * @throws UnsupportedOperationException
 	 *             This functionality has not been implemented yet
-	 * @throws IOException 
-	 * @throws AldapaException 
+	 * @throws IOException
+	 * @throws AldapaException
 	 */
 	public void deleteCatalog(String catalog_URI) throws IOException, AldapaException {
 		String resolved_delete_catalog_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteCatalog.getValue(),
@@ -434,8 +440,8 @@ public class Manager {
 	/**
 	 * @param datasetURI
 	 *            the dataset URI
-	 * @throws IOException 
-	 * @throws AldapaException 
+	 * @throws IOException
+	 * @throws AldapaException
 	 * @throws MethodNotSupportedException
 	 *             This functionality has not been implemented yet
 	 */
@@ -444,7 +450,6 @@ public class Manager {
 		        MethodFileToken.dataset_uri.getValue(), datasetURI);
 		store.execSPARQLUpdate(resolved_delete_dataset_sparql);
 	}
-	
 
 	/**
 	 * 
@@ -452,8 +457,8 @@ public class Manager {
 	 * 
 	 * @param namedGraphURI
 	 *            the named Graph URI
-	 * @throws IOException 
-	 * @throws AldapaException 
+	 * @throws IOException
+	 * @throws AldapaException
 	 * @throws MethodNotSupportedException
 	 *             This functionality has not been implemented yet
 	 */
@@ -471,11 +476,22 @@ public class Manager {
 	 *            the Named Graph URI
 	 * @throws MethodNotSupportedException
 	 *             This functionality has not been implemented yet
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void deleteDataFromNamedGraph(String namedGraphURI) throws AldapaException, IOException {
 		String resolved_data_from_named_graph_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataFromNamedGraph.getValue(),
 		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
 		store.execSPARQLUpdate(resolved_data_from_named_graph_sparql);
+	}
+
+	public Set<String> getProjects() throws AldapaException, IOException {
+		TupleQueryResult result = store.execSPARQLTupleQuery(fileutils.fileToString("model/getProjects.sparql"));
+		List<String> bindingNames = result.getBindingNames();
+		while (result.hasNext()) {
+			BindingSet bindingSet = result.next();
+			Value firstValue = bindingSet.getValue(bindingNames.get(0));
+			System.out.println(firstValue);
+		}
+		return null;
 	}
 }

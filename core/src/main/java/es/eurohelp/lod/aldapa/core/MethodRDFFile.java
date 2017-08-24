@@ -21,7 +21,7 @@ public enum MethodRDFFile {
 	addCatalog("model/addCatalog.ttl"),
 	getCatalogs("model/getCatalogs.sparql "),
 	catalogExists("model/catalogExists.sparql"),
-	deleteCatalog("model/deleteCatalog.sparql"),
+	deleteCatalog("model/deleteCatalog.sparql"),	
 	addDataset("model/addDataset.ttl"),
 	getDatasets("model/getDatasets.sparql"),
 	datasetExists("model/datasetExists.sparql"),
