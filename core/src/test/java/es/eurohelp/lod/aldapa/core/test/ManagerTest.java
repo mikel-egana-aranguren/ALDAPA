@@ -132,4 +132,12 @@ public class ManagerTest {
 		manager.flushGraph(null, test_data_output_dir + "project-deleted.ttl", RDFFormat.TURTLE);
 		manager.flushGraph(null, test_data_output_dir + "project-deleted.trig", RDFFormat.TRIG);
 	}
+	@Test
+	public final void testDeleteCatalog () throws IOException, URISyntaxException, AldapaException {
+		
+		
+		
+		
+		
+	}
 }

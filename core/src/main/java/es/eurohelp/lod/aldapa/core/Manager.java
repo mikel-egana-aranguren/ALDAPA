@@ -17,6 +17,7 @@ import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogExistsException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
@@ -421,9 +422,13 @@ public class Manager {
 	 *            the catalog URI
 	 * @throws UnsupportedOperationException
 	 *             This functionality has not been implemented yet
+	 * @throws IOException 
+	 * @throws AldapaException 
 	 */
-	public void deleteCatalog(String catalog_URI) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+	public void deleteCatalog(String catalog_URI) throws IOException, AldapaException {
+		String resolved_delete_catalog_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteCatalog.getValue(),
+		        MethodFileToken.catalog_uri.getValue(), catalog_URI);
+		store.execSPARQLUpdate(resolved_delete_catalog_sparql);
 	}
 
 	/**
