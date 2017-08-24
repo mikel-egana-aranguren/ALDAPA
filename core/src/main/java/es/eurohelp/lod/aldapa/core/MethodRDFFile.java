@@ -15,14 +15,22 @@ package es.eurohelp.lod.aldapa.core;
  */
 public enum MethodRDFFile {
 	addProject("model/addProject.ttl"), 
-	addCatalog("model/addCatalog.ttl"),
-	projectExists("model/projectExists.sparql"),
 	getProjects("model/getProjects.sparql"), 
+	projectExists("model/projectExists.sparql"),
+	deleteProject("model/deleteProject.sparql"),
+	addCatalog("model/addCatalog.ttl"),
+	getCatalogs("model/getCatalogs.sparql "),
 	catalogExists("model/catalogExists.sparql"),
-	datasetExists("model/datasetExists.sparql"),
-	namedGraphExists("model/namedGraphExists.sparql"),
+	deleteCatalog("model/deleteCatalog.sparql"),
 	addDataset("model/addDataset.ttl"),
-	addNamedGraph("model/addNamedGraph.ttl")
+	getDatasets("model/getDatasets.sparql"),
+	datasetExists("model/datasetExists.sparql"),
+	deleteDataset("model/deleteDataset.sparql"),	
+	addNamedGraph("model/addNamedGraph.ttl"),
+	getNamedGraphs("model/getNamedGraphs.sparql"),
+	namedGraphExists("model/namedGraphExists.sparql"),
+	deleteNamedGraph("model/deleteNamedGraph.sparql"),
+	deleteDataFromNamedGraph("model/deleteDataFromNamedGraph.sparql"),
 	;
 
 	public final String methodFileName;

@@ -11,7 +11,7 @@ script:
 
 branches:
   only:
-  - develop
+  - feature-core-delete-stuff
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)

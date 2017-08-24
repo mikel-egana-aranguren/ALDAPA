@@ -17,6 +17,7 @@ import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogExistsException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
@@ -51,16 +52,21 @@ public class Manager {
 	 * 
 	 * @param configuredconfigmanager
 	 *            an already configured ConfigurationManger, holding the necessary configuration
-	 * @throws ClassNotFoundException the plugin class was not found
-	 * @throws IllegalAccessException illegal access
-	 * @throws InstantiationException the plugin class could not be instantiated
-	 * @throws ConfigurationException the configuration is incomplete
+	 * @throws ClassNotFoundException
+	 *             the plugin class was not found
+	 * @throws IllegalAccessException
+	 *             illegal access
+	 * @throws InstantiationException
+	 *             the plugin class could not be instantiated
+	 * @throws ConfigurationException
+	 *             the configuration is incomplete
 	 * 
 	 */
-	public Manager(ConfigurationManager configuredconfigmanager) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException {
+	public Manager(ConfigurationManager configuredconfigmanager)
+	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException {
 		configmanager = configuredconfigmanager;
 		fileutils = FileUtils.getInstance();
-		
+
 		// Initialise Triple Store
 		String store_plugin_name = configmanager.getConfigPropertyValue("TRIPLE_STORE_CONFIG_FILE", "pluginClassName");
 		LOGGER.info("Triple Store plugin name: " + store_plugin_name);
@@ -68,14 +74,14 @@ public class Manager {
 		store = (RDFStore) store_class.newInstance();
 		store.startRDFStore();
 		LOGGER.info("Triple Store started");
-		
+
 		// Initialise CSV2RDF transformer
 		String transformer_plugin_name = configmanager.getConfigPropertyValue("TRANSFORMER_CONFIG_FILE", "pluginClassName");
 		LOGGER.info("CSV2RDF transformer plugin name: " + transformer_plugin_name);
 		Class<?> transformer_class = Class.forName(transformer_plugin_name);
 		transformer = (CSV2RDFBatchConverter) transformer_class.newInstance();
 		LOGGER.info("CSV2RDF Transfomer loaded");
-		
+
 	}
 
 	/**
@@ -86,14 +92,19 @@ public class Manager {
 	 *            the name of the new project that will be used to generate the project URI, according to the
 	 *            configuration
 	 * @return the URI of the newly added project
-	 * @throws IOException an input/output exception
-	 * @throws RDFStoreException a problem with the RDF Store
-	 * @throws URISyntaxException the URI is wrong
-	 * @throws ConfigurationException the configuration is incomplete
+	 * @throws IOException
+	 *             an input/output exception
+	 * @throws RDFStoreException
+	 *             a problem with the RDF Store
+	 * @throws URISyntaxException
+	 *             the URI is wrong
+	 * @throws ConfigurationException
+	 *             the configuration is incomplete
 	 * 
 	 */
 
-	public String addProject(String project_name) throws ProjectExistsException, IOException, RDFStoreException, URISyntaxException, ConfigurationException {
+	public String addProject(String project_name)
+	        throws ProjectExistsException, IOException, RDFStoreException, URISyntaxException, ConfigurationException {
 		LOGGER.info("Project name: " + project_name);
 
 		// Create Project URI
@@ -133,14 +144,18 @@ public class Manager {
 	 * 
 	 * Write a Graph into a file
 	 * 
-	 * @param graphuri the Named Graph URI, it can be null
-	 * @param fileName the path of the file to wrtie the graph to
-	 * @throws RDFStoreException a problem with the RDF Store
-	 * @throws IOException an input/output exception
+	 * @param graphuri
+	 *            the Named Graph URI, it can be null
+	 * @param fileName
+	 *            the path of the file to wrtie the graph to
+	 * @throws RDFStoreException
+	 *             a problem with the RDF Store
+	 * @throws IOException
+	 *             an input/output exception
 	 */
-	public void flushGraph(String graphuri, String fileName) throws RDFStoreException, IOException {
+	public void flushGraph(String graphuri, String fileName, RDFFormat format) throws RDFStoreException, IOException {
 		FileUtils fileutils = FileUtils.getInstance();
-		store.flushGraph(graphuri, fileutils.getFileOutputStream(fileName), RDFFormat.TURTLE);
+		store.flushGraph(graphuri, fileutils.getFileOutputStream(fileName), format);
 	}
 
 	/**
@@ -152,12 +167,18 @@ public class Manager {
 	 * @param project_uri
 	 *            the project that this catalog belongs to
 	 * @return Catalog URI
-	 * @throws CatalogExistsException the catalog already exists
-	 * @throws IOException an input/output exception
-	 * @throws RDFStoreException a problem with the RDF Store
-	 * @throws ProjectNotFoundException the project could not be found
-	 * @throws URISyntaxException the dataset could not be found
-	 * @throws ConfigurationException the configuration is incomplete
+	 * @throws CatalogExistsException
+	 *             the catalog already exists
+	 * @throws IOException
+	 *             an input/output exception
+	 * @throws RDFStoreException
+	 *             a problem with the RDF Store
+	 * @throws ProjectNotFoundException
+	 *             the project could not be found
+	 * @throws URISyntaxException
+	 *             the dataset could not be found
+	 * @throws ConfigurationException
+	 *             the configuration is incomplete
 	 */
 	public String addCatalog(String catalog_name, String project_uri)
 	        throws CatalogExistsException, IOException, RDFStoreException, ProjectNotFoundException, URISyntaxException, ConfigurationException {
@@ -212,12 +233,18 @@ public class Manager {
 	 * @param catalog_uri
 	 *            the catalog that this dataset belongs to
 	 * @return Dataset URI
-	 * @throws DatasetExistsException the dataset already exists
-	 * @throws IOException an input/output exception
-	 * @throws RDFStoreException a problem with the RDF Store
-	 * @throws CatalogNotFoundException the catalog could not be found
-	 * @throws URISyntaxException the URI is wrong
-	 * @throws ConfigurationException the configuration is incomplete
+	 * @throws DatasetExistsException
+	 *             the dataset already exists
+	 * @throws IOException
+	 *             an input/output exception
+	 * @throws RDFStoreException
+	 *             a problem with the RDF Store
+	 * @throws CatalogNotFoundException
+	 *             the catalog could not be found
+	 * @throws URISyntaxException
+	 *             the URI is wrong
+	 * @throws ConfigurationException
+	 *             the configuration is incomplete
 	 */
 	public String addDataset(String dataset_name, String catalog_uri)
 	        throws DatasetExistsException, IOException, RDFStoreException, CatalogNotFoundException, URISyntaxException, ConfigurationException {
@@ -273,14 +300,21 @@ public class Manager {
 	 * @param dataset_uri
 	 *            the URI of the dataset that this named graph belongs to
 	 * @return the URI for the named graph
-	 * @throws IOException an input/output exception
-	 * @throws RDFStoreException a problem with the RDF Store
-	 * @throws URISyntaxException the URI is wrong
-	 * @throws ConfigurationException the configuration is incomplete
-	 * @throws DatasetNotFoundException the dataset could not be found
-	 * @throws NamedGraphExistsException the Named Graph already exists
+	 * @throws IOException
+	 *             an input/output exception
+	 * @throws RDFStoreException
+	 *             a problem with the RDF Store
+	 * @throws URISyntaxException
+	 *             the URI is wrong
+	 * @throws ConfigurationException
+	 *             the configuration is incomplete
+	 * @throws DatasetNotFoundException
+	 *             the dataset could not be found
+	 * @throws NamedGraphExistsException
+	 *             the Named Graph already exists
 	 */
-	public String addNamedGraph(String graph_name, String dataset_uri) throws IOException, RDFStoreException, URISyntaxException, ConfigurationException, DatasetNotFoundException, NamedGraphExistsException {
+	public String addNamedGraph(String graph_name, String dataset_uri)
+	        throws IOException, RDFStoreException, URISyntaxException, ConfigurationException, DatasetNotFoundException, NamedGraphExistsException {
 
 		// Dataset should exist
 		String resolved_dataset_exists_sparql = fileutils.fileTokenResolver(MethodRDFFile.datasetExists.getValue(),
@@ -297,13 +331,12 @@ public class Manager {
 		LOGGER.info("Graph uri: " + graph_uri);
 
 		// Graph should not exist
-		
+
 		EnumMap<MethodFileToken, String> token_replacement_map = new EnumMap<>(MethodFileToken.class);
-		
+
 		token_replacement_map.put(MethodFileToken.dataset_uri, dataset_uri);
 		token_replacement_map.put(MethodFileToken.graph_uri, graph_uri);
-		
-		
+
 		String resolved_graph_exists_sparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.namedGraphExists.getValue(), token_replacement_map);
 
 		Boolean graph_exists = store.execSPARQLBooleanQuery(resolved_graph_exists_sparql);
@@ -336,69 +369,113 @@ public class Manager {
 	 *            the named Graph URI that will store the data
 	 * @param csv_path
 	 *            the path CSV file with Open Data
-	 * @throws IOException an input/output exception
-	 * @throws RDFStoreException a problem with the RDF Store
+	 * @throws IOException
+	 *             an input/output exception
+	 * @throws RDFStoreException
+	 *             a problem with the RDF Store
 	 * 
 	 */
 
-	public void addDataToNamedGraph(String namedGraphURI , String csv_path) throws IOException, RDFStoreException { 
+	public void addDataToNamedGraph(String namedGraphURI, String csv_path) throws IOException, RDFStoreException {
 		transformer.setDataSource(csv_path);
 		transformer.setModel(new TreeModel());
 		store.saveModel(transformer.getTransformedModel(namedGraphURI));
 	}
 	
 	/**
-	 * @param datasetURI the dataset URI
-	 * @throws MethodNotSupportedException This functionality has not been implemented yet
+	 * 
+	 * Adds the data of a RDF4J Model to the store
+	 * 
+	 * @param namedGraphURI
+	 * @param model
+	 * @throws RDFStoreException 
 	 */
-	public void deleteDataset(String datasetURI) throws MethodNotSupportedException{
-		throw new MethodNotSupportedException("This functionality has not been implemented yet");
+	public void addData (Model model) throws RDFStoreException{
+		store.saveModel(model);
 	}
-	
-	/**
-	 * 
-	 * Delete the URI of a named Graph
-	 * 
-	 * @param namedGraphURI the Named Graph URI
-	 * @throws MethodNotSupportedException This functionality has not been implemented yet
-	 */
-	public void deleteNamedGraphData(String namedGraphURI) throws MethodNotSupportedException{
-		throw new MethodNotSupportedException("This functionality has not been implemented yet");
-	}
-	
-	/**
-	 * 
-	 * Delete a named graph and the triples contained in it
-	 * 
-	 * @param namedGraphURI the named Graph URI
-	 * @throws MethodNotSupportedException This functionality has not been implemented yet
-	 */
-	public void deleteNamedGraphDataAndNamedGraph (String namedGraphURI) throws MethodNotSupportedException{
-		throw new MethodNotSupportedException("This functionality has not been implemented yet");
-	}
-	
+
 	/**
 	 * 
 	 * Delete a project. This will delete a project and all its metadata (Catalogs, Datasets etc.) and the data within
 	 * its dataset
 	 * 
-	 * @param project_URI the project URI
-	 * @throws UnsupportedOperationException This functionality has not been implemented yet
+	 * @param project_URI
+	 *            the project URI
+	 * @throws IOException 
+	 * @throws RDFStoreException 
+	 * @throws UnsupportedOperationException
+	 *             This functionality has not been implemented yet
 	 * 
 	 */
 
-	public void deleteProject(String project_URI) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+	public void deleteProject(String project_URI) throws IOException, RDFStoreException {
+		String resolved_delete_project_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteProject.getValue(),
+		        MethodFileToken.project_uri.getValue(), project_URI);
+		store.execSPARQLUpdate(resolved_delete_project_sparql);
 	}
 
 	/**
 	 * 
 	 * 
 	 * 
-	 * @param catalog_URI the catalog URI
-	 * @throws UnsupportedOperationException This functionality has not been implemented yet
+	 * @param catalog_URI
+	 *            the catalog URI
+	 * @throws UnsupportedOperationException
+	 *             This functionality has not been implemented yet
+	 * @throws IOException 
+	 * @throws AldapaException 
 	 */
-	public void deleteCatalog(String catalog_URI) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+	public void deleteCatalog(String catalog_URI) throws IOException, AldapaException {
+		String resolved_delete_catalog_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteCatalog.getValue(),
+		        MethodFileToken.catalog_uri.getValue(), catalog_URI);
+		store.execSPARQLUpdate(resolved_delete_catalog_sparql);
+	}
+
+	/**
+	 * @param datasetURI
+	 *            the dataset URI
+	 * @throws IOException 
+	 * @throws AldapaException 
+	 * @throws MethodNotSupportedException
+	 *             This functionality has not been implemented yet
+	 */
+	public void deleteDataset(String datasetURI) throws IOException, AldapaException {
+		String resolved_delete_dataset_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataset.getValue(),
+		        MethodFileToken.dataset_uri.getValue(), datasetURI);
+		store.execSPARQLUpdate(resolved_delete_dataset_sparql);
+	}
+	
+
+	/**
+	 * 
+	 * Delete a named graph and the triples contained in it
+	 * 
+	 * @param namedGraphURI
+	 *            the named Graph URI
+	 * @throws IOException 
+	 * @throws AldapaException 
+	 * @throws MethodNotSupportedException
+	 *             This functionality has not been implemented yet
+	 */
+	public void deleteNamedGraph(String namedGraphURI) throws IOException, AldapaException {
+		String resolved_delete_named_graph_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteNamedGraph.getValue(),
+		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
+		store.execSPARQLUpdate(resolved_delete_named_graph_sparql);
+	}
+
+	/**
+	 * 
+	 * Delete the triples contained in a named Graph
+	 * 
+	 * @param namedGraphURI
+	 *            the Named Graph URI
+	 * @throws MethodNotSupportedException
+	 *             This functionality has not been implemented yet
+	 * @throws IOException 
+	 */
+	public void deleteDataFromNamedGraph(String namedGraphURI) throws AldapaException, IOException {
+		String resolved_data_from_named_graph_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataFromNamedGraph.getValue(),
+		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
+		store.execSPARQLUpdate(resolved_data_from_named_graph_sparql);
 	}
 }

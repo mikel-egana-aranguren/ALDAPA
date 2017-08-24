@@ -121,4 +121,13 @@ public interface RDFStore {
 	
 	public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException;
 	
+	/**
+	 * 
+	 * Executes a SPARQL query that will modify a graph: DELETE, DELETE DATA, INSERT, INSERT DATA
+	 * 
+	 * @param pSPARQLquery
+	 * @throws RDFStoreException
+	 */
+	public void execSPARQLUpdate (String pSPARQLquery) throws RDFStoreException;
+	
 }

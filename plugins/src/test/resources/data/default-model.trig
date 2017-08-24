@@ -35,9 +35,9 @@ PREFIX distribution: <http://lod.eurohelp.es/aldapa/distribution/>
 
 # Prefixes for data (this should change in each pipeline)
 
-PREFIX graph: <http://opendata.eurohelp.es/graph/>
-PREFIX resource: <http://opendata.eurohelp.es/resource/>
-PREFIX property: <http://opendata.eurohelp.es/property/>
+PREFIX graph: <http://lod.eurohelp.es/graph/>
+PREFIX resource: <http://lod.eurohelp.es/resource/>
+PREFIX property: <http://lod.eurohelp.es/property/>
 
 # Metadata normally goes into the aldapa named graph, or the default graph
 
@@ -50,7 +50,9 @@ PREFIX property: <http://opendata.eurohelp.es/property/>
 		dcat:distribution distribution:RDF_DUMP_DISTRIBUTION_NAME ;
 		dcat:distribution distribution:SPARQL_ENDPOINT_DISTRIBUTION_NAME ;	
 		dcat:distribution distribution:LINKED_DATA_SERVER_DISTRIBUTION_NAME ;
-        sd:namedGraph graph:dataset-graph001 .
+        sd:namedGraph [
+            sd:name graph:dataset-graph001 ;
+        ] .
         # TODO: add void stuff like URI regexp etc, see https://labur.eus/QmaoJ
         
     # Provenance for the generation of a dataset from a CSV

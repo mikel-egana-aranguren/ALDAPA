@@ -26,17 +26,36 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class MemoryRDFStoreTest {
 
-	private final String aldapa_model_file = "model/default-model.trig";
-	private final String graphURI = "http://lod.eurohelp.es/graph/graph001";
-	private final String aldapa_model_output_file = "data/default-model-output.ttl";
-	private final RDFFormat output_rdf_format = RDFFormat.TURTLE;
+	private final String input_file_graphs = "data/default-model.trig";
+	private final String input_file_no_graphs = "data/default-model-no-graphs.ttl";
+	private final String output_file_no_extension = "data/default-model-output";
+	private final String dataGraphURI = "http://lod.eurohelp.es/graph/dataset-graph001";
+	private final String metadataGraphURI = "http://lod.eurohelp.es/aldapa/metadata";
+	private final String tmp_uri = "http://lod.eurohelp.es/MemoryRDFTests";
+	private String boolean_query_ask = 
+								"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + 
+								"PREFIX foaf:<http://xmlns.com/foaf/0.1/> " + 
+								"ASK WHERE { " + 
+								"?project rdf:type foaf:Project . " + 
+								"}";
+	
+	private String query_delete = 
+								"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + 
+								"PREFIX foaf:<http://xmlns.com/foaf/0.1/> " + 
+								"DELETE {"
+								+ "?project rdf:type foaf:Project . "
+								+ "}"
+								+ "WHERE { " + 
+								"?project rdf:type foaf:Project . " + 
+								"}";
+
 
 	/**
 	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#MemoryRDFStore()}.
 	 */
 	@Test
 	public final void testMemoryRDFStore() {
-		// fail("Not yet implemented"); // TODO
+//		fail("This functionality has not been implemented yet");
 	}
 
 	/**
@@ -44,7 +63,7 @@ public class MemoryRDFStoreTest {
 	 */
 	@Test
 	public final void testStartRDFStore() {
-		// fail("Not yet implemented"); // TODO
+//		fail("This functionality has not been implemented yet");
 	}
 
 	/**
@@ -52,7 +71,7 @@ public class MemoryRDFStoreTest {
 	 */
 	@Test
 	public final void testStopRDFStore() {
-		// fail("Not yet implemented"); // TODO
+//		fail("This functionality has not been implemented yet");
 	}
 
 	/**
@@ -68,8 +87,8 @@ public class MemoryRDFStoreTest {
 	public final void testSaveModel() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
 		MemoryRDFStore mem_store = new MemoryRDFStore();
 		mem_store.startRDFStore();
-		InputStream inStream = FileUtils.getInstance().getInputStream(aldapa_model_file);
-		Model model = Rio.parse(inStream, "http://opendata.eurohelp.es/aldapa/testSaveModel", RDFFormat.TRIG);
+		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_graphs);
+		Model model = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
 		mem_store.saveModel(model);
 		assertNotNull(model);
 		mem_store.stopRDFStore();
@@ -86,22 +105,48 @@ public class MemoryRDFStoreTest {
 	 * @throws RDFStoreException
 	 */
 	@Test
-	public final void testFlushGraph() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
+	public final void testFlushNamedGraph() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
 		MemoryRDFStore mem_store = new MemoryRDFStore();
 		mem_store.startRDFStore();
-		InputStream inStream = FileUtils.getInstance().getInputStream(aldapa_model_file);
-		Model model = Rio.parse(inStream, "http://opendata.eurohelp.es/aldapa/testFlushGraph", RDFFormat.TRIG);
+		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_graphs);
+		Model model = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
 		mem_store.saveModel(model);
-		mem_store.flushGraph(graphURI, new FileOutputStream(aldapa_model_output_file), output_rdf_format);
+		mem_store.flushGraph(dataGraphURI, new FileOutputStream(output_file_no_extension + "Data" + ".trig"), RDFFormat.TRIG);
+		mem_store.flushGraph(metadataGraphURI, new FileOutputStream(output_file_no_extension + "MetaData" + ".trig"), RDFFormat.TRIG);
 		mem_store.stopRDFStore();
 	}
 
+	/**
+	 * @throws RDFParseException
+	 * @throws UnsupportedRDFormatException
+	 * @throws IOException
+	 * @throws RDFStoreException
+	 */
+	@Test
+	public final void testFlushModel() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
+		MemoryRDFStore mem_store = new MemoryRDFStore();
+		mem_store.startRDFStore();
+		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_no_graphs);
+		Model model = Rio.parse(inStream, tmp_uri, RDFFormat.TURTLE);
+		mem_store.saveModel(model);
+		mem_store.flushGraph(null, new FileOutputStream(output_file_no_extension + ".ttl"), RDFFormat.TURTLE);
+//		mem_store.flushGraph(null, new FileOutputStream(output_file_no_extension + ".jsonld"), RDFFormat.JSONLD);
+//		mem_store.flushGraph(null, new FileOutputStream(output_file_no_extension + ".bin"), RDFFormat.BINARY);
+//		mem_store.flushGraph(null, new FileOutputStream(output_file_no_extension + ".trix"), RDFFormat.TRIX);
+//		mem_store.flushGraph(null, new FileOutputStream(output_file_no_extension + ".nquads"), RDFFormat.NQUADS);
+//		mem_store.flushGraph(null, new FileOutputStream(output_file_no_extension + ".rdfjson"), RDFFormat.RDFJSON);
+//		mem_store.flushGraph(null, new FileOutputStream(output_file_no_extension + ".ntriples"), RDFFormat.NTRIPLES);
+//		mem_store.flushGraph(null, new FileOutputStream(output_file_no_extension + ".rdf"), RDFFormat.RDFXML);
+//		mem_store.flushGraph(null, new FileOutputStream(output_file_no_extension + ".n3"), RDFFormat.N3);
+		mem_store.stopRDFStore();
+	}
+	
 	/**
 	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#deleteGraph(java.lang.String)}.
 	 */
 	@Test
 	public final void testDeleteGraph() {
-		// fail("Not yet implemented"); // TODO
+//		fail("This functionality has not been implemented yet");
 	}
 
 	/**
@@ -110,7 +155,7 @@ public class MemoryRDFStoreTest {
 	 */
 	@Test
 	public final void testExecSPARQLGraphQuery() {
-		// fail("Not yet implemented"); // TODO
+//		fail("This functionality has not been implemented yet");
 	}
 
 	/**
@@ -119,7 +164,7 @@ public class MemoryRDFStoreTest {
 	 */
 	@Test
 	public final void testExecSPARQLTupleQuery() {
-		// fail("Not yet implemented"); // TODO
+//		fail("This functionality has not been implemented yet");
 	}
 
 	@Test
@@ -127,11 +172,24 @@ public class MemoryRDFStoreTest {
 		boolean query_result = false;
 		MemoryRDFStore mem_store = new MemoryRDFStore();
 		mem_store.startRDFStore();
-		InputStream inStream = FileUtils.getInstance().getInputStream(aldapa_model_file);
-		Model model = Rio.parse(inStream, "http://lod.eurohelp.es/aldapa/testFlushGraph", RDFFormat.TRIG);
+		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_graphs);
+		Model model = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
 		mem_store.saveModel(model);
-		query_result = mem_store.execSPARQLBooleanQuery("PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
-		        + "PREFIX foaf:<http://xmlns.com/foaf/0.1/> " + "ASK WHERE { " + "?project rdf:type foaf:Project . " + "}");
+		query_result = mem_store.execSPARQLBooleanQuery(boolean_query_ask);
 		assertTrue(query_result);
+	}
+	
+	
+	@Test
+	public final void testexecSPARQLUpdateDelete() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
+		boolean query_result = false;
+		MemoryRDFStore mem_store = new MemoryRDFStore();
+		mem_store.startRDFStore();
+		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_graphs);
+		Model model = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
+		mem_store.saveModel(model);
+		mem_store.execSPARQLUpdate(query_delete);
+		mem_store.flushGraph(metadataGraphURI, new FileOutputStream(output_file_no_extension + "MetaDataProjectRemoved" + ".trig"), RDFFormat.TRIG);
+		mem_store.stopRDFStore();
 	}
 }
