@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.http.MethodNotSupportedException;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +18,6 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.query.BindingSet;
-import org.eclipse.rdf4j.query.TupleQuery;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
@@ -384,8 +383,10 @@ public class Manager {
 
 	public void addDataToNamedGraph(String namedGraphURI, String csv_path) throws IOException, RDFStoreException {
 		transformer.setDataSource(csv_path);
+		LOGGER.info("CSV path: " + csv_path);
 		transformer.setModel(new TreeModel());
 		store.saveModel(transformer.getTransformedModel(namedGraphURI));
+		LOGGER.info("Data from CSV saved into graph: " + namedGraphURI);
 	}
 
 	/**
@@ -418,6 +419,7 @@ public class Manager {
 		String resolved_delete_project_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteProject.getValue(),
 		        MethodFileToken.project_uri.getValue(), project_URI);
 		store.execSPARQLUpdate(resolved_delete_project_sparql);
+		LOGGER.info("Project deleted: " + project_URI);
 	}
 
 	/**
@@ -435,6 +437,7 @@ public class Manager {
 		String resolved_delete_catalog_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteCatalog.getValue(),
 		        MethodFileToken.catalog_uri.getValue(), catalog_URI);
 		store.execSPARQLUpdate(resolved_delete_catalog_sparql);
+		LOGGER.info("Catalog deleted: " + catalog_URI);
 	}
 
 	/**
@@ -445,10 +448,11 @@ public class Manager {
 	 * @throws MethodNotSupportedException
 	 *             This functionality has not been implemented yet
 	 */
-	public void deleteDataset(String datasetURI) throws IOException, AldapaException {
+	public void deleteDataset(String dataset_URI) throws IOException, AldapaException {
 		String resolved_delete_dataset_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataset.getValue(),
-		        MethodFileToken.dataset_uri.getValue(), datasetURI);
+		        MethodFileToken.dataset_uri.getValue(), dataset_URI);
 		store.execSPARQLUpdate(resolved_delete_dataset_sparql);
+		LOGGER.info("Dataset deleted: " + dataset_URI);
 	}
 
 	/**
@@ -466,6 +470,7 @@ public class Manager {
 		String resolved_delete_named_graph_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteNamedGraph.getValue(),
 		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
 		store.execSPARQLUpdate(resolved_delete_named_graph_sparql);
+		LOGGER.info("Named graph and its data deleted: " + namedGraphURI);
 	}
 
 	/**
@@ -474,24 +479,121 @@ public class Manager {
 	 * 
 	 * @param namedGraphURI
 	 *            the Named Graph URI
-	 * @throws MethodNotSupportedException
-	 *             This functionality has not been implemented yet
 	 * @throws IOException
 	 */
 	public void deleteDataFromNamedGraph(String namedGraphURI) throws AldapaException, IOException {
 		String resolved_data_from_named_graph_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataFromNamedGraph.getValue(),
 		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
 		store.execSPARQLUpdate(resolved_data_from_named_graph_sparql);
+		LOGGER.info("Data from named graph deleted: " + namedGraphURI);
 	}
 
-	public Set<String> getProjects() throws AldapaException, IOException {
-		TupleQueryResult result = store.execSPARQLTupleQuery(fileutils.fileToString("model/getProjects.sparql"));
+	/**
+	 * 
+	 * Get the project URIs 
+	 * 
+	 * @return a HashSet containing the project URIs as Strings
+	 * @throws AldapaException
+	 * @throws IOException
+	 */
+	public HashSet<String> getProjects() throws AldapaException, IOException {
+		String query = fileutils.fileToString(MethodRDFFile.getProjects.getValue());
+		return execTupleQueryToStringSet(query);
+	}
+	
+	/**
+	 * 
+	 * Get all the catalogs
+	 * 
+	 * @return a HashSet containing all the catalog URIs as Strings
+	 * @throws AldapaException
+	 * @throws IOException
+	 */
+	public HashSet<String> getCatalogs() throws AldapaException, IOException {
+		String query = fileutils.fileToString(MethodRDFFile.getAllCatalogs.getValue());
+		return execTupleQueryToStringSet(query);
+	}
+	
+	/**
+	 * 
+	 * Get all the catalogs pertaining to a given project
+	 * 
+	 * @return a Hashset containing all the catalog URIs as Strings
+	 * @throws AldapaException
+	 * @throws IOException
+	 */
+	
+	public HashSet<String> getCatalogs(String project_uri) throws AldapaException, IOException {
+		String query = fileutils.fileTokenResolver(MethodRDFFile.getCatalogsByProject.getValue(),
+		        MethodFileToken.project_uri.getValue(), project_uri);
+		return execTupleQueryToStringSet(query);
+	}
+	
+	/**
+	 * 
+	 * Get all the datasets
+	 * 
+	 * @return a Hashset containing all the dataset URIs as Strings
+	 * @throws AldapaException
+	 * @throws IOException
+	 */
+	public HashSet<String> getDatasets() throws AldapaException, IOException {
+		String query = fileutils.fileToString(MethodRDFFile.getAllDatasets.getValue());
+		return execTupleQueryToStringSet(query);
+	}
+	
+	/**
+	 * 
+	 * Get all the datasets pertaining to a given catalog
+	 * 
+	 * @return a Hashset containing all the dataset URIs as Strings
+	 * @throws AldapaException
+	 * @throws IOException
+	 */
+	
+	public HashSet<String> getDatasets(String catalog_uri) throws AldapaException, IOException {
+		String query = fileutils.fileTokenResolver(MethodRDFFile.getDatasetsByCatalog.getValue(),
+		        MethodFileToken.catalog_uri.getValue(), catalog_uri);
+		return execTupleQueryToStringSet(query);
+	}
+	
+	/**
+	 * 
+	 * Get all the named graphs
+	 * 
+	 * @return a HashSet containing all the named graph URIs as Strings
+	 * @throws AldapaException
+	 * @throws IOException
+	 */
+	public HashSet<String> getNamedGraphs() throws AldapaException, IOException {
+		String query = fileutils.fileToString(MethodRDFFile.getAllNamedGraphs.getValue());
+		return execTupleQueryToStringSet(query);
+	}
+	
+	/**
+	 * 
+	 * Get all the named graphs pertaining to a given dataset
+	 * 
+	 * @return a HashSet containing all the named graph URIs as Strings
+	 * @throws AldapaException
+	 * @throws IOException
+	 */
+	
+	public HashSet<String> getNamedGraphs(String dataset_uri) throws AldapaException, IOException {
+		String query = fileutils.fileTokenResolver(MethodRDFFile.getNamedGraphsByDataset.getValue(),
+		        MethodFileToken.dataset_uri.getValue(), dataset_uri);
+		return execTupleQueryToStringSet(query);
+	}
+	
+	private HashSet<String> execTupleQueryToStringSet (String query) throws RDFStoreException {
+		HashSet<String> results = new HashSet<String>(); 
+		TupleQueryResult result = store.execSPARQLTupleQuery(query);
 		List<String> bindingNames = result.getBindingNames();
 		while (result.hasNext()) {
 			BindingSet bindingSet = result.next();
 			Value firstValue = bindingSet.getValue(bindingNames.get(0));
-			System.out.println(firstValue);
+			results.add(firstValue.toString());
 		}
-		return null;
+		return results;
 	}
 }

@@ -18,3 +18,11 @@
 	
 	<http://lod.eurohelp.es/aldapa/project/donosti-movilidad2> a <http://xmlns.com/foaf/0.1/Project> .
 }
+
+<http://euskadi.eus/graph/donosti-parkings-febr-0012> {
+	<http://opendata.eurohelp.es/resource/resource_004> <http://opendata.eurohelp.es/property/property_005> <http://opendata.eurohelp.es/resource/resource_006> .
+	
+	<http://opendata.eurohelp.es/resource/resource_006> <http://www.w3.org/2002/07/owl#sameAs> <http://dbpedia.org/resource/Bilbao> .
+	
+	<http://opendata.eurohelp.es/resource/resource_007> <http://www.w3.org/2000/01/rdf-schema#label> "Resource 007"@en .
+}

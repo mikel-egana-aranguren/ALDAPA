@@ -1,0 +1,14 @@
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcat:<http://www.w3.org/ns/dcat#>
+PREFIX void:<http://rdfs.org/ns/void#>
+PREFIX schema:<http://schema.org/>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+
+
+SELECT ?namedGraph 
+WHERE {
+	?dataset rdf:type dcat:Distribution . 
+	?dataset rdf:type void:Dataset . 
+	?dataset rdf:type schema:Distribution .
+	DATASET_URI sd:namedGraph ?namedGraph .
+}
