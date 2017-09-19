@@ -76,6 +76,12 @@ public class FileUtils {
 		return new FileOutputStream(file);
 	}
 
+	
+	public String fileToString(String file_name) throws IOException {
+		InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(file_name);
+		return IOUtils.toString(in, StandardCharsets.UTF_8);
+	}
+	
 	/**
 	 * 
 	 * Resolves the occurrences of a single token of a file with the replacement URIs

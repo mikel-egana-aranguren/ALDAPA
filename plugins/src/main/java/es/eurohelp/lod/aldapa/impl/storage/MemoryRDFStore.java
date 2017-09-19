@@ -13,6 +13,7 @@ import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.query.BooleanQuery;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.QueryLanguage;
+import org.eclipse.rdf4j.query.TupleQuery;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.query.Update;
 import org.eclipse.rdf4j.repository.Repository;
@@ -181,15 +182,15 @@ public class MemoryRDFStore implements RDFStore {
 	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#execSPARQLGraphQuery(java.lang.String)
 	 */
 	public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException {
-		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+		return conn.prepareGraphQuery(pSPARQLquery).evaluate();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#execSPARQLTupleQuery(java.lang.String)
 	 */
-	public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) throws RDFStoreException {
-		throw new UnsupportedOperationException("This functionality has not been implemented yet");
+	public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) {
+		   return conn.prepareTupleQuery(QueryLanguage.SPARQL, pSPARQLquery).evaluate();
 	}
 
 	/* (non-Javadoc)
@@ -197,12 +198,10 @@ public class MemoryRDFStore implements RDFStore {
 	 */
 	@Override
 	public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException {
-		BooleanQuery query = conn.prepareBooleanQuery(pSPARQLquery);
-		return query.evaluate();
+		return conn.prepareBooleanQuery(pSPARQLquery).evaluate();
 	}
 	
 	public void execSPARQLUpdate (String pSPARQLquery){
-		Update operation = conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery);
-		operation.execute();		
+		conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery).execute();		
 	}
 }
