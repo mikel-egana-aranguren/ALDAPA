@@ -1,5 +1,0 @@
-PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-
-DATASET_URI sd:namedGraph [
-            sd:name GRAPH_URI ; # Actual data goes into graph URI
-        ] .

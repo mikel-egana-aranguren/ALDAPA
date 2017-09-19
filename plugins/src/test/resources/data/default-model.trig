@@ -1,0 +1,89 @@
+############################
+#
+# ALDAPA internal model	
+#
+#
+# This is the default internal model for ALDAPA: It stores projects, file paths, URI families, pipelines, and the data itself through named graphs.
+# This file is maintained for documentation purposes, in order to have an explicit, version-controlled representation of the model, it is not loaded into ALDAPA: the model itself is loaded by other means.
+# URIs are taken from the file resources/configuration/aldapa-default-configuration.yml and are parametrised with actual names during execution, when the model is loaded.
+# This model is orientative: is is still very incomplete (see TODOs), and very preliminary (e.g. the modelling may change, especially around the dcat:Dataset as a named graph decision)
+#
+############################
+
+############################
+# 
+# Common prefixes
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX prov:<https://www.w3.org/ns/prov#>
+PREFIX xsd:<http://www.w3.org/2001/XMLSchema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+PREFIX csvw: <http://www.w3.org/ns/csvw#> 
+
+# ALDAPA prefixes 
+
+PREFIX project: <http://lod.eurohelp.es/aldapa/project/>
+PREFIX catalog: <http://lod.eurohelp.es/aldapa/catalog/>
+PREFIX dataset: <http://lod.eurohelp.es/aldapa/dataset/>
+PREFIX distribution: <http://lod.eurohelp.es/aldapa/distribution/>
+
+# Prefixes for data (this should change in each pipeline)
+
+PREFIX graph: <http://lod.eurohelp.es/graph/>
+PREFIX resource: <http://lod.eurohelp.es/resource/>
+PREFIX property: <http://lod.eurohelp.es/property/>
+
+# Metadata normally goes into the aldapa named graph, or the default graph
+
+<http://lod.eurohelp.es/aldapa/metadata> {
+	project:PROJECT_NAME rdf:type foaf:Project .	
+	catalog:CATALOG_NAME rdf:type dcat:Catalog ;
+		dcat:dataset dataset:DATASET_NAME ;
+		schema:isPartOf project:PROJECT_NAME .
+	dataset:DATASET_NAME rdf:type dcat:Distribution, void:Dataset, schema:Distribution ; 
+		dcat:distribution distribution:RDF_DUMP_DISTRIBUTION_NAME ;
+		dcat:distribution distribution:SPARQL_ENDPOINT_DISTRIBUTION_NAME ;	
+		dcat:distribution distribution:LINKED_DATA_SERVER_DISTRIBUTION_NAME ;
+        sd:namedGraph [
+            sd:name graph:dataset-graph001 ;
+        ] .
+        # TODO: add void stuff like URI regexp etc, see https://labur.eus/QmaoJ
+        
+    # Provenance for the generation of a dataset from a CSV
+	dataset:DATASET_NAME prov:wasGeneratedBy [
+    	a prov:Activity ;
+    	# This URI should change
+    	prov:wasAssociatedWith  <http://lod.eurohelp.es/aldapa/es.eurohelp.lod.aldapa.impl.transformation.HardCodedCSV2RDFEJIECalidadAire> ;
+    	prov:startedAtTime "2015-02-13T15:12:44"^^xsd:dateTime ;
+    	prov:endedAtTime   "2015-02-13T15:12:46"^^xsd:dateTime ;
+    	prov:qualifiedUsage [ 
+    		a prov:Usage ;
+        	prov:entity <http://opendata.euskadi.eus/contenidos/ds_informes_estudios/calidad_aire_2017/es_def/adjuntos/datos_diarios_csv.zip> ;
+        	prov:hadRole csvw:csvEncodedTabularData 
+    	];
+	] .
+}
+
+# Actual data goes into a named graph
+
+graph:dataset-graph001 {
+	resource:resource_002 property:property_001 resource:resource_003 . 
+	resource:resource_003 owl:sameAs <http://dbpedia.org/resource/Bilbao> .
+}
+
+#
+############################
+
+############################
+#
+# TODO: complete DCAT modelling 
+# TODO: complete VoID modelling 
+# TODO: complete PROV modelling (e.g. when a CSV is converted)
+	
+

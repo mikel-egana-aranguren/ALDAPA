@@ -1,0 +1,9 @@
+
+<http://lod.eurohelp.es/aldapa/catalog/CATALOG_NAME> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/PROJECT_NAME> ;
+	a <http://www.w3.org/ns/dcat#Catalog> ;
+	<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> .
+
+<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
+	<http://www.w3.org/ns/dcat#distribution> <http://lod.eurohelp.es/aldapa/distribution/LINKED_DATA_SERVER_DISTRIBUTION_NAME> , <http://lod.eurohelp.es/aldapa/distribution/RDF_DUMP_DISTRIBUTION_NAME> , <http://lod.eurohelp.es/aldapa/distribution/SPARQL_ENDPOINT_DISTRIBUTION_NAME> .
+
+<http://lod.eurohelp.es/aldapa/project/PROJECT_NAME> a <http://xmlns.com/foaf/0.1/Project> .

@@ -1,0 +1,11 @@
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+
+ASK 
+WHERE {
+	DATASET_URI sd:namedGraph GRAPH_URI .
+}
+
+
+
+
+

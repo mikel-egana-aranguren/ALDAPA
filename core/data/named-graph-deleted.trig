@@ -1,0 +1,18 @@
+
+{
+	<http://lod.eurohelp.es/aldapa/catalog/donosti-parkings> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/donosti-movilidad> ;
+		a <http://www.w3.org/ns/dcat#Catalog> ;
+		<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr> .
+	
+	<http://lod.eurohelp.es/aldapa/catalog/donosti-parkings-2> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/donosti-movilidad2> ;
+		a <http://www.w3.org/ns/dcat#Catalog> ;
+		<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr2> .
+	
+	<http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> .
+	
+	<http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr2> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> .
+	
+	<http://lod.eurohelp.es/aldapa/project/donosti-movilidad> a <http://xmlns.com/foaf/0.1/Project> .
+	
+	<http://lod.eurohelp.es/aldapa/project/donosti-movilidad2> a <http://xmlns.com/foaf/0.1/Project> .
+}
