@@ -96,7 +96,7 @@ public class ConfigurationManager {
 			
 			main_config_file = new Hashtable<String, HashMap<String,String>>();
 			YAMLUtils yaml_utils = new YAMLUtils();
-			HashMap<String,String> provisional_main_config_file = yaml_utils.parseSimpleYAML(configInStream);
+			HashMap<String,String> provisional_main_config_file = (HashMap<String, String>) yaml_utils.parseSimpleYAML(configInStream);
 			
 			for (Map.Entry<String, String> entry : provisional_main_config_file.entrySet()) {
 			    String key = entry.getKey();
@@ -104,7 +104,7 @@ public class ConfigurationManager {
 				
 				LOGGER.info("Key = " + key + ", Value = " + value);
 				InputStream config2InStream = FileUtils.getInstance().getInputStream(value);
-			    main_config_file.put(key, yaml_utils.parseSimpleYAML(config2InStream));
+			    main_config_file.put(key, (HashMap<String, String>) yaml_utils.parseSimpleYAML(config2InStream));
 			}
 		} finally {
 			try {

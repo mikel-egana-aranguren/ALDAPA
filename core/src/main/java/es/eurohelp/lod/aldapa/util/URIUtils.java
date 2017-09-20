@@ -62,33 +62,33 @@ public class URIUtils {
 		if(replacement == null){
 			replacement = "-";
 		}
-		String tmp_result = 
+		String tmpResult = 
 				targetstring.replaceAll(regexp, replacement)
 					.replaceAll("[-]{2,}", replacement);
 		
 		// Replace especial characters
-		tmp_result = tmp_result.replaceAll("á|Á", "a");
-		tmp_result = tmp_result.replaceAll("é|É", "e");
-		tmp_result = tmp_result.replaceAll("í|Í", "i");
-		tmp_result = tmp_result.replaceAll("ó|Ó", "o");
-		tmp_result = tmp_result.replaceAll("ú|Ú", "u");
-		tmp_result = tmp_result.replaceAll("ñ|Ñ", "n");
-		tmp_result = tmp_result.replaceAll("ü|Ü", "u");
+		tmpResult = tmpResult.replaceAll("á|Á", "a");
+		tmpResult = tmpResult.replaceAll("é|É", "e");
+		tmpResult = tmpResult.replaceAll("í|Í", "i");
+		tmpResult = tmpResult.replaceAll("ó|Ó", "o");
+		tmpResult = tmpResult.replaceAll("ú|Ú", "u");
+		tmpResult = tmpResult.replaceAll("ñ|Ñ", "n");
+		tmpResult = tmpResult.replaceAll("ü|Ü", "u");
 		
 		// Delete first replacement character, if any
-		if(tmp_result.startsWith(replacement)){
-			tmp_result = tmp_result.substring(1);
+		if(tmpResult.startsWith(replacement)){
+			tmpResult = tmpResult.substring(1);
 		}
 		
 		// Delete last replacement character, if any
-		if(tmp_result.endsWith(replacement)){
-			tmp_result = tmp_result.substring(0, tmp_result.length()-1);
+		if(tmpResult.endsWith(replacement)){
+			tmpResult = tmpResult.substring(0, tmpResult.length()-1);
 		}
 		
 		// Make everything lowercase
-		tmp_result = tmp_result.toLowerCase();
+		tmpResult = tmpResult.toLowerCase();
 		
-		result = tmp_result;
+		result = tmpResult;
 		return result;
 	}
 }

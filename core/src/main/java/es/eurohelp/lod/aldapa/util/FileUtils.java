@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.EnumMap;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
@@ -35,7 +35,7 @@ public class FileUtils {
 	 *
 	 * @author acarbajo
 	 */
-	public synchronized static FileUtils getInstance() {
+	public static synchronized  FileUtils getInstance() {
 		if (null == INSTANCE) {
 			INSTANCE = new FileUtils();
 		}
@@ -97,11 +97,11 @@ public class FileUtils {
 	 * 
 	 */
 
-	public String fileTokenResolver(String file_name, String token, String replacement) throws IOException {
-		InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(file_name);
-		String unresolved_string = IOUtils.toString(in, StandardCharsets.UTF_8);
-		String resolved_string = unresolved_string.replaceAll(token, "<" + replacement + ">");
-		return resolved_string;
+	public String fileTokenResolver(String fileName, String token, String replacement) throws IOException {
+		InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(fileName);
+		String unresolvedString = IOUtils.toString(in, StandardCharsets.UTF_8);
+		String resolvedString = unresolvedString.replaceAll(token, "<" + replacement + ">");
+		return resolvedString;
 	}
 
 	/**
@@ -112,15 +112,15 @@ public class FileUtils {
 	 * @return the new file content, resolved
 	 * @throws IOException input/output exception regarding the target file
 	 */
-	public String fileMultipleTokenResolver(String file_name, EnumMap<MethodFileToken, String> token_replacement_map) throws IOException { 
-		InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(file_name);
-		String unresolved_string = IOUtils.toString(in, StandardCharsets.UTF_8);
-		String resolved_string = unresolved_string;
-		for (MethodFileToken token : token_replacement_map.keySet()) {
-			String token_value = token.getValue();
-			String replacement_value = token_replacement_map.get(token);
-			resolved_string = resolved_string.replaceAll(token_value, "<" + replacement_value + ">");
+	public String fileMultipleTokenResolver(String fileName, Map<MethodFileToken, String> tokenReplacementMap) throws IOException { 
+		InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(fileName);
+		String unresolvedString = IOUtils.toString(in, StandardCharsets.UTF_8);
+		String resolvedString = unresolvedString;
+		for (MethodFileToken token : tokenReplacementMap.keySet()) {
+			String tokenValue = token.getValue();
+			String replacementValue = tokenReplacementMap.get(token);
+			resolvedString = resolvedString.replaceAll(tokenValue, "<" + replacementValue + ">");
 		}
-		return resolved_string;
+		return resolvedString;
 	}
 }

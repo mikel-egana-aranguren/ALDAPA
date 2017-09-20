@@ -5,6 +5,7 @@ package es.eurohelp.lod.aldapa.util;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
 
@@ -24,7 +25,7 @@ public class YAMLUtils {
 	 * @return a HashMap with the content from the file.
 	 */
 	
-	public HashMap<String,String> parseSimpleYAML (InputStream in){
+	public Map<String,String> parseSimpleYAML (InputStream in){
 		Yaml yaml = new Yaml();
 		HashMap<String, String> yaml_values = yaml.loadAs(in, HashMap.class);
 		return yaml_values;

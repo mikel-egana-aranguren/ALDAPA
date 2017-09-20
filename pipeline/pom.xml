@@ -17,5 +17,10 @@
 			<artifactId>core</artifactId>
 			<version>0.0.3</version>
 		</dependency>
+		<dependency>
+			<groupId>es.eurohelp.lod.aldapa</groupId>
+			<artifactId>plugins</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -120,7 +120,6 @@ public class Manager {
 		LOGGER.info("Project uri: " + projectURI);
 
 		// Check if exists in RDF store with SPARQL query, throw Exception
-		// InputStream queryStream = fileutils.getInputStream(AldapaMethodRDFFile.projectExists.getValue());
 		String resolved_project_exists_sparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(),
 		        MethodFileToken.project_uri.getValue(), projectURI);
 

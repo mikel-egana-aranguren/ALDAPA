@@ -26,17 +26,13 @@ public class ConfigurationManagerTest {
 
 	/**
 	 * Test method for {@link es.eurohelp.lod.aldapa.ConfigurationManager#getInstance(java.lang.String)}.
+	 * @throws IOException 
+	 * @throws ConfigurationFileIOException 
 	 */
 	@Test
-	public final void testGetInstance() {
+	public final void testGetInstance() throws ConfigurationFileIOException, IOException {
 		ConfigurationManager test_manager = null;
-		try {
-			test_manager = ConfigurationManager.getInstance("configuration.yml");
-		} catch (ConfigurationFileIOException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		test_manager = ConfigurationManager.getInstance("configuration.yml");
 		assertNotNull(test_manager);
 	}
 
