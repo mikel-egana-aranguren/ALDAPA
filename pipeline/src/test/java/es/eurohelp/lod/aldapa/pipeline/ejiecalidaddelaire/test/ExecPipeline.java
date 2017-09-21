@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.Manager;
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogExistsException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
@@ -31,7 +32,7 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 public class ExecPipeline {
 
 	@Test
-	public void test() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException, ProjectExistsException, RDFStoreException, URISyntaxException, CatalogExistsException, ProjectNotFoundException, DatasetExistsException, CatalogNotFoundException, DatasetNotFoundException, NamedGraphExistsException {		
+	public void test() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, URISyntaxException, AldapaException {		
 		
 		// Load the configuration from file configuration.yml
 		ConfigurationManager config = ConfigurationManager.getInstance("configuration.yml");
@@ -40,24 +41,24 @@ public class ExecPipeline {
 		Manager manager = new Manager(config);
 		
 		// Add project
-		String project_uri = manager.addProject("EuskadiMedioAmbiente");
+		String projectUri = manager.addProject("EuskadiMedioAmbiente");
 		
 		// Add catalog
-		String catalog_uri = manager.addCatalog("CalidadAire", project_uri);
+		String catalogUri = manager.addCatalog("CalidadAire", projectUri);
 		
 		// Add dataset
-		String dataset_uri = manager.addDataset("Estaciones", catalog_uri);
+		String datasetUri = manager.addDataset("Estaciones", catalogUri);
 		
 		// Add namedGraph 
-		String named_graph_uri = manager.addNamedGraph("Estaciones01", dataset_uri);
+		String namedGraphUri = manager.addNamedGraph("Estaciones01", datasetUri);
 		
 		// Add data to named graph
-		manager.addDataToNamedGraph(named_graph_uri, "data/OpenDataEuskadiCalidadDelAire/estaciones.csv");
+		manager.addDataToNamedGraph(namedGraphUri, "data/OpenDataEuskadiCalidadDelAire/estaciones.csv");
 		
 		// Flush backbone
 		manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl", RDFFormat.TURTLE);
 		
 		// Flush data from named graph
-		manager.flushGraph(named_graph_uri, "data/EuskadiMedioAmbienteData.ttl", RDFFormat.TURTLE); 
+		manager.flushGraph(namedGraphUri, "data/EuskadiMedioAmbienteData.ttl", RDFFormat.TURTLE); 
 	}
 }

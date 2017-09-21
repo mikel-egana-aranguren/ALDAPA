@@ -70,20 +70,18 @@ public class ManagerTest {
 	 * 
 	 * @throws URISyntaxException
 	 * @throws IOException
-	 * @throws ConfigurationException
-	 * @throws RDFStoreException
-	 * @throws ProjectExistsException
+	 * @throws AldapaException 
 	 */
 	@Test
-	public final void testAddProject() throws ProjectExistsException, RDFStoreException, ConfigurationException, IOException, URISyntaxException {
+	public final void testAddProject() throws IOException, URISyntaxException, AldapaException {
 		String project_uri = manager.addProject(project_name);
 		manager.flushGraph(null, test_data_output_dir + "project-created.ttl", RDFFormat.TURTLE);
 		assertEquals("http://lod.eurohelp.es/aldapa/project/donosti-movilidad", project_uri);
 	}
 
 	@Test
-	public final void testAddCatalog() throws ProjectExistsException, RDFStoreException, ConfigurationException, IOException, URISyntaxException,
-	        CatalogExistsException, ProjectNotFoundException {
+	public final void testAddCatalog() throws IOException, URISyntaxException,
+	        AldapaException {
 		String project_uri = manager.addProject(project_name);
 		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
 		manager.flushGraph(null, test_data_output_dir + "catalog-created.ttl", RDFFormat.TURTLE);
@@ -91,7 +89,7 @@ public class ManagerTest {
 	}
 
 	@Test
-	public final void testAddDataset() throws ConfigurationException, ProjectExistsException, RDFStoreException, IOException, URISyntaxException, CatalogExistsException, ProjectNotFoundException, DatasetExistsException, CatalogNotFoundException {
+	public final void testAddDataset() throws IOException, URISyntaxException, AldapaException {
 		String catalog_uri = null;
 		String project_uri = manager.addProject(project_name);
 		catalog_uri = manager.addCatalog(catalog_name, project_uri);
@@ -101,7 +99,7 @@ public class ManagerTest {
 	}
 	
 	@Test
-	public final void testAddNamedGraph() throws ProjectExistsException, RDFStoreException, ConfigurationException, IOException, URISyntaxException, CatalogExistsException, ProjectNotFoundException, DatasetExistsException, CatalogNotFoundException, MethodNotSupportedException, DatasetNotFoundException, NamedGraphExistsException {
+	public final void testAddNamedGraph() throws IOException, URISyntaxException, MethodNotSupportedException, AldapaException {
 		String project_uri = manager.addProject(project_name);
 		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
 		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
@@ -243,7 +241,7 @@ public class ManagerTest {
 		manager.addNamedGraph(graph_name + "2", dataset_uri2);
 		manager.addData(model2);	
 		
-		HashSet <String> project_uris = manager.getProjects();
+		HashSet <String> project_uris = (HashSet<String>) manager.getProjects();
 		
 		assertTrue(project_uris.contains(project_uri));
 		assertTrue(project_uris.contains(project_uri2));
@@ -267,7 +265,7 @@ public class ManagerTest {
 		manager.addNamedGraph(graph_name + "2", dataset_uri2);
 		manager.addData(model2);	
 		
-		HashSet <String> catalog_uris = manager.getCatalogs();
+		HashSet <String> catalog_uris = (HashSet<String>) manager.getCatalogs();
 				
 		assertTrue(catalog_uris.contains(catalog_uri));
 		assertTrue(catalog_uris.contains(catalog_uri2));
@@ -291,7 +289,7 @@ public class ManagerTest {
 		manager.addNamedGraph(graph_name + "2", dataset_uri2);
 		manager.addData(model2);	
 		
-		HashSet <String> catalog_uris = manager.getCatalogs(project_uri2);
+		HashSet <String> catalog_uris = (HashSet<String>) manager.getCatalogs(project_uri2);
 				
 		assertFalse(catalog_uris.contains(catalog_uri));
 		assertTrue(catalog_uris.contains(catalog_uri2));
@@ -315,7 +313,7 @@ public class ManagerTest {
 		manager.addNamedGraph(graph_name + "2", dataset_uri2);
 		manager.addData(model2);	
 		
-		HashSet <String> dataset_uris = manager.getDatasets();
+		HashSet <String> dataset_uris = (HashSet<String>) manager.getDatasets();
 				
 		assertTrue(dataset_uris.contains(dataset_uri));
 		assertTrue(dataset_uris.contains(dataset_uri2));
@@ -339,7 +337,7 @@ public class ManagerTest {
 		manager.addNamedGraph(graph_name + "2", dataset_uri2);
 		manager.addData(model2);	
 		
-		HashSet <String> dataset_uris = manager.getDatasets(catalog_uri2);
+		HashSet <String> dataset_uris = (HashSet<String>) manager.getDatasets(catalog_uri2);
 				
 		assertFalse(dataset_uris.contains(dataset_uri));
 		assertTrue(dataset_uris.contains(dataset_uri2));
@@ -363,7 +361,7 @@ public class ManagerTest {
 		String graph_uri2 = manager.addNamedGraph(graph_name + "2", dataset_uri2);
 		manager.addData(model2);	
 		
-		HashSet <String> graph_uris = manager.getNamedGraphs();	
+		HashSet <String> graph_uris = (HashSet<String>) manager.getNamedGraphs();	
 		assertTrue(graph_uris.contains(graph_uri));
 		assertTrue(graph_uris.contains(graph_uri2));
 	}
@@ -386,7 +384,7 @@ public class ManagerTest {
 		String graph_uri2 = manager.addNamedGraph(graph_name + "2", dataset_uri2);
 		manager.addData(model2);	
 		
-		HashSet <String> graph_uris = manager.getNamedGraphs(dataset_uri2);	
+		HashSet <String> graph_uris = (HashSet<String>) manager.getNamedGraphs(dataset_uri2);	
 		assertFalse(graph_uris.contains(graph_uri));
 		assertTrue(graph_uris.contains(graph_uri2));
 	}

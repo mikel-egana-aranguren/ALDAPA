@@ -14,6 +14,7 @@ import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.TripleAdder;
 import es.eurohelp.lod.aldapa.util.URIUtils;
 
+
 /**
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
@@ -23,20 +24,13 @@ public class EJIECalidadAireConverter implements CSV2RDFBatchConverter {
 	private Model model;
 	private Iterable<CSVRecord> records;
 
-	/**
-	 * @return
-	 * 
-	 */
-	public EJIECalidadAireConverter() {
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see es.eurohelp.lod.aldapa.transformation.RDFBatchConverter#setDataSource(java.io.InputStream)
 	 */
 	@Override
-	public void setDataSource(String in_path) throws IOException {
-		FileReader in = new FileReader(in_path);
+	public void setDataSource(String inPath) throws IOException {
+		FileReader in = new FileReader(inPath);
 		CSVFormat csvFormat = CSVFormat.EXCEL.withHeader().withDelimiter(';');
 		records = csvFormat.parse(in);
 	}
@@ -58,80 +52,85 @@ public class EJIECalidadAireConverter implements CSV2RDFBatchConverter {
 	public Model getTransformedModel(String namedGraphURI) {
 		TripleAdder adder = new TripleAdder(model, namedGraphURI);
 
-		int process_rows = 5;
+		int processRows = 5;
 		int process = 0;
 		for (CSVRecord record : records) {
-			if(process == process_rows){
+			if(process == processRows){
 				break;
 			}
 			process += 1;
-			String Name = record.get("Name");
-			String station_uri = EUSURI.base_id_es.getValue() + NTITOKEN.environment.getValue() + "/" + DOMAINTOKEN.equipment.getValue() + "/"
-			        + CLASSTOKEN.station.getValue() + "/" + URIUtils.URIfy(null, null, Name);
-			adder.addRDFSLABELTriple(station_uri, Name, "es");
+			String name = record.get("Name");
+			String stationUri = EUSURI.base_id_es.getValue() + NTITOKEN.environment.getValue() + "/" + DOMAINTOKEN.equipment.getValue() + "/"
+			        + CLASSTOKEN.station.getValue() + "/" + URIUtils.URIfy(null, null, name);
+			adder.addRDFSLABELTriple(stationUri, name, "es");
 			
-			String Comment = record.get("Description");
+			String comment = record.get("Description");
 			
-			if (!Comment.isEmpty()) {
-				adder.addRDFSCOMMENTTriple(station_uri, Comment, "es");
+			if (!comment.isEmpty()) {
+				adder.addRDFSCOMMENTTriple(stationUri, comment, "es");
 			}
 
-			String Province = record.get("Province");
-			String province_uri = null;
+			String province = record.get("Province");
 
-			
 			// TODO: ontologia + metodo de busqueda mediante rdfs_label
-			switch (Province) {
-				case "Araba/Álava":
-					province_uri = EUSPLACEURI.alava.getValue();
-					break;
-				case "Bizkaia":
-					province_uri = EUSPLACEURI.bizkaia.getValue();
-					break;
-				case "Gipuzkoa":
-					province_uri = EUSPLACEURI.gipuzkoa.getValue();
-					break;
-			}
-			adder.addTriple(station_uri, EXTERNALURI.dbo_province.getValue(), province_uri);
-			
-			String Town = record.get("Town");
-			String town_uri = null;
+			adder.addTriple(stationUri, EXTERNALURI.dbo_province.getValue(), provinceSelector(province));
+			String town = record.get("Town");
 	
-			// TODO: ontologia + metodo de busqueda mediante rdfs_label
-			
-			switch (Town) {
-				case "Vitoria-Gasteiz":
-					town_uri = EUSPLACEURI.gasteiz.getValue();
-					break;
-				case "Abanto y Ciérvana-Abanto Zierbena":
-					town_uri = EUSPLACEURI.abantozierbena.getValue();
-					break;
-				case "Agurain/Salvatierra":
-					town_uri = EUSPLACEURI.agurain.getValue();
-					break;
-				case "Getxo":
-					town_uri = EUSPLACEURI.getxo.getValue();
-					break;					
-				case "Alonsotegi":
-					town_uri = EUSPLACEURI.alonsotegi.getValue();
-					break;	
-			}
-			
-			adder.addTriple(station_uri, EXTERNALURI.schema_location.getValue(), town_uri);
-			
-			String Address = record.get("Address");
-			
-			adder.addDataTripleXSDString(station_uri, EXTERNALURI.schema_address.getValue(), Address);
-			
-			String Latitude = record.get("Latitude");
-			
-			adder.addDataTripleXSDdouble(station_uri, EXTERNALURI.lat_wgs84.getValue(), Double.valueOf(Latitude.replace(",", ".")));
-			
-			String Longitude = record.get("Longitude");
-			
-			adder.addDataTripleXSDdouble(station_uri, EXTERNALURI.long_wgs84.getValue(), Double.valueOf(Longitude.replace(",", ".")));
-			
+			// TODO: ontologia + metodo de busqueda mediante rdfs_label			
+			adder.addTriple(stationUri, EXTERNALURI.schema_location.getValue(), townSelector(town));
+			String address = record.get("Address");
+			adder.addDataTripleXSDString(stationUri, EXTERNALURI.schema_address.getValue(), address);
+			String latitude = record.get("Latitude");
+			adder.addDataTripleXSDdouble(stationUri, EXTERNALURI.lat_wgs84.getValue(), Double.valueOf(latitude.replace(",", ".")));
+			String longitude = record.get("Longitude");
+			adder.addDataTripleXSDdouble(stationUri, EXTERNALURI.long_wgs84.getValue(), Double.valueOf(longitude.replace(",", ".")));
 		}
 		return adder.getModel();
+	}
+
+	/**
+	 * @param town
+	 * @return
+	 */
+	private String townSelector(String town) {
+		String townUri = null;
+		switch (town) {
+			case "Vitoria-Gasteiz":
+				townUri = EUSPLACEURI.gasteiz.getValue();
+				break;
+			case "Abanto y Ciérvana-Abanto Zierbena":
+				townUri = EUSPLACEURI.abantozierbena.getValue();
+				break;
+			case "Agurain/Salvatierra":
+				townUri = EUSPLACEURI.agurain.getValue();
+				break;
+			case "Getxo":
+				townUri = EUSPLACEURI.getxo.getValue();
+				break;					
+			case "Alonsotegi":
+				townUri = EUSPLACEURI.alonsotegi.getValue();
+				break;	
+		}
+		return townUri;
+	}
+
+	/**
+	 * @param province
+	 * @return
+	 */
+	private String provinceSelector(String province) {
+		String provinceURI = null;
+		switch (province) {
+			case "Araba/Álava":
+				provinceURI = EUSPLACEURI.alava.getValue();
+				break;
+			case "Bizkaia":
+				provinceURI = EUSPLACEURI.bizkaia.getValue();
+				break;
+			case "Gipuzkoa":
+				provinceURI = EUSPLACEURI.gipuzkoa.getValue();
+				break;
+		}
+		return provinceURI;
 	}
 }

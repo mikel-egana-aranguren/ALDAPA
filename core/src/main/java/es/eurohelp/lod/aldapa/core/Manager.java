@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.http.MethodNotSupportedException;
 import org.apache.logging.log4j.LogManager;
@@ -50,7 +51,9 @@ public class Manager {
 	private RDFStore store;
 	private CSV2RDFBatchConverter transformer;
 	private FileUtils fileutils;
-
+	
+	private final String aldapaConfigFileName = "ALDAPA_CONFIG_FILE";
+	
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
 
 	/**
@@ -73,18 +76,18 @@ public class Manager {
 		fileutils = FileUtils.getInstance();
 
 		// Initialise Triple Store
-		String store_plugin_name = configmanager.getConfigPropertyValue("TRIPLE_STORE_CONFIG_FILE", "pluginClassName");
-		LOGGER.info("Triple Store plugin name: " + store_plugin_name);
-		Class<?> store_class = Class.forName(store_plugin_name);
-		store = (RDFStore) store_class.newInstance();
+		String storePluginName = configmanager.getConfigPropertyValue("TRIPLE_STORE_CONFIG_FILE", "pluginClassName");
+		LOGGER.info("Triple Store plugin name: " + storePluginName);
+		Class<?> storeClass = Class.forName(storePluginName);
+		store = (RDFStore) storeClass.newInstance();
 		store.startRDFStore();
 		LOGGER.info("Triple Store started");
 
 		// Initialise CSV2RDF transformer
-		String transformer_plugin_name = configmanager.getConfigPropertyValue("TRANSFORMER_CONFIG_FILE", "pluginClassName");
-		LOGGER.info("CSV2RDF transformer plugin name: " + transformer_plugin_name);
-		Class<?> transformer_class = Class.forName(transformer_plugin_name);
-		transformer = (CSV2RDFBatchConverter) transformer_class.newInstance();
+		String transformerPluginName = configmanager.getConfigPropertyValue("TRANSFORMER_CONFIG_FILE", "pluginClassName");
+		LOGGER.info("CSV2RDF transformer plugin name: " + transformerPluginName);
+		Class<?> transformerClass = Class.forName(transformerPluginName);
+		transformer = (CSV2RDFBatchConverter) transformerClass.newInstance();
 		LOGGER.info("CSV2RDF Transfomer loaded");
 
 	}
@@ -108,33 +111,33 @@ public class Manager {
 	 * 
 	 */
 
-	public String addProject(String project_name)
-	        throws ProjectExistsException, IOException, RDFStoreException, URISyntaxException, ConfigurationException {
-		LOGGER.info("Project name: " + project_name);
+	public String addProject(String projectName)
+	        throws AldapaException, URISyntaxException, IOException {
+		LOGGER.info("Project name: " + projectName);
 
 		// Create Project URI
-		String projectURIFriendlyName = URIUtils.URIfy(null, null, project_name);
-		String project_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "PROJECT_BASE");
-		String projectURI = URIUtils.validateURI(project_base_uri + projectURIFriendlyName);
+		String projectURIFriendlyName = URIUtils.URIfy(null, null, projectName);
+		String projectBaseUri = configmanager.getConfigPropertyValue(aldapaConfigFileName , "PROJECT_BASE");
+		String projectURI = URIUtils.validateURI(projectBaseUri + projectURIFriendlyName);
 
 		LOGGER.info("Project uri: " + projectURI);
 
 		// Check if exists in RDF store with SPARQL query, throw Exception
-		String resolved_project_exists_sparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(),
+		String resolvedProjectExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(),
 		        MethodFileToken.project_uri.getValue(), projectURI);
 
-		Boolean project_exists = store.execSPARQLBooleanQuery(resolved_project_exists_sparql);
+		Boolean projectExists = store.execSPARQLBooleanQuery(resolvedProjectExistsSparql);
 
-		if (project_exists) {
+		if (projectExists) {
 			LOGGER.info("Project already exists");
 			throw new ProjectExistsException();
 		} else {
 			// Load addProject.ttl file and resolve tokens
-			String resolved_addproject_ttl = fileutils.fileTokenResolver(MethodRDFFile.addProject.getValue(), MethodFileToken.project_uri.getValue(),
+			String resolvedAddProjectTTL = fileutils.fileTokenResolver(MethodRDFFile.addProject.getValue(), MethodFileToken.project_uri.getValue(),
 			        projectURI);
 
 			// Add project to store
-			InputStream modelInputStream = new ByteArrayInputStream(resolved_addproject_ttl.getBytes());
+			InputStream modelInputStream = new ByteArrayInputStream(resolvedAddProjectTTL.getBytes());
 			Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 
 			store.saveModel(model);
@@ -158,7 +161,6 @@ public class Manager {
 	 *             an input/output exception
 	 */
 	public void flushGraph(String graphuri, String fileName, RDFFormat format) throws RDFStoreException, IOException {
-		FileUtils fileutils = FileUtils.getInstance();
 		store.flushGraph(graphuri, fileutils.getFileOutputStream(fileName), format);
 	}
 
@@ -184,48 +186,48 @@ public class Manager {
 	 * @throws ConfigurationException
 	 *             the configuration is incomplete
 	 */
-	public String addCatalog(String catalog_name, String project_uri)
-	        throws CatalogExistsException, IOException, RDFStoreException, ProjectNotFoundException, URISyntaxException, ConfigurationException {
+	public String addCatalog(String catalogName, String projectUri)
+	        throws AldapaException, IOException, URISyntaxException {
 
 		// Project should exist
-		String resolved_project_exists_sparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(),
-		        MethodFileToken.project_uri.getValue(), project_uri);
-		Boolean project_exists = store.execSPARQLBooleanQuery(resolved_project_exists_sparql);
+		String resolvedProjectExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(),
+		        MethodFileToken.project_uri.getValue(), projectUri);
+		Boolean projectExists = store.execSPARQLBooleanQuery(resolvedProjectExistsSparql);
 
-		LOGGER.info("Catalog name: " + catalog_name);
+		LOGGER.info("Catalog name: " + catalogName);
 
 		// Create catalog URI
-		String catalogURIFriendlyName = URIUtils.URIfy(null, null, catalog_name);
-		String catalog_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "CATALOG_BASE");
-		String catalog_uri = URIUtils.validateURI(catalog_base_uri + catalogURIFriendlyName);
+		String catalogURIFriendlyName = URIUtils.URIfy(null, null, catalogName);
+		String catalogBaseUri = configmanager.getConfigPropertyValue(aldapaConfigFileName, "CATALOG_BASE");
+		String catalogUri = URIUtils.validateURI(catalogBaseUri + catalogURIFriendlyName);
 
-		LOGGER.info("Catalog uri: " + catalog_uri);
+		LOGGER.info("Catalog uri: " + catalogUri);
 
 		// Catalog should not exist
-		EnumMap<MethodFileToken, String> token_replacement_map = new EnumMap<>(MethodFileToken.class);
-		token_replacement_map.put(MethodFileToken.project_uri, project_uri);
-		token_replacement_map.put(MethodFileToken.catalog_uri, catalog_uri);
+		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
+		tokenReplacementMap.put(MethodFileToken.project_uri, projectUri);
+		tokenReplacementMap.put(MethodFileToken.catalog_uri, catalogUri);
 
-		String resolved_catalog_exists_sparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.catalogExists.getValue(), token_replacement_map);
-		Boolean catalog_exists = store.execSPARQLBooleanQuery(resolved_catalog_exists_sparql);
-		if (!project_exists) {
-			LOGGER.info("Project does not exist: " + project_uri);
-			throw new ProjectNotFoundException(project_uri);
-		} else if (catalog_exists) {
-			LOGGER.info("Catalog already exists: " + catalog_uri);
+		String resolvedCatalogExistsSparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.catalogExists.getValue(), tokenReplacementMap);
+		Boolean catalogExists = store.execSPARQLBooleanQuery(resolvedCatalogExistsSparql);
+		if (!projectExists) {
+			LOGGER.info("Project does not exist: " + projectUri);
+			throw new ProjectNotFoundException(projectUri);
+		} else if (catalogExists) {
+			LOGGER.info("Catalog already exists: " + catalogUri);
 			throw new CatalogExistsException();
 		} else {
 			// Add catalog
-			String resolved_addcatalog_ttl = fileutils.fileMultipleTokenResolver(MethodRDFFile.addCatalog.getValue(), token_replacement_map);
+			String resolvedAddCatalogTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.addCatalog.getValue(), tokenReplacementMap);
 
 			// Add catalog to store
-			InputStream modelInputStream = new ByteArrayInputStream(resolved_addcatalog_ttl.getBytes());
+			InputStream modelInputStream = new ByteArrayInputStream(resolvedAddCatalogTTL.getBytes());
 			Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 
 			store.saveModel(model);
 			LOGGER.info("Catalog added to store");
 		}
-		return catalog_uri;
+		return catalogUri;
 	}
 
 	/**
@@ -250,48 +252,48 @@ public class Manager {
 	 * @throws ConfigurationException
 	 *             the configuration is incomplete
 	 */
-	public String addDataset(String dataset_name, String catalog_uri)
-	        throws DatasetExistsException, IOException, RDFStoreException, CatalogNotFoundException, URISyntaxException, ConfigurationException {
+	public String addDataset(String datasetName, String catalogUri)
+	        throws AldapaException, IOException, URISyntaxException {
 		// Catalog should exist
-		String resolved_catalog_exists_sparql = fileutils.fileTokenResolver(MethodRDFFile.catalogExists.getValue(),
-		        MethodFileToken.catalog_uri.getValue(), catalog_uri);
-		Boolean catalog_exists = store.execSPARQLBooleanQuery(resolved_catalog_exists_sparql);
+		String resolvedCatalogExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.catalogExists.getValue(),
+		        MethodFileToken.catalog_uri.getValue(), catalogUri);
+		Boolean catalogExists = store.execSPARQLBooleanQuery(resolvedCatalogExistsSparql);
 
-		LOGGER.info("Dataset name: " + dataset_name);
+		LOGGER.info("Dataset name: " + datasetName);
 
 		// Create dataset URI
-		String datasetURIFriendlyName = URIUtils.URIfy(null, null, dataset_name);
-		String dataset_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "DATASET_BASE");
-		String dataset_uri = URIUtils.validateURI(dataset_base_uri + datasetURIFriendlyName);
+		String datasetURIFriendlyName = URIUtils.URIfy(null, null, datasetName);
+		String datasetBaseUri = configmanager.getConfigPropertyValue(aldapaConfigFileName, "DATASET_BASE");
+		String datasetUri = URIUtils.validateURI(datasetBaseUri + datasetURIFriendlyName);
 
-		LOGGER.info("Dataset uri: " + dataset_uri);
+		LOGGER.info("Dataset uri: " + datasetUri);
 
 		// Dataset should not exist
-		EnumMap<MethodFileToken, String> token_replacement_map = new EnumMap<>(MethodFileToken.class);
-		token_replacement_map.put(MethodFileToken.catalog_uri, catalog_uri);
-		token_replacement_map.put(MethodFileToken.dataset_uri, dataset_uri);
+		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
+		tokenReplacementMap.put(MethodFileToken.catalog_uri, catalogUri);
+		tokenReplacementMap.put(MethodFileToken.dataset_uri, datasetUri);
 
-		String resolved_dataset_exists_sparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.datasetExists.getValue(), token_replacement_map);
+		String resolvedDatasetExistsSparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.datasetExists.getValue(), tokenReplacementMap);
 
-		Boolean dataset_exists = store.execSPARQLBooleanQuery(resolved_dataset_exists_sparql);
-		if (!catalog_exists) {
-			LOGGER.info("Project does not exist: " + catalog_uri);
-			throw new CatalogNotFoundException(catalog_uri);
-		} else if (dataset_exists) {
-			LOGGER.info("Dataset already exists: " + dataset_uri);
+		Boolean datasetExists = store.execSPARQLBooleanQuery(resolvedDatasetExistsSparql);
+		if (!catalogExists) {
+			LOGGER.info("Project does not exist: " + catalogUri);
+			throw new CatalogNotFoundException(catalogUri);
+		} else if (datasetExists) {
+			LOGGER.info("Dataset already exists: " + datasetUri);
 			throw new DatasetExistsException();
 		} else {
 			// Add dataset
-			String resolved_adddataset_ttl = fileutils.fileMultipleTokenResolver(MethodRDFFile.addDataset.getValue(), token_replacement_map);
+			String resolvedAddDatasetTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.addDataset.getValue(), tokenReplacementMap);
 
 			// Add dataset to store
-			InputStream modelInputStream = new ByteArrayInputStream(resolved_adddataset_ttl.getBytes());
+			InputStream modelInputStream = new ByteArrayInputStream(resolvedAddDatasetTTL.getBytes());
 			Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 
 			store.saveModel(model);
 			LOGGER.info("Dataset added to store");
 		}
-		return dataset_uri;
+		return datasetUri;
 	}
 
 	/**
@@ -317,51 +319,51 @@ public class Manager {
 	 * @throws NamedGraphExistsException
 	 *             the Named Graph already exists
 	 */
-	public String addNamedGraph(String graph_name, String dataset_uri)
-	        throws IOException, RDFStoreException, URISyntaxException, ConfigurationException, DatasetNotFoundException, NamedGraphExistsException {
+	public String addNamedGraph(String graphName, String datasetUri)
+	        throws AldapaException, IOException, URISyntaxException {
 
 		// Dataset should exist
-		String resolved_dataset_exists_sparql = fileutils.fileTokenResolver(MethodRDFFile.datasetExists.getValue(),
-		        MethodFileToken.dataset_uri.getValue(), dataset_uri);
-		Boolean dataset_exists = store.execSPARQLBooleanQuery(resolved_dataset_exists_sparql);
+		String resolvedDatasetExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.datasetExists.getValue(),
+		        MethodFileToken.dataset_uri.getValue(), datasetUri);
+		Boolean datasetExists = store.execSPARQLBooleanQuery(resolvedDatasetExistsSparql);
 
-		LOGGER.info("Graph name: " + graph_name);
+		LOGGER.info("Graph name: " + graphName);
 
 		// Create graph URI
-		String graphURIFriendlyName = URIUtils.URIfy(null, null, graph_name);
-		String graph_base_uri = configmanager.getConfigPropertyValue("ALDAPA_CONFIG_FILE", "GRAPH_BASE");
-		String graph_uri = URIUtils.validateURI(graph_base_uri + graphURIFriendlyName);
+		String graphURIFriendlyName = URIUtils.URIfy(null, null, graphName);
+		String graphBaseUri = configmanager.getConfigPropertyValue(aldapaConfigFileName, "GRAPH_BASE");
+		String graphUri = URIUtils.validateURI(graphBaseUri + graphURIFriendlyName);
 
-		LOGGER.info("Graph uri: " + graph_uri);
+		LOGGER.info("Graph uri: " + graphUri);
 
 		// Graph should not exist
 
-		EnumMap<MethodFileToken, String> token_replacement_map = new EnumMap<>(MethodFileToken.class);
+		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
 
-		token_replacement_map.put(MethodFileToken.dataset_uri, dataset_uri);
-		token_replacement_map.put(MethodFileToken.graph_uri, graph_uri);
+		tokenReplacementMap.put(MethodFileToken.dataset_uri, datasetUri);
+		tokenReplacementMap.put(MethodFileToken.graph_uri, graphUri);
 
-		String resolved_graph_exists_sparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.namedGraphExists.getValue(), token_replacement_map);
+		String resolvedGraphExistsSparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.namedGraphExists.getValue(), tokenReplacementMap);
 
-		Boolean graph_exists = store.execSPARQLBooleanQuery(resolved_graph_exists_sparql);
-		if (!dataset_exists) {
-			LOGGER.info("Dataset does not exist: " + dataset_uri);
-			throw new DatasetNotFoundException(dataset_uri);
-		} else if (graph_exists) {
-			LOGGER.info("Named Graph already exists: " + graph_uri);
+		Boolean graphExists = store.execSPARQLBooleanQuery(resolvedGraphExistsSparql);
+		if (!datasetExists) {
+			LOGGER.info("Dataset does not exist: " + datasetUri);
+			throw new DatasetNotFoundException(datasetUri);
+		} else if (graphExists) {
+			LOGGER.info("Named Graph already exists: " + graphUri);
 			throw new NamedGraphExistsException();
 		} else {
 			// Add Named Graph
-			String resolved_addgraph_ttl = fileutils.fileMultipleTokenResolver(MethodRDFFile.addNamedGraph.getValue(), token_replacement_map);
+			String resolvedAddGraphTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.addNamedGraph.getValue(), tokenReplacementMap);
 
 			// Add Named Graph to store
-			InputStream modelInputStream = new ByteArrayInputStream(resolved_addgraph_ttl.getBytes());
+			InputStream modelInputStream = new ByteArrayInputStream(resolvedAddGraphTTL.getBytes());
 			Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 
 			store.saveModel(model);
 			LOGGER.info("Graph added to store");
 		}
-		return graph_uri;
+		return graphUri;
 	}
 
 	/**
@@ -380,9 +382,9 @@ public class Manager {
 	 * 
 	 */
 
-	public void addDataToNamedGraph(String namedGraphURI, String csv_path) throws IOException, RDFStoreException {
-		transformer.setDataSource(csv_path);
-		LOGGER.info("CSV path: " + csv_path);
+	public void addDataToNamedGraph(String namedGraphURI, String csvPath) throws IOException, RDFStoreException {
+		transformer.setDataSource(csvPath);
+		LOGGER.info("CSV path: " + csvPath);
 		transformer.setModel(new TreeModel());
 		store.saveModel(transformer.getTransformedModel(namedGraphURI));
 		LOGGER.info("Data from CSV saved into graph: " + namedGraphURI);
@@ -414,11 +416,11 @@ public class Manager {
 	 * 
 	 */
 
-	public void deleteProject(String project_URI) throws IOException, RDFStoreException {
-		String resolved_delete_project_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteProject.getValue(),
-		        MethodFileToken.project_uri.getValue(), project_URI);
-		store.execSPARQLUpdate(resolved_delete_project_sparql);
-		LOGGER.info("Project deleted: " + project_URI);
+	public void deleteProject(String projectURI) throws IOException, RDFStoreException {
+		String resolvedDeleteProjectSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteProject.getValue(),
+		        MethodFileToken.project_uri.getValue(), projectURI);
+		store.execSPARQLUpdate(resolvedDeleteProjectSparql);
+		LOGGER.info("Project deleted: " + projectURI);
 	}
 
 	/**
@@ -432,11 +434,11 @@ public class Manager {
 	 * @throws IOException
 	 * @throws AldapaException
 	 */
-	public void deleteCatalog(String catalog_URI) throws IOException, AldapaException {
-		String resolved_delete_catalog_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteCatalog.getValue(),
-		        MethodFileToken.catalog_uri.getValue(), catalog_URI);
-		store.execSPARQLUpdate(resolved_delete_catalog_sparql);
-		LOGGER.info("Catalog deleted: " + catalog_URI);
+	public void deleteCatalog(String catalogURI) throws IOException, AldapaException {
+		String resolvedDeleteCatalogSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteCatalog.getValue(),
+		        MethodFileToken.catalog_uri.getValue(), catalogURI);
+		store.execSPARQLUpdate(resolvedDeleteCatalogSparql);
+		LOGGER.info("Catalog deleted: " + catalogURI);
 	}
 
 	/**
@@ -447,11 +449,11 @@ public class Manager {
 	 * @throws MethodNotSupportedException
 	 *             This functionality has not been implemented yet
 	 */
-	public void deleteDataset(String dataset_URI) throws IOException, AldapaException {
-		String resolved_delete_dataset_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataset.getValue(),
-		        MethodFileToken.dataset_uri.getValue(), dataset_URI);
-		store.execSPARQLUpdate(resolved_delete_dataset_sparql);
-		LOGGER.info("Dataset deleted: " + dataset_URI);
+	public void deleteDataset(String datasetURI) throws IOException, AldapaException {
+		String resolvedDeleteDatasetSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataset.getValue(),
+		        MethodFileToken.dataset_uri.getValue(), datasetURI);
+		store.execSPARQLUpdate(resolvedDeleteDatasetSparql);
+		LOGGER.info("Dataset deleted: " + datasetURI);
 	}
 
 	/**
@@ -466,9 +468,9 @@ public class Manager {
 	 *             This functionality has not been implemented yet
 	 */
 	public void deleteNamedGraph(String namedGraphURI) throws IOException, AldapaException {
-		String resolved_delete_named_graph_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteNamedGraph.getValue(),
+		String resolvedDeleteNamedGraphSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteNamedGraph.getValue(),
 		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
-		store.execSPARQLUpdate(resolved_delete_named_graph_sparql);
+		store.execSPARQLUpdate(resolvedDeleteNamedGraphSparql);
 		LOGGER.info("Named graph and its data deleted: " + namedGraphURI);
 	}
 
@@ -481,9 +483,9 @@ public class Manager {
 	 * @throws IOException
 	 */
 	public void deleteDataFromNamedGraph(String namedGraphURI) throws AldapaException, IOException {
-		String resolved_data_from_named_graph_sparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataFromNamedGraph.getValue(),
+		String resolvedDataFromNamedGraphSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataFromNamedGraph.getValue(),
 		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
-		store.execSPARQLUpdate(resolved_data_from_named_graph_sparql);
+		store.execSPARQLUpdate(resolvedDataFromNamedGraphSparql);
 		LOGGER.info("Data from named graph deleted: " + namedGraphURI);
 	}
 
@@ -491,11 +493,11 @@ public class Manager {
 	 * 
 	 * Get the project URIs 
 	 * 
-	 * @return a HashSet containing the project URIs as Strings
+	 * @return a Set containing the project URIs as Strings
 	 * @throws AldapaException
 	 * @throws IOException
 	 */
-	public HashSet<String> getProjects() throws AldapaException, IOException {
+	public Set<String> getProjects() throws AldapaException, IOException {
 		String query = fileutils.fileToString(MethodRDFFile.getProjects.getValue());
 		return execTupleQueryToStringSet(query);
 	}
@@ -504,11 +506,11 @@ public class Manager {
 	 * 
 	 * Get all the catalogs
 	 * 
-	 * @return a HashSet containing all the catalog URIs as Strings
+	 * @return a Set containing all the catalog URIs as Strings
 	 * @throws AldapaException
 	 * @throws IOException
 	 */
-	public HashSet<String> getCatalogs() throws AldapaException, IOException {
+	public Set<String> getCatalogs() throws AldapaException, IOException {
 		String query = fileutils.fileToString(MethodRDFFile.getAllCatalogs.getValue());
 		return execTupleQueryToStringSet(query);
 	}
@@ -517,14 +519,14 @@ public class Manager {
 	 * 
 	 * Get all the catalogs pertaining to a given project
 	 * 
-	 * @return a Hashset containing all the catalog URIs as Strings
+	 * @return a set containing all the catalog URIs as Strings
 	 * @throws AldapaException
 	 * @throws IOException
 	 */
 	
-	public HashSet<String> getCatalogs(String project_uri) throws AldapaException, IOException {
+	public Set<String> getCatalogs(String projectUri) throws AldapaException, IOException {
 		String query = fileutils.fileTokenResolver(MethodRDFFile.getCatalogsByProject.getValue(),
-		        MethodFileToken.project_uri.getValue(), project_uri);
+		        MethodFileToken.project_uri.getValue(), projectUri);
 		return execTupleQueryToStringSet(query);
 	}
 	
@@ -532,11 +534,11 @@ public class Manager {
 	 * 
 	 * Get all the datasets
 	 * 
-	 * @return a Hashset containing all the dataset URIs as Strings
+	 * @return a set containing all the dataset URIs as Strings
 	 * @throws AldapaException
 	 * @throws IOException
 	 */
-	public HashSet<String> getDatasets() throws AldapaException, IOException {
+	public Set<String> getDatasets() throws AldapaException, IOException {
 		String query = fileutils.fileToString(MethodRDFFile.getAllDatasets.getValue());
 		return execTupleQueryToStringSet(query);
 	}
@@ -545,14 +547,14 @@ public class Manager {
 	 * 
 	 * Get all the datasets pertaining to a given catalog
 	 * 
-	 * @return a Hashset containing all the dataset URIs as Strings
+	 * @return a set containing all the dataset URIs as Strings
 	 * @throws AldapaException
 	 * @throws IOException
 	 */
 	
-	public HashSet<String> getDatasets(String catalog_uri) throws AldapaException, IOException {
+	public Set<String> getDatasets(String catalogUri) throws AldapaException, IOException {
 		String query = fileutils.fileTokenResolver(MethodRDFFile.getDatasetsByCatalog.getValue(),
-		        MethodFileToken.catalog_uri.getValue(), catalog_uri);
+		        MethodFileToken.catalog_uri.getValue(), catalogUri);
 		return execTupleQueryToStringSet(query);
 	}
 	
@@ -564,7 +566,7 @@ public class Manager {
 	 * @throws AldapaException
 	 * @throws IOException
 	 */
-	public HashSet<String> getNamedGraphs() throws AldapaException, IOException {
+	public Set<String> getNamedGraphs() throws AldapaException, IOException {
 		String query = fileutils.fileToString(MethodRDFFile.getAllNamedGraphs.getValue());
 		return execTupleQueryToStringSet(query);
 	}
@@ -578,13 +580,13 @@ public class Manager {
 	 * @throws IOException
 	 */
 	
-	public HashSet<String> getNamedGraphs(String dataset_uri) throws AldapaException, IOException {
+	public Set<String> getNamedGraphs(String datasetUri) throws AldapaException, IOException {
 		String query = fileutils.fileTokenResolver(MethodRDFFile.getNamedGraphsByDataset.getValue(),
-		        MethodFileToken.dataset_uri.getValue(), dataset_uri);
+		        MethodFileToken.dataset_uri.getValue(), datasetUri);
 		return execTupleQueryToStringSet(query);
 	}
 	
-	private HashSet<String> execTupleQueryToStringSet (String query) throws RDFStoreException {
+	private Set<String> execTupleQueryToStringSet (String query) throws RDFStoreException {
 		HashSet<String> results = new HashSet<String>(); 
 		TupleQueryResult result = store.execSPARQLTupleQuery(query);
 		List<String> bindingNames = result.getBindingNames();
