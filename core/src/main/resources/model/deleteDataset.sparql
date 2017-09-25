@@ -1,0 +1,29 @@
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl:<http://www.w3.org/2002/07/owl#>
+PREFIX foaf:<http://xmlns.com/foaf/0.1/>
+PREFIX dcat:<http://www.w3.org/ns/dcat#>
+PREFIX void:<http://rdfs.org/ns/void#>
+PREFIX schema: <http://schema.org/>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+
+DELETE {
+	?catalog_uri dcat:dataset DATASET_URI .
+	?dataset_uri rdf:type dcat:Distribution, void:Dataset, schema:Distribution .
+	?dataset_uri sd:namedGraph ?graph_uri .
+    GRAPH ?graph_uri {
+     	?s ?p ?o
+    }
+}
+WHERE {
+	?catalog_uri dcat:dataset DATASET_URI .
+	?dataset_uri rdf:type dcat:Distribution, void:Dataset, schema:Distribution .
+	?dataset_uri sd:namedGraph ?graph_uri .
+    GRAPH ?graph_uri {
+     	?s ?p ?o
+    }
+}
+
+
+
+
+

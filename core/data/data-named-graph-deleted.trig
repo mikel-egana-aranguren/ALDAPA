@@ -1,0 +1,28 @@
+
+{
+	<http://lod.eurohelp.es/aldapa/catalog/donosti-parkings> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/donosti-movilidad> ;
+		a <http://www.w3.org/ns/dcat#Catalog> ;
+		<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr> .
+	
+	<http://lod.eurohelp.es/aldapa/catalog/donosti-parkings-2> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/donosti-movilidad2> ;
+		a <http://www.w3.org/ns/dcat#Catalog> ;
+		<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr2> .
+	
+	<http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
+		<http://www.w3.org/ns/sparql-service-description#namedGraph> <http://euskadi.eus/graph/donosti-parkings-febr-001> .
+	
+	<http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr2> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
+		<http://www.w3.org/ns/sparql-service-description#namedGraph> <http://euskadi.eus/graph/donosti-parkings-febr-0012> .
+	
+	<http://lod.eurohelp.es/aldapa/project/donosti-movilidad> a <http://xmlns.com/foaf/0.1/Project> .
+	
+	<http://lod.eurohelp.es/aldapa/project/donosti-movilidad2> a <http://xmlns.com/foaf/0.1/Project> .
+}
+
+<http://euskadi.eus/graph/donosti-parkings-febr-0012> {
+	<http://opendata.eurohelp.es/resource/resource_004> <http://opendata.eurohelp.es/property/property_005> <http://opendata.eurohelp.es/resource/resource_006> .
+	
+	<http://opendata.eurohelp.es/resource/resource_006> <http://www.w3.org/2002/07/owl#sameAs> <http://dbpedia.org/resource/Bilbao> .
+	
+	<http://opendata.eurohelp.es/resource/resource_007> <http://www.w3.org/2000/01/rdf-schema#label> "Resource 007"@en .
+}
