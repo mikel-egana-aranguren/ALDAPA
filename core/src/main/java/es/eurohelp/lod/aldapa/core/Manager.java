@@ -124,7 +124,7 @@ public class Manager {
 
 		// Check if exists in RDF store with SPARQL query, throw Exception
 		String resolvedProjectExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(),
-		        MethodFileToken.project_uri.getValue(), projectURI);
+		        MethodFileToken.projectUri.getValue(), projectURI);
 
 		Boolean projectExists = store.execSPARQLBooleanQuery(resolvedProjectExistsSparql);
 
@@ -133,7 +133,7 @@ public class Manager {
 			throw new ProjectExistsException();
 		} else {
 			// Load addProject.ttl file and resolve tokens
-			String resolvedAddProjectTTL = fileutils.fileTokenResolver(MethodRDFFile.addProject.getValue(), MethodFileToken.project_uri.getValue(),
+			String resolvedAddProjectTTL = fileutils.fileTokenResolver(MethodRDFFile.addProject.getValue(), MethodFileToken.projectUri.getValue(),
 			        projectURI);
 
 			// Add project to store
@@ -191,7 +191,7 @@ public class Manager {
 
 		// Project should exist
 		String resolvedProjectExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(),
-		        MethodFileToken.project_uri.getValue(), projectUri);
+		        MethodFileToken.projectUri.getValue(), projectUri);
 		Boolean projectExists = store.execSPARQLBooleanQuery(resolvedProjectExistsSparql);
 
 		LOGGER.info("Catalog name: " + catalogName);
@@ -205,8 +205,8 @@ public class Manager {
 
 		// Catalog should not exist
 		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
-		tokenReplacementMap.put(MethodFileToken.project_uri, projectUri);
-		tokenReplacementMap.put(MethodFileToken.catalog_uri, catalogUri);
+		tokenReplacementMap.put(MethodFileToken.projectUri, projectUri);
+		tokenReplacementMap.put(MethodFileToken.catalogUri, catalogUri);
 
 		String resolvedCatalogExistsSparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.catalogExists.getValue(), tokenReplacementMap);
 		Boolean catalogExists = store.execSPARQLBooleanQuery(resolvedCatalogExistsSparql);
@@ -256,7 +256,7 @@ public class Manager {
 	        throws AldapaException, IOException, URISyntaxException {
 		// Catalog should exist
 		String resolvedCatalogExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.catalogExists.getValue(),
-		        MethodFileToken.catalog_uri.getValue(), catalogUri);
+		        MethodFileToken.catalogUri.getValue(), catalogUri);
 		Boolean catalogExists = store.execSPARQLBooleanQuery(resolvedCatalogExistsSparql);
 
 		LOGGER.info("Dataset name: " + datasetName);
@@ -270,8 +270,8 @@ public class Manager {
 
 		// Dataset should not exist
 		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
-		tokenReplacementMap.put(MethodFileToken.catalog_uri, catalogUri);
-		tokenReplacementMap.put(MethodFileToken.dataset_uri, datasetUri);
+		tokenReplacementMap.put(MethodFileToken.catalogUri, catalogUri);
+		tokenReplacementMap.put(MethodFileToken.datasetUri, datasetUri);
 
 		String resolvedDatasetExistsSparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.datasetExists.getValue(), tokenReplacementMap);
 
@@ -324,7 +324,7 @@ public class Manager {
 
 		// Dataset should exist
 		String resolvedDatasetExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.datasetExists.getValue(),
-		        MethodFileToken.dataset_uri.getValue(), datasetUri);
+		        MethodFileToken.datasetUri.getValue(), datasetUri);
 		Boolean datasetExists = store.execSPARQLBooleanQuery(resolvedDatasetExistsSparql);
 
 		LOGGER.info("Graph name: " + graphName);
@@ -340,8 +340,8 @@ public class Manager {
 
 		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
 
-		tokenReplacementMap.put(MethodFileToken.dataset_uri, datasetUri);
-		tokenReplacementMap.put(MethodFileToken.graph_uri, graphUri);
+		tokenReplacementMap.put(MethodFileToken.datasetUri, datasetUri);
+		tokenReplacementMap.put(MethodFileToken.graphUri, graphUri);
 
 		String resolvedGraphExistsSparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.namedGraphExists.getValue(), tokenReplacementMap);
 
@@ -418,7 +418,7 @@ public class Manager {
 
 	public void deleteProject(String projectURI) throws IOException, RDFStoreException {
 		String resolvedDeleteProjectSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteProject.getValue(),
-		        MethodFileToken.project_uri.getValue(), projectURI);
+		        MethodFileToken.projectUri.getValue(), projectURI);
 		store.execSPARQLUpdate(resolvedDeleteProjectSparql);
 		LOGGER.info("Project deleted: " + projectURI);
 	}
@@ -436,7 +436,7 @@ public class Manager {
 	 */
 	public void deleteCatalog(String catalogURI) throws IOException, AldapaException {
 		String resolvedDeleteCatalogSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteCatalog.getValue(),
-		        MethodFileToken.catalog_uri.getValue(), catalogURI);
+		        MethodFileToken.catalogUri.getValue(), catalogURI);
 		store.execSPARQLUpdate(resolvedDeleteCatalogSparql);
 		LOGGER.info("Catalog deleted: " + catalogURI);
 	}
@@ -451,7 +451,7 @@ public class Manager {
 	 */
 	public void deleteDataset(String datasetURI) throws IOException, AldapaException {
 		String resolvedDeleteDatasetSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataset.getValue(),
-		        MethodFileToken.dataset_uri.getValue(), datasetURI);
+		        MethodFileToken.datasetUri.getValue(), datasetURI);
 		store.execSPARQLUpdate(resolvedDeleteDatasetSparql);
 		LOGGER.info("Dataset deleted: " + datasetURI);
 	}
@@ -469,7 +469,7 @@ public class Manager {
 	 */
 	public void deleteNamedGraph(String namedGraphURI) throws IOException, AldapaException {
 		String resolvedDeleteNamedGraphSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteNamedGraph.getValue(),
-		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
+		        MethodFileToken.graphUri.getValue(), namedGraphURI);
 		store.execSPARQLUpdate(resolvedDeleteNamedGraphSparql);
 		LOGGER.info("Named graph and its data deleted: " + namedGraphURI);
 	}
@@ -484,7 +484,7 @@ public class Manager {
 	 */
 	public void deleteDataFromNamedGraph(String namedGraphURI) throws AldapaException, IOException {
 		String resolvedDataFromNamedGraphSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataFromNamedGraph.getValue(),
-		        MethodFileToken.graph_uri.getValue(), namedGraphURI);
+		        MethodFileToken.graphUri.getValue(), namedGraphURI);
 		store.execSPARQLUpdate(resolvedDataFromNamedGraphSparql);
 		LOGGER.info("Data from named graph deleted: " + namedGraphURI);
 	}
@@ -526,7 +526,7 @@ public class Manager {
 	
 	public Set<String> getCatalogs(String projectUri) throws AldapaException, IOException {
 		String query = fileutils.fileTokenResolver(MethodRDFFile.getCatalogsByProject.getValue(),
-		        MethodFileToken.project_uri.getValue(), projectUri);
+		        MethodFileToken.projectUri.getValue(), projectUri);
 		return execTupleQueryToStringSet(query);
 	}
 	
@@ -554,7 +554,7 @@ public class Manager {
 	
 	public Set<String> getDatasets(String catalogUri) throws AldapaException, IOException {
 		String query = fileutils.fileTokenResolver(MethodRDFFile.getDatasetsByCatalog.getValue(),
-		        MethodFileToken.catalog_uri.getValue(), catalogUri);
+		        MethodFileToken.catalogUri.getValue(), catalogUri);
 		return execTupleQueryToStringSet(query);
 	}
 	
@@ -582,7 +582,7 @@ public class Manager {
 	
 	public Set<String> getNamedGraphs(String datasetUri) throws AldapaException, IOException {
 		String query = fileutils.fileTokenResolver(MethodRDFFile.getNamedGraphsByDataset.getValue(),
-		        MethodFileToken.dataset_uri.getValue(), datasetUri);
+		        MethodFileToken.datasetUri.getValue(), datasetUri);
 		return execTupleQueryToStringSet(query);
 	}
 	
@@ -596,5 +596,17 @@ public class Manager {
 			results.add(firstValue.toString());
 		}
 		return results;
+	}
+
+	/**
+	 * 
+	 * Resets the manager, thus deletes *all* the data and metadata. Use at your own risk. 
+	 * @throws IOException 
+	 * @throws RDFStoreException 
+	 * 
+	 */
+	public void reset() throws RDFStoreException, IOException {		
+		store.execSPARQLUpdate(fileutils.fileToString(MethodRDFFile.reset.getValue()));
+		LOGGER.info("Everything deleted ");
 	}
 }

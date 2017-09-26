@@ -15,6 +15,7 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFParseException;
 import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.rio.UnsupportedRDFormatException;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.core.MethodFileToken;
@@ -26,21 +27,31 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  *
  */
 public class InternalModelValidSyntaxTest {
+	
+	private static final String defaultModelTrigPath = "model/default-model.trig";
+	private static final String fakeProjetURI = "http://example.com/fakeproject";
+	private static final String fakeCatalogURI = "http://example.com/fakeCatalog";
+	private static final String fakeDatasetURI = "http://example.com/fakedataset";
+	private static final String fakeGraphURI = "http://example.com/fakegraph";
+	private static FileUtils fileUtils;
+	
+	@BeforeClass
+	public static void setUpBeforeClass(){
+		fileUtils = FileUtils.getInstance();
+	}
 
 	@Test
 	public void defaultModelTrig() throws RDFParseException, UnsupportedRDFormatException, IOException {
-		InputStream inStream = FileUtils.getInstance().getInputStream("model/default-model.trig");
-		Model results = null;
-		results = Rio.parse(inStream, "http://example.com", RDFFormat.TRIG);
+		InputStream inStream = fileUtils.getInputStream(defaultModelTrigPath);
+		Model results = Rio.parse(inStream, "http://example.com", RDFFormat.TRIG);
 		assertFalse(results.isEmpty());
 	}
 
 	@Test
 	public void addProjectTurtle() throws IOException {
 		Model results = null;
-		FileUtils fileutils = FileUtils.getInstance();
-		String resolved_addproject_ttl = fileutils.fileTokenResolver(MethodRDFFile.addProject.getValue(), MethodFileToken.project_uri.getValue(),
-		        "http://example.com/fakeproject");
+		String resolved_addproject_ttl = fileUtils.fileTokenResolver(MethodRDFFile.addProject.getValue(), MethodFileToken.projectUri.getValue(),
+		        fakeProjetURI);
 		InputStream modelInputStream = new ByteArrayInputStream(resolved_addproject_ttl.getBytes());
 		results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 		assertFalse(results.isEmpty());
@@ -48,40 +59,34 @@ public class InternalModelValidSyntaxTest {
 
 	@Test
 	public void addCatalogTurtle() throws IOException {
-		Model results = null;
-		FileUtils fileutils = FileUtils.getInstance();
-		EnumMap<MethodFileToken, String> token_replacement_map = new EnumMap<>(MethodFileToken.class);
-		token_replacement_map.put(MethodFileToken.project_uri, "http://example.com/fakeProject");
-		token_replacement_map.put(MethodFileToken.catalog_uri, "http://example.com/fakeCatalog");
-		String resolved_addcatalog_ttl = fileutils.fileMultipleTokenResolver(MethodRDFFile.addCatalog.getValue(), token_replacement_map);
-		InputStream modelInputStream = new ByteArrayInputStream(resolved_addcatalog_ttl.getBytes());
-		results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
+		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
+		tokenReplacementMap.put(MethodFileToken.projectUri, fakeProjetURI);
+		tokenReplacementMap.put(MethodFileToken.catalogUri, fakeCatalogURI);
+		String resolvedAddCatalogTTL = fileUtils.fileMultipleTokenResolver(MethodRDFFile.addCatalog.getValue(), tokenReplacementMap);
+		InputStream modelInputStream = new ByteArrayInputStream(resolvedAddCatalogTTL.getBytes());
+		Model results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 		assertFalse(results.isEmpty());
 	}
 
 	@Test
 	public void addDatasetTurtle() throws IOException {
-		Model results = null;
-		FileUtils fileutils = FileUtils.getInstance();
-		EnumMap<MethodFileToken, String> token_replacement_map = new EnumMap<>(MethodFileToken.class);
-		token_replacement_map.put(MethodFileToken.catalog_uri, "http://example.com/fakeCatalog");
-		token_replacement_map.put(MethodFileToken.dataset_uri, "http://example.com/fakedataset");
-		String resolved_adddataset_ttl = fileutils.fileMultipleTokenResolver(MethodRDFFile.addDataset.getValue(), token_replacement_map);
-		InputStream modelInputStream = new ByteArrayInputStream(resolved_adddataset_ttl.getBytes());
-		results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
+		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
+		tokenReplacementMap.put(MethodFileToken.catalogUri, fakeCatalogURI);
+		tokenReplacementMap.put(MethodFileToken.datasetUri, fakeDatasetURI);
+		String resolvedAddDatasetTTL = fileUtils.fileMultipleTokenResolver(MethodRDFFile.addDataset.getValue(), tokenReplacementMap);
+		InputStream modelInputStream = new ByteArrayInputStream(resolvedAddDatasetTTL.getBytes());
+		Model results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 		assertFalse(results.isEmpty());
 	}
 
 	@Test
 	public void addNamedGraphTurtle() throws IOException {
-		Model results = null;
-		FileUtils fileutils = FileUtils.getInstance();
-		EnumMap<MethodFileToken, String> token_replacement_map = new EnumMap<>(MethodFileToken.class);
-		token_replacement_map.put(MethodFileToken.dataset_uri, "http://example.com/fakedataset");
-		token_replacement_map.put(MethodFileToken.graph_uri, "http://example.com/fakegraph");
-		String resolved_addnamedgraph_ttl = fileutils.fileMultipleTokenResolver(MethodRDFFile.addNamedGraph.getValue(), token_replacement_map);
-		InputStream modelInputStream = new ByteArrayInputStream(resolved_addnamedgraph_ttl.getBytes());
-		results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
+		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
+		tokenReplacementMap.put(MethodFileToken.datasetUri, fakeDatasetURI);
+		tokenReplacementMap.put(MethodFileToken.graphUri, fakeGraphURI);
+		String resolvedAddNamedGraphTTL = fileUtils.fileMultipleTokenResolver(MethodRDFFile.addNamedGraph.getValue(), tokenReplacementMap);
+		InputStream modelInputStream = new ByteArrayInputStream(resolvedAddNamedGraphTTL.getBytes());
+		Model results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 		assertFalse(results.isEmpty());
 	}
 }

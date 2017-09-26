@@ -35,6 +35,7 @@ public enum MethodRDFFile {
 	namedGraphExists("model/namedGraphExists.sparql"),
 	deleteNamedGraph("model/deleteNamedGraph.sparql"),
 	deleteDataFromNamedGraph("model/deleteDataFromNamedGraph.sparql"),
+	reset("model/reset.sparql")
 	;
 
 	public final String methodFileName;
