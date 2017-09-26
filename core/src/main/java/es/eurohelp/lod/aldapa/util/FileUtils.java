@@ -16,6 +16,8 @@ import es.eurohelp.lod.aldapa.core.MethodFileToken;
  *
  * @author acarbajo
  *         Created at 14 de oct. de 2016
+ *         
+ * @author megana        
  */
 public class FileUtils {
 
@@ -77,8 +79,13 @@ public class FileUtils {
 	}
 
 	
-	public String fileToString(String file_name) throws IOException {
-		InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(file_name);
+	/**
+	 * @param fileName
+	 * @return a String containing the content of the file 
+	 * @throws IOException
+	 */
+	public String fileToString(String fileName) throws IOException {
+		InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(fileName);
 		return IOUtils.toString(in, StandardCharsets.UTF_8);
 	}
 	
