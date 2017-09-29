@@ -1,6 +1,8 @@
 package es.eurohelp.lod.aldapa.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +18,8 @@ import es.eurohelp.lod.aldapa.core.MethodFileToken;
  *
  * @author acarbajo
  *         Created at 14 de oct. de 2016
+ *         
+ * @author megana        
  */
 public class FileUtils {
 
@@ -77,9 +81,26 @@ public class FileUtils {
 	}
 
 	
-	public String fileToString(String file_name) throws IOException {
-		InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(file_name);
+	/**
+	 * @param fileName (Project resource)
+	 * @return a String containing the content of the file 
+	 * @throws IOException
+	 */
+	public String fileToString(String fileName) throws IOException {
+		InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(fileName);
 		return IOUtils.toString(in, StandardCharsets.UTF_8);
+	}
+	
+	/**
+	 * @param fileName (file system)
+	 * @return true if file is empty
+	 * @throws IOException
+	 */
+	public boolean isFileEmpty(String fileName) throws IOException{
+		FileInputStream fis = new FileInputStream(new File(fileName));  
+		int b = fis.read(); 
+		fis.close();
+		return (b == -1);
 	}
 	
 	/**

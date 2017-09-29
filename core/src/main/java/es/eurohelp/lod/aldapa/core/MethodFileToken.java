@@ -8,10 +8,10 @@ package es.eurohelp.lod.aldapa.core;
  *
  */
 public enum MethodFileToken {
-	project_uri("PROJECT_URI"),
-	catalog_uri("CATALOG_URI"),
-	dataset_uri("DATASET_URI"),
-	graph_uri("GRAPH_URI"),
+	projectUri("PROJECT_URI"),
+	catalogUri("CATALOG_URI"),
+	datasetUri("DATASET_URI"),
+	graphUri("GRAPH_URI"),
 	;
 	
 	public final String methodFileToken;
