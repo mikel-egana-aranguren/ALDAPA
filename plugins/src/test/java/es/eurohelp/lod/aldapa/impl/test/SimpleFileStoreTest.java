@@ -39,7 +39,7 @@ public class SimpleFileStoreTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws FileStoreAlreadySetException{
-		simpleFilestore = SimpleFileStore.getInstance();
+		simpleFilestore = new SimpleFileStore();
 		simpleFilestore.setDirectoryPath(outputPath);
 	}
 

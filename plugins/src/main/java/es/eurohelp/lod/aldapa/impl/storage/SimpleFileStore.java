@@ -26,23 +26,15 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class SimpleFileStore implements FileStore {
 
-	private static SimpleFileStore INSTANCE = null;
 	private String directoryPath = null;
 	private Set<String> fileNames = null;
 
-	private SimpleFileStore() {
+	public SimpleFileStore() {
 		fileNames = new TreeSet<String>();
 	}
 
-	public static synchronized SimpleFileStore getInstance() {
-		if (null == INSTANCE) {
-			INSTANCE = new SimpleFileStore();
-		}
-		return INSTANCE;
-	}
-
 	@Override
-	public void setDirectoryPath(String directoryPath) throws FileStoreAlreadySetException {
+	public synchronized void setDirectoryPath(String directoryPath) throws FileStoreAlreadySetException {
 		if (null == this.directoryPath) {
 			this.directoryPath = directoryPath;
 		} else {
