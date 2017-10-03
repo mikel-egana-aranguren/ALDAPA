@@ -15,6 +15,7 @@ You can start reading the documentation at [doc/introduction.md](doc/index.md). 
 
 This project is funded by the Torres Quevedo Program (PTQ-14-07198) of the Spanish Ministry of Economy, Industry and Competitiveness. 
 
+
 ---
 
 [![Build Status](https://travis-ci.org/mikel-egana-aranguren/ALDAPA.svg?branch=feature-blazegraph)](https://travis-ci.org/mikel-egana-aranguren/ALDAPA) 

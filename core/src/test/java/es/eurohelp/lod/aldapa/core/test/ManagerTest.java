@@ -54,7 +54,7 @@ public class ManagerTest {
 	private static final String catalogURI = "http://lod.eurohelp.es/aldapa/catalog/donosti-parkings";
 	private static final String datasetURI = "http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr";
 	private static final String namedGraphURI = "http://euskadi.eus/graph/donosti-parkings-febr-001";
-	private static final String csvPath = "data/estaciones.csv";
+	private static final String csvPath = "estaciones.csv";
 
 	private static Manager manager = null;
 	private static ConfigurationManager config = null;
@@ -151,6 +151,17 @@ public class ManagerTest {
 		String createdNamedGraphUri = manager.addNamedGraph(graphName, datasetURI);
 		manager.flushGraph(null, testDataOutputDir + "namedgraph-created.ttl", RDFFormat.TURTLE);
 		assertEquals(namedGraphURI, createdNamedGraphUri);
+	}
+	
+	@Test
+	public final void testAddDataToNamedGraph() throws AldapaException, URISyntaxException, IOException{
+		manager.addProject(projectName);
+		manager.addCatalog(catalogName, projectURI);
+		manager.addDataset(datasetName, catalogURI);
+		String namedGraphURI = manager.addNamedGraph(graphName, datasetURI);
+		manager.addDataToNamedGraph(namedGraphURI, csvPath);
+		manager.flushGraph(namedGraphURI, testDataOutputDir + "testAddDataToNamedGraph-data-added.trig", RDFFormat.TRIG);
+		manager.flushGraph(null, testDataOutputDir + "testAddDataToNamedGraph-namedgraph-added.ttl", RDFFormat.TURTLE);
 	}
 
 	@Test

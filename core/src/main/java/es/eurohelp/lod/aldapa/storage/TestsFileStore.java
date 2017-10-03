@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.lod.aldapa.impl.storage;
+package es.eurohelp.lod.aldapa.storage;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,14 +24,15 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  * @author megana
  *
  */
-public class SimpleFileStore implements FileStore {
+public class TestsFileStore implements FileStore {
 
 	private String directoryPath = null;
 	private Set<String> fileNames = null;
 
-	public SimpleFileStore() {
+	public TestsFileStore() {
 		fileNames = new TreeSet<String>();
 	}
+
 
 	@Override
 	public synchronized void setDirectoryPath(String directoryPath) throws FileStoreAlreadySetException {

@@ -42,7 +42,7 @@ public class EJIECalidadAire {
 		String named_graph_uri = manager.addNamedGraph("Estaciones01", dataset_uri);
 		
 		// Add data to named graph
-		manager.addDataToNamedGraph(named_graph_uri, "data/OpenDataEuskadiCalidadDelAire/estaciones.csv");
+		manager.addDataToNamedGraph(named_graph_uri, "estaciones.csv");
 		
 		// Flush backbone
 		manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl", RDFFormat.TURTLE);
