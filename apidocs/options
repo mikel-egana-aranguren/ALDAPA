@@ -15,10 +15,10 @@
 -docencoding
 'UTF-8'
 -doctitle
-'ALDAPA core 0.0.3 API'
+'ALDAPA core 0.0.4 API'
 -linkoffline
 'http://docs.oracle.com/javase/8/docs/api' 'C:/Users/megana/git/ALDAPA/core/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle
-'ALDAPA core 0.0.3 API'
+'ALDAPA core 0.0.4 API'
