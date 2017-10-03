@@ -29,9 +29,11 @@ import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetExistsException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetNotFoundException;
+import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
 import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
+import es.eurohelp.lod.aldapa.storage.FileStore;
 import es.eurohelp.lod.aldapa.storage.RDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
@@ -51,10 +53,17 @@ public class Manager {
 	private RDFStore store;
 	private CSV2RDFBatchConverter transformer;
 	private FileUtils fileutils;
+	private FileStore fileStore;
 	
+	private final String dirToken = "storeDirectory";
 	private final String aldapaConfigFileName = "ALDAPA_CONFIG_FILE";
+	private final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
+	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
+	private final String pluginClassName = "pluginClassName";
+	private final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
 	
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
+	
 
 	/**
 	 * 
@@ -68,15 +77,23 @@ public class Manager {
 	 *             the plugin class could not be instantiated
 	 * @throws ConfigurationException
 	 *             the configuration is incomplete
+	 * @throws FileStoreAlreadySetException 
 	 * 
 	 */
 	public Manager(ConfigurationManager configuredconfigmanager)
-	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException {
+	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException, FileStoreAlreadySetException {
 		configmanager = configuredconfigmanager;
 		fileutils = FileUtils.getInstance();
+		
+		// Initialise File Store
+		String fileStorePluginName = configmanager.getConfigPropertyValue(fileStoreConfigFile, pluginClassName);
+		LOGGER.info("File Store plugin name: " + fileStorePluginName);
+		Class<?> fileStoreClass = Class.forName(fileStorePluginName);
+		fileStore = (FileStore) fileStoreClass.newInstance();
+		fileStore.setDirectoryPath(configmanager.getConfigPropertyValue(fileStoreConfigFile, dirToken));
 
 		// Initialise Triple Store
-		String storePluginName = configmanager.getConfigPropertyValue("TRIPLE_STORE_CONFIG_FILE", "pluginClassName");
+		String storePluginName = configmanager.getConfigPropertyValue(tripleStoreConfigFile, pluginClassName);
 		LOGGER.info("Triple Store plugin name: " + storePluginName);
 		Class<?> storeClass = Class.forName(storePluginName);
 		store = (RDFStore) storeClass.newInstance();
@@ -84,7 +101,7 @@ public class Manager {
 		LOGGER.info("Triple Store started");
 
 		// Initialise CSV2RDF transformer
-		String transformerPluginName = configmanager.getConfigPropertyValue("TRANSFORMER_CONFIG_FILE", "pluginClassName");
+		String transformerPluginName = configmanager.getConfigPropertyValue(transformerConfigFile, pluginClassName);
 		LOGGER.info("CSV2RDF transformer plugin name: " + transformerPluginName);
 		Class<?> transformerClass = Class.forName(transformerPluginName);
 		transformer = (CSV2RDFBatchConverter) transformerClass.newInstance();
@@ -373,8 +390,8 @@ public class Manager {
 	 * 
 	 * @param namedGraphURI
 	 *            the named Graph URI that will store the data
-	 * @param csv_path
-	 *            the path CSV file with Open Data
+	 * @param csvFile
+	 *            the name of the CSV file with Open Data
 	 * @throws IOException
 	 *             an input/output exception
 	 * @throws RDFStoreException
@@ -382,9 +399,9 @@ public class Manager {
 	 * 
 	 */
 
-	public void addDataToNamedGraph(String namedGraphURI, String csvPath) throws IOException, RDFStoreException {
-		transformer.setDataSource(csvPath);
-		LOGGER.info("CSV path: " + csvPath);
+	public void addDataToNamedGraph(String namedGraphURI, String csvFile) throws IOException, RDFStoreException {
+		transformer.setDataSource(fileStore.getDirectoryPath() + csvFile);
+		LOGGER.info("CSV path: " + csvFile);
 		transformer.setModel(new TreeModel());
 		store.saveModel(transformer.getTransformedModel(namedGraphURI));
 		LOGGER.info("Data from CSV saved into graph: " + namedGraphURI);
