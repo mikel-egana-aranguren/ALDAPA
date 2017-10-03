@@ -10,25 +10,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
-import org.eclipse.rdf4j.query.BooleanQuery;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.TupleQueryResult;
-import org.eclipse.rdf4j.query.Update;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFWriter;
 import org.eclipse.rdf4j.rio.trig.TriGWriter;
-//import org.eclipse.rdf4j.rio.binary.BinaryRDFWriter;
-//import org.eclipse.rdf4j.rio.jsonld.JSONLDWriter;
-//import org.eclipse.rdf4j.rio.n3.N3Writer;
-//import org.eclipse.rdf4j.rio.nquads.NQuadsWriter;
-//import org.eclipse.rdf4j.rio.ntriples.NTriplesWriter;
-//import org.eclipse.rdf4j.rio.rdfjson.RDFJSONWriter;
-//import org.eclipse.rdf4j.rio.rdfxml.RDFXMLWriter;
-//import org.eclipse.rdf4j.rio.trig.TriGWriter;
-//import org.eclipse.rdf4j.rio.trix.TriXWriter;
 import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
 import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.sail.memory.MemoryStore;
@@ -39,7 +28,7 @@ import es.eurohelp.lod.aldapa.util.MIMEType;
 
 /**
  * 
- * A simple memory store that does not persist data, based on RDF4J, for testing purposes. To persist  data, use flushGraph.
+ * A simple memory store that does not persist data, based on RDF4J. To persist  data, use flushGraph.
  * 
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
@@ -88,9 +77,9 @@ public class TestsMemoryRDFStore implements RDFStore {
 	public void saveModel(Model model) throws RDFStoreException {
 		LOGGER.info("Adding model to SailRepository(MemoryStore)");
 		// Issue 35
-		Iterator<Statement> model_iterator = model.iterator();
-		while (model_iterator.hasNext()) {
-			Statement stment = model_iterator.next();
+		Iterator<Statement> modelIterator = model.iterator();
+		while (modelIterator.hasNext()) {
+			Statement stment = modelIterator.next();
 			if (stment.getContext() != null) {
 				LOGGER.info("Adding triple " + stment + " to context " + stment.getContext());
 				conn.add(stment, stment.getContext());
@@ -114,48 +103,16 @@ public class TestsMemoryRDFStore implements RDFStore {
 				
 		MIMEType foundtype = MIMEType.findMIMETypeByValue(rdfformat.getDefaultMIMEType());
 		
+		// Issue 26
 		switch (foundtype) {
 			case TURTLE:
 				rdfwriter = new TurtleWriter(outputstream);
 				LOGGER.info("TurtleWriter chosen");
 				break;
-		// Issue 26
-//			case JSONLD:
-//				rdfwriter = new JSONLDWriter(outputstream);
-//				LOGGER.info("JSONLDwriter chosen");
-//				break;
-//			case BINARY:
-//				rdfwriter = new BinaryRDFWriter(outputstream);
-//				LOGGER.info("BinaryRDFWriter chosen");
-//				break;
-//			case N3:
-//				rdfwriter = new N3Writer(outputstream);
-//				LOGGER.info("N3Writer chosen");
-//				break;
-//			case TRIX:
-//				rdfwriter = new TriXWriter(outputstream);
-//				LOGGER.info("TriXWriter chosen");
-//				break;
 			case TRIG:
 				rdfwriter = new TriGWriter(outputstream);
 				LOGGER.info("TriGWriter chosen");
 				break;
-//			case NQUADS:
-//				rdfwriter = new NQuadsWriter(outputstream);
-//				LOGGER.info("NQuadsWriter chosen");
-//				break;
-//			case RDFJSON:
-//				rdfwriter = new RDFJSONWriter(outputstream,rdfformat);
-//				LOGGER.info("RDFJSONWriter chosen");
-//				break;
-//			case NTRIPLES:
-//				rdfwriter = new NTriplesWriter(outputstream);
-//				LOGGER.info("NTriplesWriter chosen");
-//				break;
-//			case RDFXML:
-//				rdfwriter = new RDFXMLWriter(outputstream);
-//				LOGGER.info("RDFXMLWriter chosen");
-//				break;
 			default:
 				break;
 		}

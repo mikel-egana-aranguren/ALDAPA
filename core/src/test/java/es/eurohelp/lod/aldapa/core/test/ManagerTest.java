@@ -16,14 +16,17 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFParseException;
 import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.rio.UnsupportedRDFormatException;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.Manager;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogExistsException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
-import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetExistsException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
@@ -38,21 +41,65 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class ManagerTest {
 
-	private final String project_name = "Donosti movilidad";
-	private final String catalog_name = "Donosti Parkings!!???";
-	private final String dataset_name = "donOsti parkings Febr";
-	private String graph_name = "donosti parkings febr 001";
-	private String test_data_output_dir = "data/";
-	private final String tmp_uri = "http://lod.eurohelp.es/aldapa/manager/Tests";
-	private final String input_file_fake_data = "data/fake_data.trig";
-	private final String input_file_fake_data2 = "data/fake_data2.trig";
-	
-	private Manager manager = null;
-	private ConfigurationManager config = null;
+	private static final String configFile = "configuration.yml";
+	private static final String projectName = "Donosti movilidad";
+	private static final String catalogName = "Donosti Parkings!!???";
+	private static final String datasetName = "donOsti parkings Febr";
+	private static final String graphName = "donosti parkings febr 001";
+	private static final String testDataOutputDir = "data/";
+	private static final String tmpUri = "http://lod.eurohelp.es/aldapa/manager/Tests";
+	private static final String inputFileFakeData = "data/fake_data.trig";
+	private static final String inputFileFakeData2 = "data/fake_data2.trig";
+	private static final String projectURI = "http://lod.eurohelp.es/aldapa/project/donosti-movilidad";
+	private static final String catalogURI = "http://lod.eurohelp.es/aldapa/catalog/donosti-parkings";
+	private static final String datasetURI = "http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr";
+	private static final String namedGraphURI = "http://euskadi.eus/graph/donosti-parkings-febr-001";
+	private static final String csvPath = "estaciones.csv";
 
-	public ManagerTest() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException {
-		config = ConfigurationManager.getInstance("configuration.yml");
+	private static Manager manager = null;
+	private static ConfigurationManager config = null;
+	private static FileUtils fileutils = null;
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
+	@BeforeClass
+	public static void setUpBeforeClass()
+	        throws AldapaException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+		config = ConfigurationManager.getInstance(configFile);
 		manager = new Manager(config);
+		fileutils = FileUtils.getInstance();
+	}
+
+	@After
+	public void tearDown() throws RDFStoreException, IOException {
+		manager.reset();
+	}
+
+	@Test
+	public final void testReset() throws AldapaException, URISyntaxException, IOException {
+		// Add project, catalog, dataset, and data, then flush to file
+		manager.addProject(projectName);
+		manager.addCatalog(catalogName, projectURI);
+		manager.addDataset(datasetName, catalogURI);
+		String namedGraphURI = manager.addNamedGraph(graphName, datasetURI);
+		manager.addDataToNamedGraph(namedGraphURI, csvPath);
+		manager.flushGraph(namedGraphURI, testDataOutputDir + "testReset-namedgraph-data-created.trig", RDFFormat.TRIG);
+		manager.flushGraph(null, testDataOutputDir + "testReset-namedgraph-created.ttl", RDFFormat.TURTLE);
+
+		// Reset manager
+		manager.reset();
+		// After reseting, if we try to add a catalog, it should throw and exception since the project does not exist
+		thrown.expect(ProjectNotFoundException.class);
+		thrown.expectMessage("The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
+		try {
+			manager.addCatalog(catalogName, projectURI);
+		} finally {
+			// There should be no data in the files
+			manager.flushGraph(namedGraphURI, testDataOutputDir + "testReset-namedgraph-data-deleted.trig", RDFFormat.TRIG);
+			manager.flushGraph(null, testDataOutputDir + "testReset-namedgraph-deleted.ttl", RDFFormat.TURTLE);
+			assertTrue(fileutils.isFileEmpty(testDataOutputDir + "testReset-namedgraph-deleted.ttl"));
+		}
 	}
 
 	/**
@@ -70,325 +117,203 @@ public class ManagerTest {
 	 * 
 	 * @throws URISyntaxException
 	 * @throws IOException
-	 * @throws ConfigurationException
-	 * @throws RDFStoreException
-	 * @throws ProjectExistsException
+	 * @throws AldapaException
 	 */
 	@Test
-	public final void testAddProject() throws ProjectExistsException, RDFStoreException, ConfigurationException, IOException, URISyntaxException {
-		String project_uri = manager.addProject(project_name);
-		manager.flushGraph(null, test_data_output_dir + "project-created.ttl", RDFFormat.TURTLE);
-		assertEquals("http://lod.eurohelp.es/aldapa/project/donosti-movilidad", project_uri);
+	public final void testAddProject() throws IOException, URISyntaxException, AldapaException {
+		String createdProjectUri = manager.addProject(projectName);
+		manager.flushGraph(null, testDataOutputDir + "project-created.ttl", RDFFormat.TURTLE);
+		assertEquals(projectURI, createdProjectUri);
 	}
 
 	@Test
-	public final void testAddCatalog() throws ProjectExistsException, RDFStoreException, ConfigurationException, IOException, URISyntaxException,
-	        CatalogExistsException, ProjectNotFoundException {
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		manager.flushGraph(null, test_data_output_dir + "catalog-created.ttl", RDFFormat.TURTLE);
-		assertEquals("http://lod.eurohelp.es/aldapa/catalog/donosti-parkings", catalog_uri);
+	public final void testAddCatalog() throws IOException, URISyntaxException, AldapaException {
+		manager.addProject(projectName);
+		String createdCatalogUri = manager.addCatalog(catalogName, projectURI);
+		manager.flushGraph(null, testDataOutputDir + "catalog-created.ttl", RDFFormat.TURTLE);
+		assertEquals(catalogURI, createdCatalogUri);
 	}
 
 	@Test
-	public final void testAddDataset() throws ConfigurationException, ProjectExistsException, RDFStoreException, IOException, URISyntaxException, CatalogExistsException, ProjectNotFoundException, DatasetExistsException, CatalogNotFoundException {
-		String catalog_uri = null;
-		String project_uri = manager.addProject(project_name);
-		catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		manager.flushGraph(null, test_data_output_dir + "dataset-created.ttl", RDFFormat.TURTLE);
-		assertEquals("http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr", dataset_uri);
+	public final void testAddDataset() throws IOException, URISyntaxException, AldapaException {
+		manager.addProject(projectName);
+		manager.addCatalog(catalogName, projectURI);
+		String createdDatasetUri = manager.addDataset(datasetName, catalogURI);
+		manager.flushGraph(null, testDataOutputDir + "dataset-created.ttl", RDFFormat.TURTLE);
+		assertEquals(datasetURI, createdDatasetUri);
+	}
+
+	@Test
+	public final void testAddNamedGraph() throws IOException, URISyntaxException, MethodNotSupportedException, AldapaException {
+		manager.addProject(projectName);
+		manager.addCatalog(catalogName, projectURI);
+		manager.addDataset(datasetName, catalogURI);
+		String createdNamedGraphUri = manager.addNamedGraph(graphName, datasetURI);
+		manager.flushGraph(null, testDataOutputDir + "namedgraph-created.ttl", RDFFormat.TURTLE);
+		assertEquals(namedGraphURI, createdNamedGraphUri);
 	}
 	
 	@Test
-	public final void testAddNamedGraph() throws ProjectExistsException, RDFStoreException, ConfigurationException, IOException, URISyntaxException, CatalogExistsException, ProjectNotFoundException, DatasetExistsException, CatalogNotFoundException, MethodNotSupportedException, DatasetNotFoundException, NamedGraphExistsException {
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		String named_graph_uri = manager.addNamedGraph(graph_name, dataset_uri);
-		manager.flushGraph(null, test_data_output_dir + "namedgraph-created.ttl", RDFFormat.TURTLE);
-		assertEquals("http://euskadi.eus/graph/donosti-parkings-febr-001", named_graph_uri);
+	public final void testAddDataToNamedGraph() throws AldapaException, URISyntaxException, IOException{
+		manager.addProject(projectName);
+		manager.addCatalog(catalogName, projectURI);
+		manager.addDataset(datasetName, catalogURI);
+		String namedGraphURI = manager.addNamedGraph(graphName, datasetURI);
+		manager.addDataToNamedGraph(namedGraphURI, csvPath);
+		manager.flushGraph(namedGraphURI, testDataOutputDir + "testAddDataToNamedGraph-data-added.trig", RDFFormat.TRIG);
+		manager.flushGraph(null, testDataOutputDir + "testAddDataToNamedGraph-namedgraph-added.ttl", RDFFormat.TURTLE);
+	}
+
+	@Test
+	public final void testDeleteProject() throws IOException, URISyntaxException, AldapaException {
+		initManager();
+		manager.flushGraph(null, testDataOutputDir + "project-before-deleted.trig", RDFFormat.TRIG);
+		manager.deleteProject(projectURI);
+		manager.flushGraph(null, testDataOutputDir + "project-deleted.trig", RDFFormat.TRIG);
+		thrown.expect(ProjectNotFoundException.class);
+		thrown.expectMessage("The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
+		manager.addCatalog(catalogName, projectURI);
+	}
+
+	@Test
+	public final void testDeleteCatalog() throws IOException, URISyntaxException, AldapaException {
+		initManager();
+		manager.flushGraph(null, testDataOutputDir + "catalog-before-deleted.trig", RDFFormat.TRIG);
+		manager.deleteCatalog(catalogURI);
+		manager.flushGraph(null, testDataOutputDir + "catalog-deleted.trig", RDFFormat.TRIG);
+		thrown.expect(CatalogNotFoundException.class);
+		thrown.expectMessage("The catalog does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/catalog/donosti-parkings");
+		manager.addDataset(datasetName, catalogURI);
+	}
+
+	@Test
+	public final void testDeleteDataset() throws IOException, URISyntaxException, AldapaException {
+		initManager();
+		manager.flushGraph(null, testDataOutputDir + "dataset-before-deleted.trig", RDFFormat.TRIG);
+		manager.deleteDataset(datasetURI);
+		manager.flushGraph(null, testDataOutputDir + "dataset-deleted.trig", RDFFormat.TRIG);
+		thrown.expect(DatasetNotFoundException.class);
+		thrown.expectMessage("The dataset does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr");
+		manager.addNamedGraph(graphName, datasetURI);
+	}
+
+	@Test
+	public final void testDeleteNamedGraph() throws IOException, URISyntaxException, AldapaException {
+		initManager();
+		manager.flushGraph(null, testDataOutputDir + "named-graph-before-deleted.trig", RDFFormat.TRIG);
+		manager.deleteNamedGraph(namedGraphURI);
+		manager.flushGraph(null, testDataOutputDir + "named-graph-deleted.trig", RDFFormat.TRIG);
+	}
+
+	@Test
+	public final void testDeleteDataFromNamedGraph() throws IOException, URISyntaxException, AldapaException {
+		initManager();
+		manager.flushGraph(null, testDataOutputDir + "data-named-graph-before-deleted.trig", RDFFormat.TRIG);
+		manager.deleteDataFromNamedGraph(namedGraphURI);
+		manager.flushGraph(null, testDataOutputDir + "data-named-graph-deleted.trig", RDFFormat.TRIG);
+	}
+
+	@Test
+	public final void testGetProjects() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException {
+		initManager();
+		HashSet<String> projectUris = (HashSet<String>) manager.getProjects();
+		assertTrue(projectUris.contains(projectURI));
+		assertTrue(projectUris.contains(projectURI + "2"));
+	}
+
+	@Test
+	public final void testGetAllCatalogs() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException {
+		initManager();
+		HashSet<String> catalogUris = (HashSet<String>) manager.getCatalogs();
+		assertTrue(catalogUris.contains(catalogURI));
+		assertTrue(catalogUris.contains(catalogURI + "-2"));
+	}
+
+	@Test
+	public final void testGetCatalogsByProject()
+	        throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException {
+		initManager();
+		HashSet<String> catalogUris = (HashSet<String>) manager.getCatalogs(projectURI);
+		assertTrue(catalogUris.contains(catalogURI));
+	}
+
+	@Test
+	public final void testGetAllDatasets() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException {
+		initManager();
+		HashSet<String> datasetUris = (HashSet<String>) manager.getDatasets();
+		assertTrue(datasetUris.contains(datasetURI));
+		assertTrue(datasetUris.contains(datasetURI + "2"));
+	}
+
+	@Test
+	public final void testGetDatasetsByCatalog()
+	        throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException {
+		initManager();
+		HashSet<String> datasetUris = (HashSet<String>) manager.getDatasets(catalogURI + "2");
+		assertFalse(datasetUris.contains(datasetURI + "2"));
+	}
+
+	@Test
+	public final void testGetAllNamedGraphs()
+	        throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException {
+		initManager();
+		HashSet<String> graphUris = (HashSet<String>) manager.getNamedGraphs();
+		assertTrue(graphUris.contains(namedGraphURI));
+		assertTrue(graphUris.contains(namedGraphURI + "2"));
+	}
+
+	@Test
+	public final void testGetNamedGraphsByCatalog()
+	        throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException {
+		initManager();
+		HashSet<String> graphUris = (HashSet<String>) manager.getNamedGraphs(datasetURI + "2");
+		assertTrue(graphUris.contains(namedGraphURI + "2"));
+	}
+
+	@Test
+	public final void testDuplicateProject() throws AldapaException, URISyntaxException, IOException {
+		thrown.expect(ProjectExistsException.class);
+		initManager();
+		manager.addProject(projectName);
+	}
+
+	@Test
+	public final void testDuplicateCatalog() throws AldapaException, IOException, URISyntaxException {
+		thrown.expect(CatalogExistsException.class);
+		initManager();
+		manager.addCatalog(catalogName, projectURI);
+	}
+
+	@Test
+	public final void testDuplicateDataset() throws AldapaException, IOException, URISyntaxException {
+		thrown.expect(DatasetExistsException.class);
+		initManager();
+		manager.addDataset(datasetName, catalogURI);
+	}
+
+	@Test
+	public final void testDuplicateNamedGraph() throws AldapaException, IOException, URISyntaxException {
+		thrown.expect(NamedGraphExistsException.class);
+		initManager();
+		manager.addNamedGraph(graphName, datasetURI);
 	}
 	
-	@Test
-	public final void testDeleteProject () throws IOException, URISyntaxException, AldapaException {
-		
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		manager.addNamedGraph(graph_name, dataset_uri);
+	// not all the tests need initManager, so it won't be a @before like reset
+	private void initManager() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException {
+		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileFakeData);
+		Model model1 = Rio.parse(inStream, tmpUri, RDFFormat.TRIG);
+		manager.addProject(projectName);
+		manager.addCatalog(catalogName, projectURI);
+		manager.addDataset(datasetName, catalogURI);
+		manager.addNamedGraph(graphName, datasetURI);
 		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		manager.addNamedGraph(graph_name + "2", dataset_uri2);
+
+		InputStream inStream2 = FileUtils.getInstance().getInputStream(inputFileFakeData2);
+		Model model2 = Rio.parse(inStream2, tmpUri, RDFFormat.TRIG);
+		String projectUri2 = manager.addProject(projectName + "2");
+		String catalogUri2 = manager.addCatalog(catalogName + "2", projectUri2);
+		String datasetUri2 = manager.addDataset(datasetName + "2", catalogUri2);
+		manager.addNamedGraph(graphName + "2", datasetUri2);
 		manager.addData(model2);
-		
-		manager.flushGraph(null, test_data_output_dir + "project-before-deleted.trig", RDFFormat.TRIG);
-		manager.deleteProject(project_uri);
-		manager.flushGraph(null, test_data_output_dir + "project-deleted.trig", RDFFormat.TRIG);
-	}
-	@Test
-	public final void testDeleteCatalog () throws IOException, URISyntaxException, AldapaException {
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);
-		
-		manager.flushGraph(null, test_data_output_dir + "catalog-before-deleted.trig", RDFFormat.TRIG);
-		manager.deleteCatalog(catalog_uri);
-		manager.flushGraph(null, test_data_output_dir + "catalog-deleted.trig", RDFFormat.TRIG);
-	}
-	
-	@Test
-	public final void testDeleteDataset () throws IOException, URISyntaxException, AldapaException {
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);
-		
-		manager.flushGraph(null, test_data_output_dir + "dataset-before-deleted.trig", RDFFormat.TRIG);
-		manager.deleteDataset(dataset_uri);
-		manager.flushGraph(null, test_data_output_dir + "dataset-deleted.trig", RDFFormat.TRIG);
-	}
-	
-	@Test
-	public final void testDeleteNamedGraph () throws IOException, URISyntaxException, AldapaException {
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		String named_graph_uri = manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);
-		
-		manager.flushGraph(null, test_data_output_dir + "named-graph-before-deleted.trig", RDFFormat.TRIG);
-		manager.deleteNamedGraph(named_graph_uri);
-		manager.flushGraph(null, test_data_output_dir + "named-graph-deleted.trig", RDFFormat.TRIG);
-	}
-	
-	@Test
-	public final void testDeleteDataFromNamedGraph () throws IOException, URISyntaxException, AldapaException {
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		String named_graph_uri = manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);
-		
-		manager.flushGraph(null, test_data_output_dir + "data-named-graph-before-deleted.trig", RDFFormat.TRIG);
-		manager.deleteDataFromNamedGraph(named_graph_uri);
-		manager.flushGraph(null, test_data_output_dir + "data-named-graph-deleted.trig", RDFFormat.TRIG);
-	}
-	
-	@Test
-	public final void testGetProjects() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException{
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);	
-		
-		HashSet <String> project_uris = manager.getProjects();
-		
-		assertTrue(project_uris.contains(project_uri));
-		assertTrue(project_uris.contains(project_uri2));
-	}
-	
-	@Test
-	public final void testGetAllCatalogs() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException{
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);	
-		
-		HashSet <String> catalog_uris = manager.getCatalogs();
-				
-		assertTrue(catalog_uris.contains(catalog_uri));
-		assertTrue(catalog_uris.contains(catalog_uri2));
-	}
-	
-	@Test
-	public final void testGetCatalogsByProject() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException{
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);	
-		
-		HashSet <String> catalog_uris = manager.getCatalogs(project_uri2);
-				
-		assertFalse(catalog_uris.contains(catalog_uri));
-		assertTrue(catalog_uris.contains(catalog_uri2));
-	}
-	
-	@Test
-	public final void testGetAllDatasets() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException{
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);	
-		
-		HashSet <String> dataset_uris = manager.getDatasets();
-				
-		assertTrue(dataset_uris.contains(dataset_uri));
-		assertTrue(dataset_uris.contains(dataset_uri2));
-	}
-	
-	@Test
-	public final void testGetDatasetsByCatalog() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException{
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);	
-		
-		HashSet <String> dataset_uris = manager.getDatasets(catalog_uri2);
-				
-		assertFalse(dataset_uris.contains(dataset_uri));
-		assertTrue(dataset_uris.contains(dataset_uri2));
-	}
-	
-	@Test
-	public final void testGetAllNamedGraphs() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException{
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		String graph_uri = manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		String graph_uri2 = manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);	
-		
-		HashSet <String> graph_uris = manager.getNamedGraphs();	
-		assertTrue(graph_uris.contains(graph_uri));
-		assertTrue(graph_uris.contains(graph_uri2));
-	}
-	
-	@Test
-	public final void testGetNamedGraphsByCatalog() throws RDFParseException, UnsupportedRDFormatException, IOException, AldapaException, URISyntaxException{
-		InputStream inStream = FileUtils.getInstance().getInputStream(input_file_fake_data);
-		Model model1 = Rio.parse(inStream, tmp_uri, RDFFormat.TRIG);
-		String project_uri = manager.addProject(project_name);
-		String catalog_uri = manager.addCatalog(catalog_name, project_uri);
-		String dataset_uri = manager.addDataset(dataset_name, catalog_uri);
-		String graph_uri = manager.addNamedGraph(graph_name, dataset_uri);
-		manager.addData(model1);
-		
-		InputStream inStream2 = FileUtils.getInstance().getInputStream(input_file_fake_data2);
-		Model model2 = Rio.parse(inStream2, tmp_uri, RDFFormat.TRIG);
-		String project_uri2 = manager.addProject(project_name + "2");
-		String catalog_uri2 = manager.addCatalog(catalog_name + "2", project_uri2);
-		String dataset_uri2 = manager.addDataset(dataset_name + "2", catalog_uri2);
-		String graph_uri2 = manager.addNamedGraph(graph_name + "2", dataset_uri2);
-		manager.addData(model2);	
-		
-		HashSet <String> graph_uris = manager.getNamedGraphs(dataset_uri2);	
-		assertFalse(graph_uris.contains(graph_uri));
-		assertTrue(graph_uris.contains(graph_uri2));
 	}
 }
-

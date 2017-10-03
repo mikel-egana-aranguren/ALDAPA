@@ -4,11 +4,11 @@
 	<parent>
 		<groupId>es.eurohelp.lod.aldapa</groupId>
 		<artifactId>complete</artifactId>
-		<version>0.0.3</version>
+		<version>0.0.4</version>
 	</parent>
 	<groupId>es.eurohelp.lod.aldapa</groupId>
 	<artifactId>plugins</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<packaging>jar</packaging>
 	<name>ALDAPA plugins</name>
 	<description>Plugins that implement ALDAPA interfaces, to be used in pipelines</description>
@@ -16,7 +16,12 @@
 		<dependency>
 			<groupId>es.eurohelp.lod.aldapa</groupId>
 			<artifactId>core</artifactId>
-			<version>0.0.3</version>
+			<version>0.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.2.5</version>
 		</dependency>
 	</dependencies>
 </project>

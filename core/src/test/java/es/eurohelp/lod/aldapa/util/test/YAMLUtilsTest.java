@@ -25,7 +25,7 @@ public class YAMLUtilsTest {
 	@Test
 	public final void testParseSimpleYAML() {
 		InputStream in = FileUtils.getInstance().getInputStream("configuration.yml");
-		HashMap<String,String> keys_values = (new YAMLUtils()).parseSimpleYAML(in);
+		HashMap<String,String> keys_values = (HashMap<String, String>) (new YAMLUtils()).parseSimpleYAML(in);
 		assertEquals(keys_values.get("ALDAPA_CONFIG_FILE"), "configuration/aldapa-default-configuration.yml");
 	}
 }

@@ -34,11 +34,11 @@
 	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.247567997964374"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.988024000380936"^^<http://www.w3.org/2001/XMLSchema#double> .
 
-<http://lod.eurohelp.es/aldapa/catalog/calidadaire> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/euskadimedioambiente> ;
+<http://lod.eurohelp.es/aldapa/catalog/donosti-parkings> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/donosti-movilidad> ;
 	a <http://www.w3.org/ns/dcat#Catalog> ;
-	<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/estaciones> .
+	<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr> .
 
-<http://lod.eurohelp.es/aldapa/dataset/estaciones> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
-	<http://www.w3.org/ns/sparql-service-description#namedGraph> <http://euskadi.eus/graph/estaciones01> .
+<http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
+	<http://www.w3.org/ns/sparql-service-description#namedGraph> <http://euskadi.eus/graph/donosti-parkings-febr-001> .
 
-<http://lod.eurohelp.es/aldapa/project/euskadimedioambiente> a <http://xmlns.com/foaf/0.1/Project> .
+<http://lod.eurohelp.es/aldapa/project/donosti-movilidad> a <http://xmlns.com/foaf/0.1/Project> .
