@@ -29,6 +29,7 @@ import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetExistsException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetNotFoundException;
+import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
 import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
@@ -54,9 +55,15 @@ public class Manager {
 	private FileUtils fileutils;
 	private FileStore fileStore;
 	
+	private final String dirToken = "storeDirectory";
 	private final String aldapaConfigFileName = "ALDAPA_CONFIG_FILE";
+	private final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
+	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
+	private final String pluginClassName = "pluginClassName";
+	private final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
 	
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
+	
 
 	/**
 	 * 
@@ -70,21 +77,23 @@ public class Manager {
 	 *             the plugin class could not be instantiated
 	 * @throws ConfigurationException
 	 *             the configuration is incomplete
+	 * @throws FileStoreAlreadySetException 
 	 * 
 	 */
 	public Manager(ConfigurationManager configuredconfigmanager)
-	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException {
+	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException, FileStoreAlreadySetException {
 		configmanager = configuredconfigmanager;
 		fileutils = FileUtils.getInstance();
 		
 		// Initialise File Store
-		String fileStorePluginName = configmanager.getConfigPropertyValue("FILE_STORE_CONFIG_FILE", "pluginClassName");
+		String fileStorePluginName = configmanager.getConfigPropertyValue(fileStoreConfigFile, pluginClassName);
 		LOGGER.info("File Store plugin name: " + fileStorePluginName);
 		Class<?> fileStoreClass = Class.forName(fileStorePluginName);
 		fileStore = (FileStore) fileStoreClass.newInstance();
+		fileStore.setDirectoryPath(configmanager.getConfigPropertyValue(fileStoreConfigFile, dirToken));
 
 		// Initialise Triple Store
-		String storePluginName = configmanager.getConfigPropertyValue("TRIPLE_STORE_CONFIG_FILE", "pluginClassName");
+		String storePluginName = configmanager.getConfigPropertyValue(tripleStoreConfigFile, pluginClassName);
 		LOGGER.info("Triple Store plugin name: " + storePluginName);
 		Class<?> storeClass = Class.forName(storePluginName);
 		store = (RDFStore) storeClass.newInstance();
@@ -92,7 +101,7 @@ public class Manager {
 		LOGGER.info("Triple Store started");
 
 		// Initialise CSV2RDF transformer
-		String transformerPluginName = configmanager.getConfigPropertyValue("TRANSFORMER_CONFIG_FILE", "pluginClassName");
+		String transformerPluginName = configmanager.getConfigPropertyValue(transformerConfigFile, pluginClassName);
 		LOGGER.info("CSV2RDF transformer plugin name: " + transformerPluginName);
 		Class<?> transformerClass = Class.forName(transformerPluginName);
 		transformer = (CSV2RDFBatchConverter) transformerClass.newInstance();
