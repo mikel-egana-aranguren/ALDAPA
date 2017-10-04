@@ -23,7 +23,6 @@ import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.sail.memory.MemoryStore;
 
 import es.eurohelp.lod.aldapa.storage.InitRDFStore;
-import es.eurohelp.lod.aldapa.storage.RDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.util.MIMEType;
 

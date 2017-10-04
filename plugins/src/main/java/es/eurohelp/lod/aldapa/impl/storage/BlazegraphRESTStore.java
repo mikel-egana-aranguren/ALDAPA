@@ -28,7 +28,15 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
  * @author megana
  *
  */
-public class BlazegraphRESTStore extends HTTPClient implements RDFStore  {
+public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore  {
+
+	/**
+	 * @param sparqlEndpointURL
+	 */
+	public BlazegraphRESTStore(String sparqlEndpointURL) {
+		super(sparqlEndpointURL);
+		// TODO Auto-generated constructor stub
+	}
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 
