@@ -16,23 +16,7 @@ import org.eclipse.rdf4j.rio.RDFFormat;
  *
  */
 public interface RDFStore {
-	
-	/**
-	 * 
-	 * Start RDF store (allocate resources, probably configure, and start store)
-	 *
-	 */
-	
-	public void startRDFStore ();
-	
-	/**
-	 * 
-	 * Stop RDF store (close gracefully and liberate resources)
-	 *
-	 */
-	
-	public void stopRDFStore ();
- 
+	 
 	/**
 	 * 
 	 * Loads RDF data into an RDF store
@@ -129,5 +113,13 @@ public interface RDFStore {
 	 * @throws RDFStoreException
 	 */
 	public void execSPARQLUpdate (String pSPARQLquery) throws RDFStoreException;
+	
+	/**
+	 * 
+	 * Create a DB/context/... within the store
+	 * 
+	 * @param dbName
+	 */
+	public void createDB(String dbName);
 	
 }

@@ -22,6 +22,7 @@ import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
 import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.sail.memory.MemoryStore;
 
+import es.eurohelp.lod.aldapa.storage.InitRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.util.MIMEType;
@@ -33,7 +34,7 @@ import es.eurohelp.lod.aldapa.util.MIMEType;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public class MemoryRDFStore implements RDFStore {
+public class MemoryRDFStore implements InitRDFStore {
 
 	/**
 	 * 
@@ -160,5 +161,13 @@ public class MemoryRDFStore implements RDFStore {
 	
 	public void execSPARQLUpdate (String pSPARQLquery){
 		conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery).execute();		
+	}
+
+	/* (non-Javadoc)
+	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#createDB(java.lang.String)
+	 */
+	@Override
+	public void createDB(String dbName) {
+		
 	}
 }

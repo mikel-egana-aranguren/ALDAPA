@@ -34,6 +34,7 @@ import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
 import es.eurohelp.lod.aldapa.storage.FileStore;
+import es.eurohelp.lod.aldapa.storage.InitRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
@@ -92,14 +93,23 @@ public class Manager {
 		fileStore = (FileStore) fileStoreClass.newInstance();
 		fileStore.setDirectoryPath(configmanager.getConfigPropertyValue(fileStoreConfigFile, dirToken));
 
-		// Initialise Triple Store
+		// Initialise Triple Store: use reflection to determine interface implemented and act accordingly
 		String storePluginName = configmanager.getConfigPropertyValue(tripleStoreConfigFile, pluginClassName);
 		LOGGER.info("Triple Store plugin name: " + storePluginName);
 		Class<?> storeClass = Class.forName(storePluginName);
-		store = (RDFStore) storeClass.newInstance();
-		store.startRDFStore();
-		LOGGER.info("Triple Store started");
-
+		String storeInterface = storeClass.getInterfaces()[0].getName();
+		
+		LOGGER.info("Store implements interface "  + storeInterface);
+		if(storeInterface.equals("es.eurohelp.lod.aldapa.storage.InitRDFStore")){
+			store = (InitRDFStore) storeClass.newInstance();
+			((InitRDFStore) store).startRDFStore();
+			LOGGER.info("Triple Store started");
+		}
+		else{
+			store = (RDFStore) storeClass.newInstance();
+			LOGGER.info("Triple Store started");
+		}
+		
 		// Initialise CSV2RDF transformer
 		String transformerPluginName = configmanager.getConfigPropertyValue(transformerConfigFile, pluginClassName);
 		LOGGER.info("CSV2RDF transformer plugin name: " + transformerPluginName);
