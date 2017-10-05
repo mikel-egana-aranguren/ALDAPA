@@ -61,7 +61,6 @@ public class MemoryRDFStoreTest {
 	@Test
 	public final void testSaveModel() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
 		MemoryRDFStore mem_store = new MemoryRDFStore();
-		mem_store.startRDFStore();
 		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileGraphs);
 		Model model = Rio.parse(inStream, tmpUri, RDFFormat.TRIG);
 		mem_store.saveModel(model);
@@ -82,7 +81,6 @@ public class MemoryRDFStoreTest {
 	@Test
 	public final void testFlushNamedGraph() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
 		MemoryRDFStore mem_store = new MemoryRDFStore();
-		mem_store.startRDFStore();
 		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileGraphs);
 		Model model = Rio.parse(inStream, tmpUri, RDFFormat.TRIG);
 		mem_store.saveModel(model);
@@ -100,7 +98,6 @@ public class MemoryRDFStoreTest {
 	@Test
 	public final void testFlushModel() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
 		MemoryRDFStore mem_store = new MemoryRDFStore();
-		mem_store.startRDFStore();
 		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileNoGraphs);
 		Model model = Rio.parse(inStream, tmpUri, RDFFormat.TURTLE);
 		mem_store.saveModel(model);
@@ -115,7 +112,6 @@ public class MemoryRDFStoreTest {
 	public final void testExecSPARQLBooleanQuery() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
 		boolean query_result = false;
 		MemoryRDFStore mem_store = new MemoryRDFStore();
-		mem_store.startRDFStore();
 		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileGraphs);
 		Model model = Rio.parse(inStream, tmpUri, RDFFormat.TRIG);
 		mem_store.saveModel(model);
@@ -126,7 +122,6 @@ public class MemoryRDFStoreTest {
 	@Test
 	public final void testexecSPARQLUpdateDelete() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
 		MemoryRDFStore mem_store = new MemoryRDFStore();
-		mem_store.startRDFStore();
 		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileGraphs);
 		Model model = Rio.parse(inStream, tmpUri, RDFFormat.TRIG);
 		mem_store.saveModel(model);

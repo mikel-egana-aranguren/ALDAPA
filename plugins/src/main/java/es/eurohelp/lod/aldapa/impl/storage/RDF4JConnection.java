@@ -37,6 +37,9 @@ abstract public class RDF4JConnection {
 		LOGGER.info("Starting and connecting to " + repo.getClass().getSimpleName());
 	}
 	
+	public synchronized RepositoryConnection getConnection(){
+		return conn;
+	}
 	public void shutdownAtOnce (){
 		LOGGER.info("Closing connection and shutting down " + repo.getClass().getSimpleName());
 		conn.close();
