@@ -3,32 +3,44 @@
  */
 package es.eurohelp.lod.aldapa.impl.storage;
 
-import java.io.FileOutputStream;
 
-import org.eclipse.rdf4j.model.Model;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
-import org.eclipse.rdf4j.rio.RDFFormat;
 
-import es.eurohelp.lod.aldapa.storage.InitRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 
 /**
+ * 
+ * A connection to an RDF4J repository (http://docs.rdf4j.org/programming/#_the_repository_api)
+ * 
  * @author megana
  *
  */
-public class RDF4JConnection {
-	Repository repo;
-	RepositoryConnection conn;
+abstract public class RDF4JConnection {
+	private static final Logger LOGGER = LogManager.getLogger(RDF4JConnection.class);
+	
+	private Repository repo;
+	private RepositoryConnection conn;
+	
+	public RDF4JConnection (){}
 	
 	public RDF4JConnection (Repository newRepo) {
 		repo = newRepo;
 		repo.initialize();
 		conn = repo.getConnection();
 		conn.begin();
+		LOGGER.info("Starting and connecting to " + repo.getClass().getSimpleName());
+	}
+	
+	public void shutdownAtOnce (){
+		LOGGER.info("Closing connection and shutting down " + repo.getClass().getSimpleName());
+		conn.close();
+		repo.shutDown();
 	}
 	
 	public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException {

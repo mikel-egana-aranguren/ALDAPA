@@ -16,6 +16,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.TupleQueryResult;
+import org.eclipse.rdf4j.repository.sparql.SPARQLRepository;
 import org.eclipse.rdf4j.rio.RDFFormat;
 
 import es.eurohelp.lod.aldapa.storage.RDFStore;
@@ -35,7 +36,6 @@ public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore
 	 */
 	public BlazegraphRESTStore(String sparqlEndpointURL) {
 		super(sparqlEndpointURL);
-		// TODO Auto-generated constructor stub
 	}
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
@@ -84,42 +84,6 @@ public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore
 	}
 
 	/* (non-Javadoc)
-	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#execSPARQLGraphQuery(java.lang.String)
-	 */
-	@Override
-	public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#execSPARQLTupleQuery(java.lang.String)
-	 */
-	@Override
-	public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) throws RDFStoreException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#execSPARQLBooleanQuery(java.lang.String)
-	 */
-	@Override
-	public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#execSPARQLUpdate(java.lang.String)
-	 */
-	@Override
-	public void execSPARQLUpdate(String pSPARQLquery) throws RDFStoreException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
 	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#createDB(java.lang.String)
 	 */
 	@Override
@@ -127,5 +91,7 @@ public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }
