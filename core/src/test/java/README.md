@@ -1,0 +1,1 @@
+Important: in order to run the tests of the core, the plugins jar should be in the classpath, since the core uses some basic, default plugins

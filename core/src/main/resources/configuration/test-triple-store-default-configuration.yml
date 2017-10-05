@@ -4,7 +4,7 @@ comment: in memory triple store that will be dumped when the program finishes, o
 author: Mikel Egana Aranguren
 
 # Plugin with actual code for accesing the Triple Store
-pluginClassName: es.eurohelp.lod.aldapa.storage.TestsMemoryRDFStore
+pluginClassName: es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore
     
     
 #- url: http://localhost:9999
