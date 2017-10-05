@@ -1,6 +1,7 @@
 package es.eurohelp.lod.aldapa.storage;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.query.GraphQueryResult;
@@ -119,7 +120,8 @@ public interface RDFStore {
 	 * Create a DB/context/... within the store
 	 * 
 	 * @param dbName
+	 * @throws IOException 
 	 */
-	public void createDB(String dbName);
+	public void createDB(String dbName) throws IOException;
 	
 }
