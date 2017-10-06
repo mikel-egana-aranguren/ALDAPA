@@ -122,4 +122,13 @@ public class MemoryRDFStore extends RDF4JConnection implements RDFStore {
 	public void createDB(String dbName) {
 		throw new UnsupportedOperationException("This functionality has not been implemented yet");
 	}
+
+	/* (non-Javadoc)
+	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#setDB(java.lang.String)
+	 */
+	@Override
+	public void setDB(String dbName) {
+		// TODO Auto-generated method stub
+		
+	}
 }

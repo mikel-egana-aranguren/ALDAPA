@@ -4,10 +4,10 @@
 <!-- -->
 <!-- NEW KB NAMESPACE (required). -->
 <!-- -->
-<entry key="com.bigdata.rdf.sail.namespace">MY_NAMESPACE</entry>
+<entry key="com.bigdata.rdf.sail.namespace">ALDAPA7</entry>
 <!-- -->
 <!-- Specify any KB specific properties here to override defaults for the BigdataSail -->
 <!-- AbstractTripleStore, or indices in the namespace of the new KB instance. -->
 <!-- -->
-<entry key="com.bigdata.rdf.store.AbstractTripleStore.quads">false</entry>
+<entry key="com.bigdata.rdf.store.AbstractTripleStore.quads">true</entry>
 </properties>

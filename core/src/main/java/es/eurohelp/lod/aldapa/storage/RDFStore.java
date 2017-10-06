@@ -121,7 +121,9 @@ public interface RDFStore {
 	 * 
 	 * @param dbName
 	 * @throws IOException 
+	 * @throws RDFStoreException 
 	 */
-	public void createDB(String dbName) throws IOException;
+	public void createDB(String dbName) throws IOException, RDFStoreException;
 	
+	public void setDB(String dbName) throws RDFStoreException;
 }

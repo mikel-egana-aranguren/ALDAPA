@@ -114,6 +114,15 @@ public class BlazegraphStore implements InitRDFStore {
 		// TODO Auto-generated method stub
 		
 	}
+
+	/* (non-Javadoc)
+	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#setDB(java.lang.String)
+	 */
+	@Override
+	public void setDB(String dbName) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

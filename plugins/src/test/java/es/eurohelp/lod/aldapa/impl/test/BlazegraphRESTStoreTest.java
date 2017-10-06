@@ -7,6 +7,10 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.util.ModelBuilder;
+import org.eclipse.rdf4j.model.vocabulary.FOAF;
+import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,13 +18,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore;
+import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 
 /**
  * @author megana
  *
  */
 public class BlazegraphRESTStoreTest {
-	
+
 	static BlazegraphRESTStore store = null;
 
 	/**
@@ -53,7 +58,8 @@ public class BlazegraphRESTStoreTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#BlazegraphRESTStore(java.lang.String)}.
+	 * Test method for
+	 * {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#BlazegraphRESTStore(java.lang.String)}.
 	 */
 	@Test
 	public final void testBlazegraphRESTStore() {
@@ -62,14 +68,23 @@ public class BlazegraphRESTStoreTest {
 
 	/**
 	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#saveModel(org.eclipse.rdf4j.model.Model)}.
+	 * @throws RDFStoreException 
 	 */
 	@Test
-	public final void testSaveModel() {
-		fail("Not yet implemented"); // TODO
+	public final void testSaveModel() throws RDFStoreException {
+		ModelBuilder builder = new ModelBuilder();
+		builder
+				.setNamespace("ex", "http://example.org/")
+				.subject("ex:Picasso")
+					.add(RDF.TYPE, "ex:Artist")
+					.add(FOAF.FIRST_NAME, "Pablo");
+		Model model = builder.build();
+		store.saveModel(model);
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#flushGraph(java.lang.String, java.io.FileOutputStream, org.eclipse.rdf4j.rio.RDFFormat)}.
+	 * Test method for
+	 * {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#flushGraph(java.lang.String, java.io.FileOutputStream, org.eclipse.rdf4j.rio.RDFFormat)}.
 	 */
 	@Test
 	public final void testFlushGraph() {
@@ -86,16 +101,18 @@ public class BlazegraphRESTStoreTest {
 
 	/**
 	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#createDB(java.lang.String)}.
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
+	 * @throws RDFStoreException
 	 */
 	@Test
-	public final void testCreateDB() throws IOException {
-		store.createDB("ALDAPA-3");
-		fail("Not yet implemented"); // TODO
+	public final void testCreateDB() throws IOException, RDFStoreException {
+		store.createDB("ALDAPA5");
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.RDF4JConnection#execSPARQLGraphQuery(java.lang.String)}.
+	 * Test method for
+	 * {@link es.eurohelp.lod.aldapa.impl.storage.RDF4JConnection#execSPARQLGraphQuery(java.lang.String)}.
 	 */
 	@Test
 	public final void testExecSPARQLGraphQuery() {
@@ -103,7 +120,8 @@ public class BlazegraphRESTStoreTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.RDF4JConnection#execSPARQLTupleQuery(java.lang.String)}.
+	 * Test method for
+	 * {@link es.eurohelp.lod.aldapa.impl.storage.RDF4JConnection#execSPARQLTupleQuery(java.lang.String)}.
 	 */
 	@Test
 	public final void testExecSPARQLTupleQuery() {
@@ -111,7 +129,8 @@ public class BlazegraphRESTStoreTest {
 	}
 
 	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.RDF4JConnection#execSPARQLBooleanQuery(java.lang.String)}.
+	 * Test method for
+	 * {@link es.eurohelp.lod.aldapa.impl.storage.RDF4JConnection#execSPARQLBooleanQuery(java.lang.String)}.
 	 */
 	@Test
 	public final void testExecSPARQLBooleanQuery() {
