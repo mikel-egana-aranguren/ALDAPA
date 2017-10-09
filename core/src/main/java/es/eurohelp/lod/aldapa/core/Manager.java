@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.http.MethodNotSupportedException;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
@@ -424,8 +425,10 @@ public class Manager {
 	 * @param namedGraphURI
 	 * @param model
 	 * @throws RDFStoreException
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
 	 */
-	public void addData(Model model) throws RDFStoreException {
+	public void addData(Model model) throws RDFStoreException, ClientProtocolException, IOException {
 		store.saveModel(model);
 	}
 

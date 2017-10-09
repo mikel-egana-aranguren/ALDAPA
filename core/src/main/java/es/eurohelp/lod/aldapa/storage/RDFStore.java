@@ -3,6 +3,7 @@ package es.eurohelp.lod.aldapa.storage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.http.client.ClientProtocolException;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.TupleQueryResult;
@@ -24,11 +25,13 @@ public interface RDFStore {
 	 * 
 	 * @param model
 	 *            a RDF4J model containing RDF graphs
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
 	 *            
 	 * @throws an RDF Store exception
 	 */
 	
-	public void saveModel(Model model) throws RDFStoreException;
+	public void saveModel(Model model) throws RDFStoreException, ClientProtocolException, IOException;
 	
 	/**
 	 * 

@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
+import org.apache.http.client.ClientProtocolException;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
@@ -69,9 +70,11 @@ public class BlazegraphRESTStoreTest {
 	/**
 	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#saveModel(org.eclipse.rdf4j.model.Model)}.
 	 * @throws RDFStoreException 
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
 	 */
 	@Test
-	public final void testSaveModel() throws RDFStoreException {
+	public final void testSaveModel() throws RDFStoreException, ClientProtocolException, IOException {
 		ModelBuilder builder = new ModelBuilder();
 		builder
 				.setNamespace("ex", "http://example.org/")
@@ -107,7 +110,7 @@ public class BlazegraphRESTStoreTest {
 	 */
 	@Test
 	public final void testCreateDB() throws IOException, RDFStoreException {
-		store.createDB("ALDAPA5");
+		store.createDB("ALDAPA");
 	}
 
 	/**

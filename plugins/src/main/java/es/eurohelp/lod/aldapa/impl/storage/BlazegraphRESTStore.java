@@ -4,9 +4,12 @@
 package es.eurohelp.lod.aldapa.impl.storage;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -15,13 +18,18 @@ import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.BasicHttpEntity;
 import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.entity.FileEntity;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.Rio;
 
 import es.eurohelp.lod.aldapa.storage.RDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
@@ -37,9 +45,16 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
 public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore {
 	
 	// TODO abstract all the HTTP stuff into an object
-
 	// TODO get these from plugin config file
-	private static final String blazegraphInstanceURL = "http://localhost:9999";
+	
+	
+	
+//	private static final String blazegraphInstanceURL = "http://localhost:9999";
+	
+	
+	private static final String blazegraphInstanceURL = "http://172.16.0.81:58080";
+	
+	
 	private static final String xmlNSName = "MY_NAMESPACE";
 	private static final String blazegraphNamespaceAPIPath = "/blazegraph/namespace";
 	private static final String blazegraphquadsXMLFile = "blazegraphquads.xml";
@@ -63,14 +78,18 @@ public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore
 	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#saveModel(org.eclipse.rdf4j.model.Model)
 	 */
 	@Override
-	public void saveModel(Model model) throws RDFStoreException {
-//		CloseableHttpClient httpclient = HttpClients.createDefault();
-//		HttpPost post = new HttpPost(blazegraphInstanceURL + blazegraphSPARQLPath);
-//		
-//		EntityBuilder.create().setStream(stream)
-//		post.setEntity(entity);
-//		post.addHeader("Content-Type", "application/xml");
-//		HttpResponse response = httpclient.execute(post);
+	public void saveModel(Model model) throws RDFStoreException, ClientProtocolException, IOException {
+		// TODO: not optimised!!! See issue 
+		StringWriter stringwriter = new StringWriter();
+		Rio.write(model, stringwriter, RDFFormat.RDFXML);
+		String stringModel = stringwriter.toString();
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpPost post = new HttpPost(blazegraphInstanceURL +  blazegraphSPARQLPath);
+		StringEntity stringEntity = new StringEntity(stringModel);
+		post.setEntity(stringEntity);
+		post.addHeader("Content-Type", "application/rdf+xml");
+		HttpResponse response = httpclient.execute(post);
+		LOGGER.info(response.getStatusLine());
 	}
 
 	/*
@@ -106,7 +125,7 @@ public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore
 		} else {
 			String blazegraphquads = FileUtils.getInstance().fileToString(blazegraphquadsXMLFile);
 			String blazegraphquadsResolved = blazegraphquads.replace(xmlNSName, dbName);
-			String completeURL = blazegraphInstanceURL + blazegraphNamespaceAPIPath;
+			String completeURL = blazegraphInstanceURL + "/blazegraph/kb/ALDAPA/sparql";
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 			HttpPost post = new HttpPost(completeURL);
 			HttpEntity entity = new ByteArrayEntity(blazegraphquadsResolved.getBytes("UTF-8"));
