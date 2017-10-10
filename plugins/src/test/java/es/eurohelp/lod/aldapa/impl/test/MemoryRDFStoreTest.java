@@ -32,6 +32,20 @@ public class MemoryRDFStoreTest {
 	private final String dataGraphURI = "http://lod.eurohelp.es/graph/dataset-graph001";
 	private final String metadataGraphURI = "http://lod.eurohelp.es/aldapa/metadata";
 	private final String tmpUri = "http://lod.eurohelp.es/MemoryRDFTests";
+	private static final String tupleQuery = 
+			"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + 
+			"PREFIX foaf:<http://xmlns.com/foaf/0.1/> " + 
+			"SELECT ?project WHERE { " + 
+			"?project rdf:type foaf:Project . " + 
+			"}";
+	private static final String graphQuery = 
+			"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + 
+			"CONSTRUCT {"
+			+ "?o <http://example.com/prop> ?s ."
+			+ "}"
+			+ "WHERE { " + 
+			"?s rdf:type ?o . " + 
+			"}";
 	private String booleanQueryAsk = 
 								"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + 
 								"PREFIX foaf:<http://xmlns.com/foaf/0.1/> " + 
@@ -49,6 +63,18 @@ public class MemoryRDFStoreTest {
 								"?project rdf:type foaf:Project . " + 
 								"}";
 
+	
+//	@Before
+//	public void setUp() throws Exception {
+//	}
+//
+//
+//	@After
+//	public void tearDown() throws Exception {
+//	}
+	
+	
+	
 	/**
 	 * Test method for
 	 * {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#saveModel(org.openrdf.model.Model)}.
@@ -129,4 +155,17 @@ public class MemoryRDFStoreTest {
 		mem_store.flushGraph(metadataGraphURI, new FileOutputStream(outputFileNoExtension + "MetaDataProjectRemoved" + ".trig"), RDFFormat.TRIG);
 		mem_store.stopRDFStore();
 	}
+	
+	@Test 
+	public final void testexecSPARQLTupleQuery(){
+		MemoryRDFStore mem_store = new MemoryRDFStore();
+		mem_store.execSPARQLTupleQuery(tupleQuery);
+	}
+	
+	@Test
+	public final void testexecSPARQLGraphQuery() throws RDFStoreException{
+		MemoryRDFStore mem_store = new MemoryRDFStore();
+		mem_store.execSPARQLGraphQuery(graphQuery);
+	}
+	
 }

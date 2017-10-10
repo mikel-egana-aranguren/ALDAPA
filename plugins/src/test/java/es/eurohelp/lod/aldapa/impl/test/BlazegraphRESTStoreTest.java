@@ -27,7 +27,7 @@ public class BlazegraphRESTStoreTest {
 
 	private static BlazegraphRESTStore store = null;
 	private static final String blazegraphSparqlendpoint = "http://172.16.0.81:58080/blazegraph/sparql"; 
-	private static final String dbName = "ALDAPAtests";
+	private static final String dbName = "ALDAPA5";
 
 	/**
 	 * @throws java.lang.Exception
@@ -52,6 +52,8 @@ public class BlazegraphRESTStoreTest {
 					.add(FOAF.FIRST_NAME, "Pablo");
 		Model model = builder.build();
 		store.saveModel(model);
+		
+		
 		
 		// TODO: SPARQL query to verify that model has been added
 	}
