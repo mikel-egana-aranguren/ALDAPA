@@ -128,5 +128,5 @@ public interface RDFStore {
 	 */
 	public void createDB(String dbName) throws IOException, RDFStoreException;
 	
-	public void setDB(String dbName) throws RDFStoreException;
+	public void setDB(String dbName) throws RDFStoreException, ClientProtocolException, IOException;
 }

@@ -12,9 +12,7 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,52 +25,23 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
  */
 public class BlazegraphRESTStoreTest {
 
-	static BlazegraphRESTStore store = null;
+	private static BlazegraphRESTStore store = null;
+	private static final String blazegraphSparqlendpoint = "http://172.16.0.81:58080/blazegraph/sparql"; 
+	private static final String dbName = "ALDAPAtests";
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		store = new BlazegraphRESTStore("http://localhost:9999/blazegraph/sparql");
+		store = new BlazegraphRESTStore(blazegraphSparqlendpoint, dbName);
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for
-	 * {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#BlazegraphRESTStore(java.lang.String)}.
-	 */
 	@Test
 	public final void testBlazegraphRESTStore() {
-		fail("Not yet implemented"); // TODO
+		assertNotNull(store);
 	}
 
-	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#saveModel(org.eclipse.rdf4j.model.Model)}.
-	 * @throws RDFStoreException 
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
-	 */
 	@Test
 	public final void testSaveModel() throws RDFStoreException, ClientProtocolException, IOException {
 		ModelBuilder builder = new ModelBuilder();
@@ -83,69 +52,68 @@ public class BlazegraphRESTStoreTest {
 					.add(FOAF.FIRST_NAME, "Pablo");
 		Model model = builder.build();
 		store.saveModel(model);
+		
+		// TODO: SPARQL query to verify that model has been added
 	}
-
-	/**
-	 * Test method for
-	 * {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#flushGraph(java.lang.String, java.io.FileOutputStream, org.eclipse.rdf4j.rio.RDFFormat)}.
-	 */
+	
 	@Test
-	public final void testFlushGraph() {
-		fail("Not yet implemented"); // TODO
+	public final void testGetDBs() throws ClientProtocolException, IOException{
+		assertTrue(store.getDBs().contains("kb"));
 	}
-
-	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#deleteGraph(java.lang.String)}.
-	 */
+	
 	@Test
-	public final void testDeleteGraph() {
-		fail("Not yet implemented"); // TODO
+	public final void testDeleteDB () throws RDFStoreException, IOException {
+		store.createDB("ALDAPAToDelete");
+		store.deleteDB("ALDAPAToDelete");	
 	}
-
-	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore#createDB(java.lang.String)}.
-	 * 
-	 * @throws IOException
-	 * @throws RDFStoreException
-	 */
+	
 	@Test
 	public final void testCreateDB() throws IOException, RDFStoreException {
-		store.createDB("ALDAPA");
+		store.createDB("ALDAPAcreated");
 	}
-
-	/**
-	 * Test method for
-	 * {@link es.eurohelp.lod.aldapa.impl.storage.RDF4JConnection#execSPARQLGraphQuery(java.lang.String)}.
-	 */
-	@Test
-	public final void testExecSPARQLGraphQuery() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for
-	 * {@link es.eurohelp.lod.aldapa.impl.storage.RDF4JConnection#execSPARQLTupleQuery(java.lang.String)}.
-	 */
-	@Test
-	public final void testExecSPARQLTupleQuery() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for
-	 * {@link es.eurohelp.lod.aldapa.impl.storage.RDF4JConnection#execSPARQLBooleanQuery(java.lang.String)}.
-	 */
-	@Test
-	public final void testExecSPARQLBooleanQuery() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.impl.storage.RDF4JConnection#execSPARQLUpdate(java.lang.String)}.
-	 */
-	@Test
-	public final void testExecSPARQLUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
+	
+//	@Test
+//	public final void testFlushGraph() {
+//		fail("Not yet implemented"); // TODO
+//	}
+//
+//	@Test
+//	public final void testDeleteGraph() {
+//		fail("Not yet implemented"); // TODO
+//	}
+//
+//
+//	@Test
+//	public final void testExecSPARQLGraphQuery() {
+//		fail("Not yet implemented"); // TODO
+//	}
+//
+//	@Test
+//	public final void testExecSPARQLTupleQuery() {
+//		fail("Not yet implemented"); // TODO
+//	}
+//
+//	@Test
+//	public final void testExecSPARQLBooleanQuery() {
+//		fail("Not yet implemented"); // TODO
+//	}
+//
+//	@Test
+//	public final void testExecSPARQLUpdate() {
+//		fail("Not yet implemented"); // TODO
+//	}
+	
+//	@AfterClass
+//	public static void tearDownAfterClass() throws Exception {
+//	}
+//
+//
+//	@Before
+//	public void setUp() throws Exception {
+//	}
+//
+//
+//	@After
+//	public void tearDown() throws Exception {
+//	}
 }
