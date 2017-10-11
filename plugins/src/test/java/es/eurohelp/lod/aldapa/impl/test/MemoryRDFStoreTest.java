@@ -38,10 +38,9 @@ public class MemoryRDFStoreTest {
 	        + "SELECT ?project WHERE { " + "?project rdf:type foaf:Project . " + "}";
 	private static final String graphQuery = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "CONSTRUCT {"
 	        + "?o <http://example.com/prop> ?s ." + "}" + "WHERE { " + "?s rdf:type ?o . " + "}";
-	private String booleanQueryAsk = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "PREFIX foaf:<http://xmlns.com/foaf/0.1/> "
+	private static final String booleanQueryAsk = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "PREFIX foaf:<http://xmlns.com/foaf/0.1/> "
 	        + "ASK WHERE { " + "?project rdf:type foaf:Project . " + "}";
-
-	private String queryDelete = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "PREFIX foaf:<http://xmlns.com/foaf/0.1/> "
+	private static final String queryDelete = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "PREFIX foaf:<http://xmlns.com/foaf/0.1/> "
 	        + "DELETE {" + "?project rdf:type foaf:Project . " + "}" + "WHERE { " + "?project rdf:type foaf:Project . " + "}";
 
 	private MemoryRDFStore mem_store = null;

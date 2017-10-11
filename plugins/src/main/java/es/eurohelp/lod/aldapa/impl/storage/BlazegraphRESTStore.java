@@ -63,9 +63,9 @@ public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore
 	 * @throws RDFStoreException 
 	 */
 
-	public BlazegraphRESTStore(String sparqlEndpointURL, String dbName) throws RDFStoreException, IOException {
-		super(sparqlEndpointURL);
-		blazegraphBaseURL = sparqlEndpointURL.replace("/sparql", "");
+	public BlazegraphRESTStore(String blazegraphURL, String dbName) throws RDFStoreException, IOException {
+		super(blazegraphURL + "/namespace" + "/" + dbName + "/sparql");
+		blazegraphBaseURL = blazegraphURL;
 		this.createDB(dbName);
 	}
 
@@ -177,8 +177,6 @@ public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore
 			blazegraphNSName = dbName;
 		}
 	}
-	
-	
 	
 	// TODO abstract all the HTTP stuff into an static HTTPUtils
 	

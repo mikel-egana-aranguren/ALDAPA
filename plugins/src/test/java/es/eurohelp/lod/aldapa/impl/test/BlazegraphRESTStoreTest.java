@@ -6,13 +6,18 @@ package es.eurohelp.lod.aldapa.impl.test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
-
+import org.eclipse.rdf4j.query.BindingSet;
+import org.eclipse.rdf4j.query.GraphQueryResult;
+import org.eclipse.rdf4j.query.TupleQueryResult;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,15 +31,39 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 public class BlazegraphRESTStoreTest {
 
 	private static BlazegraphRESTStore store = null;
-	private static final String blazegraphSparqlendpoint = "http://172.16.0.81:58080/blazegraph/sparql"; 
-	private static final String dbName = "ALDAPA5";
+	private static final String blazegraph = "http://172.16.0.81:58080/blazegraph";
+	private static final String dbName = "ALDAPAtest";
+	private static final String tupleQuery = "SELECT * WHERE {?s ?p ?o}";
+	private static final String graphQuery = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "CONSTRUCT {"
+	        + "?o <http://example.com/prop> ?s ." + "}" + "WHERE { " + "?s rdf:type ?o . " + "}";
+	private static final String booleanQueryAsk = "PREFIX foaf:<http://xmlns.com/foaf/0.1/> PREFIX ex:<http://example.org/> ASK {ex:Picasso foaf:firstName ?name}";
+	private static final String queryDelete = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "PREFIX ex:<http://example.org/> "
+	        + "DELETE {" + "?artist rdf:type ex:Artist . " + "}" + "WHERE { " + "?artist rdf:type ex:Artist . " + "}";
+	private static final String stmt = "(http://example.org/Artist, http://example.com/prop, http://example.org/Picasso)";
+	private static final String subject = "http://example.org/Picasso";
+	private static final String predicate = "http://xmlns.com/foaf/0.1/firstName";
+	private static final String object = "\"Pablo\"^^<http://www.w3.org/2001/XMLSchema#string>";
+	private static final String ALDAPAToDelete = "ALDAPAToDelete";
+	private static final String ALDAPAcreated = "ALDAPAcreated";
 
 	/**
+	 * @throws IOException
+	 * @throws RDFStoreException
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		store = new BlazegraphRESTStore(blazegraphSparqlendpoint, dbName);
+	public static void setUpBeforeClass() throws RDFStoreException, IOException {
+		store = new BlazegraphRESTStore(blazegraph, dbName);
+		ModelBuilder builder = new ModelBuilder();
+		builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
+		Model model = builder.build();
+		store.saveModel(model);
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws ClientProtocolException, RDFStoreException, IOException {
+		store.deleteDB(dbName);
+		store.shutdownAtOnce();
 	}
 
 	@Test
@@ -44,78 +73,78 @@ public class BlazegraphRESTStoreTest {
 
 	@Test
 	public final void testSaveModel() throws RDFStoreException, ClientProtocolException, IOException {
-		ModelBuilder builder = new ModelBuilder();
-		builder
-				.setNamespace("ex", "http://example.org/")
-				.subject("ex:Picasso")
-					.add(RDF.TYPE, "ex:Artist")
-					.add(FOAF.FIRST_NAME, "Pablo");
-		Model model = builder.build();
-		store.saveModel(model);
-		
-		
-		
-		// TODO: SPARQL query to verify that model has been added
+		assertTrue(store.execSPARQLBooleanQuery(booleanQueryAsk));
 	}
-	
+
 	@Test
-	public final void testGetDBs() throws ClientProtocolException, IOException{
+	public final void testGetDBs() throws ClientProtocolException, IOException {
 		assertTrue(store.getDBs().contains("kb"));
 	}
-	
+
 	@Test
-	public final void testDeleteDB () throws RDFStoreException, IOException {
-		store.createDB("ALDAPAToDelete");
-		store.deleteDB("ALDAPAToDelete");	
+	public final void testDeleteDB() throws RDFStoreException, IOException {
+		store.createDB(ALDAPAToDelete);
+		store.deleteDB(ALDAPAToDelete);
+		assertFalse(store.getDBs().contains(ALDAPAToDelete));
+		store.setDB(dbName);
 	}
-	
+
 	@Test
 	public final void testCreateDB() throws IOException, RDFStoreException {
-		store.createDB("ALDAPAcreated");
+		store.createDB(ALDAPAcreated);
+		assertTrue(store.getDBs().contains(ALDAPAcreated));
+		store.setDB(dbName);
+		store.deleteDB(ALDAPAcreated);
 	}
-	
-//	@Test
-//	public final void testFlushGraph() {
-//		fail("Not yet implemented"); // TODO
-//	}
-//
-//	@Test
-//	public final void testDeleteGraph() {
-//		fail("Not yet implemented"); // TODO
-//	}
-//
-//
-//	@Test
-//	public final void testExecSPARQLGraphQuery() {
-//		fail("Not yet implemented"); // TODO
-//	}
-//
-//	@Test
-//	public final void testExecSPARQLTupleQuery() {
-//		fail("Not yet implemented"); // TODO
-//	}
-//
-//	@Test
-//	public final void testExecSPARQLBooleanQuery() {
-//		fail("Not yet implemented"); // TODO
-//	}
-//
-//	@Test
-//	public final void testExecSPARQLUpdate() {
-//		fail("Not yet implemented"); // TODO
-//	}
-	
-//	@AfterClass
-//	public static void tearDownAfterClass() throws Exception {
-//	}
-//
-//
-//	@Before
-//	public void setUp() throws Exception {
-//	}
-//
-//
-//	@After
-//	public void tearDown() throws Exception {
-//	}
+
+	@Test
+	public final void testExecSPARQLGraphQuery() throws RDFStoreException {
+		GraphQueryResult result = store.execSPARQLGraphQuery(graphQuery);
+		boolean contains = false;
+		while (result.hasNext()) {
+			String resultStmt = result.next().toString();
+			if (resultStmt.equals(stmt)) {
+				contains = true;
+				break;
+			}
+		}
+		assertTrue(contains);
+	}
+
+	@Test
+	public final void testExecSPARQLTupleQuery() {
+		TupleQueryResult result = store.execSPARQLTupleQuery(tupleQuery);
+		List<String> bindingNames = result.getBindingNames();
+		boolean contains = false;
+		while (result.hasNext()) {
+			BindingSet bindingSet = result.next();
+			if (bindingSet.getValue(bindingNames.get(0)).toString().equals(subject)
+			        && bindingSet.getValue(bindingNames.get(1)).toString().equals(predicate)
+			        && bindingSet.getValue(bindingNames.get(2)).toString().equals(object)) {
+				contains = true;
+				break;
+			}
+		}
+		assertTrue(contains);
+	}
+
+	@Test
+	public final void testExecSPARQLUpdate() {
+		store.execSPARQLUpdate(queryDelete);
+	}
+
+	// @Test
+	// public final void testFlushGraph() {
+	// fail("Not yet implemented"); // TODO
+	// }
+	//
+	// @Test
+	// public final void testDeleteGraph() {
+	// fail("Not yet implemented"); // TODO
+	// }
+
+	// @Before
+	// public void setUp() throws Exception {
+	// }
+
 }
