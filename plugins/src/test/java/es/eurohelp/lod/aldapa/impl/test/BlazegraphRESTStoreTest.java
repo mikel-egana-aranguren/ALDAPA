@@ -5,6 +5,7 @@ package es.eurohelp.lod.aldapa.impl.test;
 
 import static org.junit.Assert.*;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.TupleQueryResult;
+import org.eclipse.rdf4j.rio.RDFFormat;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -133,18 +135,25 @@ public class BlazegraphRESTStoreTest {
 		store.execSPARQLUpdate(queryDelete);
 	}
 
-	// @Test
-	// public final void testFlushGraph() {
-	// fail("Not yet implemented"); // TODO
-	// }
-	//
-	// @Test
-	// public final void testDeleteGraph() {
-	// fail("Not yet implemented"); // TODO
-	// }
+	@Test
+	public final void testFlushGraph() throws RDFStoreException, ClientProtocolException, IOException {
+		ModelBuilder builder = new ModelBuilder();
+		builder.namedGraph("http://lod.eurohelp.es/graph/aldapaflush").setNamespace("ex", "http://lod.eurohelp.es/flush").subject("ex:Mikelflush")
+		        .add(RDF.TYPE, "ex:Humanflush").add(FOAF.FIRST_NAME, "Mikel Egana Aranguren flush flush flush");
+		Model model = builder.build();
+		store.saveModel(model);
+		store.flushGraph("http://lod.eurohelp.es/graph/aldapaflush", new FileOutputStream("data/BlazegraphRESTStoreTest-flushNamedGraph.trig"), RDFFormat.TRIG);
+		store.flushGraph(null, new FileOutputStream("data/BlazegraphRESTStoreTest-flushNullGraph.ttl"), RDFFormat.TURTLE);
+		store.deleteGraph("http://lod.eurohelp.es/graph/aldapaflush");	
+	}
 
-	// @Before
-	// public void setUp() throws Exception {
-	// }
-
+	@Test
+	public final void testDeleteGraph() throws RDFStoreException, ClientProtocolException, IOException {
+		ModelBuilder builder = new ModelBuilder();
+		builder.namedGraph("http://lod.eurohelp.es/graph/aldapa").setNamespace("ex", "http://lod.eurohelp.es/").subject("ex:Mikel")
+		        .add(RDF.TYPE, "ex:Human").add(FOAF.FIRST_NAME, "Mikel Egana Aranguren");
+		Model model = builder.build();
+		store.saveModel(model);
+		store.deleteGraph("http://lod.eurohelp.es/graph/aldapa");
+	}
 }

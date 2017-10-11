@@ -57,12 +57,14 @@ public interface RDFStore {
 	 * 
 	 * @param graphUri
 	 *            the URI to identify the named Graph
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
 	 * 
 	 * @throws an RDF Store exception
 	 *
 	 */
 		
-	public void deleteGraph (String graphUri) throws RDFStoreException;
+	public void deleteGraph (String graphUri) throws RDFStoreException, ClientProtocolException, IOException;
 	
 	/**
 	 * 
@@ -120,7 +122,7 @@ public interface RDFStore {
 	
 	/**
 	 * 
-	 * Create a DB/context/... within the store
+	 * Create a DataBase (Stardog) / Namespace (Blazegraph)/ whatever within the store
 	 * 
 	 * @param dbName
 	 * @throws IOException 
@@ -128,5 +130,14 @@ public interface RDFStore {
 	 */
 	public void createDB(String dbName) throws IOException, RDFStoreException;
 	
+	/**
+	 * 
+	 * Set the DB we are working with
+	 * 
+	 * @param dbName
+	 * @throws RDFStoreException
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public void setDB(String dbName) throws RDFStoreException, ClientProtocolException, IOException;
 }

@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -28,6 +29,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Statement;
+import org.eclipse.rdf4j.model.util.ModelBuilder;
+import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
@@ -46,14 +50,13 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore {
 
-	// TODO: get these from confgi file
+	// TODO: get these from config file
 	private static final String xmlNSName = "MY_NAMESPACE";
 	private static final String blazegraphquadsXMLFile = "blazegraphquads.xml";
 	
 	private String blazegraphBaseURL = null;
 	private String blazegraphNSName = null;
 	
-//	http://localhost:9999/blazegraph/namespace/kb/sparql
 
 	private static final Logger LOGGER = LogManager.getLogger(BlazegraphRESTStore.class);
 
@@ -73,25 +76,43 @@ public class BlazegraphRESTStore extends SPARQLProtocolStore implements RDFStore
 	public void saveModel(Model model) throws RDFStoreException, ClientProtocolException, IOException {
 		// TODO: not optimised!!! See issue # 44
 		StringWriter stringwriter = new StringWriter();
-		Rio.write(model, stringwriter, RDFFormat.RDFXML);
+		Rio.write(model, stringwriter, RDFFormat.TRIG);
 		String stringModel = stringwriter.toString();
+		LOGGER.info("Adding model " + stringModel.hashCode());
 		StringEntity stringEntity = new StringEntity(stringModel);
 		HashMap<String, String> httpHeaders = new HashMap<String,String>();
-		httpHeaders.put("Content-Type", "application/rdf+xml");
-		HttpResponse response = execPOST(blazegraphBaseURL + "/namespace/" + blazegraphNSName + "/sparql", stringEntity, httpHeaders);
-		LOGGER.info(response.getStatusLine());
+		httpHeaders.put("Content-Type", "application/x-trig");
+		execPOST(blazegraphBaseURL + "/namespace/" + blazegraphNSName + "/sparql", stringEntity, httpHeaders);
 	}
 
 	@Override
 	public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws RDFStoreException {
-		// TODO Auto-generated method stub
-
+		ModelBuilder builder = new ModelBuilder();
+		// No named graph
+		if(graphURI == null){
+			GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}");
+			while (graphQueryResult.hasNext()) {
+				Statement stmt = graphQueryResult.next();
+				builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
+			}
+		}
+		// Named graph
+		else{
+			GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }");
+			builder.namedGraph(graphURI);
+			while (graphQueryResult.hasNext()) {
+				Statement stmt = graphQueryResult.next();
+				builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
+			}
+		}
+		Model model = builder.build();
+		Rio.write(model, outputstream, rdfformat);
 	}
 
 	@Override
-	public void deleteGraph(String graphUri) throws RDFStoreException {
-		// TODO Auto-generated method stub
-
+	public void deleteGraph(String graphUri) throws RDFStoreException, ClientProtocolException, IOException {
+		String targetUrl = blazegraphBaseURL + "/namespace/" + blazegraphNSName + "/sparql" + "?c=" + URLEncoder.encode("<" + graphUri + ">", "ISO-8859-1");
+		execDELETE(targetUrl);
 	}
 
 	/**
