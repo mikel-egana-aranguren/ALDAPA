@@ -4,6 +4,7 @@
 package es.eurohelp.lod.aldapa.pipeline.ejiecalidaddelaire;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 
 import org.eclipse.rdf4j.rio.RDFFormat;
@@ -22,7 +23,7 @@ import es.eurohelp.lod.aldapa.core.exception.AldapaException;
  */
 public class EJIECalidadAire {
 
-	public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException, URISyntaxException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException, URISyntaxException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		// Load the configuration from file configuration.yml
 		ConfigurationManager config = ConfigurationManager.getInstance("configuration.yml");
 		

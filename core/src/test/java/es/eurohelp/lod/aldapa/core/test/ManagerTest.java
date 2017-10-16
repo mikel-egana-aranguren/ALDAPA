@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.HashSet;
 
@@ -65,7 +66,7 @@ public class ManagerTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass()
-	        throws AldapaException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	        throws AldapaException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		config = ConfigurationManager.getInstance(configFile);
 		manager = new Manager(config);
 		fileutils = FileUtils.getInstance();

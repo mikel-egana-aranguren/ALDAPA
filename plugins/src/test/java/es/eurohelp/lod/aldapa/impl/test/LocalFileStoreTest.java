@@ -19,28 +19,27 @@ import org.junit.rules.ExpectedException;
 import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
 import es.eurohelp.lod.aldapa.core.exception.FileStoreFileAlreadyStoredException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
-import es.eurohelp.lod.aldapa.impl.storage.SimpleFileStore;
+import es.eurohelp.lod.aldapa.impl.storage.LocalFileStore;
 
 /**
  * @author megana
  *
  */
-public class SimpleFileStoreTest {
+public class LocalFileStoreTest {
 
 	private static final String outputPath = "data/getFileHTTPOutput/";
 	private static final String ejieFile = "estaciones.csv";
 	private static final String ejieFileURL = "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv";
 	private static final String caceresCarrilesBiciFile = "carrilesBici.csv";
 	private static final String caceresCarrilesBiciFileURL = "http://opendata.caceres.es/GetData/GetData?dataset=om:CarrilBici&format=csv";
-	private static SimpleFileStore simpleFilestore;
+	private static LocalFileStore simpleFilestore;
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws FileStoreAlreadySetException{
-		simpleFilestore = new SimpleFileStore();
-		simpleFilestore.setDirectoryPath(outputPath);
+		simpleFilestore = new LocalFileStore(outputPath);
 	}
 
 	@Test

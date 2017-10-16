@@ -18,40 +18,29 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
 import es.eurohelp.lod.aldapa.core.exception.FileStoreFileAlreadyStoredException;
 import es.eurohelp.lod.aldapa.storage.FileStore;
+import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 
 /**
  * @author megana
  *
  */
-public class SimpleFileStore implements FileStore {
+public class LocalFileStore extends FileStore implements FunctionalFileStore {
 
-	private String directoryPath = null;
 	private Set<String> fileNames = null;
 
-	public SimpleFileStore() {
+	public LocalFileStore(String directoryPath) {
+		super(directoryPath);
 		fileNames = new TreeSet<String>();
 	}
 
-	@Override
-	public synchronized void setDirectoryPath(String directoryPath) throws FileStoreAlreadySetException {
-		if (null == this.directoryPath) {
-			this.directoryPath = directoryPath;
-		} else {
-			throw new FileStoreAlreadySetException();
-		}
-	}
-
-	@Override
-	public String getDirectoryPath() {
-		return this.directoryPath;
-	}
 
 	@Override
 	public Set<String> getFileNames() {
 		return fileNames;
 	}
 
+	@Override
 	public void getFileHTTP(String fileURL, String fileName, boolean rewrite) throws ClientProtocolException, IOException, FileStoreFileAlreadyStoredException {
 		if (!rewrite && fileNames.contains(fileName)) {
 			throw new FileStoreFileAlreadyStoredException();
@@ -65,7 +54,7 @@ public class SimpleFileStore implements FileStore {
 			FileOutputStream fileOutputStream = null;
 			try {
 				inputStream = response.getEntity().getContent();
-				fileOutputStream = FileUtils.getInstance().getFileOutputStream(directoryPath + fileName);
+				fileOutputStream = FileUtils.getInstance().getFileOutputStream(super.getDirectoryPath() + fileName);
 				int inByte;
 				while ((inByte = inputStream.read()) != -1) {
 					fileOutputStream.write(inByte);

@@ -2,6 +2,7 @@ package es.eurohelp.lod.aldapa.core;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,14 +11,15 @@ import org.apache.logging.log4j.Logger;
 
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
+import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
  * 
- * A configuration manager holds the configuration properties. The main file should contain pointers to other
+ * A configuration manager holds the configuration properties and prepares the described plugins. The main file should contain pointers to other
  * files, each file having the configuration of each module. See configuration.yml and the folder configuration for
- * details
+ * details.
  * 
  * @author Mikel Egana Aranguren, Eurohelp consulting S.L.
  * 
@@ -27,6 +29,13 @@ import es.eurohelp.lod.aldapa.util.YAMLUtils;
 public class ConfigurationManager {
 
 	private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
+	
+	// General tokens
+	private final String pluginClassName = "pluginClassName";
+	
+	// File Store tokens
+	private final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
+	private final String dirToken = "storeDirectory";
 
 	/**
 	 * The configuration is stored in a HashTable:
@@ -140,5 +149,20 @@ public class ConfigurationManager {
 		} else {
 			return propValue;
 		}
+	}
+	
+	public FunctionalFileStore getFileStore () throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ConfigurationException, ClassNotFoundException{
+		FunctionalFileStore fileStore = null;
+		String fileStorePluginName = this.getConfigPropertyValue(fileStoreConfigFile, pluginClassName);
+		LOGGER.info("File Store plugin name: " + fileStorePluginName);
+		Class fileStoreClass = Class.forName(fileStorePluginName);
+		String fileStoreSuperClassName = fileStoreClass.getSuperclass().getName();
+		if(fileStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.FileStore")){
+			Class[] cArg = new Class[1];
+			cArg[0] = String.class; 
+			String s = this.getConfigPropertyValue(fileStoreConfigFile, dirToken);
+			fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(s);	
+		}
+		return fileStore;
 	}
 }
