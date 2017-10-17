@@ -155,11 +155,11 @@ public class ConfigurationManager {
 		FunctionalFileStore fileStore = null;
 		String fileStorePluginName = this.getConfigPropertyValue(fileStoreConfigFile, pluginClassName);
 		LOGGER.info("File Store plugin name: " + fileStorePluginName);
-		Class fileStoreClass = Class.forName(fileStorePluginName);
+		Class<?> fileStoreClass = Class.forName(fileStorePluginName);
 		String fileStoreSuperClassName = fileStoreClass.getSuperclass().getName();
 		if(fileStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.FileStore")){
-			Class[] cArg = new Class[1];
-			cArg[0] = String.class; 
+			Class [] cArg = new Class [1];
+			cArg [0] = String.class; 
 			String s = this.getConfigPropertyValue(fileStoreConfigFile, dirToken);
 			fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(s);	
 		}

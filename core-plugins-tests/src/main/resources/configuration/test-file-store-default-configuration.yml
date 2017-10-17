@@ -1,0 +1,14 @@
+# THIS CONFIGURATION
+name: SimpleFileStoreForTests
+comment: simple file store only for testing purposes
+author: Mikel Egana Aranguren
+
+# Plugin with actual code for accesing the Triple Store
+pluginClassName: es.eurohelp.lod.aldapa.impl.storage.LocalFileStore
+
+storeDirectory: data/
+    
+    
+#- url: http://localhost:9999
+#- user: admin 
+#- password: admin

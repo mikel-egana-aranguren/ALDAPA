@@ -1,0 +1,16 @@
+# THIS CONFIGURATION
+name: default
+comment: A configuration suitable for most cases
+author: Mikel Egana Aranguren
+
+#ALDAPA URIs (They should not change)
+PROJECT_BASE: "http://lod.eurohelp.es/aldapa/project/"
+CATALOG_BASE: "http://lod.eurohelp.es/aldapa/catalog/"
+DATASET_BASE: "http://lod.eurohelp.es/aldapa/dataset/"
+
+
+# DOMAIN URIs (They should change)
+GRAPH_BASE: "http://euskadi.eus/graph/"
+
+
+

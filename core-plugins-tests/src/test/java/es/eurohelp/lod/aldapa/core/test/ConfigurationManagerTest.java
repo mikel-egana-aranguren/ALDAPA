@@ -24,9 +24,6 @@ import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
 public class ConfigurationManagerTest {
 	
 	private static final String configFile = "configuration.yml";
-	private static final String projectBaseToken = "PROJECT_BASE";
-	private static final String aldapaConfigFiletoken = "ALDAPA_CONFIG_FILE";
-	private static final String fakePropToken = "FAKE_PROP";
 	private static ConfigurationManager testManager; 
 
 	@Rule
@@ -36,21 +33,9 @@ public class ConfigurationManagerTest {
 	public static void setUpBeforeClass() throws ConfigurationFileIOException, IOException{
 		testManager = ConfigurationManager.getInstance(configFile);
 	}
-	
-	@Test
-	public final void testGetInstance() throws ConfigurationFileIOException, IOException {
-		assertNotNull(testManager);
-	}
 
 	@Test
-	public final void testGetConfigPropertyValue() throws IOException, ConfigurationException {
-		assertEquals("http://lod.eurohelp.es/aldapa/project/", testManager.getConfigPropertyValue(aldapaConfigFiletoken, projectBaseToken));
-	}
-
-	@Test
-	public final void testNotExistingGetConfigPropertyValue() throws ConfigurationException, IOException {
-		thrown.expect(ConfigurationException.class);
-		thrown.expectMessage("Property or value not found");
-		testManager.getConfigPropertyValue(aldapaConfigFiletoken, fakePropToken );
+	public void testFileStore() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ConfigurationException, ClassNotFoundException{
+		System.out.println(testManager.getFileStore().getDirectoryPath());
 	}
 }
