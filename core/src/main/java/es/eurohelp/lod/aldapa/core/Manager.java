@@ -36,8 +36,7 @@ import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
-import es.eurohelp.lod.aldapa.storage.InitRDFStore;
-import es.eurohelp.lod.aldapa.storage.RDFStore;
+import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
@@ -53,7 +52,7 @@ import es.eurohelp.lod.aldapa.util.URIUtils;
 public class Manager {
 
 	private ConfigurationManager configmanager;
-	private RDFStore store;
+	private FunctionalRDFStore store;
 	private CSV2RDFBatchConverter transformer;
 	private FileUtils fileutils;
 	private FunctionalFileStore fileStore;

@@ -5,8 +5,6 @@ import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
 import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.query.GraphQueryResult;
-import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 
 
@@ -17,7 +15,7 @@ import org.eclipse.rdf4j.rio.RDFFormat;
  * @author Mikel Egana Aranguren, Eurohelp S.L.
  *
  */
-public interface RDFStore {
+public interface FunctionalRDFStore extends FunctionalSPARQLStore {
 	 
 	/**
 	 * 
@@ -65,60 +63,6 @@ public interface RDFStore {
 	 */
 		
 	public void deleteGraph (String graphUri) throws RDFStoreException, ClientProtocolException, IOException;
-	
-	/**
-	 * 
-	 * Executes a SPARQL query that will return, if successful, a set of RDF statements and their Graph (context), if any
-	 * 
-	 * @param pSPARQLquery
-	 *            the SPARQL query
-	 *            
-	 * @return the result as a GraphQueryResult object
-	 * 
-	 * @throws an RDF Store exception
-	 *
-	 */
-
-	public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException;
-
-	/**
-	 * 
-	 * Executes a SPARQL query that will return, if successful, a set of bindings (results as variables and associated entities)
-	 * 
-	 * @param pSPARQLquery
-	 *            the SPARQL query
-	 *            
-	 * @return the result as a TupleQueryResult object
-	 * 
-	 * @throws an RDF Store exception
-	 *
-	 */
-	
-	public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) throws RDFStoreException;
-	
-	/**
-	 * 
-	 * Executes a SPARQL query that will return, if successful, either true or false (ASK)
-	 * 
-	 * @param pSPARQLquery
-	 *            the SPARQL query
-	 *            
-	 * @return the result as a boolean
-	 * 
-	 * @throws an RDF Store exception
-	 *
-	 */
-	
-	public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException;
-	
-	/**
-	 * 
-	 * Executes a SPARQL query that will modify a graph: DELETE, DELETE DATA, INSERT, INSERT DATA
-	 * 
-	 * @param pSPARQLquery
-	 * @throws RDFStoreException
-	 */
-	public void execSPARQLUpdate (String pSPARQLquery) throws RDFStoreException;
 	
 	/**
 	 * 

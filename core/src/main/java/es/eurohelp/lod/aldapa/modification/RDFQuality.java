@@ -3,7 +3,7 @@
  */
 package es.eurohelp.lod.aldapa.modification;
 
-import es.eurohelp.lod.aldapa.storage.RDFStore;
+import es.eurohelp.lod.aldapa.storage.FunctionalSPARQLStore;
 
 /**
  * 
@@ -21,5 +21,5 @@ public interface RDFQuality<T> {
 	 * @param rules the set of rules to analyse the graph
 	 * @return a report about the quality of the graph
 	 */
-	public Object analyseGraph (RDFStore store, String targetGraphURI, Object rules);
+	public Object analyseGraph (FunctionalSPARQLStore store, String targetGraphURI, Object rules);
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.lod.aldapa.impl.storage;
+package es.eurohelp.lod.aldapa.storage;
 
 
 import org.apache.logging.log4j.LogManager;
@@ -11,8 +11,6 @@ import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
-
-import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 
 /**
  * 

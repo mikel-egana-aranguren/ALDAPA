@@ -19,7 +19,9 @@ import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
 import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.sail.memory.MemoryStore;
 
-import es.eurohelp.lod.aldapa.storage.RDFStore;
+import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
+import es.eurohelp.lod.aldapa.storage.MemoryStoreRDF4JConnection;
+import es.eurohelp.lod.aldapa.storage.RDF4JConnection;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.util.MIMEType;
 
@@ -30,7 +32,7 @@ import es.eurohelp.lod.aldapa.util.MIMEType;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public class MemoryRDFStore extends RDF4JConnection implements RDFStore {
+public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements FunctionalRDFStore {
 
 	private static final Logger LOGGER = LogManager.getLogger(MemoryRDFStore.class);
 
