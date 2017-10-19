@@ -9,9 +9,11 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
+import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
@@ -35,6 +37,7 @@ public class ConfigurationManager {
 	
 	// File Store tokens
 	private final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
+	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
 	private final String dirToken = "storeDirectory";
 
 	/**
@@ -145,13 +148,13 @@ public class ConfigurationManager {
 	public String getConfigPropertyValue(String module, String property) throws ConfigurationException {
 		String propValue = (mainConfigFile.get(module)).get(property);
 		if (propValue == null) {
-			throw new ConfigurationException("Property or value not found");
+			throw new ConfigurationException("Value not found with property: " + property);
 		} else {
 			return propValue;
 		}
 	}
 	
-	public FunctionalFileStore getFileStore () throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ConfigurationException, ClassNotFoundException{
+	public FunctionalFileStore getFileStore () throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, AldapaException{
 		FunctionalFileStore fileStore = null;
 		String fileStorePluginName = this.getConfigPropertyValue(fileStoreConfigFile, pluginClassName);
 		LOGGER.info("File Store plugin name: " + fileStorePluginName);
@@ -162,7 +165,34 @@ public class ConfigurationManager {
 			cArg [0] = String.class; 
 			String s = this.getConfigPropertyValue(fileStoreConfigFile, dirToken);
 			fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(s);	
+			LOGGER.info("File Store started ");
+		}
+		else{
+			throw new AldapaException("ALDAPA cannot initialise class " + fileStoreClass.getName());
 		}
 		return fileStore;
+	}
+
+	/**
+	 * @return
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws AldapaException 
+	 */
+	public FunctionalRDFStore getRDFStore() throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException {
+		FunctionalRDFStore rdfStore = null;
+		String rdfStorePluginName = this.getConfigPropertyValue(tripleStoreConfigFile, pluginClassName);
+		LOGGER.info("Triple Store plugin name: " + rdfStorePluginName);
+		Class<?> rdfStoreClass = Class.forName(rdfStorePluginName);
+		String rdfStoreSuperClassName = rdfStoreClass.getSuperclass().getName();
+		if(rdfStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.MemoryStoreRDF4JConnection")){
+			rdfStore = (FunctionalRDFStore) rdfStoreClass.newInstance();
+			LOGGER.info("Triple Store started");
+		}
+		else{
+			throw new AldapaException("ALDAPA cannot initialise class " + rdfStoreClass.getName());
+		}
+		return rdfStore;
 	}
 }

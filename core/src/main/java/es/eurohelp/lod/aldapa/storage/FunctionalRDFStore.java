@@ -63,25 +63,4 @@ public interface FunctionalRDFStore extends FunctionalSPARQLStore {
 	 */
 		
 	public void deleteGraph (String graphUri) throws RDFStoreException, ClientProtocolException, IOException;
-	
-	/**
-	 * 
-	 * Create a DataBase (Stardog) / Namespace (Blazegraph)/ whatever within the store
-	 * 
-	 * @param dbName
-	 * @throws IOException 
-	 * @throws RDFStoreException 
-	 */
-	public void createDB(String dbName) throws IOException, RDFStoreException;
-	
-	/**
-	 * 
-	 * Set the DB we are working with
-	 * 
-	 * @param dbName
-	 * @throws RDFStoreException
-	 * @throws ClientProtocolException
-	 * @throws IOException
-	 */
-	public void setDB(String dbName) throws RDFStoreException, ClientProtocolException, IOException;
 }

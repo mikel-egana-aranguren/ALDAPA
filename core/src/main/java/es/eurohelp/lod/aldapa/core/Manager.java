@@ -60,8 +60,6 @@ public class Manager {
 	
 	private final String aldapaConfigFileName = "ALDAPA_CONFIG_FILE";
 
-	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
-
 	private final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
 
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
@@ -76,29 +74,25 @@ public class Manager {
 	 *             illegal access
 	 * @throws InstantiationException
 	 *             the plugin class could not be instantiated
-	 * @throws ConfigurationException
-	 *             the configuration is incomplete
-	 * @throws FileStoreAlreadySetException
 	 * @throws SecurityException 
 	 * @throws NoSuchMethodException 
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
+	 * @throws AldapaException 
 	 * 
 	 */
 	public Manager(ConfigurationManager configuredconfigmanager)
-	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException, FileStoreAlreadySetException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, AldapaException {
 		configmanager = configuredconfigmanager;
 		fileutils = FileUtils.getInstance();
 
 		// Initialise File Store
 		fileStore = configuredconfigmanager.getFileStore();
 
-		// Initialise Triple Store: use reflection to determine interface implemented and act accordingly
-//		String storePluginName = configmanager.getConfigPropertyValue(tripleStoreConfigFile, pluginClassName);
-//		LOGGER.info("Triple Store plugin name: " + storePluginName);
-//		Class<?> storeClass = Class.forName(storePluginName);
-//		store = (RDFStore) storeClass.newInstance();
-//		LOGGER.info("Triple Store started");
+		// Initialise Triple Store		
+		store = configuredconfigmanager.getRDFStore();
+		
+
 
 		// Initialise CSV2RDF transformer
 //		String transformerPluginName = configmanager.getConfigPropertyValue(transformerConfigFile, pluginClassName);

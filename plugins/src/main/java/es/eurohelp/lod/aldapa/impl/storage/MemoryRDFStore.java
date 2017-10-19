@@ -16,12 +16,9 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFWriter;
 import org.eclipse.rdf4j.rio.trig.TriGWriter;
 import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
-import org.eclipse.rdf4j.repository.sail.SailRepository;
-import org.eclipse.rdf4j.sail.memory.MemoryStore;
 
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.MemoryStoreRDF4JConnection;
-import es.eurohelp.lod.aldapa.storage.RDF4JConnection;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.util.MIMEType;
 
@@ -39,9 +36,8 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
 	RepositoryConnection conn;
 
 	public MemoryRDFStore() {
-		super(new SailRepository(new MemoryStore()));
+		super();
 		conn = super.getConnection();
-		
 	}
 
 	/*
@@ -115,22 +111,5 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
 	 */
 	public void deleteGraph(String graphUri) throws RDFStoreException {
 		throw new UnsupportedOperationException("This functionality has not been implemented yet");
-	}
-
-	/* (non-Javadoc)
-	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#createDB(java.lang.String)
-	 */
-	@Override
-	public void createDB(String dbName) {
-		throw new UnsupportedOperationException("This functionality has not been implemented yet");
-	}
-
-	/* (non-Javadoc)
-	 * @see es.eurohelp.lod.aldapa.storage.RDFStore#setDB(java.lang.String)
-	 */
-	@Override
-	public void setDB(String dbName) {
-		// TODO Auto-generated method stub
-		
 	}
 }

@@ -35,6 +35,7 @@ import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
+import es.eurohelp.lod.aldapa.storage.FunctionalDBRDFStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.util.FileUtils;
@@ -48,7 +49,7 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  * @author megana
  *
  */
-public class BlazegraphRESTStore extends SPARQLProtocolStore implements FunctionalRDFStore {
+public class BlazegraphRESTStore extends SPARQLProtocolStore implements FunctionalDBRDFStore {
 
 	// TODO: get these from config file
 	private static final String xmlNSName = "MY_NAMESPACE";
