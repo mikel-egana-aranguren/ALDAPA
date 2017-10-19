@@ -32,13 +32,14 @@ public class ConfigurationManager {
 
 	private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
 	
-	// General tokens
+	// General config tokens
 	private final String pluginClassName = "pluginClassName";
 	
-	// File Store tokens
+	// Plugin config tokens
 	private final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
 	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
 	private final String dirToken = "storeDirectory";
+	private final String endpointURLToken = "endpointURL";
 
 	/**
 	 * The configuration is stored in a HashTable:
@@ -189,6 +190,13 @@ public class ConfigurationManager {
 		if(rdfStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.MemoryStoreRDF4JConnection")){
 			rdfStore = (FunctionalRDFStore) rdfStoreClass.newInstance();
 			LOGGER.info("Triple Store started");
+		}
+		else if(rdfStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.RESTStoreRDF4JConnection")){
+			Class [] cArg = new Class [1];
+			cArg [0] = String.class; 
+			String s = this.getConfigPropertyValue(tripleStoreConfigFile, endpointURLToken);
+			fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(s);	
+			LOGGER.info("File Store started ");
 		}
 		else{
 			throw new AldapaException("ALDAPA cannot initialise class " + rdfStoreClass.getName());

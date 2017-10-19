@@ -32,12 +32,14 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.query.GraphQueryResult;
+import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
 import es.eurohelp.lod.aldapa.storage.FunctionalDBRDFStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
+import es.eurohelp.lod.aldapa.storage.RESTStoreRDF4JConnection;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 
 /**
@@ -49,7 +51,7 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  * @author megana
  *
  */
-public class BlazegraphRESTStore extends SPARQLProtocolStore implements FunctionalDBRDFStore {
+public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements FunctionalDBRDFStore {
 
 	// TODO: get these from config file
 	private static final String xmlNSName = "MY_NAMESPACE";
@@ -68,7 +70,7 @@ public class BlazegraphRESTStore extends SPARQLProtocolStore implements Function
 	 */
 
 	public BlazegraphRESTStore(String blazegraphURL, String dbName) throws RDFStoreException, IOException {
-		super(blazegraphURL + "/namespace" + "/" + dbName + "/sparql");
+		super(blazegraphURL, dbName);
 		blazegraphBaseURL = blazegraphURL;
 		this.createDB(dbName);
 	}
