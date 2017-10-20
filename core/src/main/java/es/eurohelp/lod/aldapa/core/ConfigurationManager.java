@@ -14,6 +14,7 @@ import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
@@ -37,10 +38,13 @@ public class ConfigurationManager {
 	
 	// Plugin config tokens
 	private final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
-	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
 	private final String dirToken = "storeDirectory";
+	
+	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
 	private final String endpointURLToken = "endpointURL";
 	private final String dbNameToken = "dbName";
+	
+	private final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
 
 	/**
 	 * The configuration is stored in a HashTable:
@@ -209,5 +213,21 @@ public class ConfigurationManager {
 			throw new AldapaException("ALDAPA cannot initialise class " + rdfStoreClass.getName());
 		}
 		return rdfStore;
+	}
+	
+	public FunctionalCSV2RDFBatchConverter getTransformer() throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException{
+		FunctionalCSV2RDFBatchConverter converter = null;
+		String converterPluginName = this.getConfigPropertyValue(transformerConfigFile, pluginClassName);
+		LOGGER.info("Transformer plugin name: " + converterPluginName);
+		Class<?> converterClass = Class.forName(converterPluginName);
+		String converterSuperClassName = converterClass.getSuperclass().getName();
+		if(converterSuperClassName.equals("es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter")){
+			converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
+			LOGGER.info("Triple Store started");
+		}
+		else{
+			throw new AldapaException("ALDAPA cannot initialise class " + converterClass.getName());
+		}
+		return converter;
 	}
 }

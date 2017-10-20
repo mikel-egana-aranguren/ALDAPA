@@ -11,6 +11,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.eclipse.rdf4j.model.Model;
 
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.TripleAdder;
 import es.eurohelp.lod.aldapa.util.URIUtils;
 
@@ -19,7 +20,7 @@ import es.eurohelp.lod.aldapa.util.URIUtils;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public class EJIECalidadAireConverter implements CSV2RDFBatchConverter {
+public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements FunctionalCSV2RDFBatchConverter {
 
 	private Model model;
 	private Iterable<CSVRecord> records;

@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 
 import org.apache.http.client.ClientProtocolException;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
@@ -23,6 +24,7 @@ import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.storage.FunctionalDBRDFStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
 
 /**
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
@@ -34,7 +36,8 @@ public class ConfigurationManagerTest {
 	private static final String configFile2 = "configuration2.yml";
 	private static final String ejieFile = "estaciones.csv";
 	private static final String ejieFileURL = "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv";
-
+	private static final String csvFile = "data/OpenDataEuskadiCalidadDelAire/estaciones.csv";
+	
 	// Plugin config tokens
 	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
 	private final String dbNameToken = "dbName";
@@ -67,7 +70,18 @@ public class ConfigurationManagerTest {
 		builder.setNamespace("ex", "http://example.com/").subject("ex:Mikel").add(RDF.TYPE, "ex:Developer").add(FOAF.FIRST_NAME, "Mikel");
 		Model model = builder.build();
 		rdfStore.saveModel(model);
-		FunctionalDBRDFStore dbRDFStore = (FunctionalDBRDFStore)rdfStore; 
-		dbRDFStore.deleteDB(testManager.getConfigPropertyValue(tripleStoreConfigFile, dbNameToken));
+//		FunctionalDBRDFStore dbRDFStore = (FunctionalDBRDFStore)rdfStore; 
+//		dbRDFStore.deleteDB(testManager.getConfigPropertyValue(tripleStoreConfigFile, dbNameToken));
+	}
+	
+	@Test
+	public void testTransformer () throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException, ClientProtocolException, IOException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		ConfigurationManager testManager = ConfigurationManager.getInstance(configFile);
+		FunctionalCSV2RDFBatchConverter converter = testManager.getTransformer();
+		Model model = new TreeModel();
+		converter.setDataSource(csvFile);
+		converter.setModel(model);
+		Model new_model = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
+		assertNotNull(new_model);
 	}
 }

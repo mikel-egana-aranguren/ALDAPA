@@ -38,7 +38,7 @@ import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
-import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.URIUtils;
 
@@ -53,14 +53,11 @@ public class Manager {
 
 	private ConfigurationManager configmanager;
 	private FunctionalRDFStore store;
-	private CSV2RDFBatchConverter transformer;
+	private FunctionalCSV2RDFBatchConverter transformer;
 	private FileUtils fileutils;
 	private FunctionalFileStore fileStore;
-
 	
 	private final String aldapaConfigFileName = "ALDAPA_CONFIG_FILE";
-
-	private final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
 
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
 
@@ -92,15 +89,8 @@ public class Manager {
 		// Initialise Triple Store		
 		store = configuredconfigmanager.getRDFStore();
 		
-
-
 		// Initialise CSV2RDF transformer
-//		String transformerPluginName = configmanager.getConfigPropertyValue(transformerConfigFile, pluginClassName);
-//		LOGGER.info("CSV2RDF transformer plugin name: " + transformerPluginName);
-//		Class<?> transformerClass = Class.forName(transformerPluginName);
-//		transformer = (CSV2RDFBatchConverter) transformerClass.newInstance();
-//		LOGGER.info("CSV2RDF Transfomer loaded");
-
+		transformer = configuredconfigmanager.getTransformer();
 	}
 
 	/**
