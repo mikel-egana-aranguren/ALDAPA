@@ -12,8 +12,6 @@
 		<module>plugins</module>
 		<module>pipeline</module>
 		<module>core</module>
-		<module>core-plungins-tests</module>
-		<module>tests-core-plugins</module>
 		<module>core-plugins-tests</module>
 	</modules>
 	<dependencies>

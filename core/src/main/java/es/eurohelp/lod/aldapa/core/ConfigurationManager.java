@@ -154,7 +154,7 @@ public class ConfigurationManager {
 	public String getConfigPropertyValue(String module, String property) throws ConfigurationException {
 		String propValue = (mainConfigFile.get(module)).get(property);
 		if (propValue == null) {
-			throw new ConfigurationException("Value not found with property: " + property);
+			throw new ConfigurationException("Property or value not found");
 		} else {
 			return propValue;
 		}
