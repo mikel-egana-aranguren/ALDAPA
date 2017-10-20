@@ -31,7 +31,7 @@ import es.eurohelp.lod.aldapa.util.YAMLUtils;
 public class ConfigurationManager {
 
 	private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
-	
+
 	// General config tokens
 	private final String pluginClassName = "pluginClassName";
 	
@@ -40,6 +40,7 @@ public class ConfigurationManager {
 	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
 	private final String dirToken = "storeDirectory";
 	private final String endpointURLToken = "endpointURL";
+	private final String dbNameToken = "dbName";
 
 	/**
 	 * The configuration is stored in a HashTable:
@@ -180,8 +181,12 @@ public class ConfigurationManager {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 * @throws AldapaException 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
 	 */
-	public FunctionalRDFStore getRDFStore() throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException {
+	public FunctionalRDFStore getRDFStore() throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		FunctionalRDFStore rdfStore = null;
 		String rdfStorePluginName = this.getConfigPropertyValue(tripleStoreConfigFile, pluginClassName);
 		LOGGER.info("Triple Store plugin name: " + rdfStorePluginName);
@@ -192,11 +197,13 @@ public class ConfigurationManager {
 			LOGGER.info("Triple Store started");
 		}
 		else if(rdfStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.RESTStoreRDF4JConnection")){
-			Class [] cArg = new Class [1];
+			Class [] cArg = new Class [2];
 			cArg [0] = String.class; 
-			String s = this.getConfigPropertyValue(tripleStoreConfigFile, endpointURLToken);
-			fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(s);	
-			LOGGER.info("File Store started ");
+			cArg [1] = String.class; 
+			String endpointURL = this.getConfigPropertyValue(tripleStoreConfigFile, endpointURLToken);
+			String dbName = this.getConfigPropertyValue(tripleStoreConfigFile, dbNameToken);
+			rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(endpointURL,dbName);	
+			LOGGER.info("File Store started ");	
 		}
 		else{
 			throw new AldapaException("ALDAPA cannot initialise class " + rdfStoreClass.getName());
