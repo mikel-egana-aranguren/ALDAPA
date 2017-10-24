@@ -1,0 +1,8 @@
+
+{
+	<http://lod.eurohelp.es/aldapa/catalog/donosti-parkings-2> a <http://www.w3.org/ns/dcat#Catalog> .
+	
+	<http://lod.eurohelp.es/aldapa/project/donosti-movilidad> a <http://xmlns.com/foaf/0.1/Project> .
+	
+	<http://lod.eurohelp.es/aldapa/project/donosti-movilidad2> a <http://xmlns.com/foaf/0.1/Project> .
+}
