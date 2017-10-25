@@ -10,19 +10,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
-import org.eclipse.rdf4j.query.GraphQueryResult;
-import org.eclipse.rdf4j.query.QueryLanguage;
-import org.eclipse.rdf4j.query.TupleQueryResult;
-import org.eclipse.rdf4j.repository.Repository;
+
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFWriter;
 import org.eclipse.rdf4j.rio.trig.TriGWriter;
 import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
-import org.eclipse.rdf4j.repository.sail.SailRepository;
-import org.eclipse.rdf4j.sail.memory.MemoryStore;
 
-import es.eurohelp.lod.aldapa.storage.RDFStore;
+import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
+import es.eurohelp.lod.aldapa.storage.MemoryStoreRDF4JConnection;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.util.MIMEType;
 
@@ -33,31 +29,15 @@ import es.eurohelp.lod.aldapa.util.MIMEType;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public class MemoryRDFStore implements RDFStore {
-
-	/**
-	 * 
-	 */
+public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements FunctionalRDFStore {
 
 	private static final Logger LOGGER = LogManager.getLogger(MemoryRDFStore.class);
 
-	Repository repo;
 	RepositoryConnection conn;
 
 	public MemoryRDFStore() {
-		LOGGER.info("Creating SailRepository(MemoryStore)");
-		repo = new SailRepository(new MemoryStore());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#startRDFStore()
-	 */
-	public void startRDFStore() {
-		LOGGER.info("Initialising and connecting to SailRepository(MemoryStore)");
-		repo.initialize();
-		conn = repo.getConnection();
-		conn.begin();
+		super();
+		conn = super.getConnection();
 	}
 
 	/*
@@ -65,9 +45,8 @@ public class MemoryRDFStore implements RDFStore {
 	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#stopRDFStore()
 	 */
 	public void stopRDFStore() {
+		super.shutdownAtOnce();
 		LOGGER.info("Closing connection and shutting down SailRepository(MemoryStore)");
-		conn.close();
-		repo.shutDown();
 	}
 
 	/*
@@ -132,33 +111,5 @@ public class MemoryRDFStore implements RDFStore {
 	 */
 	public void deleteGraph(String graphUri) throws RDFStoreException {
 		throw new UnsupportedOperationException("This functionality has not been implemented yet");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#execSPARQLGraphQuery(java.lang.String)
-	 */
-	public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException {
-		return conn.prepareGraphQuery(pSPARQLquery).evaluate();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#execSPARQLTupleQuery(java.lang.String)
-	 */
-	public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) {
-		   return conn.prepareTupleQuery(QueryLanguage.SPARQL, pSPARQLquery).evaluate();
-	}
-
-	/* (non-Javadoc)
-	 * @see es.eurohelp.opendata.aldapa.storage.RDFStore#execSPARQLBooleanQuery(java.lang.String)
-	 */
-	@Override
-	public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException {
-		return conn.prepareBooleanQuery(pSPARQLquery).evaluate();
-	}
-	
-	public void execSPARQLUpdate (String pSPARQLquery){
-		conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery).execute();		
 	}
 }

@@ -6,6 +6,7 @@ package es.eurohelp.lod.aldapa.core;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.EnumMap;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.http.MethodNotSupportedException;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
@@ -33,10 +35,10 @@ import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
 import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
-import es.eurohelp.lod.aldapa.storage.FileStore;
-import es.eurohelp.lod.aldapa.storage.RDFStore;
+import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
+import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
-import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.URIUtils;
 
@@ -50,20 +52,14 @@ import es.eurohelp.lod.aldapa.util.URIUtils;
 public class Manager {
 
 	private ConfigurationManager configmanager;
-	private RDFStore store;
-	private CSV2RDFBatchConverter transformer;
+	private FunctionalRDFStore store;
+	private FunctionalCSV2RDFBatchConverter transformer;
 	private FileUtils fileutils;
-	private FileStore fileStore;
+	private FunctionalFileStore fileStore;
 	
-	private final String dirToken = "storeDirectory";
 	private final String aldapaConfigFileName = "ALDAPA_CONFIG_FILE";
-	private final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
-	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
-	private final String pluginClassName = "pluginClassName";
-	private final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
-	
+
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
-	
 
 	/**
 	 * 
@@ -75,38 +71,26 @@ public class Manager {
 	 *             illegal access
 	 * @throws InstantiationException
 	 *             the plugin class could not be instantiated
-	 * @throws ConfigurationException
-	 *             the configuration is incomplete
-	 * @throws FileStoreAlreadySetException 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws AldapaException 
 	 * 
 	 */
 	public Manager(ConfigurationManager configuredconfigmanager)
-	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, ConfigurationException, FileStoreAlreadySetException {
+	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, AldapaException {
 		configmanager = configuredconfigmanager;
 		fileutils = FileUtils.getInstance();
-		
+
 		// Initialise File Store
-		String fileStorePluginName = configmanager.getConfigPropertyValue(fileStoreConfigFile, pluginClassName);
-		LOGGER.info("File Store plugin name: " + fileStorePluginName);
-		Class<?> fileStoreClass = Class.forName(fileStorePluginName);
-		fileStore = (FileStore) fileStoreClass.newInstance();
-		fileStore.setDirectoryPath(configmanager.getConfigPropertyValue(fileStoreConfigFile, dirToken));
+		fileStore = configuredconfigmanager.getFileStore();
 
-		// Initialise Triple Store
-		String storePluginName = configmanager.getConfigPropertyValue(tripleStoreConfigFile, pluginClassName);
-		LOGGER.info("Triple Store plugin name: " + storePluginName);
-		Class<?> storeClass = Class.forName(storePluginName);
-		store = (RDFStore) storeClass.newInstance();
-		store.startRDFStore();
-		LOGGER.info("Triple Store started");
-
+		// Initialise Triple Store		
+		store = configuredconfigmanager.getRDFStore();
+		
 		// Initialise CSV2RDF transformer
-		String transformerPluginName = configmanager.getConfigPropertyValue(transformerConfigFile, pluginClassName);
-		LOGGER.info("CSV2RDF transformer plugin name: " + transformerPluginName);
-		Class<?> transformerClass = Class.forName(transformerPluginName);
-		transformer = (CSV2RDFBatchConverter) transformerClass.newInstance();
-		LOGGER.info("CSV2RDF Transfomer loaded");
-
+		transformer = configuredconfigmanager.getTransformer();
 	}
 
 	/**
@@ -128,13 +112,12 @@ public class Manager {
 	 * 
 	 */
 
-	public String addProject(String projectName)
-	        throws AldapaException, URISyntaxException, IOException {
+	public String addProject(String projectName) throws AldapaException, URISyntaxException, IOException {
 		LOGGER.info("Project name: " + projectName);
 
 		// Create Project URI
 		String projectURIFriendlyName = URIUtils.URIfy(null, null, projectName);
-		String projectBaseUri = configmanager.getConfigPropertyValue(aldapaConfigFileName , "PROJECT_BASE");
+		String projectBaseUri = configmanager.getConfigPropertyValue(aldapaConfigFileName, "PROJECT_BASE");
 		String projectURI = URIUtils.validateURI(projectBaseUri + projectURIFriendlyName);
 
 		LOGGER.info("Project uri: " + projectURI);
@@ -203,8 +186,7 @@ public class Manager {
 	 * @throws ConfigurationException
 	 *             the configuration is incomplete
 	 */
-	public String addCatalog(String catalogName, String projectUri)
-	        throws AldapaException, IOException, URISyntaxException {
+	public String addCatalog(String catalogName, String projectUri) throws AldapaException, IOException, URISyntaxException {
 
 		// Project should exist
 		String resolvedProjectExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(),
@@ -269,8 +251,7 @@ public class Manager {
 	 * @throws ConfigurationException
 	 *             the configuration is incomplete
 	 */
-	public String addDataset(String datasetName, String catalogUri)
-	        throws AldapaException, IOException, URISyntaxException {
+	public String addDataset(String datasetName, String catalogUri) throws AldapaException, IOException, URISyntaxException {
 		// Catalog should exist
 		String resolvedCatalogExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.catalogExists.getValue(),
 		        MethodFileToken.catalogUri.getValue(), catalogUri);
@@ -336,8 +317,7 @@ public class Manager {
 	 * @throws NamedGraphExistsException
 	 *             the Named Graph already exists
 	 */
-	public String addNamedGraph(String graphName, String datasetUri)
-	        throws AldapaException, IOException, URISyntaxException {
+	public String addNamedGraph(String graphName, String datasetUri) throws AldapaException, IOException, URISyntaxException {
 
 		// Dataset should exist
 		String resolvedDatasetExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.datasetExists.getValue(),
@@ -414,8 +394,10 @@ public class Manager {
 	 * @param namedGraphURI
 	 * @param model
 	 * @throws RDFStoreException
+	 * @throws IOException
+	 * @throws ClientProtocolException
 	 */
-	public void addData(Model model) throws RDFStoreException {
+	public void addData(Model model) throws RDFStoreException, ClientProtocolException, IOException {
 		store.saveModel(model);
 	}
 
@@ -508,7 +490,7 @@ public class Manager {
 
 	/**
 	 * 
-	 * Get the project URIs 
+	 * Get the project URIs
 	 * 
 	 * @return a Set containing the project URIs as Strings
 	 * @throws AldapaException
@@ -518,7 +500,7 @@ public class Manager {
 		String query = fileutils.fileToString(MethodRDFFile.getProjects.getValue());
 		return execTupleQueryToStringSet(query);
 	}
-	
+
 	/**
 	 * 
 	 * Get all the catalogs
@@ -531,7 +513,7 @@ public class Manager {
 		String query = fileutils.fileToString(MethodRDFFile.getAllCatalogs.getValue());
 		return execTupleQueryToStringSet(query);
 	}
-	
+
 	/**
 	 * 
 	 * Get all the catalogs pertaining to a given project
@@ -540,13 +522,12 @@ public class Manager {
 	 * @throws AldapaException
 	 * @throws IOException
 	 */
-	
+
 	public Set<String> getCatalogs(String projectUri) throws AldapaException, IOException {
-		String query = fileutils.fileTokenResolver(MethodRDFFile.getCatalogsByProject.getValue(),
-		        MethodFileToken.projectUri.getValue(), projectUri);
+		String query = fileutils.fileTokenResolver(MethodRDFFile.getCatalogsByProject.getValue(), MethodFileToken.projectUri.getValue(), projectUri);
 		return execTupleQueryToStringSet(query);
 	}
-	
+
 	/**
 	 * 
 	 * Get all the datasets
@@ -559,7 +540,7 @@ public class Manager {
 		String query = fileutils.fileToString(MethodRDFFile.getAllDatasets.getValue());
 		return execTupleQueryToStringSet(query);
 	}
-	
+
 	/**
 	 * 
 	 * Get all the datasets pertaining to a given catalog
@@ -568,13 +549,12 @@ public class Manager {
 	 * @throws AldapaException
 	 * @throws IOException
 	 */
-	
+
 	public Set<String> getDatasets(String catalogUri) throws AldapaException, IOException {
-		String query = fileutils.fileTokenResolver(MethodRDFFile.getDatasetsByCatalog.getValue(),
-		        MethodFileToken.catalogUri.getValue(), catalogUri);
+		String query = fileutils.fileTokenResolver(MethodRDFFile.getDatasetsByCatalog.getValue(), MethodFileToken.catalogUri.getValue(), catalogUri);
 		return execTupleQueryToStringSet(query);
 	}
-	
+
 	/**
 	 * 
 	 * Get all the named graphs
@@ -587,7 +567,7 @@ public class Manager {
 		String query = fileutils.fileToString(MethodRDFFile.getAllNamedGraphs.getValue());
 		return execTupleQueryToStringSet(query);
 	}
-	
+
 	/**
 	 * 
 	 * Get all the named graphs pertaining to a given dataset
@@ -596,15 +576,15 @@ public class Manager {
 	 * @throws AldapaException
 	 * @throws IOException
 	 */
-	
+
 	public Set<String> getNamedGraphs(String datasetUri) throws AldapaException, IOException {
-		String query = fileutils.fileTokenResolver(MethodRDFFile.getNamedGraphsByDataset.getValue(),
-		        MethodFileToken.datasetUri.getValue(), datasetUri);
+		String query = fileutils.fileTokenResolver(MethodRDFFile.getNamedGraphsByDataset.getValue(), MethodFileToken.datasetUri.getValue(),
+		        datasetUri);
 		return execTupleQueryToStringSet(query);
 	}
-	
-	private Set<String> execTupleQueryToStringSet (String query) throws RDFStoreException {
-		HashSet<String> results = new HashSet<String>(); 
+
+	private Set<String> execTupleQueryToStringSet(String query) throws RDFStoreException {
+		HashSet<String> results = new HashSet<String>();
 		TupleQueryResult result = store.execSPARQLTupleQuery(query);
 		List<String> bindingNames = result.getBindingNames();
 		while (result.hasNext()) {
@@ -617,12 +597,13 @@ public class Manager {
 
 	/**
 	 * 
-	 * Resets the manager, thus deletes *all* the data and metadata. Use at your own risk. 
-	 * @throws IOException 
-	 * @throws RDFStoreException 
+	 * Resets the manager, thus deletes *all* the data and metadata. Use at your own risk.
+	 * 
+	 * @throws IOException
+	 * @throws RDFStoreException
 	 * 
 	 */
-	public void reset() throws RDFStoreException, IOException {		
+	public void reset() throws RDFStoreException, IOException {
 		store.execSPARQLUpdate(fileutils.fileToString(MethodRDFFile.reset.getValue()));
 		LOGGER.info("Everything deleted ");
 	}

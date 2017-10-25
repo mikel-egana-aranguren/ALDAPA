@@ -1,0 +1,6 @@
+
+<http://example.org/Picasso> a <http://example.org/Artist> ;
+	<http://xmlns.com/foaf/0.1/firstName> "Pablo" .
+
+<http://lod.eurohelp.es/flushMikelflush> a <http://lod.eurohelp.es/flushHumanflush> ;
+	<http://xmlns.com/foaf/0.1/firstName> "Mikel Egana Aranguren flush flush flush" .

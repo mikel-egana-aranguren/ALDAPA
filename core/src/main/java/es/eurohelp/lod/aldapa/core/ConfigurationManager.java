@@ -2,22 +2,27 @@ package es.eurohelp.lod.aldapa.core;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
+import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
+import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
  * 
- * A configuration manager holds the configuration properties. The main file should contain pointers to other
+ * A configuration manager holds the configuration properties and prepares the described plugins. The main file should contain pointers to other
  * files, each file having the configuration of each module. See configuration.yml and the folder configuration for
- * details
+ * details.
  * 
  * @author Mikel Egana Aranguren, Eurohelp consulting S.L.
  * 
@@ -27,6 +32,19 @@ import es.eurohelp.lod.aldapa.util.YAMLUtils;
 public class ConfigurationManager {
 
 	private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
+
+	// General config tokens
+	private final String pluginClassName = "pluginClassName";
+	
+	// Plugin config tokens
+	private final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
+	private final String dirToken = "storeDirectory";
+	
+	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
+	private final String endpointURLToken = "endpointURL";
+	private final String dbNameToken = "dbName";
+	
+	private final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
 
 	/**
 	 * The configuration is stored in a HashTable:
@@ -140,5 +158,76 @@ public class ConfigurationManager {
 		} else {
 			return propValue;
 		}
+	}
+	
+	public FunctionalFileStore getFileStore () throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, AldapaException{
+		FunctionalFileStore fileStore = null;
+		String fileStorePluginName = this.getConfigPropertyValue(fileStoreConfigFile, pluginClassName);
+		LOGGER.info("File Store plugin name: " + fileStorePluginName);
+		Class<?> fileStoreClass = Class.forName(fileStorePluginName);
+		String fileStoreSuperClassName = fileStoreClass.getSuperclass().getName();
+		if(fileStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.FileStore")){
+			Class [] cArg = new Class [1];
+			cArg [0] = String.class; 
+			String s = this.getConfigPropertyValue(fileStoreConfigFile, dirToken);
+			fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(s);	
+			LOGGER.info("File Store started ");
+		}
+		else{
+			throw new AldapaException("ALDAPA cannot initialise class " + fileStoreClass.getName());
+		}
+		return fileStore;
+	}
+
+	/**
+	 * @return
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws AldapaException 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 */
+	public FunctionalRDFStore getRDFStore() throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		FunctionalRDFStore rdfStore = null;
+		String rdfStorePluginName = this.getConfigPropertyValue(tripleStoreConfigFile, pluginClassName);
+		LOGGER.info("Triple Store plugin name: " + rdfStorePluginName);
+		Class<?> rdfStoreClass = Class.forName(rdfStorePluginName);
+		String rdfStoreSuperClassName = rdfStoreClass.getSuperclass().getName();
+		if(rdfStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.MemoryStoreRDF4JConnection")){
+			rdfStore = (FunctionalRDFStore) rdfStoreClass.newInstance();
+			LOGGER.info("Triple Store started");
+		}
+		else if(rdfStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.RESTStoreRDF4JConnection")){
+			Class [] cArg = new Class [2];
+			cArg [0] = String.class; 
+			cArg [1] = String.class; 
+			String endpointURL = this.getConfigPropertyValue(tripleStoreConfigFile, endpointURLToken);
+			String dbName = this.getConfigPropertyValue(tripleStoreConfigFile, dbNameToken);
+			rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(endpointURL,dbName);	
+			LOGGER.info("File Store started ");	
+		}
+		else{
+			throw new AldapaException("ALDAPA cannot initialise class " + rdfStoreClass.getName());
+		}
+		return rdfStore;
+	}
+	
+	public FunctionalCSV2RDFBatchConverter getTransformer() throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException{
+		FunctionalCSV2RDFBatchConverter converter = null;
+		String converterPluginName = this.getConfigPropertyValue(transformerConfigFile, pluginClassName);
+		LOGGER.info("Transformer plugin name: " + converterPluginName);
+		Class<?> converterClass = Class.forName(converterPluginName);
+		String converterSuperClassName = converterClass.getSuperclass().getName();
+		if(converterSuperClassName.equals("es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter")){
+			converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
+			LOGGER.info("Triple Store started");
+		}
+		else{
+			throw new AldapaException("ALDAPA cannot initialise class " + converterClass.getName());
+		}
+		return converter;
 	}
 }

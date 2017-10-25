@@ -6,6 +6,7 @@ package es.eurohelp.lod.aldapa.pipeline.ejiecalidaddelaire.test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 
 import org.junit.Test;
@@ -22,7 +23,7 @@ import es.eurohelp.lod.aldapa.pipeline.ejiecalidaddelaire.EJIECalidadAire;
 public class ExecPipeline {
 
 	@Test
-	public void test() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, URISyntaxException, AldapaException {		
+	public void test() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, URISyntaxException, AldapaException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {		
 		EJIECalidadAire.main(null);
 	}
 }
