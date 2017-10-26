@@ -6,6 +6,7 @@ package es.eurohelp.lod.aldapa.core.test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -36,24 +37,11 @@ public class ConfigurationManagerTest {
 		testManager = ConfigurationManager.getInstance(configFile);
 	}
 	
-
-	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.ConfigurationManager#getInstance(java.lang.String)}.
-	 * @throws IOException 
-	 * @throws ConfigurationFileIOException 
-	 */
 	@Test
 	public final void testGetInstance() throws ConfigurationFileIOException, IOException {
 		assertNotNull(testManager);
 	}
 
-	/**
-	 * Test method for
-	 * {@link es.eurohelp.lod.aldapa.ConfigurationManager#getConfigPropertyValue(java.lang.String, java.lang.String)}.
-	 * 
-	 * @throws IOException
-	 * @throws ConfigurationException
-	 */
 	@Test
 	public final void testGetConfigPropertyValue() throws IOException, ConfigurationException {
 		assertEquals("http://lod.eurohelp.es/aldapa/project/", testManager.getConfigPropertyValue(aldapaConfigFiletoken, projectBaseToken));

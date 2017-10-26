@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.eurohelp.lod.aldapa</groupId>
 	<artifactId>complete</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 	<name>ALDAPA</name>
 	<description>Assistant for Linked DAta Production Automation</description>
 	<url>http://mikel-egana-aranguren.github.io/ALDAPA/</url>
@@ -12,6 +12,7 @@
 		<module>plugins</module>
 		<module>pipeline</module>
 		<module>core</module>
+		<module>core-plugins-tests</module>
 	</modules>
 	<dependencies>
 		<dependency>
@@ -71,13 +72,13 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-surefire-plugin</artifactId> -->
-<!-- 				<configuration> -->
-<!-- 					<testFailureIgnore>true</testFailureIgnore> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<!-- https://wiki.blazegraph.com/wiki/index.php/REST_API#Quads -->
+<entry key="com.bigdata.rdf.sail.namespace">MY_NAMESPACE</entry>
+<entry key="com.bigdata.rdf.store.AbstractTripleStore.quads">true</entry>
+<entry key="com.bigdata.rdf.sail.truthMaintenance">false</entry>
+<entry key="com.bigdata.rdf.store.AbstractTripleStore.axiomsClass">com.bigdata.rdf.axioms.NoAxioms</entry>
+<entry key="com.bigdata.rdf.sail.isolatableIndices">false</entry>
+<entry key="com.bigdata.rdf.store.AbstractTripleStore.justify">false</entry>
+<entry key="com.bigdata.relation.class">com.bigdata.rdf.store.LocalTripleStore</entry>
+<entry key="com.bigdata.rdf.store.AbstractTripleStore.textIndex">false</entry>
+</properties>

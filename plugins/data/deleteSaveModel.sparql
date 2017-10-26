@@ -1,0 +1,3 @@
+DELETE DATA{
+<http://example.org/Picasso> rdf:type <http://example.org/Artist> .
+<http://example.org/Picasso> foaf:firstName "Pablo"}
