@@ -4,11 +4,11 @@
 	<parent>
 		<groupId>es.eurohelp.lod.aldapa</groupId>
 		<artifactId>complete</artifactId>
-		<version>0.0.4</version>
+		<version>0.0.5</version>
 	</parent>
 	<groupId>es.eurohelp.lod.aldapa</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 	<packaging>jar</packaging>
 	<name>ALDAPA core</name>
 	<description>Core ALDAPA API</description>
