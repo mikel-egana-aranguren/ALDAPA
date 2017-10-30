@@ -620,6 +620,7 @@ public class Manager {
 //		reportSPARQLquery: query string
 		
 //		So search graph URI and execute rule
+//		validator.validate(target, rules, queryToCheckReport)
 		
 		return false;
 	}
