@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
+import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
@@ -33,18 +34,22 @@ public class ConfigurationManager {
 
 	private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
 
+	
+
 	// General config tokens
-	private final String pluginClassName = "pluginClassName";
+	private static final String pluginClassName = "pluginClassName";
 	
 	// Plugin config tokens
-	private final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
-	private final String dirToken = "storeDirectory";
+	private static final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
+	private static final String dirToken = "storeDirectory";
 	
-	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
-	private final String endpointURLToken = "endpointURL";
-	private final String dbNameToken = "dbName";
+	private static final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
+	private static final String endpointURLToken = "endpointURL";
+	private static final String dbNameToken = "dbName";
 	
-	private final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
+	private static final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
+	
+	private static final String validatorConfigFile = "VALIDATOR_CONFIG_FILE";
 
 	/**
 	 * The configuration is stored in a HashTable:
@@ -223,11 +228,34 @@ public class ConfigurationManager {
 		String converterSuperClassName = converterClass.getSuperclass().getName();
 		if(converterSuperClassName.equals("es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter")){
 			converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
-			LOGGER.info("Triple Store started");
+			LOGGER.info("CSV2RDF converter started");
 		}
 		else{
 			throw new AldapaException("ALDAPA cannot initialise class " + converterClass.getName());
 		}
 		return converter;
+	}
+
+	/**
+	 * @return
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws AldapaException 
+	 */
+	public FunctionalRDFQualityValidator getRDFQualityValidator() throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException {
+		FunctionalRDFQualityValidator validator = null;
+		String validatorPluginName = this.getConfigPropertyValue(validatorConfigFile, pluginClassName);
+		LOGGER.info("validator plugin name: " + validatorPluginName);
+		Class<?> validatorClass = Class.forName(validatorPluginName);
+		String validatorSuperClassName = validatorClass.getSuperclass().getName();
+		if(validatorSuperClassName.equals("es.eurohelp.lod.aldapa.modification.RDFQualityValidator")){
+			validator = (FunctionalRDFQualityValidator) validatorClass.newInstance();
+			LOGGER.info("RDF validator started");
+		}
+		else{
+			throw new AldapaException("ALDAPA cannot initialise class " + validatorClass.getName());
+		}
+		return validator;
 	}
 }

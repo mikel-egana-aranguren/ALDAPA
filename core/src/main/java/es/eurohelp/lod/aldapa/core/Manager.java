@@ -31,10 +31,10 @@ import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetExistsException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetNotFoundException;
-import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
 import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
+import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
@@ -56,6 +56,7 @@ public class Manager {
 	private FunctionalCSV2RDFBatchConverter transformer;
 	private FileUtils fileutils;
 	private FunctionalFileStore fileStore;
+	private FunctionalRDFQualityValidator validator;
 	
 	private final String aldapaConfigFileName = "ALDAPA_CONFIG_FILE";
 
@@ -91,6 +92,11 @@ public class Manager {
 		
 		// Initialise CSV2RDF transformer
 		transformer = configuredconfigmanager.getTransformer();
+		
+		// Initialise RDF quality validator
+		validator = configuredconfigmanager.getRDFQualityValidator();
+		
+		// Initialise link discoverer
 	}
 
 	/**
@@ -424,8 +430,6 @@ public class Manager {
 
 	/**
 	 * 
-	 * 
-	 * 
 	 * @param catalog_URI
 	 *            the catalog URI
 	 * @throws UnsupportedOperationException
@@ -606,5 +610,17 @@ public class Manager {
 	public void reset() throws RDFStoreException, IOException {
 		store.execSPARQLUpdate(fileutils.fileToString(MethodRDFFile.reset.getValue()));
 		LOGGER.info("Everything deleted ");
+	}
+	
+	public boolean analyseGraph (String graphURI){
+//		PluginConfigFile:
+//		graphRule1: graph uri - rules file path
+//		graphRule2: graph uri - rules file path
+//		graphRule3: graph uri - rules file path
+//		reportSPARQLquery: query string
+		
+//		So search graph URI and execute rule
+		
+		return false;
 	}
 }
