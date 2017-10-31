@@ -618,6 +618,7 @@ public class Manager {
 //		graphRule2: graph uri - rules file path
 //		graphRule3: graph uri - rules file path
 //		reportSPARQLquery: query string
+// 		report path
 		
 //		So search graph URI and execute rule
 //		validator.validate(target, rules, queryToCheckReport)

@@ -1,0 +1,931 @@
+@prefix schema: <http://schema.org/> .
+@prefix ns0: <http://www.w3.org/2006/time#> .
+@prefix ns1: <http://lod.eurohelp.es/def/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+<http://lod.eurohelp.es/id/fare/Antiguo-Berri/120-min-4-10>
+  schema:price 4.100000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Antiguo-Berri/15-min-0-60>
+  schema:price 6.000000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Antiguo-Berri/180-min-6>
+  schema:price 6.000000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Antiguo-Berri/30-min-1-35>
+  schema:price 1.350000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Antiguo-Berri/300-min-14-55>
+  schema:price 1.455000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Antiguo-Berri/300-min-15-85>
+  schema:price 1.585000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Antiguo-Berri/300-min-9-15>
+  schema:price 9.150000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Antiguo-Berri/60-min-2-25>
+  schema:price 2.250000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Antiguo-Berri/90-min-3-10>
+  schema:price 3.100000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Arcco/120-min-3-37>
+  schema:price 3.370000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Arcco/15-min-0-59>
+  schema:price 5.900000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Arcco/180-min-4-91>
+  schema:price 4.910000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Arcco/30-min-1-00>
+  schema:price 1.000000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Arcco/300-min-14-00>
+  schema:price 1.400000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Arcco/300-min-18-52>
+  schema:price 1.852000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Arcco/300-min-21-54>
+  schema:price 2.154000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Arcco/300-min-7-97>
+  schema:price 7.970000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Arcco/60-min-1-80>
+  schema:price 1.800000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Arcco/90-min-2-60>
+  schema:price 2.600000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Atotxa/120-min-3-72>
+  schema:price 3.720000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Atotxa/15-min-0-66>
+  schema:price 6.600000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Atotxa/180-min-5-47>
+  schema:price 5.470000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Atotxa/30-min-1-10>
+  schema:price 1.100000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Atotxa/300-min-18-31>
+  schema:price 1.831000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Atotxa/300-min-22-07>
+  schema:price 2.207000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Atotxa/300-min-24-57>
+  schema:price 2.457000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Atotxa/300-min-9-68>
+  schema:price 9.680000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Atotxa/60-min-1-99>
+  schema:price 1.990000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Atotxa/90-min-2-87>
+  schema:price 2.870000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Boulevard/120-min-4-49>
+  schema:price 4.490000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Boulevard/15-min-0-79>
+  schema:price 7.900000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Boulevard/180-min-6-56>
+  schema:price 6.560000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Boulevard/30-min-1-33>
+  schema:price 1.330000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Boulevard/300-min-11-47>
+  schema:price 1.147000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Boulevard/300-min-20-68>
+  schema:price 2.068000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Boulevard/300-min-23-02>
+  schema:price 2.302000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Boulevard/300-min-24-57>
+  schema:price 2.457000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Boulevard/60-min-2-40>
+  schema:price 2.400000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Boulevard/90-min-3-47>
+  schema:price 3.470000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Buen-Pastor/120-min-3-72>
+  schema:price 3.720000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Buen-Pastor/15-min-0-66>
+  schema:price 6.600000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Buen-Pastor/180-min-5-47>
+  schema:price 5.470000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Buen-Pastor/30-min-1-10>
+  schema:price 1.100000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Buen-Pastor/300-min-18-31>
+  schema:price 1.831000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Buen-Pastor/300-min-22-07>
+  schema:price 2.207000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Buen-Pastor/300-min-24-57>
+  schema:price 2.457000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Buen-Pastor/300-min-9-68>
+  schema:price 9.680000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Buen-Pastor/60-min-1-99>
+  schema:price 1.990000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Buen-Pastor/90-min-2-87>
+  schema:price 2.870000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Easo/120-min-3-72>
+  schema:price 3.720000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Easo/15-min-0-66>
+  schema:price 6.600000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Easo/180-min-5-47>
+  schema:price 5.470000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Easo/30-min-1-10>
+  schema:price 1.100000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Easo/300-min-18-31>
+  schema:price 1.831000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Easo/300-min-22-07>
+  schema:price 2.207000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Easo/300-min-24-57>
+  schema:price 2.457000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Easo/300-min-9-68>
+  schema:price 9.680000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Easo/60-min-1-99>
+  schema:price 1.990000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Easo/90-min-2-87>
+  schema:price 2.870000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Illumbe/120-min-2-80>
+  schema:price 2.800000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Illumbe/15-min-0-50>
+  schema:price 5.000000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Illumbe/180-min-4-30>
+  schema:price 4.300000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Illumbe/30-min-0-75>
+  schema:price 7.500000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Illumbe/300-min-12-55>
+  schema:price 1.255000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Illumbe/300-min-16-70>
+  schema:price 1.670000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Illumbe/300-min-19-50>
+  schema:price 1.950000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Illumbe/300-min-7>
+  schema:price 7.000000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Illumbe/60-min-1-50>
+  schema:price 1.500000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Illumbe/90-min-2-20>
+  schema:price 2.200000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Katalunia/120-min-3-72>
+  schema:price 3.720000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Katalunia/15-min-0-66>
+  schema:price 6.600000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Katalunia/180-min-5-47>
+  schema:price 5.470000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Katalunia/30-min-1-10>
+  schema:price 1.100000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Katalunia/300-min-18-31>
+  schema:price 1.831000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Katalunia/300-min-22-07>
+  schema:price 2.207000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Katalunia/300-min-24-57>
+  schema:price 2.457000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Katalunia/300-min-9-68>
+  schema:price 9.680000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Katalunia/60-min-1-99>
+  schema:price 1.990000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Katalunia/90-min-2-87>
+  schema:price 2.870000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Kontxa/120-min-4-46>
+  schema:price 4.460000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Kontxa/15-min-0-79>
+  schema:price 7.900000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Kontxa/180-min-6-56>
+  schema:price 6.560000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Kontxa/30-min-1-32>
+  schema:price 1.320000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Kontxa/300-min-11-47>
+  schema:price 1.147000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Kontxa/300-min-20-68>
+  schema:price 2.068000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Kontxa/300-min-23-02>
+  schema:price 2.302000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Kontxa/300-min-24-57>
+  schema:price 2.457000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Kontxa/60-min-2-38>
+  schema:price 2.380000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Kontxa/90-min-3-45>
+  schema:price 3.450000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Kursaal/120-min-4-46>
+  schema:price 4.460000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Kursaal/15-min-0-79>
+  schema:price 7.900000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Kursaal/180-min-6-56>
+  schema:price 6.560000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Kursaal/30-min-1-32>
+  schema:price 1.320000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Kursaal/300-min-11-47>
+  schema:price 1.147000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Kursaal/300-min-20-68>
+  schema:price 2.068000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Kursaal/300-min-23-02>
+  schema:price 2.302000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Kursaal/300-min-24-57>
+  schema:price 2.457000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Kursaal/60-min-2-38>
+  schema:price 2.380000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Kursaal/90-min-3-45>
+  schema:price 3.450000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Okendo/120-min-4-46>
+  schema:price 4.460000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Okendo/15-min-0-79>
+  schema:price 7.900000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Okendo/180-min-6-56>
+  schema:price 6.560000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Okendo/30-min-1-32>
+  schema:price 1.320000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Okendo/300-min-11-47>
+  schema:price 1.147000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Okendo/300-min-20-68>
+  schema:price 2.068000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Okendo/300-min-23-02>
+  schema:price 2.302000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Okendo/300-min-24-57>
+  schema:price 2.457000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Okendo/60-min-2-38>
+  schema:price 2.380000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Okendo/90-min-3-45>
+  schema:price 3.450000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Pio-XII/120-min-3-35>
+  schema:price 3.350000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Pio-XII/15-min-0-59>
+  schema:price 5.900000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Pio-XII/180-min-4-88>
+  schema:price 4.880000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Pio-XII/30-min-0-99>
+  schema:price 9.900000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Pio-XII/300-min-14-01>
+  schema:price 1.401000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Pio-XII/300-min-18-50>
+  schema:price 1.850000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Pio-XII/300-min-21-50>
+  schema:price 2.150000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Pio-XII/300-min-7-94>
+  schema:price 7.940000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Pio-XII/60-min-1-79>
+  schema:price 1.790000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Pio-XII/90-min-2-59>
+  schema:price 2.590000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/San-Martin/120-min-4-46>
+  schema:price 4.460000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/San-Martin/15-min-0-79>
+  schema:price 7.900000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/San-Martin/180-min-6-56>
+  schema:price 6.560000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/San-Martin/30-min-1-32>
+  schema:price 1.320000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/San-Martin/300-min-11-47>
+  schema:price 1.147000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/San-Martin/300-min-20-68>
+  schema:price 2.068000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/San-Martin/300-min-23-02>
+  schema:price 2.302000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/San-Martin/300-min-24-57>
+  schema:price 2.457000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/San-Martin/60-min-2-38>
+  schema:price 2.380000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/San-Martin/90-min-3-45>
+  schema:price 3.450000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Txofre/120-min-3-72>
+  schema:price 3.720000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Txofre/15-min-0-66>
+  schema:price 6.600000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Txofre/180-min-5-47>
+  schema:price 5.470000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Txofre/30-min-1-10>
+  schema:price 1.100000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Txofre/300-min-18-31>
+  schema:price 1.831000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Txofre/300-min-22-07>
+  schema:price 2.207000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Txofre/300-min-24-57>
+  schema:price 2.457000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Txofre/300-min-9-68>
+  schema:price 9.680000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Txofre/60-min-1-99>
+  schema:price 1.990000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Txofre/90-min-2-87>
+  schema:price 2.870000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/fare/Zuatzu/120-min-2-46>
+  schema:price 2.460000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 120.0 .
+
+<http://lod.eurohelp.es/id/fare/Zuatzu/15-min-0-33>
+  schema:price 3.300000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 15.0 .
+
+<http://lod.eurohelp.es/id/fare/Zuatzu/180-min-3-69>
+  schema:price 3.690000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 180.0 .
+
+<http://lod.eurohelp.es/id/fare/Zuatzu/30-min-0-66>
+  schema:price 6.600000e-1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 30.0 .
+
+<http://lod.eurohelp.es/id/fare/Zuatzu/300-min-11-07>
+  schema:price 1.107000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Zuatzu/300-min-14-76>
+  schema:price 1.476000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Zuatzu/300-min-16-40>
+  schema:price 1.640000e+1 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Zuatzu/300-min-6-15>
+  schema:price 6.150000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 300.0 .
+
+<http://lod.eurohelp.es/id/fare/Zuatzu/60-min-1-23>
+  schema:price 1.230000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 60.0 .
+
+<http://lod.eurohelp.es/id/fare/Zuatzu/90-min-1-89>
+  schema:price 1.890000e+0 ;
+  schema:priceCurrency "EUR" ;
+  ns0:minutes 90.0 .
+
+<http://lod.eurohelp.es/id/parking/Antiguo-Berri>
+  ns1:plazasresidentes "0"^^xsd:int ;
+  ns1:plazasresidenteslibres "0"^^xsd:int ;
+  ns1:plazasrotatorias "489"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "0"^^xsd:int ;
+  ns1:plazastotales "489"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Antiguo-Berri/120-min-4-10>, <http://lod.eurohelp.es/id/fare/Antiguo-Berri/15-min-0-60>, <http://lod.eurohelp.es/id/fare/Antiguo-Berri/180-min-6>, <http://lod.eurohelp.es/id/fare/Antiguo-Berri/30-min-1-35>, <http://lod.eurohelp.es/id/fare/Antiguo-Berri/300-min-14-55>, <http://lod.eurohelp.es/id/fare/Antiguo-Berri/300-min-15-85>, <http://lod.eurohelp.es/id/fare/Antiguo-Berri/300-min-9-15>, <http://lod.eurohelp.es/id/fare/Antiguo-Berri/60-min-2-25>, <http://lod.eurohelp.es/id/fare/Antiguo-Berri/90-min-3-10> ;
+  a ns1:parkingrotatorio, schema:ParkingFacility ;
+  rdfs:label "Antiguo Berri" ;
+  geo:lat 4.331019e+1 ;
+  geo:long -2.007963e+0 .
+
+<http://lod.eurohelp.es/id/parking/Arcco>
+  ns1:plazasresidentes "0"^^xsd:int ;
+  ns1:plazasresidenteslibres "0"^^xsd:int ;
+  ns1:plazasrotatorias "214"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "0"^^xsd:int ;
+  ns1:plazastotales "214"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Arcco/120-min-3-37>, <http://lod.eurohelp.es/id/fare/Arcco/15-min-0-59>, <http://lod.eurohelp.es/id/fare/Arcco/180-min-4-91>, <http://lod.eurohelp.es/id/fare/Arcco/30-min-1-00>, <http://lod.eurohelp.es/id/fare/Arcco/300-min-14-00>, <http://lod.eurohelp.es/id/fare/Arcco/300-min-18-52>, <http://lod.eurohelp.es/id/fare/Arcco/300-min-21-54>, <http://lod.eurohelp.es/id/fare/Arcco/300-min-7-97>, <http://lod.eurohelp.es/id/fare/Arcco/60-min-1-80>, <http://lod.eurohelp.es/id/fare/Arcco/90-min-2-60> ;
+  a ns1:parkingrotatorio, schema:ParkingFacility ;
+  rdfs:label "Arcco" ;
+  geo:lat 4.330563e+1 ;
+  geo:long -1.973710e+0 .
+
+<http://lod.eurohelp.es/id/parking/Atotxa>
+  ns1:plazasresidentes "0"^^xsd:int ;
+  ns1:plazasresidenteslibres "0"^^xsd:int ;
+  ns1:plazasrotatorias "210"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "146"^^xsd:int ;
+  ns1:plazastotales "210"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Atotxa/120-min-3-72>, <http://lod.eurohelp.es/id/fare/Atotxa/15-min-0-66>, <http://lod.eurohelp.es/id/fare/Atotxa/180-min-5-47>, <http://lod.eurohelp.es/id/fare/Atotxa/30-min-1-10>, <http://lod.eurohelp.es/id/fare/Atotxa/300-min-18-31>, <http://lod.eurohelp.es/id/fare/Atotxa/300-min-22-07>, <http://lod.eurohelp.es/id/fare/Atotxa/300-min-24-57>, <http://lod.eurohelp.es/id/fare/Atotxa/300-min-9-68>, <http://lod.eurohelp.es/id/fare/Atotxa/60-min-1-99>, <http://lod.eurohelp.es/id/fare/Atotxa/90-min-2-87> ;
+  a ns1:parkingrotatorio, schema:ParkingFacility ;
+  rdfs:label "Atotxa" ;
+  geo:lat 4.331855e+1 ;
+  geo:long -1.975480e+0 .
+
+<http://lod.eurohelp.es/id/parking/Boulevard>
+  ns1:plazasresidentes "135"^^xsd:int ;
+  ns1:plazasresidenteslibres "0"^^xsd:int ;
+  ns1:plazasrotatorias "381"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "152"^^xsd:int ;
+  ns1:plazastotales "516"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Boulevard/120-min-4-49>, <http://lod.eurohelp.es/id/fare/Boulevard/15-min-0-79>, <http://lod.eurohelp.es/id/fare/Boulevard/180-min-6-56>, <http://lod.eurohelp.es/id/fare/Boulevard/30-min-1-33>, <http://lod.eurohelp.es/id/fare/Boulevard/300-min-11-47>, <http://lod.eurohelp.es/id/fare/Boulevard/300-min-20-68>, <http://lod.eurohelp.es/id/fare/Boulevard/300-min-23-02>, <http://lod.eurohelp.es/id/fare/Boulevard/300-min-24-57>, <http://lod.eurohelp.es/id/fare/Boulevard/60-min-2-40>, <http://lod.eurohelp.es/id/fare/Boulevard/90-min-3-47> ;
+  a ns1:parkingmixto, schema:ParkingFacility ;
+  rdfs:label "Boulevard" ;
+  geo:lat 4.332283e+1 ;
+  geo:long -1.981920e+0 .
+
+<http://lod.eurohelp.es/id/parking/Buen-Pastor>
+  ns1:plazasresidentes "583"^^xsd:int ;
+  ns1:plazasresidenteslibres "1"^^xsd:int ;
+  ns1:plazasrotatorias "384"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "141"^^xsd:int ;
+  ns1:plazastotales "967"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Buen-Pastor/120-min-3-72>, <http://lod.eurohelp.es/id/fare/Buen-Pastor/15-min-0-66>, <http://lod.eurohelp.es/id/fare/Buen-Pastor/180-min-5-47>, <http://lod.eurohelp.es/id/fare/Buen-Pastor/30-min-1-10>, <http://lod.eurohelp.es/id/fare/Buen-Pastor/300-min-18-31>, <http://lod.eurohelp.es/id/fare/Buen-Pastor/300-min-22-07>, <http://lod.eurohelp.es/id/fare/Buen-Pastor/300-min-24-57>, <http://lod.eurohelp.es/id/fare/Buen-Pastor/300-min-9-68>, <http://lod.eurohelp.es/id/fare/Buen-Pastor/60-min-1-99>, <http://lod.eurohelp.es/id/fare/Buen-Pastor/90-min-2-87> ;
+  a ns1:parkingmixto, schema:ParkingFacility ;
+  rdfs:label "Buen Pastor" ;
+  geo:lat 4.331715e+1 ;
+  geo:long -1.981020e+0 .
+
+<http://lod.eurohelp.es/id/parking/Easo>
+  ns1:plazasresidentes "266"^^xsd:int ;
+  ns1:plazasresidenteslibres "0"^^xsd:int ;
+  ns1:plazasrotatorias "146"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "99"^^xsd:int ;
+  ns1:plazastotales "412"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Easo/120-min-3-72>, <http://lod.eurohelp.es/id/fare/Easo/15-min-0-66>, <http://lod.eurohelp.es/id/fare/Easo/180-min-5-47>, <http://lod.eurohelp.es/id/fare/Easo/30-min-1-10>, <http://lod.eurohelp.es/id/fare/Easo/300-min-18-31>, <http://lod.eurohelp.es/id/fare/Easo/300-min-22-07>, <http://lod.eurohelp.es/id/fare/Easo/300-min-24-57>, <http://lod.eurohelp.es/id/fare/Easo/300-min-9-68>, <http://lod.eurohelp.es/id/fare/Easo/60-min-1-99>, <http://lod.eurohelp.es/id/fare/Easo/90-min-2-87> ;
+  a ns1:parkingmixto, schema:ParkingFacility ;
+  rdfs:label "Easo" ;
+  geo:lat 4.331316e+1 ;
+  geo:long -1.982078e+0 .
+
+<http://lod.eurohelp.es/id/parking/Illumbe>
+  ns1:plazasresidentes "0"^^xsd:int ;
+  ns1:plazasresidenteslibres "0"^^xsd:int ;
+  ns1:plazasrotatorias "500"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "0"^^xsd:int ;
+  ns1:plazastotales "500"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Illumbe/120-min-2-80>, <http://lod.eurohelp.es/id/fare/Illumbe/15-min-0-50>, <http://lod.eurohelp.es/id/fare/Illumbe/180-min-4-30>, <http://lod.eurohelp.es/id/fare/Illumbe/30-min-0-75>, <http://lod.eurohelp.es/id/fare/Illumbe/300-min-12-55>, <http://lod.eurohelp.es/id/fare/Illumbe/300-min-16-70>, <http://lod.eurohelp.es/id/fare/Illumbe/300-min-19-50>, <http://lod.eurohelp.es/id/fare/Illumbe/300-min-7>, <http://lod.eurohelp.es/id/fare/Illumbe/60-min-1-50>, <http://lod.eurohelp.es/id/fare/Illumbe/90-min-2-20> ;
+  a ns1:parkingrotatorio, schema:ParkingFacility ;
+  rdfs:label "Illumbe" ;
+  geo:lat 4.329809e+1 ;
+  geo:long -1.970040e+0 .
+
+<http://lod.eurohelp.es/id/parking/Katalunia>
+  ns1:plazasresidentes "483"^^xsd:int ;
+  ns1:plazasresidenteslibres "84"^^xsd:int ;
+  ns1:plazasrotatorias "456"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "221"^^xsd:int ;
+  ns1:plazastotales "939"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Katalunia/120-min-3-72>, <http://lod.eurohelp.es/id/fare/Katalunia/15-min-0-66>, <http://lod.eurohelp.es/id/fare/Katalunia/180-min-5-47>, <http://lod.eurohelp.es/id/fare/Katalunia/30-min-1-10>, <http://lod.eurohelp.es/id/fare/Katalunia/300-min-18-31>, <http://lod.eurohelp.es/id/fare/Katalunia/300-min-22-07>, <http://lod.eurohelp.es/id/fare/Katalunia/300-min-24-57>, <http://lod.eurohelp.es/id/fare/Katalunia/300-min-9-68>, <http://lod.eurohelp.es/id/fare/Katalunia/60-min-1-99>, <http://lod.eurohelp.es/id/fare/Katalunia/90-min-2-87> ;
+  a ns1:parkingmixto, schema:ParkingFacility ;
+  rdfs:label "Katalunia" ;
+  geo:lat 4.332385e+1 ;
+  geo:long -1.975168e+0 .
+
+<http://lod.eurohelp.es/id/parking/Kontxa>
+  ns1:plazasresidentes "619"^^xsd:int ;
+  ns1:plazasresidenteslibres "87"^^xsd:int ;
+  ns1:plazasrotatorias "655"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "136"^^xsd:int ;
+  ns1:plazastotales "1274"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Kontxa/120-min-4-46>, <http://lod.eurohelp.es/id/fare/Kontxa/15-min-0-79>, <http://lod.eurohelp.es/id/fare/Kontxa/180-min-6-56>, <http://lod.eurohelp.es/id/fare/Kontxa/30-min-1-32>, <http://lod.eurohelp.es/id/fare/Kontxa/300-min-11-47>, <http://lod.eurohelp.es/id/fare/Kontxa/300-min-20-68>, <http://lod.eurohelp.es/id/fare/Kontxa/300-min-23-02>, <http://lod.eurohelp.es/id/fare/Kontxa/300-min-24-57>, <http://lod.eurohelp.es/id/fare/Kontxa/60-min-2-38>, <http://lod.eurohelp.es/id/fare/Kontxa/90-min-3-45> ;
+  a ns1:parkingmixto, schema:ParkingFacility ;
+  rdfs:label "Kontxa" ;
+  geo:lat 4.331862e+1 ;
+  geo:long -1.984886e+0 .
+
+<http://lod.eurohelp.es/id/parking/Kursaal>
+  ns1:plazasresidentes "200"^^xsd:int ;
+  ns1:plazasresidenteslibres "0"^^xsd:int ;
+  ns1:plazasrotatorias "300"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "0"^^xsd:int ;
+  ns1:plazastotales "500"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Kursaal/120-min-4-46>, <http://lod.eurohelp.es/id/fare/Kursaal/15-min-0-79>, <http://lod.eurohelp.es/id/fare/Kursaal/180-min-6-56>, <http://lod.eurohelp.es/id/fare/Kursaal/30-min-1-32>, <http://lod.eurohelp.es/id/fare/Kursaal/300-min-11-47>, <http://lod.eurohelp.es/id/fare/Kursaal/300-min-20-68>, <http://lod.eurohelp.es/id/fare/Kursaal/300-min-23-02>, <http://lod.eurohelp.es/id/fare/Kursaal/300-min-24-57>, <http://lod.eurohelp.es/id/fare/Kursaal/60-min-2-38>, <http://lod.eurohelp.es/id/fare/Kursaal/90-min-3-45> ;
+  a ns1:parkingmixto, schema:ParkingFacility ;
+  rdfs:label "Kursaal" ;
+  geo:lat 4.332468e+1 ;
+  geo:long -1.977280e+0 .
+
+<http://lod.eurohelp.es/id/parking/Okendo>
+  ns1:plazasresidentes "744"^^xsd:int ;
+  ns1:plazasresidenteslibres "27"^^xsd:int ;
+  ns1:plazasrotatorias "748"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "365"^^xsd:int ;
+  ns1:plazastotales "1492"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Okendo/120-min-4-46>, <http://lod.eurohelp.es/id/fare/Okendo/15-min-0-79>, <http://lod.eurohelp.es/id/fare/Okendo/180-min-6-56>, <http://lod.eurohelp.es/id/fare/Okendo/30-min-1-32>, <http://lod.eurohelp.es/id/fare/Okendo/300-min-11-47>, <http://lod.eurohelp.es/id/fare/Okendo/300-min-20-68>, <http://lod.eurohelp.es/id/fare/Okendo/300-min-23-02>, <http://lod.eurohelp.es/id/fare/Okendo/300-min-24-57>, <http://lod.eurohelp.es/id/fare/Okendo/60-min-2-38>, <http://lod.eurohelp.es/id/fare/Okendo/90-min-3-45> ;
+  a ns1:parkingmixto, schema:ParkingFacility ;
+  rdfs:label "Okendo" ;
+  geo:lat 4.332111e+1 ;
+  geo:long -1.979149e+0 .
+
+<http://lod.eurohelp.es/id/parking/Pio-XII>
+  ns1:plazasresidentes "181"^^xsd:int ;
+  ns1:plazasresidenteslibres "16"^^xsd:int ;
+  ns1:plazasrotatorias "339"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "158"^^xsd:int ;
+  ns1:plazastotales "520"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Pio-XII/120-min-3-35>, <http://lod.eurohelp.es/id/fare/Pio-XII/15-min-0-59>, <http://lod.eurohelp.es/id/fare/Pio-XII/180-min-4-88>, <http://lod.eurohelp.es/id/fare/Pio-XII/30-min-0-99>, <http://lod.eurohelp.es/id/fare/Pio-XII/300-min-14-01>, <http://lod.eurohelp.es/id/fare/Pio-XII/300-min-18-50>, <http://lod.eurohelp.es/id/fare/Pio-XII/300-min-21-50>, <http://lod.eurohelp.es/id/fare/Pio-XII/300-min-7-94>, <http://lod.eurohelp.es/id/fare/Pio-XII/60-min-1-79>, <http://lod.eurohelp.es/id/fare/Pio-XII/90-min-2-59> ;
+  a ns1:parkingmixto, schema:ParkingFacility ;
+  rdfs:label "Pio XII" ;
+  geo:lat 4.330781e+1 ;
+  geo:long -1.978186e+0 .
+
+<http://lod.eurohelp.es/id/parking/San-Martin>
+  ns1:plazasresidentes "300"^^xsd:int ;
+  ns1:plazasresidenteslibres "2"^^xsd:int ;
+  ns1:plazasrotatorias "300"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "152"^^xsd:int ;
+  ns1:plazastotales "600"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/San-Martin/120-min-4-46>, <http://lod.eurohelp.es/id/fare/San-Martin/15-min-0-79>, <http://lod.eurohelp.es/id/fare/San-Martin/180-min-6-56>, <http://lod.eurohelp.es/id/fare/San-Martin/30-min-1-32>, <http://lod.eurohelp.es/id/fare/San-Martin/300-min-11-47>, <http://lod.eurohelp.es/id/fare/San-Martin/300-min-20-68>, <http://lod.eurohelp.es/id/fare/San-Martin/300-min-23-02>, <http://lod.eurohelp.es/id/fare/San-Martin/300-min-24-57>, <http://lod.eurohelp.es/id/fare/San-Martin/60-min-2-38>, <http://lod.eurohelp.es/id/fare/San-Martin/90-min-3-45> ;
+  a ns1:parkingmixto, schema:ParkingFacility ;
+  rdfs:label "San Martin" ;
+  geo:lat 4.331788e+1 ;
+  geo:long -1.983371e+0 .
+
+<http://lod.eurohelp.es/id/parking/Txofre>
+  ns1:plazasresidentes "0"^^xsd:int ;
+  ns1:plazasresidenteslibres "0"^^xsd:int ;
+  ns1:plazasrotatorias "465"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "0"^^xsd:int ;
+  ns1:plazastotales "465"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Txofre/120-min-3-72>, <http://lod.eurohelp.es/id/fare/Txofre/15-min-0-66>, <http://lod.eurohelp.es/id/fare/Txofre/180-min-5-47>, <http://lod.eurohelp.es/id/fare/Txofre/30-min-1-10>, <http://lod.eurohelp.es/id/fare/Txofre/300-min-18-31>, <http://lod.eurohelp.es/id/fare/Txofre/300-min-22-07>, <http://lod.eurohelp.es/id/fare/Txofre/300-min-24-57>, <http://lod.eurohelp.es/id/fare/Txofre/300-min-9-68>, <http://lod.eurohelp.es/id/fare/Txofre/60-min-1-99>, <http://lod.eurohelp.es/id/fare/Txofre/90-min-2-87> ;
+  a ns1:parkingrotatorio, schema:ParkingFacility ;
+  rdfs:label "Txofre" ;
+  geo:lat 4.332446e+1 ;
+  geo:long -1.970800e+0 .
+
+<http://lod.eurohelp.es/id/parking/Zuatzu>
+  ns1:plazasresidentes "0"^^xsd:int ;
+  ns1:plazasresidenteslibres "0"^^xsd:int ;
+  ns1:plazasrotatorias "402"^^xsd:int ;
+  ns1:plazasrotatoriaslibres "0"^^xsd:int ;
+  ns1:plazastotales "402"^^xsd:int ;
+  schema:offers <http://lod.eurohelp.es/id/fare/Zuatzu/120-min-2-46>, <http://lod.eurohelp.es/id/fare/Zuatzu/15-min-0-33>, <http://lod.eurohelp.es/id/fare/Zuatzu/180-min-3-69>, <http://lod.eurohelp.es/id/fare/Zuatzu/30-min-0-66>, <http://lod.eurohelp.es/id/fare/Zuatzu/300-min-11-07>, <http://lod.eurohelp.es/id/fare/Zuatzu/300-min-14-76>, <http://lod.eurohelp.es/id/fare/Zuatzu/300-min-16-40>, <http://lod.eurohelp.es/id/fare/Zuatzu/300-min-6-15>, <http://lod.eurohelp.es/id/fare/Zuatzu/60-min-1-23>, <http://lod.eurohelp.es/id/fare/Zuatzu/90-min-1-89> ;
+  a ns1:parkingrotatorio, schema:ParkingFacility ;
+  rdfs:label "Zuatzu" ;
+  geo:lat 4.329541e+1 ;
+  geo:long -2.011130e+0 .

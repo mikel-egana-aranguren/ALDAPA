@@ -3,21 +3,21 @@
  */
 package es.eurohelp.lod.aldapa.impl.modification;
 
-import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.riot.RDFDataMgr;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.topbraid.shacl.validation.ValidationUtil;
 
 import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
+import es.eurohelp.lod.aldapa.modification.InvalidRDFException;
 import es.eurohelp.lod.aldapa.modification.RDFQualityValidator;
 
 /**
@@ -25,54 +25,35 @@ import es.eurohelp.lod.aldapa.modification.RDFQualityValidator;
  *
  */
 public class SHACLValidator extends RDFQualityValidator implements FunctionalRDFQualityValidator {
+	
+	private static final Logger LOGGER = LogManager.getLogger(SHACLValidator.class);
 
 	@Override
-	public boolean validate(Model target, Model rules, String queryToCheckReport) {
-//		String targetFile = args[0];
-//		String namedGraphURI = args [1];
-//		String SHACLFile = args[2];
-//		String reportCheckingQueryFile = args[3];
-//		String reportFile = args[4];
-//		
-//		// Load the data to validate
-//		Model model = RDFDataMgr.loadDataset(targetFile).getNamedModel(namedGraphURI);
-//		
-//		// Load the quality tests
-//		Model shacl = ModelFactory.createDefaultModel();
-//		shacl.read(SHACLFile);
+	public boolean validate(Model target, Model rules, String queryToCheckReport, String reportFilePath) throws IOException, InvalidRDFException {
+		boolean result = false; 
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//
-//		// Create a validation report (execute the tests)
-//		Resource report = ValidationUtil.validateModel(model, shacl, true);
-//
-//		// Write report to disk
-//		FileWriter out = new FileWriter(reportFile);
-//		report.getModel().write(out, "TURTLE");
-//
+		// Create a validation report (execute the tests)
+		Resource report = ValidationUtil.validateModel(target, rules, true);
+
+		// Write report to disk
+		FileWriter out = new FileWriter(reportFilePath);
+		report.getModel().write(out, "TURTLE");
+
 //		// Query report to check if data is conformant
-//		String reportCheckingQuery = FileUtils.readFileToString(new File(reportCheckingQueryFile));
-//		Query query = QueryFactory.create(reportCheckingQuery);
-//		QueryExecution qexec = QueryExecutionFactory.create(query, report.getModel());
-//		boolean result = qexec.execAsk();
-//		qexec.close();
-//		
-//		// Data is not conformant
-//		if (result) {
-//			throw new Exception("SHACL violation: non-conformant RDF, see report at " + reportFile);
-//		}
-//		// Conformant data
-//		else{
-//			System.out.println("Valid RDF");
-//		}
-		return false;
+		Query query = QueryFactory.create(queryToCheckReport);
+		QueryExecution qexec = QueryExecutionFactory.create(query, report.getModel());
+		boolean resultAsk = qexec.execAsk();
+		qexec.close();
+		
+		// Data is not conformant
+		if (resultAsk) {
+			throw new InvalidRDFException(reportFilePath);
+		}
+		// Conformant data
+		else{
+			result = true;
+			LOGGER.info("Valid RDF");
+		}
+		return result;
 	}
 }
