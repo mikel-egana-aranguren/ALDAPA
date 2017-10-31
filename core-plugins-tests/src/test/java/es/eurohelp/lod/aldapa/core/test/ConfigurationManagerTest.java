@@ -21,6 +21,8 @@ import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
+import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
+import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalDBRDFStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
@@ -83,5 +85,11 @@ public class ConfigurationManagerTest {
 		converter.setModel(model);
 		Model new_model = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
 		assertNotNull(new_model);
+	}
+	
+	@Test
+	public void testValidator () throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException{
+		ConfigurationManager testManager = ConfigurationManager.getInstance(configFile);
+		FunctionalRDFQualityValidator validator = testManager.getRDFQualityValidator();
 	}
 }

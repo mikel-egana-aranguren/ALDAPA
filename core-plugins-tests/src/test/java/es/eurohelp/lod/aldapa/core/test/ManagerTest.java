@@ -43,18 +43,27 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
 public class ManagerTest {
 
 	private static final String configFile = "configuration.yml";
+	
 	private static final String projectName = "Donosti movilidad";
 	private static final String catalogName = "Donosti Parkings!!???";
 	private static final String datasetName = "donOsti parkings Febr";
 	private static final String graphName = "donosti parkings febr 001";
+	
 	private static final String testDataOutputDir = "data/";
 	private static final String tmpUri = "http://lod.eurohelp.es/aldapa/manager/Tests";
 	private static final String inputFileFakeData = "data/fake_data.trig";
 	private static final String inputFileFakeData2 = "data/fake_data2.trig";
+	
 	private static final String projectURI = "http://lod.eurohelp.es/aldapa/project/donosti-movilidad";
 	private static final String catalogURI = "http://lod.eurohelp.es/aldapa/catalog/donosti-parkings";
 	private static final String datasetURI = "http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr";
 	private static final String namedGraphURI = "http://euskadi.eus/graph/donosti-parkings-febr-001";
+	
+	private static final String opendateuskadiProjectName = "Open Data Euskadi";
+	private static final String environmentCatalogName = "environment";
+	private static final String airqualityDatasetName = "air quality";
+	private static final String estacionesGraphName = "estaciones";
+	
 	private static final String csvPath = "estaciones.csv";
 
 	private static Manager manager = null;
@@ -297,6 +306,22 @@ public class ManagerTest {
 		thrown.expect(NamedGraphExistsException.class);
 		initManager();
 		manager.addNamedGraph(graphName, datasetURI);
+	}
+	
+	@Test
+	public final void testAnalyseGraph() throws AldapaException, URISyntaxException, IOException{
+		String projectURI = manager.addProject(opendateuskadiProjectName);
+		String catalogURI = manager.addCatalog(environmentCatalogName, projectURI);
+		String datasetURI = manager.addDataset(airqualityDatasetName, catalogURI);
+		String namedGraphURI = manager.addNamedGraph(estacionesGraphName, datasetURI);
+		manager.addDataToNamedGraph(namedGraphURI, csvPath);
+		manager.flushGraph(namedGraphURI, testDataOutputDir + "test-ejie-calidad-aire-namedgraph-created.ttl", RDFFormat.TURTLE);
+		manager.flushGraph(namedGraphURI, testDataOutputDir + "test-ejie-calidad-aire-namedgraph-created.trig", RDFFormat.TRIG);
+		manager.analyseGraph(namedGraphURI);
+		manager.addDataToNamedGraph(namedGraphURI + "2", csvPath);
+		manager.flushGraph(namedGraphURI + "2", testDataOutputDir + "test-ejie-calidad-aire-namedgraph-created-2.ttl", RDFFormat.TURTLE);
+		manager.flushGraph(namedGraphURI + "2", testDataOutputDir + "test-ejie-calidad-aire-namedgraph-created-2.trig", RDFFormat.TRIG);
+		manager.analyseGraph(namedGraphURI + "2");
 	}
 	
 	// not all the tests need initManager, so it won't be a @before like reset

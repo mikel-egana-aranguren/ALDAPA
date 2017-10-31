@@ -1,0 +1,10 @@
+name: SHACLValidatorForTests
+comment: SHACL validator for testing purposes
+author: Mikel Egana Aranguren
+
+pluginClassName: es.eurohelp.lod.aldapa.impl.modification.SHACLValidator
+graphRule: graph uri - rules file path
+graphRule: graph uri - rules file path
+reportSPARQLquery: query string
+reportPath: 
+
