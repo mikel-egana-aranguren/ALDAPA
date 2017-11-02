@@ -1,0 +1,70 @@
+
+<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Sensor> . 
+
+<http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Sensor> . 
+
+<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Sensor> . 
+
+<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Sensor> . 
+
+<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Sensor> . 
+
+<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://schema.org/address> "Avda. del Minero, 2. Ayuntamiento" .
+
+<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://schema.org/address> "C/ Baztieta, s/n. Bº Irauregi" .
+
+<http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://schema.org/address> "C/ Fueros, 11. Subcomisaría de la Ertzaintza." .
+
+<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://schema.org/address> "Carretera de Galea, s/n " .
+
+<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://schema.org/address> "Plaza Tres de Marzo, s/n" .
+
+<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/abantozierbena> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/agurain> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/alonsotegi> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/gasteiz> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/getxo> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://www.w3.org/2000/01/rdf-schema#label> "3 DE MARZO" .
+
+<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://www.w3.org/2000/01/rdf-schema#label> "ABANTO" .
+
+<http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://www.w3.org/2000/01/rdf-schema#label> "AGURAIN" .
+
+<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://www.w3.org/2000/01/rdf-schema#label> "ALGORTA (BBIZI2)" .
+
+<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://www.w3.org/2000/01/rdf-schema#label> "ALONSOTEGI" .
+
+<http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "42.84901250588428"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "42.85604797053618"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.247567997964374"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.32047399433485"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.362055748944286"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.3937033896081683"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.667784994714487"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.988024000380936"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0227822073211765"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0741559961978044"^^<http://www.w3.org/2001/XMLSchema#double> .

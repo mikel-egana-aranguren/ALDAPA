@@ -317,11 +317,11 @@ public class ManagerTest {
 		manager.addDataToNamedGraph(namedGraphURI, csvPath);
 		manager.flushGraph(namedGraphURI, testDataOutputDir + "test-ejie-calidad-aire-namedgraph-created.ttl", RDFFormat.TURTLE);
 		manager.flushGraph(namedGraphURI, testDataOutputDir + "test-ejie-calidad-aire-namedgraph-created.trig", RDFFormat.TRIG);
-		manager.analyseGraph(namedGraphURI);
-		manager.addDataToNamedGraph(namedGraphURI + "2", csvPath);
-		manager.flushGraph(namedGraphURI + "2", testDataOutputDir + "test-ejie-calidad-aire-namedgraph-created-2.ttl", RDFFormat.TURTLE);
-		manager.flushGraph(namedGraphURI + "2", testDataOutputDir + "test-ejie-calidad-aire-namedgraph-created-2.trig", RDFFormat.TRIG);
-		manager.analyseGraph(namedGraphURI + "2");
+		manager.analyseGraph();
+//		manager.addDataToNamedGraph(namedGraphURI + "2", csvPath);
+//		manager.flushGraph(namedGraphURI + "2", testDataOutputDir + "test-ejie-calidad-aire-namedgraph-created-2.ttl", RDFFormat.TURTLE);
+//		manager.flushGraph(namedGraphURI + "2", testDataOutputDir + "test-ejie-calidad-aire-namedgraph-created-2.trig", RDFFormat.TRIG);
+//		manager.analyseGraph(namedGraphURI + "2");
 	}
 	
 	// not all the tests need initManager, so it won't be a @before like reset
