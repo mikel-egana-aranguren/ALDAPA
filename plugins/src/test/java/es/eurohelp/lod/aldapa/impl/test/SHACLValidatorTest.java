@@ -33,10 +33,12 @@ public class SHACLValidatorTest {
 	private static final String shape = "shaclValidatorTestData/shape.ttl";
 	private static final String parkingsShape = "shaclValidatorTestData/parkings-shape.ttl";
 	private static final String estacionesShape = "shaclValidatorTestData/estaciones-shape.ttl";
+	private static final String invalidEstacionesShape = "shaclValidatorTestData/invalid-estaciones-shape.ttl";
 	private static final String reportQuery = "shaclValidatorTestData/report.sparql";
 	private static final String reportPath = "data/shaclValidator/report.ttl";
 	private static final String parkingsReportPath = "data/shaclValidator/parkingsReport.ttl";
 	private static final String estacionesReportPath = "data/shaclValidator/estacionesReport.ttl";
+	private static final String invalidEstacionesReportPath = "data/shaclValidator/invalidEstacionesReport.ttl";
 	private static SHACLValidator validator = null;
 	
 	@Rule
@@ -103,6 +105,26 @@ public class SHACLValidatorTest {
 		String finalQuery = fileUtils.fileToString(reportQuery);
 		boolean result = validator.validate(target, tests, finalQuery,parkingsReportPath);
 		
+		assertTrue(result);
+	}
+	
+	@Test
+	public final void testValidateInvalidRDFEstaciones () throws IOException, InvalidRDFException {
+		thrown.expect(InvalidRDFException.class);
+		thrown.expectMessage("Invalid RDF, see report at data/shaclValidator/invalidEstacionesReport.ttl");
+		
+		FileUtils fileUtils = FileUtils.getInstance();
+		InputStream targetIn = fileUtils.getInputStream(validTargetEjieCalidadAire);
+		Model target = ModelFactory.createDefaultModel();
+		target.read(targetIn, null, "TURTLE");
+
+		InputStream shapeIn = fileUtils.getInputStream(invalidEstacionesShape);
+		Model tests = ModelFactory.createDefaultModel();
+		tests.read(shapeIn, null, "TURTLE");
+
+		String finalQuery = fileUtils.fileToString(reportQuery);
+		boolean result = validator.validate(target, tests, finalQuery,invalidEstacionesReportPath);
+
 		assertTrue(result);
 	}
 	

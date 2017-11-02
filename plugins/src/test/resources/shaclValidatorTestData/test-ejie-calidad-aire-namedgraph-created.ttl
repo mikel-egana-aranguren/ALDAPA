@@ -1,13 +1,23 @@
 
 <http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> .
 
+<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Sensor> . 
+
 <http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Sensor> . 
 
 <http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> .
 
+<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Sensor> . 
+
 <http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> .
 
+<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Sensor> . 
+
 <http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Sensor> . 
 
 <http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://schema.org/address> "Avda. del Minero, 2. Ayuntamiento" .
 

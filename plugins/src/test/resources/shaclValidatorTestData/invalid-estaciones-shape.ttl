@@ -14,6 +14,9 @@ ex:EstacionShape
 	sh:property [
 		sh:path geo:lat ;
 		sh:datatype xsd:double ;
-		sh:minInclusive 42.1 ;
-		sh:maxInclusive 43.9 ;
+		sh:minInclusive 46.1 ;
+		#sh:minInclusive 43.1 ;
+    	#sh:minInclusive 42.6 ;
+		#sh:maxInclusive 43.4 ;
+		sh:maxInclusive 48.4 ;
 	] .
