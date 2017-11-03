@@ -30,6 +30,16 @@
 	
 	<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/getxo> .
 	
+	<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> a <http://www.w3.org/ns/sosa/Sensor> .
+	
+	<http://es.euskadi.eus/id/environment/equipment/station/abanto> a <http://www.w3.org/ns/sosa/Sensor> .
+	
+	<http://es.euskadi.eus/id/environment/equipment/station/agurain> a <http://www.w3.org/ns/sosa/Sensor> .
+	
+	<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> a <http://www.w3.org/ns/sosa/Sensor> .
+	
+	<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> a <http://www.w3.org/ns/sosa/Sensor> .
+	
 	<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://www.w3.org/2000/01/rdf-schema#label> "3 DE MARZO" .
 	
 	<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://www.w3.org/2000/01/rdf-schema#label> "ABANTO" .

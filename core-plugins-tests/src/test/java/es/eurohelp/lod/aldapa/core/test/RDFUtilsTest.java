@@ -43,11 +43,6 @@ public class RDFUtilsTest {
 	}
 	
 	@Test
-	public final void testExecTupleQueryToStringSet() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
 	public final void testConvertGraphToJenaModel() throws RDFStoreException, ClientProtocolException, IOException {
 		ModelBuilder builder = new ModelBuilder();
 		builder.setNamespace("ex", "http://example.org/")
