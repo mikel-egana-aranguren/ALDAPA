@@ -1,7 +1,9 @@
 /**
  * 
  */
-package es.eurohelp.lod.aldapa.core.exception;
+package es.eurohelp.lod.aldapa.storage;
+
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 
 /**
  * 

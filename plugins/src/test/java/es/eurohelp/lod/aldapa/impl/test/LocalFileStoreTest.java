@@ -16,10 +16,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
-import es.eurohelp.lod.aldapa.core.exception.FileStoreFileAlreadyStoredException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
 import es.eurohelp.lod.aldapa.impl.storage.LocalFileStore;
+import es.eurohelp.lod.aldapa.storage.FileStoreAlreadySetException;
+import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
 
 /**
  * @author megana

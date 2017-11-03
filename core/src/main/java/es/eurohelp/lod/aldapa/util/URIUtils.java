@@ -12,10 +12,6 @@ import java.net.URISyntaxException;
  */
 public class URIUtils {
 
-	public URIUtils() {
-
-	}
-
 	/**
 	 * 
 	 * Verifies the validity of a complete URI

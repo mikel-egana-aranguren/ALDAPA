@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
+import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
@@ -34,18 +35,31 @@ public class ConfigurationManager {
 	private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
 
 	// General config tokens
-	private final String pluginClassName = "pluginClassName";
+	private static final String pluginClassName = "pluginClassName";
 	
 	// Plugin config tokens
-	private final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
-	private final String dirToken = "storeDirectory";
 	
-	private final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
-	private final String endpointURLToken = "endpointURL";
-	private final String dbNameToken = "dbName";
+	// File store
+	private static final String fileStoreConfigFile = "FILE_STORE_CONFIG_FILE";
+	private static final String abstractFileStore = "es.eurohelp.lod.aldapa.storage.FileStore";
+	private static final String dirToken = "storeDirectory";
 	
-	private final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
-
+	// RDF store
+	private static final String tripleStoreConfigFile = "TRIPLE_STORE_CONFIG_FILE";
+	private static final String abstractMemoryStoreRDF4JConnection = "es.eurohelp.lod.aldapa.storage.MemoryStoreRDF4JConnection";
+	private static final String abstractRESTStoreRDF4JConnection = "es.eurohelp.lod.aldapa.storage.RESTStoreRDF4JConnection";
+	private static final String endpointURLToken = "endpointURL";
+	private static final String dbNameToken = "dbName";
+	
+	// CSV2RDF transformer
+	private static final String transformerConfigFile = "TRANSFORMER_CONFIG_FILE";
+	private static final Object abstractCSV2RDFBatchConverter = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
+	
+	// RDF validator
+	private static final String validatorConfigFile = "VALIDATOR_CONFIG_FILE";
+	private static final String abstractRDFQualityValidator = "es.eurohelp.lod.aldapa.modification.RDFQualityValidator";
+	
+	
 	/**
 	 * The configuration is stored in a HashTable:
 	 * 
@@ -166,7 +180,7 @@ public class ConfigurationManager {
 		LOGGER.info("File Store plugin name: " + fileStorePluginName);
 		Class<?> fileStoreClass = Class.forName(fileStorePluginName);
 		String fileStoreSuperClassName = fileStoreClass.getSuperclass().getName();
-		if(fileStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.FileStore")){
+		if(fileStoreSuperClassName.equals(abstractFileStore)){
 			Class [] cArg = new Class [1];
 			cArg [0] = String.class; 
 			String s = this.getConfigPropertyValue(fileStoreConfigFile, dirToken);
@@ -196,11 +210,11 @@ public class ConfigurationManager {
 		LOGGER.info("Triple Store plugin name: " + rdfStorePluginName);
 		Class<?> rdfStoreClass = Class.forName(rdfStorePluginName);
 		String rdfStoreSuperClassName = rdfStoreClass.getSuperclass().getName();
-		if(rdfStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.MemoryStoreRDF4JConnection")){
+		if(rdfStoreSuperClassName.equals(abstractMemoryStoreRDF4JConnection)){
 			rdfStore = (FunctionalRDFStore) rdfStoreClass.newInstance();
 			LOGGER.info("Triple Store started");
 		}
-		else if(rdfStoreSuperClassName.equals("es.eurohelp.lod.aldapa.storage.RESTStoreRDF4JConnection")){
+		else if(rdfStoreSuperClassName.equals(abstractRESTStoreRDF4JConnection)){
 			Class [] cArg = new Class [2];
 			cArg [0] = String.class; 
 			cArg [1] = String.class; 
@@ -221,13 +235,36 @@ public class ConfigurationManager {
 		LOGGER.info("Transformer plugin name: " + converterPluginName);
 		Class<?> converterClass = Class.forName(converterPluginName);
 		String converterSuperClassName = converterClass.getSuperclass().getName();
-		if(converterSuperClassName.equals("es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter")){
+		if(converterSuperClassName.equals(abstractCSV2RDFBatchConverter)){
 			converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
-			LOGGER.info("Triple Store started");
+			LOGGER.info("CSV2RDF converter started");
 		}
 		else{
 			throw new AldapaException("ALDAPA cannot initialise class " + converterClass.getName());
 		}
 		return converter;
+	}
+
+	/**
+	 * @return
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws AldapaException 
+	 */
+	public FunctionalRDFQualityValidator getRDFQualityValidator() throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException {
+		FunctionalRDFQualityValidator validator = null;
+		String validatorPluginName = this.getConfigPropertyValue(validatorConfigFile, pluginClassName);
+		LOGGER.info("validator plugin name: " + validatorPluginName);
+		Class<?> validatorClass = Class.forName(validatorPluginName);
+		String validatorSuperClassName = validatorClass.getSuperclass().getName();
+		if(validatorSuperClassName.equals(abstractRDFQualityValidator)){
+			validator = (FunctionalRDFQualityValidator) validatorClass.newInstance();
+			LOGGER.info("RDF validator started");
+		}
+		else{
+			throw new AldapaException("ALDAPA cannot initialise class " + validatorClass.getName());
+		}
+		return validator;
 	}
 }

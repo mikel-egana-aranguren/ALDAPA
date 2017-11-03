@@ -8,9 +8,6 @@ import java.util.Set;
 
 import org.apache.http.client.ClientProtocolException;
 
-import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
-import es.eurohelp.lod.aldapa.core.exception.FileStoreFileAlreadyStoredException;
-
 /**
  * 
  * Plugins implementing this interface should get, store, and retrieve files with data (most likely CSVs)

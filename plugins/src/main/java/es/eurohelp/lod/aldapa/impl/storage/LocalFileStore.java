@@ -15,9 +15,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
-import es.eurohelp.lod.aldapa.core.exception.FileStoreFileAlreadyStoredException;
 import es.eurohelp.lod.aldapa.storage.FileStore;
+import es.eurohelp.lod.aldapa.storage.FileStoreAlreadySetException;
+import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 

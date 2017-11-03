@@ -1,0 +1,9 @@
+name: SHACLValidatorForTests
+comment: SHACL validator for testing purposes
+author: Mikel Egana Aranguren
+
+pluginClassName: es.eurohelp.lod.aldapa.impl.modification.SHACLValidator
+dataGraph: http://euskadi.eus/graph/estaciones
+shapeGraph: shacl/estaciones-shape.ttl
+reportFile: data/shaclValidationReports/estaciones.ttl
+

@@ -4,6 +4,7 @@
 package es.eurohelp.lod.aldapa.core;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -15,12 +16,14 @@ import java.util.Set;
 
 import org.apache.http.MethodNotSupportedException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.query.BindingSet;
+import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
@@ -31,15 +34,17 @@ import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetExistsException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetNotFoundException;
-import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
 import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
+import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
+import es.eurohelp.lod.aldapa.modification.InvalidRDFException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
+import es.eurohelp.lod.aldapa.util.RDFUtils;
 import es.eurohelp.lod.aldapa.util.URIUtils;
 
 /**
@@ -55,7 +60,9 @@ public class Manager {
 	private FunctionalRDFStore store;
 	private FunctionalCSV2RDFBatchConverter transformer;
 	private FileUtils fileutils;
+	private RDFUtils rdfutils;
 	private FunctionalFileStore fileStore;
+	private FunctionalRDFQualityValidator validator;
 	
 	private final String aldapaConfigFileName = "ALDAPA_CONFIG_FILE";
 
@@ -82,6 +89,7 @@ public class Manager {
 	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, AldapaException {
 		configmanager = configuredconfigmanager;
 		fileutils = FileUtils.getInstance();
+		rdfutils = new RDFUtils();
 
 		// Initialise File Store
 		fileStore = configuredconfigmanager.getFileStore();
@@ -91,6 +99,11 @@ public class Manager {
 		
 		// Initialise CSV2RDF transformer
 		transformer = configuredconfigmanager.getTransformer();
+		
+		// Initialise RDF quality validator
+		validator = configuredconfigmanager.getRDFQualityValidator();
+		
+		// Initialise link discoverer
 	}
 
 	/**
@@ -424,8 +437,6 @@ public class Manager {
 
 	/**
 	 * 
-	 * 
-	 * 
 	 * @param catalog_URI
 	 *            the catalog URI
 	 * @throws UnsupportedOperationException
@@ -498,7 +509,7 @@ public class Manager {
 	 */
 	public Set<String> getProjects() throws AldapaException, IOException {
 		String query = fileutils.fileToString(MethodRDFFile.getProjects.getValue());
-		return execTupleQueryToStringSet(query);
+		return rdfutils.execTupleQueryToStringSet(store,query);
 	}
 
 	/**
@@ -511,7 +522,7 @@ public class Manager {
 	 */
 	public Set<String> getCatalogs() throws AldapaException, IOException {
 		String query = fileutils.fileToString(MethodRDFFile.getAllCatalogs.getValue());
-		return execTupleQueryToStringSet(query);
+		return rdfutils.execTupleQueryToStringSet(store,query);
 	}
 
 	/**
@@ -525,7 +536,7 @@ public class Manager {
 
 	public Set<String> getCatalogs(String projectUri) throws AldapaException, IOException {
 		String query = fileutils.fileTokenResolver(MethodRDFFile.getCatalogsByProject.getValue(), MethodFileToken.projectUri.getValue(), projectUri);
-		return execTupleQueryToStringSet(query);
+		return rdfutils.execTupleQueryToStringSet(store,query);
 	}
 
 	/**
@@ -538,7 +549,7 @@ public class Manager {
 	 */
 	public Set<String> getDatasets() throws AldapaException, IOException {
 		String query = fileutils.fileToString(MethodRDFFile.getAllDatasets.getValue());
-		return execTupleQueryToStringSet(query);
+		return rdfutils.execTupleQueryToStringSet(store,query);
 	}
 
 	/**
@@ -552,7 +563,7 @@ public class Manager {
 
 	public Set<String> getDatasets(String catalogUri) throws AldapaException, IOException {
 		String query = fileutils.fileTokenResolver(MethodRDFFile.getDatasetsByCatalog.getValue(), MethodFileToken.catalogUri.getValue(), catalogUri);
-		return execTupleQueryToStringSet(query);
+		return rdfutils.execTupleQueryToStringSet(store,query);
 	}
 
 	/**
@@ -565,7 +576,7 @@ public class Manager {
 	 */
 	public Set<String> getNamedGraphs() throws AldapaException, IOException {
 		String query = fileutils.fileToString(MethodRDFFile.getAllNamedGraphs.getValue());
-		return execTupleQueryToStringSet(query);
+		return rdfutils.execTupleQueryToStringSet(store,query);
 	}
 
 	/**
@@ -580,20 +591,10 @@ public class Manager {
 	public Set<String> getNamedGraphs(String datasetUri) throws AldapaException, IOException {
 		String query = fileutils.fileTokenResolver(MethodRDFFile.getNamedGraphsByDataset.getValue(), MethodFileToken.datasetUri.getValue(),
 		        datasetUri);
-		return execTupleQueryToStringSet(query);
+		return rdfutils.execTupleQueryToStringSet(store,query);
 	}
 
-	private Set<String> execTupleQueryToStringSet(String query) throws RDFStoreException {
-		HashSet<String> results = new HashSet<String>();
-		TupleQueryResult result = store.execSPARQLTupleQuery(query);
-		List<String> bindingNames = result.getBindingNames();
-		while (result.hasNext()) {
-			BindingSet bindingSet = result.next();
-			Value firstValue = bindingSet.getValue(bindingNames.get(0));
-			results.add(firstValue.toString());
-		}
-		return results;
-	}
+
 
 	/**
 	 * 
@@ -606,5 +607,22 @@ public class Manager {
 	public void reset() throws RDFStoreException, IOException {
 		store.execSPARQLUpdate(fileutils.fileToString(MethodRDFFile.reset.getValue()));
 		LOGGER.info("Everything deleted ");
+	}
+	
+	public boolean analyseGraph () throws ConfigurationException, RDFStoreException, IOException, InvalidRDFException{
+		
+		String graphURI = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "dataGraph");
+		org.apache.jena.rdf.model.Model target = RDFUtils.convertGraphToJenaModel(store, graphURI);
+		LOGGER.info("Validator data graph: " + graphURI);
+				
+		String rulesPath = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "shapeGraph");
+		org.apache.jena.rdf.model.Model rulesModel = ModelFactory.createDefaultModel();
+		rulesModel.read(rulesPath);
+		LOGGER.info("Rules file: " + rulesPath);
+
+		String reportFile = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "reportFile");
+		boolean valid = validator.validate(target, rulesModel, reportFile);
+
+		return valid;
 	}
 }

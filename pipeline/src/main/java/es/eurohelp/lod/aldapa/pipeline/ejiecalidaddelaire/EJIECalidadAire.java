@@ -45,6 +45,11 @@ public class EJIECalidadAire {
 		// Add data to named graph
 		manager.addDataToNamedGraph(named_graph_uri, "estaciones.csv");
 		
+		// Validate data
+		manager.analyseGraph();
+		
+		// Discover links
+		
 		// Flush backbone
 		manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl", RDFFormat.TURTLE);
 		

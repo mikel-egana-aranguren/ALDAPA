@@ -3,8 +3,6 @@
  */
 package es.eurohelp.lod.aldapa.storage;
 
-import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
-
 /**
  * @author megana
  *
