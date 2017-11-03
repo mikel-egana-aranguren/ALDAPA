@@ -66,7 +66,7 @@ public class SHACLValidatorTest {
 		tests.read(shapeIn, null, "TURTLE");
 
 		String finalQuery = fileUtils.fileToString(reportQuery);
-		boolean result = validator.validate(target, tests, finalQuery,reportPath);
+		boolean result = validator.validate(target, tests, reportPath);
 		
 		assertTrue(result);
 	}
@@ -86,7 +86,7 @@ public class SHACLValidatorTest {
 		tests.read(shapeIn, null, "TURTLE");
 
 		String finalQuery = fileUtils.fileToString(reportQuery);
-		boolean result = validator.validate(target, tests, finalQuery,reportPath);
+		boolean result = validator.validate(target, tests, reportPath);
 
 		assertFalse(result);
 	}
@@ -103,7 +103,7 @@ public class SHACLValidatorTest {
 		tests.read(shapeIn, null, "TURTLE");
 
 		String finalQuery = fileUtils.fileToString(reportQuery);
-		boolean result = validator.validate(target, tests, finalQuery,parkingsReportPath);
+		boolean result = validator.validate(target, tests, parkingsReportPath);
 		
 		assertTrue(result);
 	}
@@ -123,7 +123,7 @@ public class SHACLValidatorTest {
 		tests.read(shapeIn, null, "TURTLE");
 
 		String finalQuery = fileUtils.fileToString(reportQuery);
-		boolean result = validator.validate(target, tests, finalQuery,invalidEstacionesReportPath);
+		boolean result = validator.validate(target, tests, invalidEstacionesReportPath);
 
 		assertTrue(result);
 	}
@@ -140,7 +140,7 @@ public class SHACLValidatorTest {
 		tests.read(shapeIn, null, "TURTLE");
 
 		String finalQuery = fileUtils.fileToString(reportQuery);
-		boolean result = validator.validate(target, tests, finalQuery,estacionesReportPath);
+		boolean result = validator.validate(target, tests, estacionesReportPath);
 
 		assertTrue(result);
 	}

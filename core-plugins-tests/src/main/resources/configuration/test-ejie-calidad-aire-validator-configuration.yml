@@ -5,6 +5,5 @@ author: Mikel Egana Aranguren
 pluginClassName: es.eurohelp.lod.aldapa.impl.modification.SHACLValidator
 dataGraph: http://euskadi.eus/graph/estaciones
 shapeGraph: shacl/estaciones-shape.ttl
-reportSPARQLquery: shacl/report.sparql
-reportsDir: data/shaclValidationReports
+reportFile: data/shaclValidationReports/estaciones.ttl
 

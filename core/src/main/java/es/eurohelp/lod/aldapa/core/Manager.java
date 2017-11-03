@@ -4,6 +4,7 @@
 package es.eurohelp.lod.aldapa.core;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -15,6 +16,7 @@ import java.util.Set;
 
 import org.apache.http.MethodNotSupportedException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
@@ -36,6 +38,7 @@ import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
 import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
+import es.eurohelp.lod.aldapa.modification.InvalidRDFException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
@@ -606,19 +609,20 @@ public class Manager {
 		LOGGER.info("Everything deleted ");
 	}
 	
-	public boolean analyseGraph (){
+	public boolean analyseGraph () throws ConfigurationException, RDFStoreException, IOException, InvalidRDFException{
 		
-//		rdfutils.execGraphQueryToJenaModel(store, query)
-		
-		
-//		store.execSPARQLGraphQuery(pSPARQLquery)
-//		
-//		validator.validate(target, rules, queryToCheckReport, reportFilePath)
-		
+		String graphURI = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "dataGraph");
+		org.apache.jena.rdf.model.Model target = RDFUtils.convertGraphToJenaModel(store, graphURI);
+		LOGGER.info("Validator data graph: " + graphURI);
+				
+		String rulesPath = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "shapeGraph");
+		org.apache.jena.rdf.model.Model rulesModel = ModelFactory.createDefaultModel();
+		rulesModel.read(rulesPath);
+		LOGGER.info("Rules file: " + rulesPath);
 
-		
-		return false;
+		String reportFile = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "reportFile");
+		boolean valid = validator.validate(target, rulesModel, reportFile);
+
+		return valid;
 	}
-	
-
 }

@@ -18,5 +18,5 @@ import org.apache.jena.rdf.model.Model;
 
 public interface FunctionalRDFQualityValidator {
 	// true: valid according to tests
-	public boolean validate (Model target, Model rules, String queryToCheckReport, String reportFilePath) throws IOException, InvalidRDFException; // Always print out report
+	public boolean validate (Model target, Model rules, String reportFilePath) throws IOException, InvalidRDFException; // Always print out report
 }

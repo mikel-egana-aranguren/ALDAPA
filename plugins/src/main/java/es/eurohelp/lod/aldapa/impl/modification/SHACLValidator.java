@@ -27,9 +27,13 @@ import es.eurohelp.lod.aldapa.modification.RDFQualityValidator;
 public class SHACLValidator extends RDFQualityValidator implements FunctionalRDFQualityValidator {
 	
 	private static final Logger LOGGER = LogManager.getLogger(SHACLValidator.class);
+	private static final String reportQuery = 
+			"ASK WHERE { "
+			+ "?ValidationReport <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationReport> . "
+			+ "?ValidationReport <http://www.w3.org/ns/shacl#conforms> \"false\"^^<http://www.w3.org/2001/XMLSchema#boolean> .}" ;
 
 	@Override
-	public boolean validate(Model target, Model rules, String queryToCheckReport, String reportFilePath) throws IOException, InvalidRDFException {
+	public boolean validate(Model target, Model rules, String reportFilePath) throws IOException, InvalidRDFException {
 		boolean result = false; 
 		
 		// Create a validation report (execute the tests)
@@ -40,7 +44,7 @@ public class SHACLValidator extends RDFQualityValidator implements FunctionalRDF
 		report.getModel().write(out, "TURTLE");
 
 //		// Query report to check if data is conformant
-		Query query = QueryFactory.create(queryToCheckReport);
+		Query query = QueryFactory.create(reportQuery);
 		QueryExecution qexec = QueryExecutionFactory.create(query, report.getModel());
 		boolean resultAsk = qexec.execAsk();
 		qexec.close();

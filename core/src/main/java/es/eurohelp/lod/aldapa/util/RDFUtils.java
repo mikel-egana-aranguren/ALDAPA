@@ -27,7 +27,7 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
  */
 public class RDFUtils {
 	
-	private static final String tmpFile = "tmpConvertGraphToJenaModel.rdf";
+	private static final String tmpFile = "tmpConvertGraphToJenaModel.ttl";
 	
 	public static Set<String> execTupleQueryToStringSet(FunctionalRDFStore store, String query) throws RDFStoreException {
 		HashSet<String> results = new HashSet<String>();
@@ -42,9 +42,9 @@ public class RDFUtils {
 	}
 	
 	public static Model convertGraphToJenaModel (FunctionalRDFStore store, String graphURI) throws RDFStoreException, FileNotFoundException{
-		store.flushGraph(graphURI, new FileOutputStream(tmpFile), RDFFormat.RDFXML);
-		Model model = ModelFactory.createDefaultModel() ;
-		model.read(tmpFile) ;
+		store.flushGraph(graphURI, new FileOutputStream(tmpFile), RDFFormat.TURTLE);
+		Model model = ModelFactory.createDefaultModel();
+		model.read(tmpFile);
 		return model;
 	}
 }
