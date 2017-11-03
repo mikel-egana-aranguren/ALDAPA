@@ -6,7 +6,7 @@
     <version>0.0.5</version>
   </parent>
   <artifactId>core-plugins-tests</artifactId>
-  <name>Core and plugins tests</name>
+  <name>ALDAPA core and plugins tests</name>
   <description>Core needs some plugins for testing, but circular dependencies would arise</description>
   <dependencies>
 		<dependency>
