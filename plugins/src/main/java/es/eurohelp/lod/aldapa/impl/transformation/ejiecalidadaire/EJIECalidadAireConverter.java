@@ -72,19 +72,23 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
 			}
 
 			String province = record.get("Province");
-
 			// TODO: ontologia + metodo de busqueda mediante rdfs_label
 			adder.addTriple(stationUri, EXTERNALURI.dbo_province.getValue(), provinceSelector(province));
+			
 			String town = record.get("Town");
-	
 			// TODO: ontologia + metodo de busqueda mediante rdfs_label			
 			adder.addTriple(stationUri, EXTERNALURI.schema_location.getValue(), townSelector(town));
+			
 			String address = record.get("Address");
 			adder.addDataTripleXSDString(stationUri, EXTERNALURI.schema_address.getValue(), address);
+			
 			String latitude = record.get("Latitude");
 			adder.addDataTripleXSDdouble(stationUri, EXTERNALURI.lat_wgs84.getValue(), Double.valueOf(latitude.replace(",", ".")));
+			
 			String longitude = record.get("Longitude");
 			adder.addDataTripleXSDdouble(stationUri, EXTERNALURI.long_wgs84.getValue(), Double.valueOf(longitude.replace(",", ".")));
+			
+			adder.addRDFTYPETriple(stationUri, "http://www.w3.org/ns/sosa/Sensor");
 		}
 		return adder.getModel();
 	}

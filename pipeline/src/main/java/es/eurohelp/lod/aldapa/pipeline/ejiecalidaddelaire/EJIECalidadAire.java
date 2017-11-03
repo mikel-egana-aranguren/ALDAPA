@@ -46,6 +46,7 @@ public class EJIECalidadAire {
 		manager.addDataToNamedGraph(named_graph_uri, "estaciones.csv");
 		
 		// Validate data
+		manager.analyseGraph();
 		
 		// Discover links
 		

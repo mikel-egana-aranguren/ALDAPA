@@ -1,0 +1,9 @@
+name: SHACLValidatorForCalidadDelAirePipeline
+comment: SHACL validator for testing purposes, calidad del aire pipeline
+author: Mikel Egana Aranguren
+
+pluginClassName: es.eurohelp.lod.aldapa.impl.modification.SHACLValidator
+dataGraph: http://euskadi.eus/graph/estaciones01
+shapeGraph: estaciones-shape.ttl
+reportFile: data/estaciones.ttl
+
