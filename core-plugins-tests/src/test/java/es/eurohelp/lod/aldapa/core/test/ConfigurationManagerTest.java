@@ -32,15 +32,15 @@ import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
  */
 public class ConfigurationManagerTest {
 	
-	private static final String configfile = "configuration.yml";
+	private static final String ConfigFile = "configuration.yml";
 	private static final String configfile2 = "configuration2.yml";
 	private static final String ejiefile = "estaciones.csv";
 	private static final String ejiefileurl = "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv";
 	private static final String csvfile = "data/OpenDataEuskadiCalidadDelAire/estaciones.csv";
 	
 	@Test
-	public void testFileStore() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, ClientProtocolException, IOException, AldapaException{
-		ConfigurationManager testManager = ConfigurationManager.getInstance(configfile);
+	public void testFileStore() throws Exception{
+		ConfigurationManager testManager = ConfigurationManager.getInstance(ConfigFile);
 		FunctionalFileStore fileStore = testManager.getFileStore();
 		fileStore.getFileHTTP(ejiefileurl, ejiefile, true);
 		assertEquals("data/",fileStore.getDirectoryPath());
@@ -48,8 +48,8 @@ public class ConfigurationManagerTest {
 	}
 	
 	@Test
-	public void testMemoryRDFStore () throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException, ClientProtocolException, IOException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-		ConfigurationManager testManager = ConfigurationManager.getInstance(configfile);
+	public void testMemoryRDFStore () throws Exception {
+		ConfigurationManager testManager = ConfigurationManager.getInstance(ConfigFile);
 		FunctionalRDFStore rdfStore = testManager.getRDFStore();
 		ModelBuilder builder = new ModelBuilder();
 		builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
@@ -58,7 +58,7 @@ public class ConfigurationManagerTest {
 	}
 	
 	@Test
-	public void testRESTRDFStore () throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException, ClientProtocolException, IOException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+	public void testRESTRDFStore () throws Exception {
 		ConfigurationManager testManager = ConfigurationManager.getInstance(configfile2);
 		FunctionalRDFStore rdfStore = testManager.getRDFStore();
 		ModelBuilder builder = new ModelBuilder();
@@ -70,8 +70,8 @@ public class ConfigurationManagerTest {
 	}
 	
 	@Test
-	public void testTransformer () throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException, ClientProtocolException, IOException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-		ConfigurationManager testManager = ConfigurationManager.getInstance(configfile);
+	public void testTransformer () throws Exception {
+		ConfigurationManager testManager = ConfigurationManager.getInstance(ConfigFile);
 		FunctionalCSV2RDFBatchConverter converter = testManager.getTransformer();
 		Model model = new TreeModel();
 		converter.setDataSource(csvfile);
@@ -82,7 +82,7 @@ public class ConfigurationManagerTest {
 	
 	@Test
 	public void testValidator () throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException{
-		ConfigurationManager testManager = ConfigurationManager.getInstance(configfile);
+		ConfigurationManager testManager = ConfigurationManager.getInstance(ConfigFile);
 		FunctionalRDFQualityValidator validator = testManager.getRDFQualityValidator();
 	}
 }
