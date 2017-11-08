@@ -10,7 +10,7 @@ package es.eurohelp.lod.aldapa.core.exception;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public class AldapaException extends Exception {
+public class AldapaException extends RuntimeException {
 
 	private static final long serialVersionUID = 5816787623162646478L;
 
