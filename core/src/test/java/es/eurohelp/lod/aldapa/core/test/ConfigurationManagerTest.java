@@ -6,7 +6,6 @@ package es.eurohelp.lod.aldapa.core.test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import org.junit.BeforeClass;
 import org.junit.Rule;
