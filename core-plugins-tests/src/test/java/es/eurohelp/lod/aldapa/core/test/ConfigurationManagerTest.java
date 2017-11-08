@@ -10,7 +10,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.apache.http.client.ClientProtocolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
@@ -24,7 +23,6 @@ import org.junit.Test;
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
-import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
@@ -62,42 +60,60 @@ public class ConfigurationManagerTest {
 			fileStore.getFileHTTP(EJIEFILEURL, EJIEFILE, true);
 			assertEquals("data/",fileStore.getDirectoryPath());
 			assertTrue(Files.exists(Paths.get(fileStore.getDirectoryPath() + EJIEFILE)));
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-		        | SecurityException | ClassNotFoundException | AldapaException | IOException e) {
+		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException
+		        | SecurityException | ClassNotFoundException | IOException e) {
 			LOGGER.error(e);
 		} 
 	}
 	
 	@Test
-	public void testMemoryRDFStore () throws Exception {
-		FunctionalRDFStore rdfStore = testManager.getRDFStore();
-		ModelBuilder builder = new ModelBuilder();
-		builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
-		Model model = builder.build();
-		rdfStore.saveModel(model);
+	public void testMemoryRDFStore () {
+		try {
+			FunctionalRDFStore rdfStore = testManager.getRDFStore();
+			ModelBuilder builder = new ModelBuilder();
+			builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
+			Model model = builder.build();
+			rdfStore.saveModel(model);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
+		        | InvocationTargetException | NoSuchMethodException | SecurityException | IOException e) {
+			LOGGER.error(e);
+		}
 	}
 	
 	@Test
-	public void testRESTRDFStore () throws Exception {
-		FunctionalRDFStore rdfStore = testManager2.getRDFStore();
-		ModelBuilder builder = new ModelBuilder();
-		builder.setNamespace("ex", "http://example.com/").subject("ex:Mikel").add(RDF.TYPE, "ex:Developer").add(FOAF.FIRST_NAME, "Mikel");
-		Model model = builder.build();
-		rdfStore.saveModel(model);
+	public void testRESTRDFStore () {
+		try {
+			FunctionalRDFStore rdfStore = testManager2.getRDFStore();
+			ModelBuilder builder = new ModelBuilder();
+			builder.setNamespace("ex", "http://example.com/").subject("ex:Mikel").add(RDF.TYPE, "ex:Developer").add(FOAF.FIRST_NAME, "Mikel");
+			Model model = builder.build();
+			rdfStore.saveModel(model);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException 
+		        | InvocationTargetException | NoSuchMethodException | IOException e) {
+			LOGGER.error(e);
+		}
 	}
 	
 	@Test
-	public void testTransformer () throws Exception {
-		FunctionalCSV2RDFBatchConverter converter = testManager.getTransformer();
-		Model model = new TreeModel();
-		converter.setDataSource(CSVFILE);
-		converter.setModel(model);
-		Model new_model = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
-		assertNotNull(new_model);
+	public void testTransformer () {
+		try {
+			FunctionalCSV2RDFBatchConverter converter = testManager.getTransformer();
+			Model model = new TreeModel();
+			converter.setDataSource(CSVFILE);
+			converter.setModel(model);
+			Model newModel = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
+			assertNotNull(newModel);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IOException e) {
+			LOGGER.error(e);
+		}
 	}
 	
 	@Test
-	public void testValidator () throws Exception{
-		assertNotNull(testManager.getRDFQualityValidator());
+	public void testValidator () {
+		try {
+			assertNotNull(testManager.getRDFQualityValidator());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			LOGGER.error(e);
+		}
 	}
 }
