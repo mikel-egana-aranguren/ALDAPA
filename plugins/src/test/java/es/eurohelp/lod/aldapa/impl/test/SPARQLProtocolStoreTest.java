@@ -5,6 +5,8 @@ package es.eurohelp.lod.aldapa.impl.test;
 
 import static org.junit.Assert.*;
 
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -20,6 +22,8 @@ import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.impl.storage.SPARQLProtocolStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
+import es.eurohelp.lod.aldapa.util.FileUtils;
+import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
  * @author megana
@@ -27,7 +31,6 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
  */
 public class SPARQLProtocolStoreTest {
 
-	private static final String endpointUrl = "http://172.16.0.81:58080/blazegraph/namespace/aldapa/sparql";
 	private static final String graphQuery = "CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}";
 	private static final String tupleQuery = "SELECT * WHERE {?s ?p ?o}";
 	private static final String booleanQuery = "ASK {<http://blazegraph.com/blazegraph> <http://blazegraph.com/implements> <http://example.com/testing>}";
@@ -42,6 +45,10 @@ public class SPARQLProtocolStoreTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() {
+		InputStream in = FileUtils.getInstance().getInputStream("BlazegraphRESTStoreTest.yml");
+		HashMap<String,String> keysValues = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(in);
+		String blazegraph = keysValues.get("blazegraph");
+		String endpointUrl = blazegraph + "/namespace/aldapa/sparql";
 		sparqlStore = new SPARQLProtocolStore(endpointUrl);
 	}
 	

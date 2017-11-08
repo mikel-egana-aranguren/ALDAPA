@@ -7,6 +7,8 @@ import static org.junit.Assert.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
@@ -18,13 +20,14 @@ import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
+import es.eurohelp.lod.aldapa.util.FileUtils;
+import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
  * @author megana
@@ -33,7 +36,6 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 public class BlazegraphRESTStoreTest {
 
 	private static BlazegraphRESTStore store = null;
-	private static final String blazegraph = "http://172.16.0.81:58080/blazegraph";
 	private static final String dbName = "ALDAPAtest";
 	private static final String tupleQuery = "SELECT * WHERE {?s ?p ?o}";
 	private static final String graphQuery = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "CONSTRUCT {"
@@ -55,6 +57,10 @@ public class BlazegraphRESTStoreTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws RDFStoreException, IOException {
+		InputStream in = FileUtils.getInstance().getInputStream("BlazegraphRESTStoreTest.yml");
+		HashMap<String,String> keysValues = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(in);
+		String blazegraph = keysValues.get("blazegraph");
+		
 		store = new BlazegraphRESTStore(blazegraph, dbName);
 		ModelBuilder builder = new ModelBuilder();
 		builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
