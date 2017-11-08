@@ -5,6 +5,8 @@ package es.eurohelp.lod.aldapa.core.test;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -17,7 +19,8 @@ import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
-import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
+import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
@@ -35,7 +38,7 @@ public class ConfigurationManagerTest {
 	private static final String CSVFILE = "data/OpenDataEuskadiCalidadDelAire/estaciones.csv";
 	
 	@Test
-	public void testFileStore() throws Exception{
+	public void testFileStore() throws IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, AldapaException {
 		ConfigurationManager testManager = ConfigurationManager.getInstance(CONFIGFILE);
 		FunctionalFileStore fileStore = testManager.getFileStore();
 		fileStore.getFileHTTP(EJIEFILEURL, EJIEFILE, true);
