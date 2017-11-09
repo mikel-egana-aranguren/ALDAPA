@@ -21,6 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
@@ -44,12 +45,8 @@ public class ConfigurationManagerTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-        try {
-            testManager = ConfigurationManager.getInstance(CONFIGFILE);
-            testManager2 = ConfigurationManager.getInstance(CONFIGFILE2);
-        } catch (ConfigurationFileIOException | IOException e) {
-            LOGGER.error(e);
-        }
+        testManager = ConfigurationManager.getInstance(CONFIGFILE);
+        testManager2 = ConfigurationManager.getInstance(CONFIGFILE2);
     }
 
     @Test
@@ -59,8 +56,7 @@ public class ConfigurationManagerTest {
             fileStore.getFileHTTP(EJIEFILEURL, EJIEFILE, true);
             assertEquals("data/", fileStore.getDirectoryPath());
             assertTrue(Files.exists(Paths.get(fileStore.getDirectoryPath() + EJIEFILE)));
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | SecurityException
-                | ClassNotFoundException | IOException e) {
+        } catch (AldapaException | IOException e) {
             LOGGER.error(e);
         }
     }

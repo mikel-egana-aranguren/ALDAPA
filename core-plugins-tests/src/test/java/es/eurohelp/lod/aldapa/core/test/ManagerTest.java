@@ -79,7 +79,7 @@ public class ManagerTest {
             config = ConfigurationManager.getInstance(CONFIGFILE);
             manager = new Manager(config);
             fileutils = FileUtils.getInstance();
-        } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException
                 | NoSuchMethodException | SecurityException e) {
             LOGGER.error(e);
         }
