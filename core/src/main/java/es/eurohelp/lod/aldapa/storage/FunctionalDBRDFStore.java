@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
+
 /**
  * @author megana
  *
@@ -32,8 +34,8 @@ public interface FunctionalDBRDFStore extends FunctionalRDFStore{
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	void setDB(String dbName) throws RDFStoreException, ClientProtocolException, IOException;
+	void setDB(String dbName) throws AldapaException;
 	
-	void deleteDB(String dbName) throws RDFStoreException, ClientProtocolException, IOException;
+	void deleteDB(String dbName) throws AldapaException;
 
 }

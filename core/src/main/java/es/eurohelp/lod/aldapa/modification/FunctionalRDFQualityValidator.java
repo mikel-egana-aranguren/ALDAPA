@@ -3,9 +3,10 @@
  */
 package es.eurohelp.lod.aldapa.modification;
 
-import java.io.IOException;
 
 import org.apache.jena.rdf.model.Model;
+
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 
 /**
  * 
@@ -18,5 +19,5 @@ import org.apache.jena.rdf.model.Model;
 
 public interface FunctionalRDFQualityValidator {
 	// true: valid according to tests
-	public boolean validate (Model target, Model rules, String reportFilePath) throws IOException, InvalidRDFException; // Always print out report
+	public boolean validate (Model target, Model rules, String reportFilePath) throws AldapaException; // Always print out report
 }

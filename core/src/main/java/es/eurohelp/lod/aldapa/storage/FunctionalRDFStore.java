@@ -7,6 +7,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.rio.RDFFormat;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
+
 
 /**
  * 
@@ -29,7 +31,7 @@ public interface FunctionalRDFStore extends FunctionalSPARQLStore {
 	 * @throws an RDF Store exception
 	 */
 	
-	public void saveModel(Model model) throws RDFStoreException, ClientProtocolException, IOException;
+	public void saveModel(Model model) throws AldapaException;
 	
 	/**
 	 * 
@@ -47,7 +49,7 @@ public interface FunctionalRDFStore extends FunctionalSPARQLStore {
 	 * @throws an RDF Store exception
 	 */
 	
-	public void flushGraph (String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws RDFStoreException;
+	public void flushGraph (String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws AldapaException;
 	
 	/**
 	 * 
@@ -62,5 +64,5 @@ public interface FunctionalRDFStore extends FunctionalSPARQLStore {
 	 *
 	 */
 		
-	public void deleteGraph (String graphUri) throws RDFStoreException, ClientProtocolException, IOException;
+	public void deleteGraph (String graphUri) throws AldapaException;
 }

@@ -6,6 +6,8 @@ package es.eurohelp.lod.aldapa.storage;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
+
 /**
  * @author megana
  *
@@ -21,11 +23,11 @@ public interface FunctionalSPARQLStore {
 	 *            
 	 * @return the result as a GraphQueryResult object
 	 * 
-	 * @throws an RDF Store exception
+	 * @throws AldapaException an RDF Store exception
 	 *
 	 */
 
-	GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException;
+	GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws AldapaException;
 
 	/**
 	 * 
@@ -36,11 +38,11 @@ public interface FunctionalSPARQLStore {
 	 *            
 	 * @return the result as a TupleQueryResult object
 	 * 
-	 * @throws an RDF Store exception
+	 * @throws AldapaException an RDF Store exception
 	 *
 	 */
 
-	TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) throws RDFStoreException;
+	TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) throws AldapaException;
 
 	/**
 	 * 
@@ -51,19 +53,19 @@ public interface FunctionalSPARQLStore {
 	 *            
 	 * @return the result as a boolean
 	 * 
-	 * @throws an RDF Store exception
+	 * @throws AldapaException an RDF Store exception
 	 *
 	 */
 
-	boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException;
+	boolean execSPARQLBooleanQuery(String pSPARQLquery) throws AldapaException;
 
 	/**
 	 * 
 	 * Executes a SPARQL query that will modify a graph: DELETE, DELETE DATA, INSERT, INSERT DATA
 	 * 
 	 * @param pSPARQLquery
-	 * @throws RDFStoreException
+	 * @throws AldapaException
 	 */
-	void execSPARQLUpdate(String pSPARQLquery) throws RDFStoreException;
+	void execSPARQLUpdate(String pSPARQLquery) throws AldapaException;
 
 }

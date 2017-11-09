@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import org.eclipse.rdf4j.model.Model;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
+
 
 /**
  * 
@@ -23,7 +25,7 @@ public interface FunctionalCSV2RDFBatchConverter {
 	 * @throws IOException
 	 */
 	
-	public void setDataSource(String file_path) throws IOException;
+	public void setDataSource(String file_path) throws AldapaException;
 	public void setModel (Model model);
 	public Model getTransformedModel(String namedGraphURI);
 	

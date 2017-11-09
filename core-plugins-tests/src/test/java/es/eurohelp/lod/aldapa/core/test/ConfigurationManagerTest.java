@@ -54,7 +54,7 @@ public class ConfigurationManagerTest {
             fileStore.getFileHTTP(EJIEFILEURL, EJIEFILE, true);
             assertEquals("data/", fileStore.getDirectoryPath());
             assertTrue(Files.exists(Paths.get(fileStore.getDirectoryPath() + EJIEFILE)));
-        } catch (AldapaException | IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -67,7 +67,7 @@ public class ConfigurationManagerTest {
             builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
             Model model = builder.build();
             rdfStore.saveModel(model);
-        } catch (AldapaException | IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -80,7 +80,7 @@ public class ConfigurationManagerTest {
             builder.setNamespace("ex", "http://example.com/").subject("ex:Mikel").add(RDF.TYPE, "ex:Developer").add(FOAF.FIRST_NAME, "Mikel");
             Model model = builder.build();
             rdfStore.saveModel(model);
-        } catch (AldapaException | IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -94,7 +94,7 @@ public class ConfigurationManagerTest {
             converter.setModel(model);
             Model newModel = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
             assertNotNull(newModel);
-        } catch (AldapaException | IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }

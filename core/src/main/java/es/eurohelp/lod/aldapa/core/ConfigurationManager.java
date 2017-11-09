@@ -112,7 +112,7 @@ public class ConfigurationManager {
      * @return the only instance of ConfigurationManager.
      * @author acarbajo
      * @throws ConfigurationFileIOException
-     *             an I/O exception pertaining to the confgi file
+     *             an I/O exception pertaining to the config file
      * @throws IOException
      *             a general I/O exception
      */

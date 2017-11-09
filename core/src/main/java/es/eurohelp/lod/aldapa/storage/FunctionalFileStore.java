@@ -8,6 +8,8 @@ import java.util.Set;
 
 import org.apache.http.client.ClientProtocolException;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
+
 /**
  * 
  * Plugins implementing this interface should get, store, and retrieve files with data (most likely CSVs)
@@ -27,7 +29,7 @@ public interface FunctionalFileStore {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public void getFileHTTP (String fileURL, String fileName, boolean rewrite) throws FileStoreFileAlreadyStoredException, ClientProtocolException, IOException;
+	public void getFileHTTP (String fileURL, String fileName, boolean rewrite) throws AldapaException;
 	
 	public Set<String> getFileNames ();
 
