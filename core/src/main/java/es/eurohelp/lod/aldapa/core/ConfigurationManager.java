@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
+import es.eurohelp.lod.aldapa.core.exception.CouldNotInitialisePluginException;
 import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
@@ -86,7 +87,7 @@ public class ConfigurationManager {
      * 
      * @param the
      *            main config file name
-     *            
+     * 
      * @throws IOException
      * 
      * @throws ConfigurationFileIOException
@@ -115,7 +116,7 @@ public class ConfigurationManager {
      * @throws IOException
      *             a general I/O exception
      */
-    public synchronized static ConfigurationManager getInstance(String configurationFileName) {
+    public static synchronized ConfigurationManager getInstance(String configurationFileName) {
         if (null == INSTANCE) {
             INSTANCE = new ConfigurationManager(configurationFileName);
         }
@@ -197,7 +198,7 @@ public class ConfigurationManager {
                 LOGGER.info("File Store started ");
             } else {
                 LOGGER.error("ALDAPA cannot initialise class " + fileStoreClass.getName());
-                throw new AldapaException("ALDAPA cannot initialise class " + fileStoreClass.getName());
+                throw new CouldNotInitialisePluginException(fileStoreClass.getName());
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new AldapaException(e);
@@ -216,42 +217,48 @@ public class ConfigurationManager {
      * @throws InvocationTargetException
      * @throws IllegalArgumentException
      */
-    public FunctionalRDFStore getRDFStore() throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException,
-            IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    public FunctionalRDFStore getRDFStore() {
         FunctionalRDFStore rdfStore = null;
-        String rdfStorePluginName = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, PLUGINCLASSNAME);
-        LOGGER.info("Triple Store plugin name: " + rdfStorePluginName);
-        Class<?> rdfStoreClass = Class.forName(rdfStorePluginName);
-        String rdfStoreSuperClassName = rdfStoreClass.getSuperclass().getName();
-        if (rdfStoreSuperClassName.equals(ABSTRACTMEMORYSTORERDF4JCONNECTION)) {
-            rdfStore = (FunctionalRDFStore) rdfStoreClass.newInstance();
-            LOGGER.info("Triple Store started");
-        } else if (rdfStoreSuperClassName.equals(ABSTRACTRESTSTORERDF4JCONNECTION)) {
-            Class[] cArg = new Class[2];
-            cArg[0] = String.class;
-            cArg[1] = String.class;
-            String endpointURL = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, ENDPOINTURLTOKEN);
-            String dbName = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, DBNAMETOKEN);
-            rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(endpointURL, dbName);
-            LOGGER.info("File Store started ");
-        } else {
-            throw new AldapaException("ALDAPA cannot initialise class " + rdfStoreClass.getName());
+        try {
+            String rdfStorePluginName = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, PLUGINCLASSNAME);
+            LOGGER.info("Triple Store plugin name: " + rdfStorePluginName);
+            Class<?> rdfStoreClass = Class.forName(rdfStorePluginName);
+            String rdfStoreSuperClassName = rdfStoreClass.getSuperclass().getName();
+            if (rdfStoreSuperClassName.equals(ABSTRACTMEMORYSTORERDF4JCONNECTION)) {
+                rdfStore = (FunctionalRDFStore) rdfStoreClass.newInstance();
+                LOGGER.info("Triple Store started");
+            } else if (rdfStoreSuperClassName.equals(ABSTRACTRESTSTORERDF4JCONNECTION)) {
+                Class[] cArg = new Class[2];
+                cArg[0] = String.class;
+                cArg[1] = String.class;
+                String endpointURL = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, ENDPOINTURLTOKEN);
+                String dbName = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, DBNAMETOKEN);
+                rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(endpointURL, dbName);
+                LOGGER.info("File Store started ");
+            } else {
+                throw new CouldNotInitialisePluginException(rdfStoreClass.getName());
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            throw new AldapaException(e);
         }
         return rdfStore;
     }
 
-    public FunctionalCSV2RDFBatchConverter getTransformer()
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException {
+    public FunctionalCSV2RDFBatchConverter getTransformer() {
         FunctionalCSV2RDFBatchConverter converter = null;
-        String converterPluginName = this.getConfigPropertyValue(TRANSFORMERCONFGIFILE, PLUGINCLASSNAME);
-        LOGGER.info("Transformer plugin name: " + converterPluginName);
-        Class<?> converterClass = Class.forName(converterPluginName);
-        String converterSuperClassName = converterClass.getSuperclass().getName();
-        if (converterSuperClassName.equals(ABSTRACTCSV2RDFBATCHCONVERTER)) {
-            converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
-            LOGGER.info("CSV2RDF converter started");
-        } else {
-            throw new AldapaException("ALDAPA cannot initialise class " + converterClass.getName());
+        try {
+            String converterPluginName = this.getConfigPropertyValue(TRANSFORMERCONFGIFILE, PLUGINCLASSNAME);
+            LOGGER.info("Transformer plugin name: " + converterPluginName);
+            Class<?> converterClass = Class.forName(converterPluginName);
+            String converterSuperClassName = converterClass.getSuperclass().getName();
+            if (converterSuperClassName.equals(ABSTRACTCSV2RDFBATCHCONVERTER)) {
+                converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
+                LOGGER.info("CSV2RDF converter started");
+            } else {
+                throw new CouldNotInitialisePluginException(converterClass.getName());
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            throw new AldapaException(e);
         }
         return converter;
     }
@@ -263,18 +270,21 @@ public class ConfigurationManager {
      * @throws InstantiationException
      * @throws AldapaException
      */
-    public FunctionalRDFQualityValidator getRDFQualityValidator()
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException {
+    public FunctionalRDFQualityValidator getRDFQualityValidator() {
         FunctionalRDFQualityValidator validator = null;
-        String validatorPluginName = this.getConfigPropertyValue(VALIDATORCONFIGFILE, PLUGINCLASSNAME);
-        LOGGER.info("validator plugin name: " + validatorPluginName);
-        Class<?> validatorClass = Class.forName(validatorPluginName);
-        String validatorSuperClassName = validatorClass.getSuperclass().getName();
-        if (validatorSuperClassName.equals(ABSTRACTRDFQUALITYVALIDATOR)) {
-            validator = (FunctionalRDFQualityValidator) validatorClass.newInstance();
-            LOGGER.info("RDF validator started");
-        } else {
-            throw new AldapaException("ALDAPA cannot initialise class " + validatorClass.getName());
+        try {
+            String validatorPluginName = this.getConfigPropertyValue(VALIDATORCONFIGFILE, PLUGINCLASSNAME);
+            LOGGER.info("validator plugin name: " + validatorPluginName);
+            Class<?> validatorClass = Class.forName(validatorPluginName);
+            String validatorSuperClassName = validatorClass.getSuperclass().getName();
+            if (validatorSuperClassName.equals(ABSTRACTRDFQUALITYVALIDATOR)) {
+                validator = (FunctionalRDFQualityValidator) validatorClass.newInstance();
+                LOGGER.info("RDF validator started");
+            } else {
+                throw new CouldNotInitialisePluginException(validatorClass.getName());
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            throw new AldapaException(e);
         }
         return validator;
     }

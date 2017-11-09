@@ -6,7 +6,6 @@ package es.eurohelp.lod.aldapa.core.test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -22,7 +21,6 @@ import org.junit.Test;
 
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
-import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
@@ -69,8 +67,7 @@ public class ConfigurationManagerTest {
             builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
             Model model = builder.build();
             rdfStore.saveModel(model);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-                | NoSuchMethodException | SecurityException | IOException e) {
+        } catch (AldapaException | IOException e) {
             LOGGER.error(e);
         }
     }
@@ -83,8 +80,7 @@ public class ConfigurationManagerTest {
             builder.setNamespace("ex", "http://example.com/").subject("ex:Mikel").add(RDF.TYPE, "ex:Developer").add(FOAF.FIRST_NAME, "Mikel");
             Model model = builder.build();
             rdfStore.saveModel(model);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException
-                | IOException e) {
+        } catch (AldapaException | IOException e) {
             LOGGER.error(e);
         }
     }
@@ -98,7 +94,7 @@ public class ConfigurationManagerTest {
             converter.setModel(model);
             Model newModel = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
             assertNotNull(newModel);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IOException e) {
+        } catch (AldapaException | IOException e) {
             LOGGER.error(e);
         }
     }
@@ -107,7 +103,7 @@ public class ConfigurationManagerTest {
     public void testValidator() {
         try {
             assertNotNull(testManager.getRDFQualityValidator());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
