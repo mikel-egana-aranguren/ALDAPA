@@ -107,7 +107,7 @@ public class Manager {
         try {
             LOGGER.info("Project name: " + projectName);
             // Create Project URI
-            String projectURIFriendlyName = URIUtils.URIfy(null, null, projectName);
+            String projectURIFriendlyName = URIUtils.urify(null, null, projectName);
             String projectBaseUri = configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "PROJECT_BASE");
 
             String projectURI = URIUtils.validateURI(projectBaseUri + projectURIFriendlyName);
@@ -197,7 +197,7 @@ public class Manager {
             LOGGER.info("Catalog name: " + catalogName);
 
             // Create catalog URI
-            String catalogURIFriendlyName = URIUtils.URIfy(null, null, catalogName);
+            String catalogURIFriendlyName = URIUtils.urify(null, null, catalogName);
             String catalogBaseUri = configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "CATALOG_BASE");
             String catalogUri = URIUtils.validateURI(catalogBaseUri + catalogURIFriendlyName);
 
@@ -266,7 +266,7 @@ public class Manager {
             LOGGER.info("Dataset name: " + datasetName);
 
             // Create dataset URI
-            String datasetURIFriendlyName = URIUtils.URIfy(null, null, datasetName);
+            String datasetURIFriendlyName = URIUtils.urify(null, null, datasetName);
             String datasetBaseUri = configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "DATASET_BASE");
             String datasetUri = URIUtils.validateURI(datasetBaseUri + datasetURIFriendlyName);
 
@@ -337,7 +337,7 @@ public class Manager {
             LOGGER.info("Graph name: " + graphName);
 
             // Create graph URI
-            String graphURIFriendlyName = URIUtils.URIfy(null, null, graphName);
+            String graphURIFriendlyName = URIUtils.urify(null, null, graphName);
             String graphBaseUri = configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "GRAPH_BASE");
             String graphUri = URIUtils.validateURI(graphBaseUri + graphURIFriendlyName);
 

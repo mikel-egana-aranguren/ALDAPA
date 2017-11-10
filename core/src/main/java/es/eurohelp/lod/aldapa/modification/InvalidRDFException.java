@@ -15,14 +15,14 @@ import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 public class InvalidRDFException extends AldapaException {
 
 	private static final long serialVersionUID = -2919775317777744434L;
-	private final static String message = "Invalid RDF";
+	private static final String MESSAGE = "Invalid RDF";
 
 	public InvalidRDFException() {
-		super(message);
+        super(MESSAGE);
 	}
 	
 	public InvalidRDFException(String reportPath) {
-		super(message + ", see report at " + reportPath);
+		super(MESSAGE + ", see report at " + reportPath);
 	}
 
 	public InvalidRDFException(Throwable cause) {

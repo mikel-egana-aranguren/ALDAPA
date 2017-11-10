@@ -9,33 +9,33 @@ package es.eurohelp.lod.aldapa.core.exception;
  */
 public class DatasetNotFoundException extends AldapaException {
 
-	/**
-		 * 
-		 */
-	private static final long serialVersionUID = -7890380589126653122L;
-	private static String message = "The dataset does not exist in the RDF Store";
+    /**
+    	 * 
+    	 */
+    private static final long serialVersionUID = -7890380589126653122L;
+    private static final String MESSAGE = "The dataset does not exist in the RDF Store";
 
-	public DatasetNotFoundException() {
-	}
+    public DatasetNotFoundException() {
+    }
 
-	/**
-	 * @param catalog_uri
-	 *            the catalog URI
-	 */
-	public DatasetNotFoundException(String dataset_uri) {
-		super(message + ": " + dataset_uri);
-	}
+    /**
+     * @param catalog_uri
+     *            the catalog URI
+     */
+    public DatasetNotFoundException(String datasetUri) {
+        super(MESSAGE + ": " + datasetUri);
+    }
 
-	public DatasetNotFoundException(Throwable cause) {
-		super(cause);
-	}
+    public DatasetNotFoundException(Throwable cause) {
+        super(cause);
+    }
 
-	public DatasetNotFoundException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public DatasetNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public DatasetNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
+    public DatasetNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 
 }

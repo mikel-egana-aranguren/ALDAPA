@@ -10,7 +10,7 @@ package es.eurohelp.lod.aldapa.core.exception;
 public class NamedGraphExistsException extends AldapaException {
 
 	private static final long serialVersionUID = 5643998639202681881L;
-    private static String message = "The Named Graph URI already exists in the RDF Store";
+    private static final String MESSAGE = "The Named Graph URI already exists in the RDF Store";
 	
 	public NamedGraphExistsException() {
 	}
@@ -18,8 +18,8 @@ public class NamedGraphExistsException extends AldapaException {
 	/**
 	 * @param graph_uri the Named Graph URI
 	 */
-	public NamedGraphExistsException(String graph_uri) {
-		super(message +": " + graph_uri);
+	public NamedGraphExistsException(String graphUri) {
+        super(MESSAGE +": " + graphUri);
 	}
 
 	public NamedGraphExistsException(Throwable cause) {

@@ -12,17 +12,17 @@ public class DatasetExistsException extends AldapaException {
 
 	private static final long serialVersionUID = 2234576815915767365L;
 
-	private final static String message = "The dataset URI already exists in the RDF Store";
+	private static final String MESSAGE = "The dataset URI already exists in the RDF Store";
 
 	public DatasetExistsException() {
-		super(message);
+		super(MESSAGE);
 	}
 
 	/**
 	 * @param datasetURI the dataset URI
 	 */
 	public DatasetExistsException(String datasetURI) {
-		super(message +": " + datasetURI);
+		super(MESSAGE +": " + datasetURI);
 	}
 
 	public DatasetExistsException(Throwable cause) {
