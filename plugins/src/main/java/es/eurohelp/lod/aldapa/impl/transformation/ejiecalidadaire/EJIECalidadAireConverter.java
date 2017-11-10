@@ -72,7 +72,7 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
             process += 1;
             String name = record.get("Name");
             String stationUri = EUSURI.base_id_es.getValue() + NTITOKEN.environment.getValue() + "/" + DOMAINTOKEN.equipment.getValue() + "/"
-                    + CLASSTOKEN.station.getValue() + "/" + URIUtils.URIfy(null, null, name);
+                    + CLASSTOKEN.station.getValue() + "/" + URIUtils.urify(null, null, name);
             adder.addRDFSLABELTriple(stationUri, name, "es");
 
             String comment = record.get("Description");
