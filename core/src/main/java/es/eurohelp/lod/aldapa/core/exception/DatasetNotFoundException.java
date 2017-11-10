@@ -9,9 +9,6 @@ package es.eurohelp.lod.aldapa.core.exception;
  */
 public class DatasetNotFoundException extends AldapaException {
 
-    /**
-    	 * 
-    	 */
     private static final long serialVersionUID = -7890380589126653122L;
     private static final String MESSAGE = "The dataset does not exist in the RDF Store";
 

@@ -11,8 +11,9 @@ import java.net.URISyntaxException;
  *
  */
 public class URIUtils {
-    
-    private URIUtils (){}
+
+    private URIUtils() {
+    }
 
     /**
      * 
@@ -62,14 +63,12 @@ public class URIUtils {
         // Main replacement and collapse contigous replacement characters
         if (regexp == null) {
             regularExpression = "\\(|\\)|\\s|\\/|\\.|:|!|\\?|\\[|\\]|;|\\+|_|\\*|ª|º";
-        }
-        else {
+        } else {
             regularExpression = regexp;
         }
         if (replacement == null) {
             textReplacement = "-";
-        }
-        else {
+        } else {
             textReplacement = replacement;
         }
         String tmpResult = targetstring.replaceAll(regularExpression, textReplacement).replaceAll("[-]{2,}", textReplacement);

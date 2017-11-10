@@ -25,6 +25,4 @@ public class URIUtilsTest {
 	public void testValidateURI() throws URISyntaxException {
 		assertEquals("urn:aldapa:project:parkings-donosti", URIUtils.validateURI("urn:aldapa:project:parkings-donosti"));
 	}
-
-	// TODO: issue 27
 }

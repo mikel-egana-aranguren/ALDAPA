@@ -550,7 +550,7 @@ public class Manager {
      */
     public Set<String> getCatalogs() throws AldapaException {
         try {
-            String query = fileutils.fileToString(MethodRDFFile.GETAllCATALOGS.getValue());
+            String query = fileutils.fileToString(MethodRDFFile.GETALLCATALOGS.getValue());
             return RDFUtils.execTupleQueryToStringSet(store, query);
         } catch (IOException e) {
             LOGGER.error(e);
@@ -589,7 +589,7 @@ public class Manager {
      */
     public Set<String> getDatasets() throws AldapaException {
         try {
-            String query = fileutils.fileToString(MethodRDFFile.GETAllDATASETS.getValue());
+            String query = fileutils.fileToString(MethodRDFFile.GETALLDATASETS.getValue());
             return RDFUtils.execTupleQueryToStringSet(store, query);
         } catch (IOException e) {
             LOGGER.error(e);
@@ -628,7 +628,7 @@ public class Manager {
      */
     public Set<String> getNamedGraphs() throws AldapaException {
         try {
-            String query = fileutils.fileToString(MethodRDFFile.GETAllNAMEDGRAPHS.getValue());
+            String query = fileutils.fileToString(MethodRDFFile.GETALLNAMEDGRAPHS.getValue());
             return RDFUtils.execTupleQueryToStringSet(store, query);
         } catch (IOException e) {
             LOGGER.error(e);
@@ -678,7 +678,6 @@ public class Manager {
 
     public boolean analyseGraph() throws AldapaException {
         try {
-
             String graphURI = configmanager.getConfigPropertyValue(VALIDATORCONFIGFILE, "dataGraph");
             org.apache.jena.rdf.model.Model target = RDFUtils.convertGraphToJenaModel(store, graphURI);
             LOGGER.info("Validator data graph: " + graphURI);
