@@ -7,7 +7,6 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.HashSet;
 
@@ -77,54 +76,41 @@ public class ManagerTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-        try {
-            config = ConfigurationManager.getInstance(CONFIGFILE);
-            manager = new Manager(config);
-            fileutils = FileUtils.getInstance();
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        config = ConfigurationManager.getInstance(CONFIGFILE);
+        manager = new Manager(config);
+        fileutils = FileUtils.getInstance();
     }
 
     @After
     public void tearDown() {
-        try {
-            manager.reset();
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        manager.reset();
     }
 
     @Test
-    public final void testReset() {
+    public final void testReset() throws IOException {
+        // Add project, catalog, dataset, and data, then flush to file
+        manager.addProject(PROJECTNAME);
+        manager.addCatalog(CATALOGNAME, PROJECTURI);
+        manager.addDataset(DATASETNAME, CATALOGURI);
+        String namedGraphURI = manager.addNamedGraph(GRAPHNAME, DATASETURI);
+        manager.addDataToNamedGraph(namedGraphURI, CSVPATH);
+        manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testReset-namedgraph-data-created.trig", RDFFormat.TRIG);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "testReset-namedgraph-created.ttl", RDFFormat.TURTLE);
+
+        // Reset manager
+        manager.reset();
+
+        // After reseting, if we try to add a catalog, it should throw and exception since the project does not
+        // exist
+        thrown.expect(ProjectNotFoundException.class);
+        thrown.expectMessage("The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
         try {
-            // Add project, catalog, dataset, and data, then flush to file
-            manager.addProject(PROJECTNAME);
             manager.addCatalog(CATALOGNAME, PROJECTURI);
-            manager.addDataset(DATASETNAME, CATALOGURI);
-            String namedGraphURI = manager.addNamedGraph(GRAPHNAME, DATASETURI);
-            manager.addDataToNamedGraph(namedGraphURI, CSVPATH);
-            manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testReset-namedgraph-data-created.trig", RDFFormat.TRIG);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "testReset-namedgraph-created.ttl", RDFFormat.TURTLE);
-
-            // Reset manager
-            manager.reset();
-
-            // After reseting, if we try to add a catalog, it should throw and exception since the project does not
-            // exist
-            thrown.expect(ProjectNotFoundException.class);
-            thrown.expectMessage("The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
-            try {
-                manager.addCatalog(CATALOGNAME, PROJECTURI);
-            } finally {
-                // There should be no data in the files
-                manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testReset-namedgraph-data-deleted.trig", RDFFormat.TRIG);
-                manager.flushGraph(null, TESTDATAOUTPUTDIR + "testReset-namedgraph-deleted.ttl", RDFFormat.TURTLE);
-                assertTrue(fileutils.isFileEmpty(TESTDATAOUTPUTDIR + "testReset-namedgraph-deleted.ttl"));
-            }
-
-        } catch (AldapaException | IOException e) {
-            LOGGER.error(e);
+        } finally {
+            // There should be no data in the files
+            manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testReset-namedgraph-data-deleted.trig", RDFFormat.TRIG);
+            manager.flushGraph(null, TESTDATAOUTPUTDIR + "testReset-namedgraph-deleted.ttl", RDFFormat.TURTLE);
+            assertTrue(fileutils.isFileEmpty(TESTDATAOUTPUTDIR + "testReset-namedgraph-deleted.ttl"));
         }
     }
 
@@ -147,277 +133,195 @@ public class ManagerTest {
      */
     @Test
     public final void testAddProject() {
-        try {
-            String createdProjectUri = manager.addProject(PROJECTNAME);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "project-created.ttl", RDFFormat.TURTLE);
-            assertEquals(PROJECTURI, createdProjectUri);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        String createdProjectUri = manager.addProject(PROJECTNAME);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "project-created.ttl", RDFFormat.TURTLE);
+        assertEquals(PROJECTURI, createdProjectUri);
     }
 
     @Test
     public final void testAddCatalog() {
-        try {
-            manager.addProject(PROJECTNAME);
-            String createdCatalogUri = manager.addCatalog(CATALOGNAME, PROJECTURI);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "catalog-created.ttl", RDFFormat.TURTLE);
-            assertEquals(CATALOGURI, createdCatalogUri);
-        } catch (AldapaException  e) {
-            LOGGER.error(e);
-        }
+        manager.addProject(PROJECTNAME);
+        String createdCatalogUri = manager.addCatalog(CATALOGNAME, PROJECTURI);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "catalog-created.ttl", RDFFormat.TURTLE);
+        assertEquals(CATALOGURI, createdCatalogUri);
     }
 
     @Test
     public final void testAddDataset() {
-        try {
-            manager.addProject(PROJECTNAME);
-            manager.addCatalog(CATALOGNAME, PROJECTURI);
-            String createdDatasetUri = manager.addDataset(DATASETNAME, CATALOGURI);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "dataset-created.ttl", RDFFormat.TURTLE);
-            assertEquals(DATASETURI, createdDatasetUri);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        manager.addProject(PROJECTNAME);
+        manager.addCatalog(CATALOGNAME, PROJECTURI);
+        String createdDatasetUri = manager.addDataset(DATASETNAME, CATALOGURI);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "dataset-created.ttl", RDFFormat.TURTLE);
+        assertEquals(DATASETURI, createdDatasetUri);
+
     }
 
     @Test
     public final void testAddNamedGraph() {
-        try {
-            manager.addProject(PROJECTNAME);
-            manager.addCatalog(CATALOGNAME, PROJECTURI);
-            manager.addDataset(DATASETNAME, CATALOGURI);
-            String createdNamedGraphUri = manager.addNamedGraph(GRAPHNAME, DATASETURI);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "namedgraph-created.ttl", RDFFormat.TURTLE);
-            assertEquals(NAMEDGRAPHURI, createdNamedGraphUri);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        manager.addProject(PROJECTNAME);
+        manager.addCatalog(CATALOGNAME, PROJECTURI);
+        manager.addDataset(DATASETNAME, CATALOGURI);
+        String createdNamedGraphUri = manager.addNamedGraph(GRAPHNAME, DATASETURI);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "namedgraph-created.ttl", RDFFormat.TURTLE);
+        assertEquals(NAMEDGRAPHURI, createdNamedGraphUri);
     }
 
     @Test
     public final void testAddDataToNamedGraph() {
-        try {
-            manager.addProject(PROJECTNAME);
-            manager.addCatalog(CATALOGNAME, PROJECTURI);
-            manager.addDataset(DATASETNAME, CATALOGURI);
-            String namedGraphURI = manager.addNamedGraph(GRAPHNAME, DATASETURI);
-            manager.addDataToNamedGraph(namedGraphURI, CSVPATH);
-            manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testAddDataToNamedGraph-data-added.trig", RDFFormat.TRIG);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "testAddDataToNamedGraph-namedgraph-added.ttl", RDFFormat.TURTLE);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        manager.addProject(PROJECTNAME);
+        manager.addCatalog(CATALOGNAME, PROJECTURI);
+        manager.addDataset(DATASETNAME, CATALOGURI);
+        String namedGraphURI = manager.addNamedGraph(GRAPHNAME, DATASETURI);
+        manager.addDataToNamedGraph(namedGraphURI, CSVPATH);
+        manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testAddDataToNamedGraph-data-added.trig", RDFFormat.TRIG);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "testAddDataToNamedGraph-namedgraph-added.ttl", RDFFormat.TURTLE);
     }
 
     @Test
     public final void testDeleteProject() {
-        try {
-            initManager();
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "project-before-deleted.trig", RDFFormat.TRIG);
-            manager.deleteProject(PROJECTURI);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "project-deleted.trig", RDFFormat.TRIG);
-            thrown.expect(ProjectNotFoundException.class);
-            thrown.expectMessage("The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
-            manager.addCatalog(CATALOGNAME, PROJECTURI);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+
+        initManager();
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "project-before-deleted.trig", RDFFormat.TRIG);
+        manager.deleteProject(PROJECTURI);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "project-deleted.trig", RDFFormat.TRIG);
+        thrown.expect(ProjectNotFoundException.class);
+        thrown.expectMessage("The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
+        manager.addCatalog(CATALOGNAME, PROJECTURI);
     }
 
     @Test
     public final void testDeleteCatalog() {
-        try {
-            initManager();
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "catalog-before-deleted.trig", RDFFormat.TRIG);
-            manager.deleteCatalog(CATALOGURI);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "catalog-deleted.trig", RDFFormat.TRIG);
-            thrown.expect(AldapaException.class);
-            thrown.expectMessage("The catalog does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/catalog/donosti-parkings");
-            manager.addDataset(DATASETNAME, CATALOGURI);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "catalog-before-deleted.trig", RDFFormat.TRIG);
+        manager.deleteCatalog(CATALOGURI);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "catalog-deleted.trig", RDFFormat.TRIG);
+        thrown.expect(CatalogNotFoundException.class);
+        thrown.expectMessage("The catalog does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/catalog/donosti-parkings");
+        manager.addDataset(DATASETNAME, CATALOGURI);
     }
 
     @Test
     public final void testDeleteDataset() {
-        try {
-            initManager();
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "dataset-before-deleted.trig", RDFFormat.TRIG);
-            manager.deleteDataset(DATASETURI);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "dataset-deleted.trig", RDFFormat.TRIG);
-            thrown.expect(DatasetNotFoundException.class);
-            thrown.expectMessage("The dataset does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr");
-            manager.addNamedGraph(GRAPHNAME, DATASETURI);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "dataset-before-deleted.trig", RDFFormat.TRIG);
+        manager.deleteDataset(DATASETURI);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "dataset-deleted.trig", RDFFormat.TRIG);
+        thrown.expect(DatasetNotFoundException.class);
+        thrown.expectMessage("The dataset does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr");
+        manager.addNamedGraph(GRAPHNAME, DATASETURI);
     }
 
     @Test
     public final void testDeleteNamedGraph() {
-        try {
-            initManager();
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "named-graph-before-deleted.trig", RDFFormat.TRIG);
-            manager.deleteNamedGraph(NAMEDGRAPHURI);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "named-graph-deleted.trig", RDFFormat.TRIG);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "named-graph-before-deleted.trig", RDFFormat.TRIG);
+        manager.deleteNamedGraph(NAMEDGRAPHURI);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "named-graph-deleted.trig", RDFFormat.TRIG);
     }
 
     @Test
     public final void testDeleteDataFromNamedGraph() {
-        try {
-            initManager();
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "data-named-graph-before-deleted.trig", RDFFormat.TRIG);
-            manager.deleteDataFromNamedGraph(NAMEDGRAPHURI);
-            manager.flushGraph(null, TESTDATAOUTPUTDIR + "data-named-graph-deleted.trig", RDFFormat.TRIG);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "data-named-graph-before-deleted.trig", RDFFormat.TRIG);
+        manager.deleteDataFromNamedGraph(NAMEDGRAPHURI);
+        manager.flushGraph(null, TESTDATAOUTPUTDIR + "data-named-graph-deleted.trig", RDFFormat.TRIG);
+
     }
 
     @Test
     public final void testGetProjects() {
-        try {
-            initManager();
-            HashSet<String> projectUris = (HashSet<String>) manager.getProjects();
-            assertTrue(projectUris.contains(PROJECTURI));
-            assertTrue(projectUris.contains(PROJECTURI + "2"));
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        HashSet<String> projectUris = (HashSet<String>) manager.getProjects();
+        assertTrue(projectUris.contains(PROJECTURI));
+        assertTrue(projectUris.contains(PROJECTURI + "2"));
     }
 
     @Test
     public final void testGetAllCatalogs() {
-        try {
-            initManager();
-            HashSet<String> catalogUris = (HashSet<String>) manager.getCatalogs();
-            assertTrue(catalogUris.contains(CATALOGURI));
-            assertTrue(catalogUris.contains(CATALOGURI + "-2"));
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        HashSet<String> catalogUris = (HashSet<String>) manager.getCatalogs();
+        assertTrue(catalogUris.contains(CATALOGURI));
+        assertTrue(catalogUris.contains(CATALOGURI + "-2"));
+
     }
 
     @Test
     public final void testGetCatalogsByProject() {
-        try {
-            initManager();
-            HashSet<String> catalogUris = (HashSet<String>) manager.getCatalogs(PROJECTURI);
-            assertTrue(catalogUris.contains(CATALOGURI));
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        HashSet<String> catalogUris = (HashSet<String>) manager.getCatalogs(PROJECTURI);
+        assertTrue(catalogUris.contains(CATALOGURI));
     }
 
     @Test
     public final void testGetAllDatasets() {
-        try {
-            initManager();
-            HashSet<String> datasetUris = (HashSet<String>) manager.getDatasets();
-            assertTrue(datasetUris.contains(DATASETURI));
-            assertTrue(datasetUris.contains(DATASETURI + "2"));
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        HashSet<String> datasetUris = (HashSet<String>) manager.getDatasets();
+        assertTrue(datasetUris.contains(DATASETURI));
+        assertTrue(datasetUris.contains(DATASETURI + "2"));
     }
 
     @Test
     public final void testGetDatasetsByCatalog() {
-        try {
-            initManager();
-            HashSet<String> datasetUris = (HashSet<String>) manager.getDatasets(CATALOGURI + "2");
-            assertFalse(datasetUris.contains(DATASETURI + "2"));
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        HashSet<String> datasetUris = (HashSet<String>) manager.getDatasets(CATALOGURI + "2");
+        assertFalse(datasetUris.contains(DATASETURI + "2"));
     }
 
     @Test
     public final void testGetAllNamedGraphs() {
-        try {
-            initManager();
-            HashSet<String> graphUris = (HashSet<String>) manager.getNamedGraphs();
-            assertTrue(graphUris.contains(NAMEDGRAPHURI));
-            assertTrue(graphUris.contains(NAMEDGRAPHURI + "2"));
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        HashSet<String> graphUris = (HashSet<String>) manager.getNamedGraphs();
+        assertTrue(graphUris.contains(NAMEDGRAPHURI));
+        assertTrue(graphUris.contains(NAMEDGRAPHURI + "2"));
+
     }
 
     @Test
     public final void testGetNamedGraphsByCatalog() {
-        try {
-            initManager();
-            HashSet<String> graphUris = (HashSet<String>) manager.getNamedGraphs(DATASETURI + "2");
-            assertTrue(graphUris.contains(NAMEDGRAPHURI + "2"));
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        initManager();
+        HashSet<String> graphUris = (HashSet<String>) manager.getNamedGraphs(DATASETURI + "2");
+        assertTrue(graphUris.contains(NAMEDGRAPHURI + "2"));
     }
 
     @Test
     public final void testDuplicateProject() {
-        try {
-            thrown.expect(ProjectExistsException.class);
-            initManager();
-            manager.addProject(PROJECTNAME);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        thrown.expect(ProjectExistsException.class);
+        initManager();
+        manager.addProject(PROJECTNAME);
     }
 
     @Test
     public final void testDuplicateCatalog() {
-        try {
-            thrown.expect(CatalogExistsException.class);
-            initManager();
-            manager.addCatalog(CATALOGNAME, PROJECTURI);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        thrown.expect(CatalogExistsException.class);
+        initManager();
+        manager.addCatalog(CATALOGNAME, PROJECTURI);
     }
 
     @Test
     public final void testDuplicateDataset() {
-        try {
-            thrown.expect(DatasetExistsException.class);
-            initManager();
-            manager.addDataset(DATASETNAME, CATALOGURI);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        thrown.expect(DatasetExistsException.class);
+        initManager();
+        manager.addDataset(DATASETNAME, CATALOGURI);
     }
 
     @Test
     public final void testDuplicateNamedGraph() {
-        try {
-            thrown.expect(NamedGraphExistsException.class);
-            initManager();
-            manager.addNamedGraph(GRAPHNAME, DATASETURI);
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+
+        thrown.expect(NamedGraphExistsException.class);
+        initManager();
+        manager.addNamedGraph(GRAPHNAME, DATASETURI);
     }
 
     @Test
     public final void testAnalyseGraph() {
-        try {
-            String projectURI = manager.addProject(OPENDATAEUSKADIPROJECTNAME);
-            String catalogURI = manager.addCatalog(ENVIRONMENTCATALOGNAME, projectURI);
-            String datasetURI = manager.addDataset(AIRQUALITYDATASETNAME, catalogURI);
-            String namedGraphURI = manager.addNamedGraph(ESTACIONESGRAPHNAME, datasetURI);
-            manager.addDataToNamedGraph(namedGraphURI, CSVPATH);
-            manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "test-ejie-calidad-aire-namedgraph-created.ttl", RDFFormat.TURTLE);
-            manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "test-ejie-calidad-aire-namedgraph-created.trig", RDFFormat.TRIG);
-            manager.analyseGraph();
-        } catch (AldapaException e) {
-            LOGGER.error(e);
-        }
+        String projectURI = manager.addProject(OPENDATAEUSKADIPROJECTNAME);
+        String catalogURI = manager.addCatalog(ENVIRONMENTCATALOGNAME, projectURI);
+        String datasetURI = manager.addDataset(AIRQUALITYDATASETNAME, catalogURI);
+        String namedGraphURI = manager.addNamedGraph(ESTACIONESGRAPHNAME, datasetURI);
+        manager.addDataToNamedGraph(namedGraphURI, CSVPATH);
+        manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "test-ejie-calidad-aire-namedgraph-created.ttl", RDFFormat.TURTLE);
+        manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "test-ejie-calidad-aire-namedgraph-created.trig", RDFFormat.TRIG);
+        manager.analyseGraph();
     }
 
     // Not all the tests need initManager, so it won't be a @before like reset
@@ -438,7 +342,7 @@ public class ManagerTest {
             String datasetUri2 = manager.addDataset(DATASETNAME + "2", catalogUri2);
             manager.addNamedGraph(GRAPHNAME + "2", datasetUri2);
             manager.addData(model2);
-        } catch (AldapaException | RDFParseException | UnsupportedRDFormatException | IOException e) {
+        } catch (IOException e) {
             LOGGER.error(e);
         }
     }
