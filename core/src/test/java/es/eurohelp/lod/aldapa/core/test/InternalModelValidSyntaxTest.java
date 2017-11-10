@@ -50,7 +50,7 @@ public class InternalModelValidSyntaxTest {
 	@Test
 	public void addProjectTurtle() throws IOException {
 		Model results = null;
-		String resolved_addproject_ttl = fileUtils.fileTokenResolver(MethodRDFFile.addProject.getValue(), MethodFileToken.PROJECTURI.getValue(),
+		String resolved_addproject_ttl = fileUtils.fileTokenResolver(MethodRDFFile.ADDPROJECT.getValue(), MethodFileToken.PROJECTURI.getValue(),
 		        fakeProjetURI);
 		InputStream modelInputStream = new ByteArrayInputStream(resolved_addproject_ttl.getBytes());
 		results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
@@ -62,7 +62,7 @@ public class InternalModelValidSyntaxTest {
 		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
 		tokenReplacementMap.put(MethodFileToken.PROJECTURI, fakeProjetURI);
 		tokenReplacementMap.put(MethodFileToken.CATALOGURI, fakeCatalogURI);
-		String resolvedAddCatalogTTL = fileUtils.fileMultipleTokenResolver(MethodRDFFile.addCatalog.getValue(), tokenReplacementMap);
+		String resolvedAddCatalogTTL = fileUtils.fileMultipleTokenResolver(MethodRDFFile.ADDCATALOG.getValue(), tokenReplacementMap);
 		InputStream modelInputStream = new ByteArrayInputStream(resolvedAddCatalogTTL.getBytes());
 		Model results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 		assertFalse(results.isEmpty());
@@ -73,7 +73,7 @@ public class InternalModelValidSyntaxTest {
 		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
 		tokenReplacementMap.put(MethodFileToken.CATALOGURI, fakeCatalogURI);
 		tokenReplacementMap.put(MethodFileToken.DATASETURI, fakeDatasetURI);
-		String resolvedAddDatasetTTL = fileUtils.fileMultipleTokenResolver(MethodRDFFile.addDataset.getValue(), tokenReplacementMap);
+		String resolvedAddDatasetTTL = fileUtils.fileMultipleTokenResolver(MethodRDFFile.ADDDATASET.getValue(), tokenReplacementMap);
 		InputStream modelInputStream = new ByteArrayInputStream(resolvedAddDatasetTTL.getBytes());
 		Model results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 		assertFalse(results.isEmpty());
@@ -84,7 +84,7 @@ public class InternalModelValidSyntaxTest {
 		EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
 		tokenReplacementMap.put(MethodFileToken.DATASETURI, fakeDatasetURI);
 		tokenReplacementMap.put(MethodFileToken.GRAPHURI, fakeGraphURI);
-		String resolvedAddNamedGraphTTL = fileUtils.fileMultipleTokenResolver(MethodRDFFile.addNamedGraph.getValue(), tokenReplacementMap);
+		String resolvedAddNamedGraphTTL = fileUtils.fileMultipleTokenResolver(MethodRDFFile.ADDNAMEDGRAPH.getValue(), tokenReplacementMap);
 		InputStream modelInputStream = new ByteArrayInputStream(resolvedAddNamedGraphTTL.getBytes());
 		Model results = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 		assertFalse(results.isEmpty());
