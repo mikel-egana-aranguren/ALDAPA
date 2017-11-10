@@ -15,7 +15,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.RDFParseException;
 import org.eclipse.rdf4j.rio.Rio;
+import org.eclipse.rdf4j.rio.UnsupportedRDFormatException;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -79,8 +81,7 @@ public class ManagerTest {
             config = ConfigurationManager.getInstance(CONFIGFILE);
             manager = new Manager(config);
             fileutils = FileUtils.getInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException
-                | NoSuchMethodException | SecurityException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -89,7 +90,7 @@ public class ManagerTest {
     public void tearDown() {
         try {
             manager.reset();
-        } catch (IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -122,7 +123,7 @@ public class ManagerTest {
                 assertTrue(fileutils.isFileEmpty(TESTDATAOUTPUTDIR + "testReset-namedgraph-deleted.ttl"));
             }
 
-        } catch (URISyntaxException | IOException e) {
+        } catch (AldapaException | IOException e) {
             LOGGER.error(e);
         }
     }
@@ -150,7 +151,7 @@ public class ManagerTest {
             String createdProjectUri = manager.addProject(PROJECTNAME);
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "project-created.ttl", RDFFormat.TURTLE);
             assertEquals(PROJECTURI, createdProjectUri);
-        } catch (URISyntaxException | IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -162,7 +163,7 @@ public class ManagerTest {
             String createdCatalogUri = manager.addCatalog(CATALOGNAME, PROJECTURI);
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "catalog-created.ttl", RDFFormat.TURTLE);
             assertEquals(CATALOGURI, createdCatalogUri);
-        } catch (AldapaException | URISyntaxException | IOException e) {
+        } catch (AldapaException  e) {
             LOGGER.error(e);
         }
     }
@@ -175,7 +176,7 @@ public class ManagerTest {
             String createdDatasetUri = manager.addDataset(DATASETNAME, CATALOGURI);
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "dataset-created.ttl", RDFFormat.TURTLE);
             assertEquals(DATASETURI, createdDatasetUri);
-        } catch (URISyntaxException | IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -189,7 +190,7 @@ public class ManagerTest {
             String createdNamedGraphUri = manager.addNamedGraph(GRAPHNAME, DATASETURI);
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "namedgraph-created.ttl", RDFFormat.TURTLE);
             assertEquals(NAMEDGRAPHURI, createdNamedGraphUri);
-        } catch (URISyntaxException | IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -204,7 +205,7 @@ public class ManagerTest {
             manager.addDataToNamedGraph(namedGraphURI, CSVPATH);
             manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testAddDataToNamedGraph-data-added.trig", RDFFormat.TRIG);
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "testAddDataToNamedGraph-namedgraph-added.ttl", RDFFormat.TURTLE);
-        } catch (URISyntaxException | IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -219,7 +220,7 @@ public class ManagerTest {
             thrown.expect(ProjectNotFoundException.class);
             thrown.expectMessage("The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
             manager.addCatalog(CATALOGNAME, PROJECTURI);
-        } catch (IOException | URISyntaxException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -231,10 +232,10 @@ public class ManagerTest {
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "catalog-before-deleted.trig", RDFFormat.TRIG);
             manager.deleteCatalog(CATALOGURI);
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "catalog-deleted.trig", RDFFormat.TRIG);
-            thrown.expect(CatalogNotFoundException.class);
+            thrown.expect(AldapaException.class);
             thrown.expectMessage("The catalog does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/catalog/donosti-parkings");
             manager.addDataset(DATASETNAME, CATALOGURI);
-        } catch (IOException | URISyntaxException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -249,7 +250,7 @@ public class ManagerTest {
             thrown.expect(DatasetNotFoundException.class);
             thrown.expectMessage("The dataset does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr");
             manager.addNamedGraph(GRAPHNAME, DATASETURI);
-        } catch (IOException | URISyntaxException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -261,7 +262,7 @@ public class ManagerTest {
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "named-graph-before-deleted.trig", RDFFormat.TRIG);
             manager.deleteNamedGraph(NAMEDGRAPHURI);
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "named-graph-deleted.trig", RDFFormat.TRIG);
-        } catch (IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -273,7 +274,7 @@ public class ManagerTest {
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "data-named-graph-before-deleted.trig", RDFFormat.TRIG);
             manager.deleteDataFromNamedGraph(NAMEDGRAPHURI);
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "data-named-graph-deleted.trig", RDFFormat.TRIG);
-        } catch (IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -285,7 +286,7 @@ public class ManagerTest {
             HashSet<String> projectUris = (HashSet<String>) manager.getProjects();
             assertTrue(projectUris.contains(PROJECTURI));
             assertTrue(projectUris.contains(PROJECTURI + "2"));
-        } catch (IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -297,7 +298,7 @@ public class ManagerTest {
             HashSet<String> catalogUris = (HashSet<String>) manager.getCatalogs();
             assertTrue(catalogUris.contains(CATALOGURI));
             assertTrue(catalogUris.contains(CATALOGURI + "-2"));
-        } catch (IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -308,7 +309,7 @@ public class ManagerTest {
             initManager();
             HashSet<String> catalogUris = (HashSet<String>) manager.getCatalogs(PROJECTURI);
             assertTrue(catalogUris.contains(CATALOGURI));
-        } catch (IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -320,7 +321,7 @@ public class ManagerTest {
             HashSet<String> datasetUris = (HashSet<String>) manager.getDatasets();
             assertTrue(datasetUris.contains(DATASETURI));
             assertTrue(datasetUris.contains(DATASETURI + "2"));
-        } catch (IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -331,7 +332,7 @@ public class ManagerTest {
             initManager();
             HashSet<String> datasetUris = (HashSet<String>) manager.getDatasets(CATALOGURI + "2");
             assertFalse(datasetUris.contains(DATASETURI + "2"));
-        } catch (IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -343,7 +344,7 @@ public class ManagerTest {
             HashSet<String> graphUris = (HashSet<String>) manager.getNamedGraphs();
             assertTrue(graphUris.contains(NAMEDGRAPHURI));
             assertTrue(graphUris.contains(NAMEDGRAPHURI + "2"));
-        } catch (IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -354,7 +355,7 @@ public class ManagerTest {
             initManager();
             HashSet<String> graphUris = (HashSet<String>) manager.getNamedGraphs(DATASETURI + "2");
             assertTrue(graphUris.contains(NAMEDGRAPHURI + "2"));
-        } catch (IOException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -365,7 +366,7 @@ public class ManagerTest {
             thrown.expect(ProjectExistsException.class);
             initManager();
             manager.addProject(PROJECTNAME);
-        } catch (IOException | URISyntaxException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -376,7 +377,7 @@ public class ManagerTest {
             thrown.expect(CatalogExistsException.class);
             initManager();
             manager.addCatalog(CATALOGNAME, PROJECTURI);
-        } catch (IOException | URISyntaxException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -387,7 +388,7 @@ public class ManagerTest {
             thrown.expect(DatasetExistsException.class);
             initManager();
             manager.addDataset(DATASETNAME, CATALOGURI);
-        } catch (IOException | URISyntaxException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -398,7 +399,7 @@ public class ManagerTest {
             thrown.expect(NamedGraphExistsException.class);
             initManager();
             manager.addNamedGraph(GRAPHNAME, DATASETURI);
-        } catch (IOException | URISyntaxException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -414,7 +415,7 @@ public class ManagerTest {
             manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "test-ejie-calidad-aire-namedgraph-created.ttl", RDFFormat.TURTLE);
             manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "test-ejie-calidad-aire-namedgraph-created.trig", RDFFormat.TRIG);
             manager.analyseGraph();
-        } catch (IOException | URISyntaxException e) {
+        } catch (AldapaException e) {
             LOGGER.error(e);
         }
     }
@@ -437,7 +438,7 @@ public class ManagerTest {
             String datasetUri2 = manager.addDataset(DATASETNAME + "2", catalogUri2);
             manager.addNamedGraph(GRAPHNAME + "2", datasetUri2);
             manager.addData(model2);
-        } catch (IOException | URISyntaxException e) {
+        } catch (AldapaException | RDFParseException | UnsupportedRDFormatException | IOException e) {
             LOGGER.error(e);
         }
     }

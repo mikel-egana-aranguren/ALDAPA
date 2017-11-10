@@ -16,6 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.topbraid.shacl.validation.ValidationUtil;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.modification.InvalidRDFException;
 import es.eurohelp.lod.aldapa.modification.RDFQualityValidator;
@@ -25,39 +26,46 @@ import es.eurohelp.lod.aldapa.modification.RDFQualityValidator;
  *
  */
 public class SHACLValidator extends RDFQualityValidator implements FunctionalRDFQualityValidator {
-	
-	private static final Logger LOGGER = LogManager.getLogger(SHACLValidator.class);
-	private static final String reportQuery = 
-			"ASK WHERE { "
-			+ "?ValidationReport <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationReport> . "
-			+ "?ValidationReport <http://www.w3.org/ns/shacl#conforms> \"false\"^^<http://www.w3.org/2001/XMLSchema#boolean> .}" ;
 
-	@Override
-	public boolean validate(Model target, Model rules, String reportFilePath) throws IOException, InvalidRDFException {
-		boolean result = false; 
-		
-		// Create a validation report (execute the tests)
-		Resource report = ValidationUtil.validateModel(target, rules, true);
+    private static final Logger LOGGER = LogManager.getLogger(SHACLValidator.class);
+    private static final String REPORTQUERY = "ASK WHERE { "
+            + "?ValidationReport <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationReport> . "
+            + "?ValidationReport <http://www.w3.org/ns/shacl#conforms> \"false\"^^<http://www.w3.org/2001/XMLSchema#boolean> .}";
 
-		// Write report to disk
-		FileWriter out = new FileWriter(reportFilePath);
-		report.getModel().write(out, "TURTLE");
+    @Override
+    public boolean validate(Model target, Model rules, String reportFilePath) throws AldapaException {
+        try {
 
-//		// Query report to check if data is conformant
-		Query query = QueryFactory.create(reportQuery);
-		QueryExecution qexec = QueryExecutionFactory.create(query, report.getModel());
-		boolean resultAsk = qexec.execAsk();
-		qexec.close();
-		
-		// Data is not conformant
-		if (resultAsk) {
-			throw new InvalidRDFException(reportFilePath);
-		}
-		// Conformant data
-		else{
-			result = true;
-			LOGGER.info("Valid RDF");
-		}
-		return result;
-	}
+            // Create a validation report (execute the tests)
+            Resource report = ValidationUtil.validateModel(target, rules, true);
+
+            // Write report to disk
+
+            FileWriter out = new FileWriter(reportFilePath);
+
+            report.getModel().write(out, "TURTLE");
+
+            // // Query report to check if data is conformant
+            Query query = QueryFactory.create(REPORTQUERY);
+            QueryExecution qexec = QueryExecutionFactory.create(query, report.getModel());
+            boolean resultAsk = qexec.execAsk();
+            qexec.close();
+
+            boolean result = false;
+            // Data is not conformant
+            if (resultAsk) {
+                LOGGER.info("Invalid RDF");
+                throw new InvalidRDFException(reportFilePath);
+            }
+            // Conformant data
+            else {
+                result = true;
+                LOGGER.info("Valid RDF");
+            }
+            return result;
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
 }

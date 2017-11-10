@@ -17,7 +17,6 @@ import java.util.Set;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -35,6 +34,7 @@ import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.storage.FunctionalDBRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.storage.RESTStoreRDF4JConnection;
@@ -42,7 +42,7 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
 
 /**
  * 
- * A wrapper for Blazegraphs's REST API (https://wiki.blazegraph.com/wiki/index.php/REST_API). 
+ * A wrapper for Blazegraphs's REST API (https://wiki.blazegraph.com/wiki/index.php/REST_API).
  * 
  * The SPARQL enpoint queries are excuted through SPARQLProtocolStore
  * 
@@ -51,180 +51,216 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements FunctionalDBRDFStore {
 
-	// TODO: get these from config file
-	private static final String xmlNSName = "MY_NAMESPACE";
-	private static final String blazegraphquadsXMLFile = "blazegraphquads.xml";
-	
-	private String blazegraphBaseURL = null;
-	private String blazegraphNSName = null;
-	
+    // TODO: get these from config file
+    private static final String xmlNSName = "MY_NAMESPACE";
+    private static final String blazegraphquadsXMLFile = "blazegraphquads.xml";
 
-	private static final Logger LOGGER = LogManager.getLogger(BlazegraphRESTStore.class);
+    private String blazegraphBaseURL = null;
+    private String blazegraphNSName = null;
 
-	/**
-	 * @param sparqlEndpointURL
-	 * @throws IOException 
-	 * @throws RDFStoreException 
-	 */
+    private static final Logger LOGGER = LogManager.getLogger(BlazegraphRESTStore.class);
 
-	public BlazegraphRESTStore(String blazegraphURL, String dbName) throws RDFStoreException, IOException {
-		super(blazegraphURL, dbName);
-		blazegraphBaseURL = blazegraphURL;
-		this.createDB(dbName);
-	}
+    /**
+     * @param sparqlEndpointURL
+     * @throws IOException
+     * @throws RDFStoreException
+     */
 
-	@Override
-	public void saveModel(Model model) throws RDFStoreException, ClientProtocolException, IOException {
-		// TODO: not optimised!!! See issue # 44
-		StringWriter stringwriter = new StringWriter();
-		Rio.write(model, stringwriter, RDFFormat.TRIG);
-		String stringModel = stringwriter.toString();
-		LOGGER.info("Adding model " + stringModel.hashCode());
-		StringEntity stringEntity = new StringEntity(stringModel);
-		HashMap<String, String> httpHeaders = new HashMap<String,String>();
-		httpHeaders.put("Content-Type", "application/x-trig");
-		execPOST(blazegraphBaseURL + "/namespace/" + blazegraphNSName + "/sparql", stringEntity, httpHeaders);
-	}
+    public BlazegraphRESTStore(String blazegraphURL, String dbName) throws RDFStoreException, IOException {
+        super(blazegraphURL, dbName);
+        blazegraphBaseURL = blazegraphURL;
+        this.createDB(dbName);
+    }
 
-	@Override
-	public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws RDFStoreException {
-		ModelBuilder builder = new ModelBuilder();
-		// No named graph
-		if(graphURI == null){
-			GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}");
-			while (graphQueryResult.hasNext()) {
-				Statement stmt = graphQueryResult.next();
-				builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
-			}
-		}
-		// Named graph
-		else{
-			GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }");
-			builder.namedGraph(graphURI);
-			while (graphQueryResult.hasNext()) {
-				Statement stmt = graphQueryResult.next();
-				builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
-			}
-		}
-		Model model = builder.build();
-		Rio.write(model, outputstream, rdfformat);
-	}
+    @Override
+    public void saveModel(Model model) throws AldapaException {
+        try {
+            // TODO: not optimised!!! See issue # 44
+            StringWriter stringwriter = new StringWriter();
+            Rio.write(model, stringwriter, RDFFormat.TRIG);
+            String stringModel = stringwriter.toString();
+            LOGGER.info("Adding model " + stringModel.hashCode());
+            StringEntity stringEntity;
 
-	@Override
-	public void deleteGraph(String graphUri) throws RDFStoreException, ClientProtocolException, IOException {
-		String targetUrl = blazegraphBaseURL + "/namespace/" + blazegraphNSName + "/sparql" + "?c=" + URLEncoder.encode("<" + graphUri + ">", "ISO-8859-1");
-		execDELETE(targetUrl);
-	}
+            stringEntity = new StringEntity(stringModel);
 
-	/**
-	 * 
-	 * Creates a Quad Store (No inference): https://wiki.blazegraph.com/wiki/index.php/REST_API#Quads
-	 * 
-	 * @param dbName
-	 * @throws IOException
-	 * @throws RDFStoreException
-	 */
-	@Override
-	public void createDB(String dbName) throws IOException, RDFStoreException {
-		// If this object already created this DB, we stop without executing the HTTP call
-		if (blazegraphNSName != null && blazegraphNSName.equals(dbName)) {
-			throw new RDFStoreException("DB already exists");
-		} else {
-			String blazegraphquads = FileUtils.getInstance().fileToString(blazegraphquadsXMLFile);
-			String blazegraphquadsResolved = blazegraphquads.replace(xmlNSName, dbName);
-			String completeURL = blazegraphBaseURL + "/namespace";
-			HttpEntity entity = new ByteArrayEntity(blazegraphquadsResolved.getBytes("UTF-8"));	
-			HashMap<String, String> httpHeaders = new HashMap<String,String>();
-			httpHeaders.put("Content-Type", "application/xml");
-			HttpResponse response = execPOST(completeURL, entity, httpHeaders);
-			int status = response.getStatusLine().getStatusCode();
-			// Even if this object does not hold a db, it might already exist in BlazeGraph itself
-			if (status >= 400 && status < 600) {
-				throw new RDFStoreException("Could not create DB due to HTTP error code " + status);
-			} else {
-				LOGGER.info("Namespace " + dbName + " created in Blazegraph");
-				blazegraphNSName = dbName;
-			}
-		}
-	}
-	
-	/**
-	 * 
-	 * Create a DB with a custom XML properties file (e.g. https://wiki.blazegraph.com/wiki/index.php/REST_API#Triples_.2B_Inference_.2B_Truth_Maintenance)
-	 * 
-	 * @param xmlPropsFile
-	 */
-	public void createDBWtihProps(String xmlPropsFile) {
-		
-	}
+            HashMap<String, String> httpHeaders = new HashMap<String, String>();
+            httpHeaders.put("Content-Type", "application/x-trig");
+            execPOST(blazegraphBaseURL + "/namespace/" + blazegraphNSName + "/sparql", stringEntity, httpHeaders);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
 
-	public Set<String> getDBs() throws ClientProtocolException, IOException {
-		HashSet<String> dbs = new HashSet<String>();
-		CloseableHttpResponse response = execHTTPGET(blazegraphBaseURL + "/namespace");
-		// TODO: load into RDF4J model and query with SPARQL
-		String inputLine;
-		BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-		try {
-			while ((inputLine = br.readLine()) != null) {
-				if (inputLine.contains("<Namespace xmlns=\"http://www.bigdata.com/rdf#/features/KB/\">")) {
-					dbs.add(
-							inputLine.replace("<Namespace xmlns=\"http://www.bigdata.com/rdf#/features/KB/\">", "")
-							.replace("</Namespace>", "").trim());
-				}
-			}
-		} finally {
-			br.close();
-		}
-		return dbs;
-	}
-	
-	public void deleteDB (String dbName) throws ClientProtocolException, IOException, RDFStoreException {
-		HttpResponse response = execDELETE(blazegraphBaseURL + "/namespace" + "/" + dbName);
-		int status = response.getStatusLine().getStatusCode();
-		if (status >= 400 && status < 600) {
-			throw new RDFStoreException("Could not delete DB due to HTTP error code " + status);
-		} else {
-			LOGGER.info("Namespace " + dbName + " deleted in Blazegraph");
-		}
-	}
+    @Override
+    public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws RDFStoreException {
+        ModelBuilder builder = new ModelBuilder();
+        // No named graph
+        if (graphURI == null) {
+            GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}");
+            while (graphQueryResult.hasNext()) {
+                Statement stmt = graphQueryResult.next();
+                builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
+            }
+        }
+        // Named graph
+        else {
+            GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }");
+            builder.namedGraph(graphURI);
+            while (graphQueryResult.hasNext()) {
+                Statement stmt = graphQueryResult.next();
+                builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
+            }
+        }
+        Model model = builder.build();
+        Rio.write(model, outputstream, rdfformat);
+    }
 
-	@Override
-	public void setDB(String dbName) throws RDFStoreException, ClientProtocolException, IOException {
-		if(!this.getDBs().contains(dbName)){
-			throw new RDFStoreException("DB does not exist in Blazegraph");
-		}
-		else if (blazegraphNSName.equals(dbName)) {
-			throw new RDFStoreException("DB already set");
-		} else {
-			blazegraphNSName = dbName;
-		}
-	}
-	
-	// TODO abstract all the HTTP stuff into an static HTTPUtils
-	
-	private CloseableHttpResponse execHTTPGET(String getURL) throws ClientProtocolException, IOException {
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpGet httpGet = new HttpGet(getURL);
-		return httpclient.execute(httpGet);
-	}
-	
-	private CloseableHttpResponse execPOST(String postURL, HttpEntity postEntity, Map<String,String> httpHeaders) throws ClientProtocolException, IOException{
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost post = new HttpPost(postURL);
-		if(postEntity != null){
-			post.setEntity(postEntity);
-		}
-		if(httpHeaders != null){
-			for (Entry<String, String> entry : httpHeaders.entrySet()) {
-				post.addHeader(entry.getKey(),entry.getValue());
-			}
-		}
-		return httpclient.execute(post);
-	}
-	
-	private CloseableHttpResponse execDELETE(String deleteURL) throws ClientProtocolException, IOException{
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpDelete httpDelete = new HttpDelete(deleteURL);
-		return httpclient.execute(httpDelete);
-	}
+    @Override
+    public void deleteGraph(String graphUri) throws AldapaException {
+        try {
+            String targetUrl = blazegraphBaseURL + "/namespace/" + blazegraphNSName + "/sparql" + "?c="
+                    + URLEncoder.encode("<" + graphUri + ">", "ISO-8859-1");
+            execDELETE(targetUrl);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
+
+    /**
+     * 
+     * Creates a Quad Store (No inference): https://wiki.blazegraph.com/wiki/index.php/REST_API#Quads
+     * 
+     * @param dbName
+     * @throws IOException
+     * @throws RDFStoreException
+     */
+    @Override
+    public void createDB(String dbName) throws AldapaException {
+        try {
+            // If this object already created this DB, we stop without executing the HTTP call
+            if (blazegraphNSName != null && blazegraphNSName.equals(dbName)) {
+                throw new RDFStoreException("DB already exists");
+            } else {
+                String blazegraphquads = FileUtils.getInstance().fileToString(blazegraphquadsXMLFile);
+                String blazegraphquadsResolved = blazegraphquads.replace(xmlNSName, dbName);
+                String completeURL = blazegraphBaseURL + "/namespace";
+                HttpEntity entity = new ByteArrayEntity(blazegraphquadsResolved.getBytes("UTF-8"));
+                HashMap<String, String> httpHeaders = new HashMap<String, String>();
+                httpHeaders.put("Content-Type", "application/xml");
+                HttpResponse response = execPOST(completeURL, entity, httpHeaders);
+                int status = response.getStatusLine().getStatusCode();
+                // Even if this object does not hold a db, it might already exist in BlazeGraph itself
+                if (status >= 400 && status < 600) {
+                    throw new RDFStoreException("Could not create DB due to HTTP error code " + status);
+                } else {
+                    LOGGER.info("Namespace " + dbName + " created in Blazegraph");
+                    blazegraphNSName = dbName;
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
+
+    /**
+     * 
+     * Create a DB with a custom XML properties file (e.g.
+     * https://wiki.blazegraph.com/wiki/index.php/REST_API#Triples_.2B_Inference_.2B_Truth_Maintenance)
+     * 
+     * @param xmlPropsFile
+     */
+    public void createDBWtihProps(String xmlPropsFile) {
+
+    }
+
+    public Set<String> getDBs() throws AldapaException {
+        try {
+            HashSet<String> dbs = new HashSet<String>();
+            CloseableHttpResponse response = execHTTPGET(blazegraphBaseURL + "/namespace");
+            // TODO: load into RDF4J model and query with SPARQL
+            String inputLine;
+            BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            try {
+                while ((inputLine = br.readLine()) != null) {
+                    if (inputLine.contains("<Namespace xmlns=\"http://www.bigdata.com/rdf#/features/KB/\">")) {
+                        dbs.add(inputLine.replace("<Namespace xmlns=\"http://www.bigdata.com/rdf#/features/KB/\">", "").replace("</Namespace>", "")
+                                .trim());
+                    }
+                }
+            } finally {
+                br.close();
+            }
+            return dbs;
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
+
+    public void deleteDB(String dbName) throws AldapaException {
+        HttpResponse response = execDELETE(blazegraphBaseURL + "/namespace" + "/" + dbName);
+        int status = response.getStatusLine().getStatusCode();
+        if (status >= 400 && status < 600) {
+            throw new RDFStoreException("Could not delete DB due to HTTP error code " + status);
+        } else {
+            LOGGER.info("Namespace " + dbName + " deleted in Blazegraph");
+        }
+    }
+
+    @Override
+    public void setDB(String dbName) throws AldapaException {
+        if (!this.getDBs().contains(dbName)) {
+            throw new RDFStoreException("DB does not exist in Blazegraph");
+        } else if (blazegraphNSName.equals(dbName)) {
+            throw new RDFStoreException("DB already set");
+        } else {
+            blazegraphNSName = dbName;
+        }
+    }
+
+    // TODO abstract all the HTTP stuff into an static HTTPUtils
+    private CloseableHttpResponse execHTTPGET(String getURL) throws AldapaException {
+        try {
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            HttpGet httpGet = new HttpGet(getURL);
+            return httpclient.execute(httpGet);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
+
+    private CloseableHttpResponse execPOST(String postURL, HttpEntity postEntity, Map<String, String> httpHeaders) throws AldapaException {
+        try {
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            HttpPost post = new HttpPost(postURL);
+            if (postEntity != null) {
+                post.setEntity(postEntity);
+            }
+            if (httpHeaders != null) {
+                for (Entry<String, String> entry : httpHeaders.entrySet()) {
+                    post.addHeader(entry.getKey(), entry.getValue());
+                }
+            }
+            return httpclient.execute(post);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
+
+    private CloseableHttpResponse execDELETE(String deleteURL) throws AldapaException {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpDelete httpDelete = new HttpDelete(deleteURL);
+        try {
+            return httpclient.execute(httpDelete);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
 }

@@ -11,7 +11,6 @@ import java.util.EnumMap;
 import java.util.Set;
 
 import org.apache.http.MethodNotSupportedException;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +29,6 @@ import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
 import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
-import es.eurohelp.lod.aldapa.modification.InvalidRDFException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
@@ -52,7 +50,6 @@ public class Manager {
     private FunctionalRDFStore store;
     private FunctionalCSV2RDFBatchConverter transformer;
     private FileUtils fileutils;
-    private RDFUtils rdfutils;
     private FunctionalFileStore fileStore;
     private FunctionalRDFQualityValidator validator;
 
@@ -70,7 +67,6 @@ public class Manager {
     public Manager(ConfigurationManager configuredconfigmanager) throws AldapaException {
         configmanager = configuredconfigmanager;
         fileutils = FileUtils.getInstance();
-        rdfutils = new RDFUtils();
 
         // Initialise File Store
         fileStore = configuredconfigmanager.getFileStore();
@@ -107,15 +103,13 @@ public class Manager {
      */
 
     public String addProject(String projectName) throws AldapaException {
-        LOGGER.info("Project name: " + projectName);
-        String projectURI = null;
-
         try {
+            LOGGER.info("Project name: " + projectName);
             // Create Project URI
             String projectURIFriendlyName = URIUtils.URIfy(null, null, projectName);
             String projectBaseUri = configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "PROJECT_BASE");
 
-            projectURI = URIUtils.validateURI(projectBaseUri + projectURIFriendlyName);
+            String projectURI = URIUtils.validateURI(projectBaseUri + projectURIFriendlyName);
 
             LOGGER.info("Project uri: " + projectURI);
 
@@ -140,13 +134,11 @@ public class Manager {
                 store.saveModel(model);
                 LOGGER.info("Project added to store");
             }
-
+            return projectURI;
         } catch (URISyntaxException | IOException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
-
-        return projectURI;
     }
 
     /**
@@ -194,8 +186,6 @@ public class Manager {
      *             the configuration is incomplete
      */
     public String addCatalog(String catalogName, String projectUri) throws AldapaException {
-        String catalogUri = null;
-
         // Project should exist
         try {
             String resolvedProjectExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.projectExists.getValue(),
@@ -208,7 +198,7 @@ public class Manager {
             // Create catalog URI
             String catalogURIFriendlyName = URIUtils.URIfy(null, null, catalogName);
             String catalogBaseUri = configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "CATALOG_BASE");
-            catalogUri = URIUtils.validateURI(catalogBaseUri + catalogURIFriendlyName);
+            String catalogUri = URIUtils.validateURI(catalogBaseUri + catalogURIFriendlyName);
 
             LOGGER.info("Catalog uri: " + catalogUri);
 
@@ -236,11 +226,11 @@ public class Manager {
                 store.saveModel(model);
                 LOGGER.info("Catalog added to store");
             }
+            return catalogUri;
         } catch (IOException | URISyntaxException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
-        return catalogUri;
     }
 
     /**
@@ -266,7 +256,6 @@ public class Manager {
      *             the configuration is incomplete
      */
     public String addDataset(String datasetName, String catalogUri) throws AldapaException {
-        String datasetUri = null;
         // Catalog should exist
         try {
             String resolvedCatalogExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.catalogExists.getValue(),
@@ -278,7 +267,7 @@ public class Manager {
             // Create dataset URI
             String datasetURIFriendlyName = URIUtils.URIfy(null, null, datasetName);
             String datasetBaseUri = configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "DATASET_BASE");
-            datasetUri = URIUtils.validateURI(datasetBaseUri + datasetURIFriendlyName);
+            String datasetUri = URIUtils.validateURI(datasetBaseUri + datasetURIFriendlyName);
 
             LOGGER.info("Dataset uri: " + datasetUri);
 
@@ -307,11 +296,11 @@ public class Manager {
                 store.saveModel(model);
                 LOGGER.info("Dataset added to store");
             }
+            return datasetUri;
         } catch (IOException | URISyntaxException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
-        return datasetUri;
     }
 
     /**
@@ -338,7 +327,6 @@ public class Manager {
      *             the Named Graph already exists
      */
     public String addNamedGraph(String graphName, String datasetUri) throws AldapaException {
-        String graphUri = null;
         try {
             // Dataset should exist
             String resolvedDatasetExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.datasetExists.getValue(),
@@ -350,7 +338,7 @@ public class Manager {
             // Create graph URI
             String graphURIFriendlyName = URIUtils.URIfy(null, null, graphName);
             String graphBaseUri = configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "GRAPH_BASE");
-            graphUri = URIUtils.validateURI(graphBaseUri + graphURIFriendlyName);
+            String graphUri = URIUtils.validateURI(graphBaseUri + graphURIFriendlyName);
 
             LOGGER.info("Graph uri: " + graphUri);
 
@@ -381,11 +369,11 @@ public class Manager {
                 store.saveModel(model);
                 LOGGER.info("Graph added to store");
             }
+            return graphUri;
         } catch (IOException | URISyntaxException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
-        return graphUri;
     }
 
     /**
@@ -520,11 +508,16 @@ public class Manager {
      *            the Named Graph URI
      * @throws IOException
      */
-    public void deleteDataFromNamedGraph(String namedGraphURI) throws AldapaException, IOException {
-        String resolvedDataFromNamedGraphSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataFromNamedGraph.getValue(),
-                MethodFileToken.graphUri.getValue(), namedGraphURI);
-        store.execSPARQLUpdate(resolvedDataFromNamedGraphSparql);
-        LOGGER.info("Data from named graph deleted: " + namedGraphURI);
+    public void deleteDataFromNamedGraph(String namedGraphURI) throws AldapaException {
+        try {
+            String resolvedDataFromNamedGraphSparql = fileutils.fileTokenResolver(MethodRDFFile.deleteDataFromNamedGraph.getValue(),
+                    MethodFileToken.graphUri.getValue(), namedGraphURI);
+            store.execSPARQLUpdate(resolvedDataFromNamedGraphSparql);
+            LOGGER.info("Data from named graph deleted: " + namedGraphURI);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
     }
 
     /**
@@ -535,9 +528,15 @@ public class Manager {
      * @throws AldapaException
      * @throws IOException
      */
-    public Set<String> getProjects() throws AldapaException, IOException {
-        String query = fileutils.fileToString(MethodRDFFile.getProjects.getValue());
-        return rdfutils.execTupleQueryToStringSet(store, query);
+    public Set<String> getProjects() throws AldapaException {
+        try {
+            String query = fileutils.fileToString(MethodRDFFile.getProjects.getValue());
+            return RDFUtils.execTupleQueryToStringSet(store, query);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+
     }
 
     /**
@@ -548,9 +547,15 @@ public class Manager {
      * @throws AldapaException
      * @throws IOException
      */
-    public Set<String> getCatalogs() throws AldapaException, IOException {
-        String query = fileutils.fileToString(MethodRDFFile.getAllCatalogs.getValue());
-        return rdfutils.execTupleQueryToStringSet(store, query);
+    public Set<String> getCatalogs() throws AldapaException {
+        try {
+            String query = fileutils.fileToString(MethodRDFFile.getAllCatalogs.getValue());
+            return RDFUtils.execTupleQueryToStringSet(store, query);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+
     }
 
     /**
@@ -562,9 +567,15 @@ public class Manager {
      * @throws IOException
      */
 
-    public Set<String> getCatalogs(String projectUri) throws AldapaException, IOException {
-        String query = fileutils.fileTokenResolver(MethodRDFFile.getCatalogsByProject.getValue(), MethodFileToken.projectUri.getValue(), projectUri);
-        return rdfutils.execTupleQueryToStringSet(store, query);
+    public Set<String> getCatalogs(String projectUri) throws AldapaException {
+        try {
+            String query = fileutils.fileTokenResolver(MethodRDFFile.getCatalogsByProject.getValue(), MethodFileToken.projectUri.getValue(),
+                    projectUri);
+            return RDFUtils.execTupleQueryToStringSet(store, query);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
     }
 
     /**
@@ -575,9 +586,14 @@ public class Manager {
      * @throws AldapaException
      * @throws IOException
      */
-    public Set<String> getDatasets() throws AldapaException, IOException {
-        String query = fileutils.fileToString(MethodRDFFile.getAllDatasets.getValue());
-        return rdfutils.execTupleQueryToStringSet(store, query);
+    public Set<String> getDatasets() throws AldapaException {
+        try {
+            String query = fileutils.fileToString(MethodRDFFile.getAllDatasets.getValue());
+            return RDFUtils.execTupleQueryToStringSet(store, query);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
     }
 
     /**
@@ -589,9 +605,16 @@ public class Manager {
      * @throws IOException
      */
 
-    public Set<String> getDatasets(String catalogUri) throws AldapaException, IOException {
-        String query = fileutils.fileTokenResolver(MethodRDFFile.getDatasetsByCatalog.getValue(), MethodFileToken.catalogUri.getValue(), catalogUri);
-        return rdfutils.execTupleQueryToStringSet(store, query);
+    public Set<String> getDatasets(String catalogUri) throws AldapaException {
+        try {
+            String query = fileutils.fileTokenResolver(MethodRDFFile.getDatasetsByCatalog.getValue(), MethodFileToken.catalogUri.getValue(),
+                    catalogUri);
+            return RDFUtils.execTupleQueryToStringSet(store, query);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+
     }
 
     /**
@@ -602,9 +625,15 @@ public class Manager {
      * @throws AldapaException
      * @throws IOException
      */
-    public Set<String> getNamedGraphs() throws AldapaException, IOException {
-        String query = fileutils.fileToString(MethodRDFFile.getAllNamedGraphs.getValue());
-        return rdfutils.execTupleQueryToStringSet(store, query);
+    public Set<String> getNamedGraphs() throws AldapaException {
+        try {
+            String query = fileutils.fileToString(MethodRDFFile.getAllNamedGraphs.getValue());
+            return RDFUtils.execTupleQueryToStringSet(store, query);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+
     }
 
     /**
@@ -616,10 +645,16 @@ public class Manager {
      * @throws IOException
      */
 
-    public Set<String> getNamedGraphs(String datasetUri) throws AldapaException, IOException {
-        String query = fileutils.fileTokenResolver(MethodRDFFile.getNamedGraphsByDataset.getValue(), MethodFileToken.datasetUri.getValue(),
-                datasetUri);
-        return rdfutils.execTupleQueryToStringSet(store, query);
+    public Set<String> getNamedGraphs(String datasetUri) throws AldapaException {
+        try {
+            String query = fileutils.fileTokenResolver(MethodRDFFile.getNamedGraphsByDataset.getValue(), MethodFileToken.datasetUri.getValue(),
+                    datasetUri);
+            return RDFUtils.execTupleQueryToStringSet(store, query);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+
     }
 
     /**
@@ -630,30 +665,33 @@ public class Manager {
      * @throws RDFStoreException
      * 
      */
-    public void reset() {
+    public void reset() throws AldapaException {
         try {
             store.execSPARQLUpdate(fileutils.fileToString(MethodRDFFile.reset.getValue()));
+            LOGGER.info("Everything deleted ");
         } catch (AldapaException | IOException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
-        LOGGER.info("Everything deleted ");
     }
 
-    public boolean analyseGraph() throws ConfigurationException, RDFStoreException, IOException, InvalidRDFException {
+    public boolean analyseGraph() throws AldapaException {
+        try {
 
-        String graphURI = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "dataGraph");
-        org.apache.jena.rdf.model.Model target = RDFUtils.convertGraphToJenaModel(store, graphURI);
-        LOGGER.info("Validator data graph: " + graphURI);
+            String graphURI = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "dataGraph");
+            org.apache.jena.rdf.model.Model target = RDFUtils.convertGraphToJenaModel(store, graphURI);
+            LOGGER.info("Validator data graph: " + graphURI);
 
-        String rulesPath = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "shapeGraph");
-        org.apache.jena.rdf.model.Model rulesModel = ModelFactory.createDefaultModel();
-        rulesModel.read(rulesPath);
-        LOGGER.info("Rules file: " + rulesPath);
+            String rulesPath = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "shapeGraph");
+            org.apache.jena.rdf.model.Model rulesModel = ModelFactory.createDefaultModel();
+            rulesModel.read(rulesPath);
+            LOGGER.info("Rules file: " + rulesPath);
 
-        String reportFile = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "reportFile");
-        boolean valid = validator.validate(target, rulesModel, reportFile);
-
-        return valid;
+            String reportFile = configmanager.getConfigPropertyValue("VALIDATOR_CONFIG_FILE", "reportFile");
+            return validator.validate(target, rulesModel, reportFile);
+        } catch (AldapaException | IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
     }
 }
