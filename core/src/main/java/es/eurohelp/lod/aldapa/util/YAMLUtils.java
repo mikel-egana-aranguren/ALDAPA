@@ -31,8 +31,7 @@ public class YAMLUtils {
 
     public static Map<String, String> parseSimpleYAML(InputStream in) {
         Yaml yaml = new Yaml();
-        HashMap<String, String> yamlValues = yaml.loadAs(in, HashMap.class);
-        return yamlValues;
+        return yaml.loadAs(in, HashMap.class);
     }
 
     /**
@@ -47,7 +46,6 @@ public class YAMLUtils {
 
     public static Object parseYAMLIntoObject(InputStream in, Object object) {
         Yaml yaml = new Yaml();
-        Object yamlValues = yaml.loadAs(in, Object.class);
-        return yamlValues;
+        return yaml.loadAs(in, Object.class);
     }
 }

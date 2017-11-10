@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.MethodNotSupportedException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -51,9 +52,9 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements FunctionalDBRDFStore {
 
-    // TODO: get these from config file
-    private static final String xmlNSName = "MY_NAMESPACE";
-    private static final String blazegraphquadsXMLFile = "blazegraphquads.xml";
+    private static final String XMLNSNAME = "MY_NAMESPACE";
+    private static final String BLAZEGRAPHQUADSXMLFILE = "blazegraphquads.xml";
+    private static final String SLASHNAMESPACE = "/namespace";
 
     private String blazegraphBaseURL = null;
     private String blazegraphNSName = null;
@@ -75,7 +76,6 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
     @Override
     public void saveModel(Model model) throws AldapaException {
         try {
-            // TODO: not optimised!!! See issue # 44
             StringWriter stringwriter = new StringWriter();
             Rio.write(model, stringwriter, RDFFormat.TRIG);
             String stringModel = stringwriter.toString();
@@ -86,7 +86,7 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
 
             HashMap<String, String> httpHeaders = new HashMap<String, String>();
             httpHeaders.put("Content-Type", "application/x-trig");
-            execPOST(blazegraphBaseURL + "/namespace/" + blazegraphNSName + "/sparql", stringEntity, httpHeaders);
+            execPOST(blazegraphBaseURL + SLASHNAMESPACE + "/" + blazegraphNSName + "/sparql", stringEntity, httpHeaders);
         } catch (IOException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
@@ -96,16 +96,14 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
     @Override
     public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws RDFStoreException {
         ModelBuilder builder = new ModelBuilder();
-        // No named graph
-        if (graphURI == null) {
+        if (graphURI == null) { // No named graph
             GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}");
             while (graphQueryResult.hasNext()) {
                 Statement stmt = graphQueryResult.next();
                 builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
             }
         }
-        // Named graph
-        else {
+        else { // Named graph
             GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }");
             builder.namedGraph(graphURI);
             while (graphQueryResult.hasNext()) {
@@ -120,7 +118,7 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
     @Override
     public void deleteGraph(String graphUri) throws AldapaException {
         try {
-            String targetUrl = blazegraphBaseURL + "/namespace/" + blazegraphNSName + "/sparql" + "?c="
+            String targetUrl = blazegraphBaseURL + SLASHNAMESPACE + "/" + blazegraphNSName + "/sparql" + "?c="
                     + URLEncoder.encode("<" + graphUri + ">", "ISO-8859-1");
             execDELETE(targetUrl);
         } catch (IOException e) {
@@ -144,9 +142,9 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
             if (blazegraphNSName != null && blazegraphNSName.equals(dbName)) {
                 throw new RDFStoreException("DB already exists");
             } else {
-                String blazegraphquads = FileUtils.getInstance().fileToString(blazegraphquadsXMLFile);
-                String blazegraphquadsResolved = blazegraphquads.replace(xmlNSName, dbName);
-                String completeURL = blazegraphBaseURL + "/namespace";
+                String blazegraphquads = FileUtils.getInstance().fileToString(BLAZEGRAPHQUADSXMLFILE);
+                String blazegraphquadsResolved = blazegraphquads.replace(XMLNSNAME, dbName);
+                String completeURL = blazegraphBaseURL + SLASHNAMESPACE;
                 HttpEntity entity = new ByteArrayEntity(blazegraphquadsResolved.getBytes("UTF-8"));
                 HashMap<String, String> httpHeaders = new HashMap<String, String>();
                 httpHeaders.put("Content-Type", "application/xml");
@@ -174,14 +172,13 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
      * @param xmlPropsFile
      */
     public void createDBWtihProps(String xmlPropsFile) {
-
+        throw new AldapaException(new MethodNotSupportedException("Not implemented yet"));
     }
 
     public Set<String> getDBs() throws AldapaException {
         try {
             HashSet<String> dbs = new HashSet<String>();
-            CloseableHttpResponse response = execHTTPGET(blazegraphBaseURL + "/namespace");
-            // TODO: load into RDF4J model and query with SPARQL
+            CloseableHttpResponse response = execHTTPGET(blazegraphBaseURL + SLASHNAMESPACE);
             String inputLine;
             BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             try {
@@ -202,7 +199,7 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
     }
 
     public void deleteDB(String dbName) throws AldapaException {
-        HttpResponse response = execDELETE(blazegraphBaseURL + "/namespace" + "/" + dbName);
+        HttpResponse response = execDELETE(blazegraphBaseURL + SLASHNAMESPACE + "/" + dbName);
         int status = response.getStatusLine().getStatusCode();
         if (status >= 400 && status < 600) {
             throw new RDFStoreException("Could not delete DB due to HTTP error code " + status);
@@ -222,7 +219,6 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
         }
     }
 
-    // TODO abstract all the HTTP stuff into an static HTTPUtils
     private CloseableHttpResponse execHTTPGET(String getURL) throws AldapaException {
         try {
             CloseableHttpClient httpclient = HttpClients.createDefault();

@@ -52,13 +52,11 @@ public class SHACLValidator extends RDFQualityValidator implements FunctionalRDF
             qexec.close();
 
             boolean result = false;
-            // Data is not conformant
-            if (resultAsk) {
+            
+            if (resultAsk) { // Data is not conformant
                 LOGGER.info("Invalid RDF");
                 throw new InvalidRDFException(reportFilePath);
-            }
-            // Conformant data
-            else {
+            } else { // Conformant data
                 result = true;
                 LOGGER.info("Valid RDF");
             }

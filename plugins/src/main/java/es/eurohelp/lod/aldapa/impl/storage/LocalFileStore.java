@@ -18,7 +18,6 @@ import org.apache.logging.log4j.Logger;
 
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.storage.FileStore;
-import es.eurohelp.lod.aldapa.storage.FileStoreAlreadySetException;
 import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.util.FileUtils;
