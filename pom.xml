@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.eurohelp.lod.aldapa</groupId>
 	<artifactId>complete</artifactId>
-	<version>0.0.5</version>
+	<version>0.0.6</version>
 	<name>ALDAPA</name>
 	<description>Assistant for Linked DAta Production Automation</description>
 	<url>http://mikel-egana-aranguren.github.io/ALDAPA/</url>

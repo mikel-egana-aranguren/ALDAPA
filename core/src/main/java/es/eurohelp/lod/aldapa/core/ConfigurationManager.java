@@ -107,14 +107,10 @@ public class ConfigurationManager {
      * 
      * Retrieves the only instance of this Singleton class.
      * 
-     * @param configuration_file_name
+     * @param configurationFileName
      *            the main config file name
      * @return the only instance of ConfigurationManager.
      * @author acarbajo
-     * @throws ConfigurationFileIOException
-     *             an I/O exception pertaining to the config file
-     * @throws IOException
-     *             a general I/O exception
      */
     public static synchronized ConfigurationManager getInstance(String configurationFileName) {
         if (null == INSTANCE) {
@@ -206,15 +202,9 @@ public class ConfigurationManager {
     }
 
     /**
-     * @return
-     * @throws ClassNotFoundException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws AldapaException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
+     * 
+     * @return an RDF store
+     * 
      */
     public FunctionalRDFStore getRDFStore() {
         FunctionalRDFStore rdfStore = null;
@@ -243,6 +233,9 @@ public class ConfigurationManager {
         return rdfStore;
     }
 
+    /**
+     * @return a FunctionalCSV2RDFBatchConverter
+     */
     public FunctionalCSV2RDFBatchConverter getTransformer() {
         FunctionalCSV2RDFBatchConverter converter = null;
         try {
@@ -263,11 +256,9 @@ public class ConfigurationManager {
     }
 
     /**
-     * @return
-     * @throws ClassNotFoundException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws AldapaException
+     * 
+     * @return a FunctionalRDFQualityValidator
+     * 
      */
     public FunctionalRDFQualityValidator getRDFQualityValidator() {
         FunctionalRDFQualityValidator validator = null;

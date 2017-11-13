@@ -10,7 +10,6 @@ import java.net.URISyntaxException;
 import java.util.EnumMap;
 import java.util.Set;
 
-import org.apache.http.MethodNotSupportedException;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -88,18 +87,11 @@ public class Manager {
      * 
      * Adds a new project
      * 
-     * @param project_name
+     * @param projectName
      *            the name of the new project that will be used to generate the project URI, according to the
      *            configuration
      * @return the URI of the newly added project
-     * @throws IOException
-     *             an input/output exception
-     * @throws RDFStoreException
-     *             a problem with the RDF Store
-     * @throws URISyntaxException
-     *             the URI is wrong
-     * @throws ConfigurationException
-     *             the configuration is incomplete
+     * @throws AldapaException
      * 
      */
 
@@ -148,12 +140,13 @@ public class Manager {
      * 
      * @param graphuri
      *            the Named Graph URI, it can be null
+     *            
      * @param fileName
-     *            the path of the file to wrtie the graph to
-     * @throws RDFStoreException
-     *             a problem with the RDF Store
-     * @throws IOException
-     *             an input/output exception
+     *            the path of the file to write the graph to
+     * 
+     * @param format the RDF format (org.eclipse.rdf4j.rio.RDFFormat) of the output file
+     *            
+     * @throws AldapaException
      */
     public void flushGraph(String graphuri, String fileName, RDFFormat format) throws AldapaException {
         try {
@@ -168,26 +161,14 @@ public class Manager {
      * 
      * Adds a new catalog in a project. See model/default-model.trig for details
      * 
-     * @param catalog_name
+     * @param catalogName
      *            the name of the new catalog that will be used to generate the URI, according to the configuration
-     * @param project_uri
+     * @param projectUri
      *            the project that this catalog belongs to
      * @return Catalog URI
-     * @throws CatalogExistsException
-     *             the catalog already exists
-     * @throws IOException
-     *             an input/output exception
-     * @throws RDFStoreException
-     *             a problem with the RDF Store
-     * @throws ProjectNotFoundException
-     *             the project could not be found
-     * @throws URISyntaxException
-     *             the dataset could not be found
-     * @throws ConfigurationException
-     *             the configuration is incomplete
+     * @throws AldapaException
      */
     public String addCatalog(String catalogName, String projectUri) throws AldapaException {
-        // Project should exist
         try {
             String resolvedProjectExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.PROJECTEXISTS.getValue(),
                     MethodFileToken.PROJECTURI.getValue(), projectUri);
@@ -238,26 +219,14 @@ public class Manager {
      * 
      * Adds a new dataset in a catalog. See model/default-model.trig for details
      * 
-     * @param dataset_name
+     * @param datasetName
      *            the name of the new dataset that will be used to generate the URI, according to the configuration
-     * @param catalog_uri
+     * @param catalogUri
      *            the catalog that this dataset belongs to
      * @return Dataset URI
-     * @throws DatasetExistsException
-     *             the dataset already exists
-     * @throws IOException
-     *             an input/output exception
-     * @throws RDFStoreException
-     *             a problem with the RDF Store
-     * @throws CatalogNotFoundException
-     *             the catalog could not be found
-     * @throws URISyntaxException
-     *             the URI is wrong
-     * @throws ConfigurationException
-     *             the configuration is incomplete
+     * @throws AldapaException
      */
     public String addDataset(String datasetName, String catalogUri) throws AldapaException {
-        // Catalog should exist
         try {
             String resolvedCatalogExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.CATALOGEXISTS.getValue(),
                     MethodFileToken.CATALOGURI.getValue(), catalogUri);
@@ -309,23 +278,12 @@ public class Manager {
      * Adds the metadata associated to a named graph that will hold actual data. See model/default-model.trig for
      * details
      * 
-     * @param graph_name
+     * @param graphName
      *            the name for the named graph
-     * @param dataset_uri
+     * @param datasetUri
      *            the URI of the dataset that this named graph belongs to
      * @return the URI for the named graph
-     * @throws IOException
-     *             an input/output exception
-     * @throws RDFStoreException
-     *             a problem with the RDF Store
-     * @throws URISyntaxException
-     *             the URI is wrong
-     * @throws ConfigurationException
-     *             the configuration is incomplete
-     * @throws DatasetNotFoundException
-     *             the dataset could not be found
-     * @throws NamedGraphExistsException
-     *             the Named Graph already exists
+     * @throws AldapaException
      */
     public String addNamedGraph(String graphName, String datasetUri) throws AldapaException {
         try {
@@ -403,8 +361,7 @@ public class Manager {
      * 
      * Adds the data of a RDF4J Model to the store
      * 
-     * @param namedGraphURI
-     * @param model
+     * @param model org.eclipse.rdf4j.model.Model
      * @throws RDFStoreException
      */
     public void addData(Model model) throws RDFStoreException {
@@ -416,12 +373,9 @@ public class Manager {
      * Delete a project. This will delete a project and all its metadata (Catalogs, Datasets etc.) and the data within
      * its dataset
      * 
-     * @param project_URI
+     * @param projectURI
      *            the project URI
-     * @throws IOException
-     * @throws RDFStoreException
-     * @throws UnsupportedOperationException
-     *             This functionality has not been implemented yet
+     * @throws AldapaException
      * 
      */
 
@@ -439,11 +393,8 @@ public class Manager {
 
     /**
      * 
-     * @param catalog_URI
+     * @param catalogURI
      *            the catalog URI
-     * @throws UnsupportedOperationException
-     *             This functionality has not been implemented yet
-     * @throws IOException
      * @throws AldapaException
      */
     public void deleteCatalog(String catalogURI) throws AldapaException {
@@ -461,10 +412,7 @@ public class Manager {
     /**
      * @param datasetURI
      *            the dataset URI
-     * @throws IOException
      * @throws AldapaException
-     * @throws MethodNotSupportedException
-     *             This functionality has not been implemented yet
      */
     public void deleteDataset(String datasetURI) throws AldapaException {
         try {
@@ -484,10 +432,7 @@ public class Manager {
      * 
      * @param namedGraphURI
      *            the named Graph URI
-     * @throws IOException
      * @throws AldapaException
-     * @throws MethodNotSupportedException
-     *             This functionality has not been implemented yet
      */
     public void deleteNamedGraph(String namedGraphURI) throws AldapaException {
         try {
@@ -507,7 +452,7 @@ public class Manager {
      * 
      * @param namedGraphURI
      *            the Named Graph URI
-     * @throws IOException
+     * @throws AldapaException
      */
     public void deleteDataFromNamedGraph(String namedGraphURI) throws AldapaException {
         try {
@@ -527,7 +472,6 @@ public class Manager {
      * 
      * @return a Set containing the project URIs as Strings
      * @throws AldapaException
-     * @throws IOException
      */
     public Set<String> getProjects() throws AldapaException {
         try {
@@ -546,7 +490,6 @@ public class Manager {
      * 
      * @return a Set containing all the catalog URIs as Strings
      * @throws AldapaException
-     * @throws IOException
      */
     public Set<String> getCatalogs() throws AldapaException {
         try {
@@ -562,10 +505,9 @@ public class Manager {
     /**
      * 
      * Get all the catalogs pertaining to a given project
-     * 
+     * @param projectUri the URI of the project
      * @return a set containing all the catalog URIs as Strings
      * @throws AldapaException
-     * @throws IOException
      */
 
     public Set<String> getCatalogs(String projectUri) throws AldapaException {
@@ -585,7 +527,6 @@ public class Manager {
      * 
      * @return a set containing all the dataset URIs as Strings
      * @throws AldapaException
-     * @throws IOException
      */
     public Set<String> getDatasets() throws AldapaException {
         try {
@@ -603,7 +544,6 @@ public class Manager {
      * 
      * @return a set containing all the dataset URIs as Strings
      * @throws AldapaException
-     * @throws IOException
      */
 
     public Set<String> getDatasets(String catalogUri) throws AldapaException {
@@ -624,7 +564,6 @@ public class Manager {
      * 
      * @return a HashSet containing all the named graph URIs as Strings
      * @throws AldapaException
-     * @throws IOException
      */
     public Set<String> getNamedGraphs() throws AldapaException {
         try {
@@ -643,7 +582,6 @@ public class Manager {
      * 
      * @return a HashSet containing all the named graph URIs as Strings
      * @throws AldapaException
-     * @throws IOException
      */
 
     public Set<String> getNamedGraphs(String datasetUri) throws AldapaException {
@@ -662,8 +600,7 @@ public class Manager {
      * 
      * Resets the manager, thus deletes *all* the data and metadata. Use at your own risk.
      * 
-     * @throws IOException
-     * @throws RDFStoreException
+     * @throws AldapaException
      * 
      */
     public void reset() throws AldapaException {
@@ -676,6 +613,13 @@ public class Manager {
         }
     }
 
+    /**
+     * 
+     * Validate an RDF graph against a set of rules (e.g. a SHACL shape)
+     * 
+     * @return true if the graph is valid
+     * @throws AldapaException
+     */
     public boolean analyseGraph() throws AldapaException {
         try {
             String graphURI = configmanager.getConfigPropertyValue(VALIDATORCONFIGFILE, "dataGraph");

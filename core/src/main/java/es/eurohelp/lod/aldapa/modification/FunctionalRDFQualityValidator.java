@@ -17,6 +17,5 @@ import es.eurohelp.lod.aldapa.core.exception.AldapaException;
  */
 
 public interface FunctionalRDFQualityValidator {
-    // true: valid according to tests
     public boolean validate(Model target, Model rules, String reportFilePath) throws AldapaException; 
 }

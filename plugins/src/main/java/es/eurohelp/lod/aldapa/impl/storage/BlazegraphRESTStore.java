@@ -65,7 +65,8 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
     private static final Logger LOGGER = LogManager.getLogger(BlazegraphRESTStore.class);
 
     /**
-     * @param sparqlEndpointURL
+     * @param blazegraphURL URL of the blazegraph REST endpoint
+     * @param dbName name of the Blazegraph DB (Namespace)
      * @throws IOException
      * @throws RDFStoreException
      */
@@ -134,8 +135,7 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
      * Creates a Quad Store (No inference): https://wiki.blazegraph.com/wiki/index.php/REST_API#Quads
      * 
      * @param dbName
-     * @throws IOException
-     * @throws RDFStoreException
+     * @throws AldapaException
      */
     @Override
     public void createDB(String dbName) throws AldapaException {
@@ -171,7 +171,7 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
      * Create a DB with a custom XML properties file (e.g.
      * https://wiki.blazegraph.com/wiki/index.php/REST_API#Triples_.2B_Inference_.2B_Truth_Maintenance)
      * 
-     * @param xmlPropsFile
+     * @param xmlPropsFile an XML with the properties to configure a Blazegraph DB 
      */
     public void createDBWtihProps(String xmlPropsFile) {
         throw new AldapaException(new MethodNotSupportedException("Not implemented yet"));
