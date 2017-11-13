@@ -31,17 +31,18 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class MemoryRDFStoreTest {
 
-    private final String INPUTFILEGRAPHS = "data/default-model.trig";
-    private final String INPUTFILENOGRAPHS = "data/default-model-no-graphs.ttl";
-    private final String OUTPUTFILENOEXTENSION = "data/default-model-output";
-    private final String DATAGRAPHURI = "http://lod.eurohelp.es/graph/dataset-graph001";
-    private final String METADATAGRAPHURI = "http://lod.eurohelp.es/aldapa/metadata";
-    private final String TMPURI = "http://lod.eurohelp.es/MemoryRDFTests";
+    private static final String INPUTFILEGRAPHS = "data/default-model.trig";
+    private static final String INPUTFILENOGRAPHS = "data/default-model-no-graphs.ttl";
+    private static final String OUTPUTFILENOEXTENSION = "data/default-model-output";
+    private static final String DATAGRAPHURI = "http://lod.eurohelp.es/graph/dataset-graph001";
+    private static final String METADATAGRAPHURI = "http://lod.eurohelp.es/aldapa/metadata";
+    private static final String TMPURI = "http://lod.eurohelp.es/MemoryRDFTests";
     private static final String TUPLEQUERY = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT ?project WHERE { ?project rdf:type foaf:Project . }";
     private static final String GRAPHQUERY = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> CONSTRUCT { ?o <http://example.com/prop> ?s .} WHERE { ?s rdf:type ?o . }";
     private static final String BOOLEANQUERYASK = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> ASK WHERE { ?project rdf:type foaf:Project . }";
     private static final String QUERYDELETE = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> DELETE { ?project rdf:type foaf:Project . } WHERE { ?project rdf:type foaf:Project . }";
-
+    private static final String TRIG = ".trig";
+    
     private MemoryRDFStore memStore = null;
 
     private static final Logger LOGGER = LogManager.getLogger(MemoryRDFStoreTest.class);
@@ -93,8 +94,8 @@ public class MemoryRDFStoreTest {
             InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
             Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
             memStore.saveModel(model);
-            memStore.flushGraph(DATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "Data" + ".trig"), RDFFormat.TRIG);
-            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaData" + ".trig"), RDFFormat.TRIG);
+            memStore.flushGraph(DATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "Data" + TRIG), RDFFormat.TRIG);
+            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaData" + TRIG), RDFFormat.TRIG);
         } catch (AldapaException | IOException e) {
             LOGGER.error(e);
         }
@@ -139,7 +140,7 @@ public class MemoryRDFStoreTest {
             Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
             memStore.saveModel(model);
             memStore.execSPARQLUpdate(QUERYDELETE);
-            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaDataProjectRemoved" + ".trig"), RDFFormat.TRIG);
+            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaDataProjectRemoved" + TRIG), RDFFormat.TRIG);
         } catch (AldapaException | IOException e) {
             LOGGER.error(e);
         }

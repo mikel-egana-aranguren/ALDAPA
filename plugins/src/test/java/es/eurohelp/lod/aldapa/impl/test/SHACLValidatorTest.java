@@ -5,13 +5,10 @@ package es.eurohelp.lod.aldapa.impl.test;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -39,6 +36,7 @@ public class SHACLValidatorTest {
     private static final String PARKINGSREPORTPATH = "data/shaclValidator/parkingsReport.ttl";
     private static final String ESTACIONESREPORTPATH = "data/shaclValidator/estacionesReport.ttl";
     private static final String INVALIDESTACIONESREPORTPATH = "data/shaclValidator/invalidEstacionesReport.ttl";
+    private static final String TURTLE = "TURTLE";
 
     private static SHACLValidator validator = null;
    
@@ -61,11 +59,11 @@ public class SHACLValidatorTest {
             FileUtils fileUtils = FileUtils.getInstance();
             InputStream targetIn = fileUtils.getInputStream(VALIDTARGET);
             Model target = ModelFactory.createDefaultModel();
-            target.read(targetIn, null, "TURTLE");
+            target.read(targetIn, null, TURTLE);
 
             InputStream shapeIn = fileUtils.getInputStream(SHAPE);
             Model tests = ModelFactory.createDefaultModel();
-            tests.read(shapeIn, null, "TURTLE");
+            tests.read(shapeIn, null, TURTLE);
 
             boolean result = validator.validate(target, tests, REPORTPATH);
 
@@ -80,11 +78,11 @@ public class SHACLValidatorTest {
         FileUtils fileUtils = FileUtils.getInstance();
         InputStream targetIn = fileUtils.getInputStream(INVALIDTARGET);
         Model target = ModelFactory.createDefaultModel();
-        target.read(targetIn, null, "TURTLE");
+        target.read(targetIn, null, TURTLE);
 
         InputStream shapeIn = fileUtils.getInputStream(SHAPE);
         Model tests = ModelFactory.createDefaultModel();
-        tests.read(shapeIn, null, "TURTLE");
+        tests.read(shapeIn, null, TURTLE);
 
         boolean result = validator.validate(target, tests, REPORTPATH);
 
@@ -96,11 +94,11 @@ public class SHACLValidatorTest {
         FileUtils fileUtils = FileUtils.getInstance();
         InputStream targetIn = fileUtils.getInputStream(VALIDTARGETPARKINGS);
         Model target = ModelFactory.createDefaultModel();
-        target.read(targetIn, null, "TURTLE");
+        target.read(targetIn, null, TURTLE);
 
         InputStream shapeIn = fileUtils.getInputStream(PARKINGSSHAPE);
         Model tests = ModelFactory.createDefaultModel();
-        tests.read(shapeIn, null, "TURTLE");
+        tests.read(shapeIn, null, TURTLE);
 
         boolean result = validator.validate(target, tests, PARKINGSREPORTPATH);
 
@@ -115,11 +113,11 @@ public class SHACLValidatorTest {
         FileUtils fileUtils = FileUtils.getInstance();
         InputStream targetIn = fileUtils.getInputStream(VALIDTARGETEJIECALIDADAIRE);
         Model target = ModelFactory.createDefaultModel();
-        target.read(targetIn, null, "TURTLE");
+        target.read(targetIn, null, TURTLE);
 
         InputStream shapeIn = fileUtils.getInputStream(INVALIDESTACIONESSHAPE);
         Model tests = ModelFactory.createDefaultModel();
-        tests.read(shapeIn, null, "TURTLE");
+        tests.read(shapeIn, null, TURTLE);
 
         boolean result = validator.validate(target, tests, INVALIDESTACIONESREPORTPATH);
 
@@ -131,11 +129,11 @@ public class SHACLValidatorTest {
         FileUtils fileUtils = FileUtils.getInstance();
         InputStream targetIn = fileUtils.getInputStream(VALIDTARGETEJIECALIDADAIRE);
         Model target = ModelFactory.createDefaultModel();
-        target.read(targetIn, null, "TURTLE");
+        target.read(targetIn, null, TURTLE);
 
         InputStream shapeIn = fileUtils.getInputStream(ESTACIONESSHAPE);
         Model tests = ModelFactory.createDefaultModel();
-        tests.read(shapeIn, null, "TURTLE");
+        tests.read(shapeIn, null, TURTLE);
 
         boolean result = validator.validate(target, tests, ESTACIONESREPORTPATH);
 

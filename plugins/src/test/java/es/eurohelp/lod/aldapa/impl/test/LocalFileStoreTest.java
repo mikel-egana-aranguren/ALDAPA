@@ -17,7 +17,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.impl.storage.LocalFileStore;
 import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
 
