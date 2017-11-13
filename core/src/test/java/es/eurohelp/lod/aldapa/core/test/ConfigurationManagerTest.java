@@ -6,7 +6,6 @@ package es.eurohelp.lod.aldapa.core.test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -22,35 +21,35 @@ import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
  *
  */
 public class ConfigurationManagerTest {
-	
-	private static final String configFile = "configuration.yml";
-	private static final String projectBaseToken = "PROJECT_BASE";
-	private static final String aldapaConfigFiletoken = "ALDAPA_CONFIG_FILE";
-	private static final String fakePropToken = "FAKE_PROP";
-	private static ConfigurationManager testManager; 
 
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws ConfigurationFileIOException, IOException{
-		testManager = ConfigurationManager.getInstance(configFile);
-	}
-	
-	@Test
-	public final void testGetInstance() throws ConfigurationFileIOException, IOException {
-		assertNotNull(testManager);
-	}
+    private static final String CONFIGFILE = "configuration.yml";
+    private static final String PROJECTBASETOKEN = "PROJECT_BASE";
+    private static final String ALDAPACONFIGFILETOKEN = "ALDAPA_CONFIG_FILE";
+    private static final String FAKEPROPTOKEN = "FAKE_PROP";
+    private static ConfigurationManager testManager;
 
-	@Test
-	public final void testGetConfigPropertyValue() throws IOException, ConfigurationException {
-		assertEquals("http://lod.eurohelp.es/aldapa/project/", testManager.getConfigPropertyValue(aldapaConfigFiletoken, projectBaseToken));
-	}
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
-	@Test
-	public final void testNotExistingGetConfigPropertyValue() throws ConfigurationException, IOException {
-		thrown.expect(ConfigurationException.class);
-		thrown.expectMessage("Property or value not found");
-		testManager.getConfigPropertyValue(aldapaConfigFiletoken, fakePropToken );
-	}
+    @BeforeClass
+    public static void setUpBeforeClass() throws ConfigurationFileIOException, IOException {
+        testManager = ConfigurationManager.getInstance(CONFIGFILE);
+    }
+
+    @Test
+    public final void testGetInstance() throws ConfigurationFileIOException, IOException {
+        assertNotNull(testManager);
+    }
+
+    @Test
+    public final void testGetConfigPropertyValue() throws IOException, ConfigurationException {
+        assertEquals("http://lod.eurohelp.es/aldapa/project/", testManager.getConfigPropertyValue(ALDAPACONFIGFILETOKEN, PROJECTBASETOKEN));
+    }
+
+    @Test
+    public final void testNotExistingGetConfigPropertyValue() throws ConfigurationException, IOException {
+        thrown.expect(ConfigurationException.class);
+        thrown.expectMessage("Property or value not found");
+        testManager.getConfigPropertyValue(ALDAPACONFIGFILETOKEN, FAKEPROPTOKEN);
+    }
 }

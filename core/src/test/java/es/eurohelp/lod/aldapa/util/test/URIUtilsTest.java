@@ -17,14 +17,13 @@ import es.eurohelp.lod.aldapa.util.URIUtils;
  */
 public class URIUtilsTest {
 
-	/**
-	 * Test method for {@link es.eurohelp.lod.aldapa.util.URIUtils#validateURI(java.lang.String)}.
-	 * @throws URISyntaxException 
-	 */
-	@Test
-	public void testValidateURI() throws URISyntaxException {
-		assertEquals("urn:aldapa:project:parkings-donosti", URIUtils.validateURI("urn:aldapa:project:parkings-donosti"));
-	}
-
-	// TODO: issue 27
+    /**
+     * Test method for {@link es.eurohelp.lod.aldapa.util.URIUtils#validateURI(java.lang.String)}.
+     * 
+     * @throws URISyntaxException
+     */
+    @Test
+    public void testValidateURI() throws URISyntaxException {
+        assertEquals("urn:aldapa:project:parkings-donosti", URIUtils.validateURI("urn:aldapa:project:parkings-donosti"));
+    }
 }

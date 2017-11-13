@@ -3,21 +3,21 @@
   <parent>
     <groupId>es.eurohelp.lod.aldapa</groupId>
     <artifactId>complete</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
   </parent>
   <artifactId>core-plugins-tests</artifactId>
-  <name>ALDAPA core and plugins tests</name>
+  <name>ALDAPA Core and plugins tests</name>
   <description>Core needs some plugins for testing, but circular dependencies would arise</description>
   <dependencies>
 		<dependency>
 			<groupId>es.eurohelp.lod.aldapa</groupId>
 			<artifactId>core</artifactId>
-			<version>0.0.5</version>
+			<version>0.0.6</version>
 		</dependency>
 		<dependency>
 			<groupId>es.eurohelp.lod.aldapa</groupId>
 			<artifactId>plugins</artifactId>
-			<version>0.0.3</version>
+			<version>0.0.4</version>
 		</dependency>
 	</dependencies>
 </project>

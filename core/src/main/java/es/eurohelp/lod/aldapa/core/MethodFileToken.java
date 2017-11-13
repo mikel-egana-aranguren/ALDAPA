@@ -8,19 +8,15 @@ package es.eurohelp.lod.aldapa.core;
  *
  */
 public enum MethodFileToken {
-	projectUri("PROJECT_URI"),
-	catalogUri("CATALOG_URI"),
-	datasetUri("DATASET_URI"),
-	graphUri("GRAPH_URI"),
-	;
-	
-	public final String methodFileToken;
-	
-	private MethodFileToken(String methodFileToken) {
-		this.methodFileToken = methodFileToken;
-	}
+    PROJECTURI("PROJECT_URI"), CATALOGURI("CATALOG_URI"), DATASETURI("DATASET_URI"), GRAPHURI("GRAPH_URI");
 
-	public String getValue() {
-		return methodFileToken;
-	}
+    public final String methodFileToken;
+
+    private MethodFileToken(String methodFileToken) {
+        this.methodFileToken = methodFileToken;
+    }
+
+    public String getValue() {
+        return methodFileToken;
+    }
 }

@@ -3,7 +3,6 @@
  */
 package es.eurohelp.lod.aldapa.storage;
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.query.GraphQueryResult;
@@ -19,44 +18,46 @@ import org.eclipse.rdf4j.repository.RepositoryConnection;
  * @author megana
  *
  */
-abstract public class RDF4JConnection {
-	private static final Logger LOGGER = LogManager.getLogger(RDF4JConnection.class);
-	
-	private Repository repo;
-	private RepositoryConnection conn;
-	
-	public RDF4JConnection (){}
-	
-	public RDF4JConnection (Repository newRepo) {
-		repo = newRepo;
-		repo.initialize();
-		conn = repo.getConnection();
-		conn.begin();
-		LOGGER.info("Starting and connecting to " + repo.getClass().getSimpleName());
-	}
-	
-	public synchronized RepositoryConnection getConnection(){
-		return conn;
-	}
-	public void shutdownAtOnce (){
-		LOGGER.info("Closing connection and shutting down " + repo.getClass().getSimpleName());
-		conn.close();
-		repo.shutDown();
-	}
-	
-	public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException {
-		return conn.prepareGraphQuery(pSPARQLquery).evaluate();
-	}
+public abstract class RDF4JConnection {
+    private static final Logger LOGGER = LogManager.getLogger(RDF4JConnection.class);
 
-	public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) {
-		   return conn.prepareTupleQuery(QueryLanguage.SPARQL, pSPARQLquery).evaluate();
-	}
+    private Repository repo;
+    private RepositoryConnection conn;
 
-	public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException {
-		return conn.prepareBooleanQuery(pSPARQLquery).evaluate();
-	}
-	
-	public void execSPARQLUpdate (String pSPARQLquery){
-		conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery).execute();		
-	}
+    public RDF4JConnection() {
+    }
+
+    public RDF4JConnection(Repository newRepo) {
+        repo = newRepo;
+        repo.initialize();
+        conn = repo.getConnection();
+        conn.begin();
+        LOGGER.info("Starting and connecting to " + repo.getClass().getSimpleName());
+    }
+
+    public synchronized RepositoryConnection getConnection() {
+        return conn;
+    }
+
+    public void shutdownAtOnce() {
+        LOGGER.info("Closing connection and shutting down " + repo.getClass().getSimpleName());
+        conn.close();
+        repo.shutDown();
+    }
+
+    public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException {
+        return conn.prepareGraphQuery(pSPARQLquery).evaluate();
+    }
+
+    public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) {
+        return conn.prepareTupleQuery(QueryLanguage.SPARQL, pSPARQLquery).evaluate();
+    }
+
+    public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException {
+        return conn.prepareBooleanQuery(pSPARQLquery).evaluate();
+    }
+
+    public void execSPARQLUpdate(String pSPARQLquery) {
+        conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery).execute();
+    }
 }

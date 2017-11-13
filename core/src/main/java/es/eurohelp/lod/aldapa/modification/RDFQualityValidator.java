@@ -8,5 +8,6 @@ package es.eurohelp.lod.aldapa.modification;
  *
  */
 public abstract class RDFQualityValidator {
-	public RDFQualityValidator(){}
+    public RDFQualityValidator() {
+    }
 }

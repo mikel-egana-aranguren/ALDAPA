@@ -10,15 +10,14 @@ import java.io.IOException;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.http.client.ClientProtocolException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
 import es.eurohelp.lod.aldapa.impl.storage.LocalFileStore;
-import es.eurohelp.lod.aldapa.storage.FileStoreAlreadySetException;
 import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
 
 /**
@@ -27,56 +26,65 @@ import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
  */
 public class LocalFileStoreTest {
 
-	private static final String outputPath = "data/getFileHTTPOutput/";
-	private static final String ejieFile = "estaciones.csv";
-	private static final String ejieFileURL = "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv";
-	private static final String caceresCarrilesBiciFile = "carrilesBici.csv";
-	private static final String caceresCarrilesBiciFileURL = "http://opendata.caceres.es/GetData/GetData?dataset=om:CarrilBici&format=csv";
-	private static LocalFileStore simpleFilestore;
-	
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws FileStoreAlreadySetException{
-		simpleFilestore = new LocalFileStore(outputPath);
-	}
+    private static final String OUTPUTPATH = "data/getFileHTTPOutput/";
+    private static final String EJIEFILE = "estaciones.csv";
+    private static final String EJIEFILEURL = "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv";
+    private static final String CACERESCARRILESBICIFILE = "carrilesBici.csv";
+    private static final String CACERESCARRILESBICIFILEURL = "http://opendata.caceres.es/GetData/GetData?dataset=om:CarrilBici&format=csv";
+    private static LocalFileStore simpleFilestore;
 
-	@Test
-	public final void testGetFileHTTPEJIECalidadDelAire() throws ClientProtocolException, IOException, FileStoreFileAlreadyStoredException {
-		simpleFilestore.getFileHTTP(ejieFileURL, ejieFile, false);
-		FileReader in = new FileReader(outputPath + ejieFile);
-		CSVFormat csvFormat = CSVFormat.EXCEL.withHeader().withDelimiter(';');
-		Iterable<CSVRecord> records = csvFormat.parse(in);
-		boolean tokenFound = false;
-		for (CSVRecord record : records) {
-			if(record.get("Name").equals("AGURAIN")){
-				tokenFound = true;
-				break;
-			}
-		}
-		assertTrue(tokenFound);
-		thrown.expect(FileStoreFileAlreadyStoredException.class);
-		thrown.expectMessage("The file has already been saved");
-		simpleFilestore.getFileHTTP(ejieFileURL, ejieFile, false);
-	}
-	
-	@Test
-	public final void testGetFileHTTPCarrilesBiciCaceres() throws ClientProtocolException, IOException, FileStoreFileAlreadyStoredException {
-		simpleFilestore.getFileHTTP(caceresCarrilesBiciFileURL, caceresCarrilesBiciFile, false);
-		FileReader in = new FileReader(outputPath + caceresCarrilesBiciFile);
-		CSVFormat csvFormat = CSVFormat.EXCEL.withHeader().withDelimiter(',');
-		Iterable<CSVRecord> records = csvFormat.parse(in);
-		boolean tokenFound = false;
-		for (CSVRecord record : records) {
-			if(record.get("rdfs_label").equals("Carril bici 0")){
-				tokenFound = true;
-				break;
-			}
-		}
-		assertTrue(tokenFound);
-		thrown.expect(FileStoreFileAlreadyStoredException.class);
-		thrown.expectMessage("The file has already been saved");
-		simpleFilestore.getFileHTTP(caceresCarrilesBiciFileURL, caceresCarrilesBiciFile, false);
-	}
+    private static final Logger LOGGER = LogManager.getLogger(LocalFileStoreTest.class);
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @BeforeClass
+    public static void setUpBeforeClass() {
+        simpleFilestore = new LocalFileStore(OUTPUTPATH);
+    }
+
+    @Test
+    public final void testGetFileHTTPEJIECalidadDelAire() {
+        try {
+            simpleFilestore.getFileHTTP(EJIEFILEURL, EJIEFILE, false);
+            FileReader in = new FileReader(OUTPUTPATH + EJIEFILE);
+            CSVFormat csvFormat = CSVFormat.EXCEL.withHeader().withDelimiter(';');
+            Iterable<CSVRecord> records = csvFormat.parse(in);
+            boolean tokenFound = tokenExists(records, "AGURAIN", "Name");
+            assertTrue(tokenFound);
+            thrown.expect(FileStoreFileAlreadyStoredException.class);
+            thrown.expectMessage("The file has already been saved");
+            simpleFilestore.getFileHTTP(EJIEFILEURL, EJIEFILE, false);
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
+    }
+
+    @Test
+    public final void testGetFileHTTPCarrilesBiciCaceres() {
+        try {
+            simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, false);
+            FileReader in = new FileReader(OUTPUTPATH + CACERESCARRILESBICIFILE);
+            CSVFormat csvFormat = CSVFormat.EXCEL.withHeader().withDelimiter(',');
+            Iterable<CSVRecord> records = csvFormat.parse(in);
+            boolean tokenFound = tokenExists(records, "Carril bici 0", "rdfs_label");
+            assertTrue(tokenFound);
+            thrown.expect(FileStoreFileAlreadyStoredException.class);
+            thrown.expectMessage("The file has already been saved");
+            simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, false);
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
+    }
+
+    private boolean tokenExists(Iterable<CSVRecord> records, String recordValue, String columnName) {
+        boolean tokenFound = false;
+        for (CSVRecord record : records) {
+            if ((recordValue).equals(record.get(columnName))) {
+                tokenFound = true;
+                break;
+            }
+        }
+        return tokenFound;
+    }
 }
