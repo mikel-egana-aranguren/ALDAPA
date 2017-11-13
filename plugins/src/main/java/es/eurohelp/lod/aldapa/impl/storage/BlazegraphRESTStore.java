@@ -11,6 +11,7 @@ import java.io.StringWriter;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -31,7 +32,9 @@ import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
+import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.GraphQueryResult;
+import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
@@ -96,14 +99,13 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
     @Override
     public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws RDFStoreException {
         ModelBuilder builder = new ModelBuilder();
-        if (graphURI == null) { // No named graph
+        if (graphURI == null) {
             GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}");
             while (graphQueryResult.hasNext()) {
                 Statement stmt = graphQueryResult.next();
                 builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
             }
-        }
-        else { // Named graph
+        } else {
             GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }");
             builder.namedGraph(graphURI);
             while (graphQueryResult.hasNext()) {
@@ -179,17 +181,19 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
         try {
             HashSet<String> dbs = new HashSet<String>();
             CloseableHttpResponse response = execHTTPGET(blazegraphBaseURL + SLASHNAMESPACE);
-            String inputLine;
             BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-            try {
-                while ((inputLine = br.readLine()) != null) {
-                    if (inputLine.contains("<Namespace xmlns=\"http://www.bigdata.com/rdf#/features/KB/\">")) {
-                        dbs.add(inputLine.replace("<Namespace xmlns=\"http://www.bigdata.com/rdf#/features/KB/\">", "").replace("</Namespace>", "")
-                                .trim());
-                    }
-                }
-            } finally {
-                br.close();
+            Model model = Rio.parse(br, "", RDFFormat.RDFXML);
+            MemoryRDFStore memstore = new MemoryRDFStore();
+            memstore.saveModel(model);
+            String dbsQuery = FileUtils.getInstance().fileToString("blazegraphdbs.sparql");
+            TupleQueryResult resultDBs = memstore.execSPARQLTupleQuery(dbsQuery);
+            List<String> bindingNames = resultDBs.getBindingNames();
+            while (resultDBs.hasNext()) {
+                BindingSet bindingSet = resultDBs.next();
+                String rawtitle = bindingSet.getValue(bindingNames.get(0)).toString();
+                String title = rawtitle.replace("\"^^<http://www.w3.org/2001/XMLSchema#string>", "").replace("\"", "");
+                LOGGER.info(title);
+                dbs.add(title);
             }
             return dbs;
         } catch (IOException e) {

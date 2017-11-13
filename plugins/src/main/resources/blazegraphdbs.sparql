@@ -1,0 +1,4 @@
+SELECT ?title
+WHERE {
+	?db <http://purl.org/dc/terms/title> ?title
+}
