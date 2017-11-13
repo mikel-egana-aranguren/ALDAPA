@@ -3,16 +3,10 @@
  */
 package es.eurohelp.lod.aldapa.pipeline.ejiecalidaddelaire;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URISyntaxException;
-
 import org.eclipse.rdf4j.rio.RDFFormat;
 
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.Manager;
-import es.eurohelp.lod.aldapa.core.exception.AldapaException;
-
 
 /**
  * 
@@ -23,37 +17,37 @@ import es.eurohelp.lod.aldapa.core.exception.AldapaException;
  */
 public class EJIECalidadAire {
 
-	public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, AldapaException, URISyntaxException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-		// Load the configuration from file configuration.yml
-		ConfigurationManager config = ConfigurationManager.getInstance("configuration.yml");
-		
-		// Create a manager with the configuration
-		Manager manager = new Manager(config);
-		
-		// Add project
-		String project_uri = manager.addProject("EuskadiMedioAmbiente");
-		
-		// Add catalog
-		String catalog_uri = manager.addCatalog("CalidadAire", project_uri);
-		
-		// Add dataset
-		String dataset_uri = manager.addDataset("Estaciones", catalog_uri);
-		
-		// Add namedGraph 
-		String named_graph_uri = manager.addNamedGraph("Estaciones01", dataset_uri);
-		
-		// Add data to named graph
-		manager.addDataToNamedGraph(named_graph_uri, "estaciones.csv");
-		
-		// Validate data
-		manager.analyseGraph();
-		
-		// Discover links
-		
-		// Flush backbone
-		manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl", RDFFormat.TURTLE);
-		
-		// Flush data from named graph
-		manager.flushGraph(named_graph_uri, "data/EuskadiMedioAmbienteData.ttl", RDFFormat.TURTLE);
-	}
+    public static void main(String[] args) {
+        // Load the configuration from file configuration.yml
+        ConfigurationManager config = ConfigurationManager.getInstance("configuration.yml");
+
+        // Create a manager with the configuration
+        Manager manager = new Manager(config);
+
+        // Add project
+        String projectUri = manager.addProject("EuskadiMedioAmbiente");
+
+        // Add catalog
+        String catalogUri = manager.addCatalog("CalidadAire", projectUri);
+
+        // Add dataset
+        String datasetUri = manager.addDataset("Estaciones", catalogUri);
+
+        // Add namedGraph
+        String namedGraphUri = manager.addNamedGraph("Estaciones01", datasetUri);
+
+        // Add data to named graph
+        manager.addDataToNamedGraph(namedGraphUri, "estaciones.csv");
+
+        // Validate data
+        manager.analyseGraph();
+
+        // Discover links
+
+        // Flush backbone
+        manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl", RDFFormat.TURTLE);
+
+        // Flush data from named graph
+        manager.flushGraph(namedGraphUri, "data/EuskadiMedioAmbienteData.ttl", RDFFormat.TURTLE);
+    }
 }

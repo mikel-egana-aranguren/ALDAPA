@@ -5,7 +5,6 @@ package es.eurohelp.lod.aldapa.impl.test;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.jena.rdf.model.Model;
@@ -15,7 +14,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.impl.modification.SHACLValidator;
 import es.eurohelp.lod.aldapa.modification.InvalidRDFException;
 import es.eurohelp.lod.aldapa.util.FileUtils;
@@ -26,122 +24,119 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class SHACLValidatorTest {
 
-	private static final String validTarget = "shaclValidatorTestData/data2.ttl";
-	private static final String validTargetParkings = "shaclValidatorTestData/parkings-data.ttl";
-	private static final String validTargetEjieCalidadAire = "shaclValidatorTestData/test-ejie-calidad-aire-namedgraph-created.ttl";
-	private static final String inValidTarget = "shaclValidatorTestData/data.ttl";
-	private static final String shape = "shaclValidatorTestData/shape.ttl";
-	private static final String parkingsShape = "shaclValidatorTestData/parkings-shape.ttl";
-	private static final String estacionesShape = "shaclValidatorTestData/estaciones-shape.ttl";
-	private static final String invalidEstacionesShape = "shaclValidatorTestData/invalid-estaciones-shape.ttl";
-	private static final String reportQuery = "shaclValidatorTestData/report.sparql";
-	private static final String reportPath = "data/shaclValidator/report.ttl";
-	private static final String parkingsReportPath = "data/shaclValidator/parkingsReport.ttl";
-	private static final String estacionesReportPath = "data/shaclValidator/estacionesReport.ttl";
-	private static final String invalidEstacionesReportPath = "data/shaclValidator/invalidEstacionesReport.ttl";
-	private static SHACLValidator validator = null;
-	
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
+    private static final String VALIDTARGET = "shaclValidatorTestData/data2.ttl";
+    private static final String VALIDTARGETPARKINGS = "shaclValidatorTestData/parkings-data.ttl";
+    private static final String VALIDTARGETEJIECALIDADAIRE = "shaclValidatorTestData/test-ejie-calidad-aire-namedgraph-created.ttl";
+    private static final String INVALIDTARGET = "shaclValidatorTestData/data.ttl";
+    private static final String SHAPE = "shaclValidatorTestData/shape.ttl";
+    private static final String PARKINGSSHAPE = "shaclValidatorTestData/parkings-shape.ttl";
+    private static final String ESTACIONESSHAPE = "shaclValidatorTestData/estaciones-shape.ttl";
+    private static final String INVALIDESTACIONESSHAPE = "shaclValidatorTestData/invalid-estaciones-shape.ttl";
+    private static final String REPORTPATH = "data/shaclValidator/report.ttl";
+    private static final String PARKINGSREPORTPATH = "data/shaclValidator/parkingsReport.ttl";
+    private static final String ESTACIONESREPORTPATH = "data/shaclValidator/estacionesReport.ttl";
+    private static final String INVALIDESTACIONESREPORTPATH = "data/shaclValidator/invalidEstacionesReport.ttl";
+    private static final String TURTLE = "TURTLE";
 
-	@BeforeClass
-	public static void setUpBeforeClass() {
-		validator = new SHACLValidator();
-	}
-	
-	@Test
-	public final void testRDFQualityValidator() {
-		assertNotNull(validator);
-	}
+    private static SHACLValidator validator = null;
+   
 
-	@Test
-	public final void testValidateValidRDF() throws IOException, InvalidRDFException {
-		FileUtils fileUtils = FileUtils.getInstance();
-		InputStream targetIn = fileUtils.getInputStream(validTarget);
-		Model target = ModelFactory.createDefaultModel();
-		target.read(targetIn, null, "TURTLE");
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
-		InputStream shapeIn = fileUtils.getInputStream(shape);
-		Model tests = ModelFactory.createDefaultModel();
-		tests.read(shapeIn, null, "TURTLE");
+    @BeforeClass
+    public static void setUpBeforeClass() {
+        validator = new SHACLValidator();
+    }
 
-		String finalQuery = fileUtils.fileToString(reportQuery);
-		boolean result = validator.validate(target, tests, reportPath);
-		
-		assertTrue(result);
-	}
+    @Test
+    public final void testRDFQualityValidator() {
+        assertNotNull(validator);
+    }
 
-	@Test
-	public final void testValidateNotValidRDF() throws IOException, InvalidRDFException {
-		thrown.expect(InvalidRDFException.class);
-		thrown.expectMessage("Invalid RDF, see report at data/shaclValidator/report.ttl");
-		
-		FileUtils fileUtils = FileUtils.getInstance();
-		InputStream targetIn = fileUtils.getInputStream(inValidTarget);
-		Model target = ModelFactory.createDefaultModel();
-		target.read(targetIn, null, "TURTLE");
+    @Test
+    public final void testValidateValidRDF() {
+            FileUtils fileUtils = FileUtils.getInstance();
+            InputStream targetIn = fileUtils.getInputStream(VALIDTARGET);
+            Model target = ModelFactory.createDefaultModel();
+            target.read(targetIn, null, TURTLE);
 
-		InputStream shapeIn = fileUtils.getInputStream(shape);
-		Model tests = ModelFactory.createDefaultModel();
-		tests.read(shapeIn, null, "TURTLE");
+            InputStream shapeIn = fileUtils.getInputStream(SHAPE);
+            Model tests = ModelFactory.createDefaultModel();
+            tests.read(shapeIn, null, TURTLE);
 
-		String finalQuery = fileUtils.fileToString(reportQuery);
-		boolean result = validator.validate(target, tests, reportPath);
+            boolean result = validator.validate(target, tests, REPORTPATH);
 
-		assertFalse(result);
-	}
-	
-	@Test
-	public final void testValidateValidRDFParkings () throws IOException, InvalidRDFException {
-		FileUtils fileUtils = FileUtils.getInstance();
-		InputStream targetIn = fileUtils.getInputStream(validTargetParkings);
-		Model target = ModelFactory.createDefaultModel();
-		target.read(targetIn, null, "TURTLE");
+            assertTrue(result);
+    }
 
-		InputStream shapeIn = fileUtils.getInputStream(parkingsShape);
-		Model tests = ModelFactory.createDefaultModel();
-		tests.read(shapeIn, null, "TURTLE");
+    @Test
+    public final void testValidateNotValidRDF() {
+        thrown.expect(InvalidRDFException.class);
+        thrown.expectMessage("Invalid RDF, see report at data/shaclValidator/report.ttl");
 
-		String finalQuery = fileUtils.fileToString(reportQuery);
-		boolean result = validator.validate(target, tests, parkingsReportPath);
-		
-		assertTrue(result);
-	}
-	
-	@Test
-	public final void testValidateInvalidRDFEstaciones () throws IOException, InvalidRDFException {
-		thrown.expect(InvalidRDFException.class);
-		thrown.expectMessage("Invalid RDF, see report at data/shaclValidator/invalidEstacionesReport.ttl");
-		
-		FileUtils fileUtils = FileUtils.getInstance();
-		InputStream targetIn = fileUtils.getInputStream(validTargetEjieCalidadAire);
-		Model target = ModelFactory.createDefaultModel();
-		target.read(targetIn, null, "TURTLE");
+        FileUtils fileUtils = FileUtils.getInstance();
+        InputStream targetIn = fileUtils.getInputStream(INVALIDTARGET);
+        Model target = ModelFactory.createDefaultModel();
+        target.read(targetIn, null, TURTLE);
 
-		InputStream shapeIn = fileUtils.getInputStream(invalidEstacionesShape);
-		Model tests = ModelFactory.createDefaultModel();
-		tests.read(shapeIn, null, "TURTLE");
+        InputStream shapeIn = fileUtils.getInputStream(SHAPE);
+        Model tests = ModelFactory.createDefaultModel();
+        tests.read(shapeIn, null, TURTLE);
 
-		String finalQuery = fileUtils.fileToString(reportQuery);
-		boolean result = validator.validate(target, tests, invalidEstacionesReportPath);
+        boolean result = validator.validate(target, tests, REPORTPATH);
 
-		assertTrue(result);
-	}
-	
-	@Test
-	public final void testValidateValidRDFEstaciones () throws IOException, InvalidRDFException {
-		FileUtils fileUtils = FileUtils.getInstance();
-		InputStream targetIn = fileUtils.getInputStream(validTargetEjieCalidadAire);
-		Model target = ModelFactory.createDefaultModel();
-		target.read(targetIn, null, "TURTLE");
+        assertFalse(result);
+    }
 
-		InputStream shapeIn = fileUtils.getInputStream(estacionesShape);
-		Model tests = ModelFactory.createDefaultModel();
-		tests.read(shapeIn, null, "TURTLE");
+    @Test
+    public final void testValidateValidRDFParkings() {
+        FileUtils fileUtils = FileUtils.getInstance();
+        InputStream targetIn = fileUtils.getInputStream(VALIDTARGETPARKINGS);
+        Model target = ModelFactory.createDefaultModel();
+        target.read(targetIn, null, TURTLE);
 
-		String finalQuery = fileUtils.fileToString(reportQuery);
-		boolean result = validator.validate(target, tests, estacionesReportPath);
+        InputStream shapeIn = fileUtils.getInputStream(PARKINGSSHAPE);
+        Model tests = ModelFactory.createDefaultModel();
+        tests.read(shapeIn, null, TURTLE);
 
-		assertTrue(result);
-	}
+        boolean result = validator.validate(target, tests, PARKINGSREPORTPATH);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public final void testValidateInvalidRDFEstaciones() {
+        thrown.expect(InvalidRDFException.class);
+        thrown.expectMessage("Invalid RDF, see report at data/shaclValidator/invalidEstacionesReport.ttl");
+
+        FileUtils fileUtils = FileUtils.getInstance();
+        InputStream targetIn = fileUtils.getInputStream(VALIDTARGETEJIECALIDADAIRE);
+        Model target = ModelFactory.createDefaultModel();
+        target.read(targetIn, null, TURTLE);
+
+        InputStream shapeIn = fileUtils.getInputStream(INVALIDESTACIONESSHAPE);
+        Model tests = ModelFactory.createDefaultModel();
+        tests.read(shapeIn, null, TURTLE);
+
+        boolean result = validator.validate(target, tests, INVALIDESTACIONESREPORTPATH);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public final void testValidateValidRDFEstaciones() {
+        FileUtils fileUtils = FileUtils.getInstance();
+        InputStream targetIn = fileUtils.getInputStream(VALIDTARGETEJIECALIDADAIRE);
+        Model target = ModelFactory.createDefaultModel();
+        target.read(targetIn, null, TURTLE);
+
+        InputStream shapeIn = fileUtils.getInputStream(ESTACIONESSHAPE);
+        Model tests = ModelFactory.createDefaultModel();
+        tests.read(shapeIn, null, TURTLE);
+
+        boolean result = validator.validate(target, tests, ESTACIONESREPORTPATH);
+
+        assertTrue(result);
+    }
 }

@@ -20,21 +20,22 @@ import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EJIECalidadAir
  *
  */
 public class EJIECalidadAireConverterTest {
-	private EJIECalidadAireConverter converter;
-	private Model model;
-	private static final String csvFile = "data/OpenDataEuskadiCalidadDelAire/estaciones.csv";
-	
-	@Before
-	public void setUp (){
-		this.converter = new EJIECalidadAireConverter();
-		this.model = new TreeModel();
-	}
+    private EJIECalidadAireConverter converter;
+    private Model model;
 
-	@Test
-	public void testEJIECalidadAireConverter() throws IOException {
-		converter.setDataSource(csvFile);
-		converter.setModel(model);
-		Model new_model = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
-		assertNotNull(new_model);
-	}
+    private static final String CSVFILE = "data/OpenDataEuskadiCalidadDelAire/estaciones.csv";
+
+    @Before
+    public void setUp() {
+        this.converter = new EJIECalidadAireConverter();
+        this.model = new TreeModel();
+    }
+
+    @Test
+    public void testEJIECalidadAireConverter() throws IOException {
+        converter.setDataSource(CSVFILE);
+        converter.setModel(model);
+        Model newModel = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
+        assertNotNull(newModel);
+    }
 }

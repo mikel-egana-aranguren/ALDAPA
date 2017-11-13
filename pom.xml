@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.eurohelp.lod.aldapa</groupId>
 	<artifactId>complete</artifactId>
-	<version>0.0.5</version>
+	<version>0.0.6</version>
 	<name>ALDAPA</name>
 	<description>Assistant for Linked DAta Production Automation</description>
 	<url>http://mikel-egana-aranguren.github.io/ALDAPA/</url>
@@ -83,7 +83,12 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<testFailureIgnore>false</testFailureIgnore>
+					<!-- Since these tests need to connect to a local Triple Store, they 
+						alway fail in Travis. Hence the exclusion -->
+					<excludes>
+						<exclude>**/*BlazegraphRESTStoreTest.java</exclude>
+						<exclude>**/*SPARQLProtocolStoreTest.java</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
