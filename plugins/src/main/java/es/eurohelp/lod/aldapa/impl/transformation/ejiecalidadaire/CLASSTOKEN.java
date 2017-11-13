@@ -10,14 +10,14 @@ package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
 enum CLASSTOKEN {
     STATION("station"),;
 
-    public final String class_token;
+    public final String classtoken;
 
     private CLASSTOKEN(String classToken) {
-        this.class_token = classToken;
+        this.classtoken = classToken;
     }
 
     public String getValue() {
-        return class_token;
+        return classtoken;
     }
 
 }

@@ -240,7 +240,6 @@ public class ManagerTest {
         HashSet<String> catalogUris = (HashSet<String>) manager.getCatalogs();
         assertTrue(catalogUris.contains(CATALOGURI));
         assertTrue(catalogUris.contains(CATALOGURI + "-2"));
-
     }
 
     @Test

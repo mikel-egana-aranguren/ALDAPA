@@ -29,7 +29,7 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
 public class LocalFileStore extends FileStore implements FunctionalFileStore {
 
     private Set<String> fileNames = null;
-    
+
     private static final Logger LOGGER = LogManager.getLogger(LocalFileStore.class);
 
     public LocalFileStore(String directoryPath) {
@@ -55,13 +55,11 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
                 // https://stackoverflow.com/questions/10960409/how-do-i-save-a-file-downloaded-with-httpclient-into-a-specific-folder
                 InputStream inputStream = null;
                 FileOutputStream fileOutputStream = null;
+
                 try {
                     inputStream = response.getEntity().getContent();
                     fileOutputStream = FileUtils.getInstance().getFileOutputStream(super.getDirectoryPath() + fileName);
-                    int inByte;
-                    while ((inByte = inputStream.read()) != -1) {
-                        fileOutputStream.write(inByte);
-                    }
+                    inputStreamToFileOutputstream(inputStream, fileOutputStream);
                 } finally {
                     fileNames.add(fileName);
                     if (inputStream != null) {
@@ -75,6 +73,18 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
         } catch (IOException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
+        }
+    }
+
+    /**
+     * @param inputStream
+     * @param fileOutputStream
+     * @throws IOException
+     */
+    private void inputStreamToFileOutputstream(InputStream inputStream, FileOutputStream fileOutputStream) throws IOException {
+        int inByte;
+        while ((inByte = inputStream.read()) != -1) {
+            fileOutputStream.write(inByte);
         }
     }
 }

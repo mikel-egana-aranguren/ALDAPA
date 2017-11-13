@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFParseException;
@@ -18,6 +20,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.util.FileUtils;
@@ -28,110 +31,127 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class MemoryRDFStoreTest {
 
-	private final String inputFileGraphs = "data/default-model.trig";
-	private final String inputFileNoGraphs = "data/default-model-no-graphs.ttl";
-	private final String outputFileNoExtension = "data/default-model-output";
-	private final String dataGraphURI = "http://lod.eurohelp.es/graph/dataset-graph001";
-	private final String metadataGraphURI = "http://lod.eurohelp.es/aldapa/metadata";
-	private final String tmpUri = "http://lod.eurohelp.es/MemoryRDFTests";
-	private static final String tupleQuery = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "PREFIX foaf:<http://xmlns.com/foaf/0.1/> "
-	        + "SELECT ?project WHERE { " + "?project rdf:type foaf:Project . " + "}";
-	private static final String graphQuery = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "CONSTRUCT {"
-	        + "?o <http://example.com/prop> ?s ." + "}" + "WHERE { " + "?s rdf:type ?o . " + "}";
-	private static final String booleanQueryAsk = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "PREFIX foaf:<http://xmlns.com/foaf/0.1/> "
-	        + "ASK WHERE { " + "?project rdf:type foaf:Project . " + "}";
-	private static final String queryDelete = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "PREFIX foaf:<http://xmlns.com/foaf/0.1/> "
-	        + "DELETE {" + "?project rdf:type foaf:Project . " + "}" + "WHERE { " + "?project rdf:type foaf:Project . " + "}";
+    private final String INPUTFILEGRAPHS = "data/default-model.trig";
+    private final String INPUTFILENOGRAPHS = "data/default-model-no-graphs.ttl";
+    private final String OUTPUTFILENOEXTENSION = "data/default-model-output";
+    private final String DATAGRAPHURI = "http://lod.eurohelp.es/graph/dataset-graph001";
+    private final String METADATAGRAPHURI = "http://lod.eurohelp.es/aldapa/metadata";
+    private final String TMPURI = "http://lod.eurohelp.es/MemoryRDFTests";
+    private static final String TUPLEQUERY = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT ?project WHERE { ?project rdf:type foaf:Project . }";
+    private static final String GRAPHQUERY = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> CONSTRUCT { ?o <http://example.com/prop> ?s .} WHERE { ?s rdf:type ?o . }";
+    private static final String BOOLEANQUERYASK = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> ASK WHERE { ?project rdf:type foaf:Project . }";
+    private static final String QUERYDELETE = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> DELETE { ?project rdf:type foaf:Project . } WHERE { ?project rdf:type foaf:Project . }";
 
-	private MemoryRDFStore mem_store = null;
-	
-	@Before
-	public void setUp() {
-		mem_store = new MemoryRDFStore();
-	}
+    private MemoryRDFStore memStore = null;
 
-	@After
-	public void tearDown() {
-		mem_store.stopRDFStore();
-	}
+    private static final Logger LOGGER = LogManager.getLogger(MemoryRDFStoreTest.class);
 
-	/**
-	 * Test method for
-	 * {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#saveModel(org.openrdf.model.Model)}.
-	 * 
-	 * @throws IOException
-	 * @throws UnsupportedRDFormatException
-	 * @throws RDFParseException
-	 * @throws RDFStoreException
-	 */
-	@Test
-	public final void testSaveModel() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
-		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileGraphs);
-		Model model = Rio.parse(inStream, tmpUri, RDFFormat.TRIG);
-		mem_store.saveModel(model);
-		assertNotNull(model);
-	}
+    @Before
+    public void setUp() {
+        memStore = new MemoryRDFStore();
+    }
 
-	/**
-	 * Test method for
-	 * {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#flushGraph(java.lang.String, java.io.FileOutputStream, org.openrdf.rio.RDFFormat)}
-	 * .
-	 * 
-	 * @throws IOException
-	 * @throws UnsupportedRDFormatException
-	 * @throws RDFParseException
-	 * @throws RDFStoreException
-	 */
-	@Test
-	public final void testFlushNamedGraph() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
-		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileGraphs);
-		Model model = Rio.parse(inStream, tmpUri, RDFFormat.TRIG);
-		mem_store.saveModel(model);
-		mem_store.flushGraph(dataGraphURI, new FileOutputStream(outputFileNoExtension + "Data" + ".trig"), RDFFormat.TRIG);
-		mem_store.flushGraph(metadataGraphURI, new FileOutputStream(outputFileNoExtension + "MetaData" + ".trig"), RDFFormat.TRIG);
-	}
+    @After
+    public void tearDown() {
+        memStore.stopRDFStore();
+    }
 
-	/**
-	 * @throws RDFParseException
-	 * @throws UnsupportedRDFormatException
-	 * @throws IOException
-	 * @throws RDFStoreException
-	 */
-	@Test
-	public final void testFlushModel() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
-		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileNoGraphs);
-		Model model = Rio.parse(inStream, tmpUri, RDFFormat.TURTLE);
-		mem_store.saveModel(model);
-		mem_store.flushGraph(null, new FileOutputStream(outputFileNoExtension + ".ttl"), RDFFormat.TURTLE);
-		// TODO: issue 26
-	}
+    /**
+     * Test method for
+     * {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#saveModel(org.openrdf.model.Model)}.
+     * 
+     * @throws IOException
+     * @throws UnsupportedRDFormatException
+     * @throws RDFParseException
+     * @throws RDFStoreException
+     */
+    @Test
+    public final void testSaveModel() {
+        try {
+            InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
+            Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
+            memStore.saveModel(model);
+            assertNotNull(model);
+        } catch (AldapaException | IOException e) {
+            LOGGER.error(e);
+        }
+    }
 
-	@Test
-	public final void testExecSPARQLBooleanQuery() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
-		boolean query_result = false;
-		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileGraphs);
-		Model model = Rio.parse(inStream, tmpUri, RDFFormat.TRIG);
-		mem_store.saveModel(model);
-		query_result = mem_store.execSPARQLBooleanQuery(booleanQueryAsk);
-		assertTrue(query_result);
-	}
+    /**
+     * Test method for
+     * {@link es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore#flushGraph(java.lang.String, java.io.FileOutputStream, org.openrdf.rio.RDFFormat)}
+     * .
+     * 
+     * @throws IOException
+     * @throws UnsupportedRDFormatException
+     * @throws RDFParseException
+     * @throws RDFStoreException
+     */
+    @Test
+    public final void testFlushNamedGraph() {
+        try {
+            InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
+            Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
+            memStore.saveModel(model);
+            memStore.flushGraph(DATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "Data" + ".trig"), RDFFormat.TRIG);
+            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaData" + ".trig"), RDFFormat.TRIG);
+        } catch (AldapaException | IOException e) {
+            LOGGER.error(e);
+        }
+    }
 
-	@Test
-	public final void testexecSPARQLUpdateDelete() throws RDFParseException, UnsupportedRDFormatException, IOException, RDFStoreException {
-		InputStream inStream = FileUtils.getInstance().getInputStream(inputFileGraphs);
-		Model model = Rio.parse(inStream, tmpUri, RDFFormat.TRIG);
-		mem_store.saveModel(model);
-		mem_store.execSPARQLUpdate(queryDelete);
-		mem_store.flushGraph(metadataGraphURI, new FileOutputStream(outputFileNoExtension + "MetaDataProjectRemoved" + ".trig"), RDFFormat.TRIG);
-	}
+    /**
+     * @throws RDFParseException
+     * @throws UnsupportedRDFormatException
+     * @throws IOException
+     * @throws RDFStoreException
+     */
+    @Test
+    public final void testFlushModel() {
+        try {
+            InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILENOGRAPHS);
+            Model model = Rio.parse(inStream, TMPURI, RDFFormat.TURTLE);
+            memStore.saveModel(model);
+            memStore.flushGraph(null, new FileOutputStream(OUTPUTFILENOEXTENSION + ".ttl"), RDFFormat.TURTLE);
+        } catch (AldapaException | IOException e) {
+            LOGGER.error(e);
+        }
+    }
 
-	@Test
-	public final void testexecSPARQLTupleQuery() {
-		mem_store.execSPARQLTupleQuery(tupleQuery);
-	}
+    @Test
+    public final void testExecSPARQLBooleanQuery() {
+        try {
+            boolean queryResult = false;
+            InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
+            Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
+            memStore.saveModel(model);
+            queryResult = memStore.execSPARQLBooleanQuery(BOOLEANQUERYASK);
+            assertTrue(queryResult);
+        } catch (AldapaException | IOException e) {
+            LOGGER.error(e);
+        }
+    }
 
-	@Test
-	public final void testexecSPARQLGraphQuery() throws RDFStoreException {
-		mem_store.execSPARQLGraphQuery(graphQuery);
-	}
+    @Test
+    public final void testexecSPARQLUpdateDelete() {
+        try {
+            InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
+            Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
+            memStore.saveModel(model);
+            memStore.execSPARQLUpdate(QUERYDELETE);
+            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaDataProjectRemoved" + ".trig"), RDFFormat.TRIG);
+        } catch (AldapaException | IOException e) {
+            LOGGER.error(e);
+        }
+    }
+
+    @Test
+    public final void testexecSPARQLTupleQuery() {
+        memStore.execSPARQLTupleQuery(TUPLEQUERY);
+    }
+
+    @Test
+    public final void testexecSPARQLGraphQuery() {
+        memStore.execSPARQLGraphQuery(GRAPHQUERY);
+    }
 }
