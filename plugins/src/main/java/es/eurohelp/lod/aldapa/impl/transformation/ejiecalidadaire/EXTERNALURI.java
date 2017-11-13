@@ -3,28 +3,23 @@
  */
 package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
 
-
 /**
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 enum EXTERNALURI {
-	lat_wgs84("http://www.w3.org/2003/01/geo/wgs84_pos#lat"),
-	long_wgs84("http://www.w3.org/2003/01/geo/wgs84_pos#long"),
-	time_minutes("http://www.w3.org/2006/time#minutes"),
-	dbo_province("http://dbpedia.org/ontology/province"),
-	schema_location("http://schema.org/location"),
-	schema_address("http://schema.org/address"),
-	;
-	
-	public final String external_uri;
-	
-	private EXTERNALURI(String external_uri) {
-		this.external_uri = external_uri;
-	}
+    LATWGS84("http://www.w3.org/2003/01/geo/wgs84_pos#lat"), LONGWGS84("http://www.w3.org/2003/01/geo/wgs84_pos#long"), TIMEMINUTES(
+            "http://www.w3.org/2006/time#minutes"), DBOPROVINCE("http://dbpedia.org/ontology/province"), SCHEMALOCATION(
+                    "http://schema.org/location"), SCHEMAADDRESS("http://schema.org/address"), SOSASENSOR("http://www.w3.org/ns/sosa/Sensor");
 
-	public String getValue() {
-		return external_uri;
-	}
+    public final String externaluri;
+
+    private EXTERNALURI(String externalUri) {
+        this.externaluri = externalUri;
+    }
+
+    public String getValue() {
+        return externaluri;
+    }
 
 }

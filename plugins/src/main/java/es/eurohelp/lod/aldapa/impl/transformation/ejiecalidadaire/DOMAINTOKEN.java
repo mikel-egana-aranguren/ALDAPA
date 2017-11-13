@@ -3,24 +3,20 @@
  */
 package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
 
-
 /**
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
 enum DOMAINTOKEN {
-	equipment("equipment"),
-	building("building"),
-	;
-	
-	public final String domain_token;
-	
-	private DOMAINTOKEN(String domain_token) {
-		this.domain_token = domain_token;
-	}
+    EQUIPMENT("equipment"), BUILDING("building"),;
 
-	public String getValue() {
-		return domain_token;
-	}
+    public final String domaintoken;
 
+    private DOMAINTOKEN(String domainToken) {
+        this.domaintoken = domainToken;
+    }
+
+    public String getValue() {
+        return domaintoken;
+    }
 }

@@ -1,0 +1,94 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+[ a       <http://www.w3.org/ns/shacl#ValidationReport> ;
+  <http://www.w3.org/ns/shacl#conforms>
+          false ;
+  <http://www.w3.org/ns/shacl#result>
+          [ a       <http://www.w3.org/ns/shacl#ValidationResult> ;
+            <http://www.w3.org/ns/shacl#focusNode>
+                    <http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> ;
+            <http://www.w3.org/ns/shacl#resultMessage>
+                    "Value is not >= 46.1" ;
+            <http://www.w3.org/ns/shacl#resultPath>
+                    <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ;
+            <http://www.w3.org/ns/shacl#resultSeverity>
+                    <http://www.w3.org/ns/shacl#Violation> ;
+            <http://www.w3.org/ns/shacl#sourceConstraintComponent>
+                    <http://www.w3.org/ns/shacl#MinInclusiveConstraintComponent> ;
+            <http://www.w3.org/ns/shacl#sourceShape>
+                    _:b0 ;
+            <http://www.w3.org/ns/shacl#value>
+                    "43.362055748944286"^^xsd:double
+          ] ;
+  <http://www.w3.org/ns/shacl#result>
+          [ a       <http://www.w3.org/ns/shacl#ValidationResult> ;
+            <http://www.w3.org/ns/shacl#focusNode>
+                    <http://es.euskadi.eus/id/environment/equipment/station/agurain> ;
+            <http://www.w3.org/ns/shacl#resultMessage>
+                    "Value is not >= 46.1" ;
+            <http://www.w3.org/ns/shacl#resultPath>
+                    <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ;
+            <http://www.w3.org/ns/shacl#resultSeverity>
+                    <http://www.w3.org/ns/shacl#Violation> ;
+            <http://www.w3.org/ns/shacl#sourceConstraintComponent>
+                    <http://www.w3.org/ns/shacl#MinInclusiveConstraintComponent> ;
+            <http://www.w3.org/ns/shacl#sourceShape>
+                    _:b0 ;
+            <http://www.w3.org/ns/shacl#value>
+                    "42.84901250588428"^^xsd:double
+          ] ;
+  <http://www.w3.org/ns/shacl#result>
+          [ a       <http://www.w3.org/ns/shacl#ValidationResult> ;
+            <http://www.w3.org/ns/shacl#focusNode>
+                    <http://es.euskadi.eus/id/environment/equipment/station/abanto> ;
+            <http://www.w3.org/ns/shacl#resultMessage>
+                    "Value is not >= 46.1" ;
+            <http://www.w3.org/ns/shacl#resultPath>
+                    <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ;
+            <http://www.w3.org/ns/shacl#resultSeverity>
+                    <http://www.w3.org/ns/shacl#Violation> ;
+            <http://www.w3.org/ns/shacl#sourceConstraintComponent>
+                    <http://www.w3.org/ns/shacl#MinInclusiveConstraintComponent> ;
+            <http://www.w3.org/ns/shacl#sourceShape>
+                    _:b0 ;
+            <http://www.w3.org/ns/shacl#value>
+                    "43.32047399433485"^^xsd:double
+          ] ;
+  <http://www.w3.org/ns/shacl#result>
+          [ a       <http://www.w3.org/ns/shacl#ValidationResult> ;
+            <http://www.w3.org/ns/shacl#focusNode>
+                    <http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> ;
+            <http://www.w3.org/ns/shacl#resultMessage>
+                    "Value is not >= 46.1" ;
+            <http://www.w3.org/ns/shacl#resultPath>
+                    <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ;
+            <http://www.w3.org/ns/shacl#resultSeverity>
+                    <http://www.w3.org/ns/shacl#Violation> ;
+            <http://www.w3.org/ns/shacl#sourceConstraintComponent>
+                    <http://www.w3.org/ns/shacl#MinInclusiveConstraintComponent> ;
+            <http://www.w3.org/ns/shacl#sourceShape>
+                    _:b0 ;
+            <http://www.w3.org/ns/shacl#value>
+                    "42.85604797053618"^^xsd:double
+          ] ;
+  <http://www.w3.org/ns/shacl#result>
+          [ a       <http://www.w3.org/ns/shacl#ValidationResult> ;
+            <http://www.w3.org/ns/shacl#focusNode>
+                    <http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> ;
+            <http://www.w3.org/ns/shacl#resultMessage>
+                    "Value is not >= 46.1" ;
+            <http://www.w3.org/ns/shacl#resultPath>
+                    <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ;
+            <http://www.w3.org/ns/shacl#resultSeverity>
+                    <http://www.w3.org/ns/shacl#Violation> ;
+            <http://www.w3.org/ns/shacl#sourceConstraintComponent>
+                    <http://www.w3.org/ns/shacl#MinInclusiveConstraintComponent> ;
+            <http://www.w3.org/ns/shacl#sourceShape>
+                    _:b0 ;
+            <http://www.w3.org/ns/shacl#value>
+                    "43.247567997964374"^^xsd:double
+          ]
+] .

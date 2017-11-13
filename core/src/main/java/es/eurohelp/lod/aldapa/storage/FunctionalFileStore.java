@@ -8,8 +8,7 @@ import java.util.Set;
 
 import org.apache.http.client.ClientProtocolException;
 
-import es.eurohelp.lod.aldapa.core.exception.FileStoreAlreadySetException;
-import es.eurohelp.lod.aldapa.core.exception.FileStoreFileAlreadyStoredException;
+import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 
 /**
  * 
@@ -19,20 +18,23 @@ import es.eurohelp.lod.aldapa.core.exception.FileStoreFileAlreadyStoredException
  *
  */
 public interface FunctionalFileStore {
-	
-	/**
-	 * 
-	 * Obtain a file through HTTP GET
-	 * 
-	 * @param fileURL the URL of the file
-	 * @param fileName the name of the file where the file should be written to
-	 * @param rewrite true if you want to rewrite an already existing file
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
-	 */
-	public void getFileHTTP (String fileURL, String fileName, boolean rewrite) throws FileStoreFileAlreadyStoredException, ClientProtocolException, IOException;
-	
-	public Set<String> getFileNames ();
 
-	public String getDirectoryPath ();
+    /**
+     * 
+     * Obtain a file through HTTP GET
+     * 
+     * @param fileURL
+     *            the URL of the file
+     * @param fileName
+     *            the name of the file where the file should be written to
+     * @param rewrite
+     *            true if you want to rewrite an already existing file
+     * @throws IOException
+     * @throws ClientProtocolException
+     */
+    public void getFileHTTP(String fileURL, String fileName, boolean rewrite) throws AldapaException;
+
+    public Set<String> getFileNames();
+
+    public String getDirectoryPath();
 }
