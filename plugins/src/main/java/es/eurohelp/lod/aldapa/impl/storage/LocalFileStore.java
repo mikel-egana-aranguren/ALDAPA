@@ -87,4 +87,13 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
             fileOutputStream.write(inByte);
         }
     }
+
+    /* (non-Javadoc)
+     * @see es.eurohelp.lod.aldapa.storage.FunctionalFileStore#getFileURL(java.lang.String)
+     */
+    @Override
+    public String getFileURL(String fileName) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
