@@ -21,7 +21,6 @@ import org.eclipse.rdf4j.rio.Rio;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogExistsException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
-import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetExistsException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;

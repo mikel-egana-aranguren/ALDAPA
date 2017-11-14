@@ -53,8 +53,8 @@ PREFIX property: <http://opendata.eurohelp.es/property/>
         sd:namedGraph graph:dataset-graph001 .
         # TODO: add void stuff like URI regexp etc, see https://labur.eus/QmaoJ
         
-    # Provenance for the generation of a dataset from a CSV
-	dataset:DATASET_NAME prov:wasGeneratedBy [
+    # Provenance for the generation of a graph from a CSV
+	graph:dataset-graph001 prov:wasGeneratedBy [
     	a prov:Activity ;
     	# This URI should change
     	prov:wasAssociatedWith  <http://lod.eurohelp.es/aldapa/es.eurohelp.lod.aldapa.impl.transformation.HardCodedCSV2RDFEJIECalidadAire> ;
