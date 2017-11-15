@@ -37,7 +37,6 @@ public class FileUtilsTest {
     private static final String PROJECTURI = "http://lod.eurohelp.es/aldapa/project/donosti-movilidad";
     private static final String CATALOGURI = "http://lod.eurohelp.es/aldapa/catalog/donosti-parkings";
     
-    private static final Logger LOGGER = LogManager.getLogger(FileUtilsTest.class);
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -45,18 +44,14 @@ public class FileUtilsTest {
         Path currentRelativePath = Paths.get("");
         currentPath = currentRelativePath.toAbsolutePath().toString();
         CREATEDDIR = fileUtils.createDir(currentPath + File.separator + CREATEDDIRNAME);
-        LOGGER.info("Created dir: " + currentPath + File.separator + CREATEDDIRNAME);
     }
 
     @AfterClass
     public static void tearDownBeforeClass() throws Exception {
         File dir = new File(currentPath + File.separator + CREATEDDIRNAME);
         dir.delete();
-        LOGGER.info("Deleted dir: " + currentPath + File.separator + CREATEDDIRNAME);
-        
         File createdFile = new File(currentPath + File.separator + CREATEFILENAME);
         createdFile.delete();
-        LOGGER.info("Deleted file: " + currentPath + File.separator + CREATEFILENAME);
     }
 
     @Test
@@ -109,11 +104,9 @@ public class FileUtilsTest {
     public final void testFileMultipleTokenResolver() throws IOException {
         EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
         tokenReplacementMap.put(MethodFileToken.PROJECTURI, PROJECTURI);
-        tokenReplacementMap.put(MethodFileToken.CATALOGURI, CATALOGURI);
-               
+        tokenReplacementMap.put(MethodFileToken.CATALOGURI, CATALOGURI);            
         assertTrue((fileUtils.fileMultipleTokenResolver(MethodRDFFile.ADDCATALOG.getValue(), tokenReplacementMap))
                 .contains("<http://lod.eurohelp.es/aldapa/catalog/donosti-parkings> rdf:type dcat:Catalog ;"));
-        
         assertTrue((fileUtils.fileMultipleTokenResolver(MethodRDFFile.ADDCATALOG.getValue(), tokenReplacementMap))
                 .contains("schema:isPartOf <http://lod.eurohelp.es/aldapa/project/donosti-movilidad>"));
     }
