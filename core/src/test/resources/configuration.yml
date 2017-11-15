@@ -1,0 +1,6 @@
+ALDAPA_CONFIG_FILE: configuration/aldapa-default-configuration.yml
+TRIPLE_STORE_CONFIG_FILE: configuration/test-triple-store-default-configuration.yml
+FILE_STORE_CONFIG_FILE: configuration/test-file-store-default-configuration.yml
+TRANSFORMER_CONFIG_FILE: configuration/test-ejie-calidad-aire-transformer-configuration.yml
+VALIDATOR_CONFIG_FILE: configuration/test-ejie-calidad-aire-validator-configuration.yml
+

@@ -109,7 +109,7 @@ public class FileUtils {
      * Resolves the occurrences of a single token of a file with the replacement URIs
      * 
      * @param file_name
-     *            the name of the file
+     *            the name of the file (resource)
      * @param token
      *            the token to search for in the file
      * @param replacement
@@ -130,7 +130,7 @@ public class FileUtils {
      * Resolves the occurrences of multiple tokens of a file with the replacement URIs
      * 
      * @param file_name
-     *            the name of the file with the actual content
+     *            the name of the file with the actual content (resource)
      * @param token_replacement_map
      *            a map containing pairs of tokens and replacements
      * @return the new file content, resolved
