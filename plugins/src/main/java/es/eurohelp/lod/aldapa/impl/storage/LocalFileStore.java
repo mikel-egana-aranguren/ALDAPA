@@ -32,8 +32,8 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
 
     private static final Logger LOGGER = LogManager.getLogger(LocalFileStore.class);
 
-    public LocalFileStore(String directoryPath) {
-        super(directoryPath);
+    public LocalFileStore(String directoryPath,String metadataFile) throws IOException {
+        super(directoryPath,metadataFile);
         fileNames = new TreeSet<String>();
     }
 
@@ -49,9 +49,8 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
                 throw new FileStoreFileAlreadyStoredException();
             } else {
                 
-                
                 // Update metadata file!!!
-                
+                FileOutputStream metadatafos = super.getMetadataFileOutputStream();
                 
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(fileURL);
@@ -66,6 +65,7 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
                     fileOutputStream = FileUtils.getInstance().getFileOutputStream(super.getDirectoryPath() + fileName);
                     inputStreamToFileOutputstream(inputStream, fileOutputStream);
                 } finally {
+                    
                     fileNames.add(fileName);
                     if (inputStream != null) {
                         inputStream.close();
