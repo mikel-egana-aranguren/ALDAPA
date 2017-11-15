@@ -148,4 +148,16 @@ public class FileUtils {
         }
         return resolvedString;
     }
+
+    /**
+     * 
+     * Creates a directory. If the directory already exists, returns false
+     * 
+     * @param dirPath
+     * @return
+     */
+    public boolean createDir(String dirPath) {
+        File directory = new File(dirPath);
+        return directory.mkdir();
+    }
 }

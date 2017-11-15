@@ -48,6 +48,11 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
             if (!rewrite && fileNames.contains(fileName)) {
                 throw new FileStoreFileAlreadyStoredException();
             } else {
+                
+                
+                // Update metadata file!!!
+                
+                
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(fileURL);
                 HttpResponse response = httpClient.execute(httpGet);
