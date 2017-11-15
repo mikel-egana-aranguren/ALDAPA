@@ -26,10 +26,8 @@ public class FileUtilsTest {
     private static FileUtils fileUtils = null;
     private static String currentPath = null;
     private static final String CREATEDDIRNAME = "createdDir";
-//    private static final String CREATEDDIRNAME2 = "createdDir2";
+
     private static Boolean CREATEDDIR = false;
-    
-    private static final Logger LOGGER = LogManager.getLogger(FileUtilsTest.class);
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -43,7 +41,6 @@ public class FileUtilsTest {
     public static void tearDownBeforeClass() throws Exception {
         File currentFile = new File(currentPath +  File.separator + CREATEDDIRNAME);
         currentFile.delete();
-        
     }
     
     @Test
@@ -60,5 +57,4 @@ public class FileUtilsTest {
     public final void testCreateDirExisting(){
         assertFalse(fileUtils.createDir(CREATEDDIRNAME));
     }
-
 }
