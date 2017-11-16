@@ -29,7 +29,7 @@ public abstract class FileStore {
         return this.directoryPath;
     }
     
-    public FileOutputStream getMetadataFileOutputStream () throws IOException {
-        return fileUtils.getFileOutputStream(directoryPath + File.separator + metadaFile);
+    public String getMetadataFilePath () {
+        return this.directoryPath +  File.separator + this.metadaFile;
     }
 }

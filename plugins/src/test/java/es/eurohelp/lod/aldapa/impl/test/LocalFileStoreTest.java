@@ -26,7 +26,7 @@ import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
  */
 public class LocalFileStoreTest {
 
-    private static final String OUTPUTPATH = "data/getFileHTTPOutput/";
+    private static final String OUTPUTPATH = "data/LocalFileStore/";
     private static final String METADATAFILE = "FileStoreMetadata.yml";
     private static final String EJIEFILE = "estaciones.csv";
     private static final String EJIEFILEURL = "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv";
@@ -43,7 +43,7 @@ public class LocalFileStoreTest {
     public static void setUpBeforeClass() throws IOException {
         simpleFilestore = new LocalFileStore(OUTPUTPATH,METADATAFILE);
     }
-
+    
     @Test
     public final void testGetFileHTTPEJIECalidadDelAire() {
         try {

@@ -2,7 +2,9 @@ package es.eurohelp.lod.aldapa.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -61,7 +63,8 @@ public class FileUtils {
     }
 
     /**
-     * Returns a FileOutputStream stream for writing to a File. If the file does not exist, it creates it.
+     * Returns a FileOutputStream stream for writing to a File. If the file does not exist, it creates it. Client should
+     * close the FileOutputStream
      * 
      * @param fileName
      *            the file name including path
@@ -89,6 +92,19 @@ public class FileUtils {
     public String fileToString(String fileName) throws IOException {
         InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(fileName);
         return IOUtils.toString(in, StandardCharsets.UTF_8);
+    }
+
+    public FileInputStream getFileInputStream(String filePath) throws IOException {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        return new FileInputStream(file);
+    }
+    
+    public boolean fileExists (String filePath) {
+        File file = new File(filePath);
+        return file.exists();
     }
 
     /**
@@ -159,5 +175,11 @@ public class FileUtils {
     public boolean createDir(String dirPath) {
         File directory = new File(dirPath);
         return directory.mkdir();
+    }
+
+    public void appendContentToFile(String filename, String lineToAdd) throws IOException {
+        try (FileWriter fw = new FileWriter(filename, true)) {
+            fw.write(lineToAdd + "\n");
+        }
     }
 }

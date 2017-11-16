@@ -6,6 +6,8 @@ package es.eurohelp.lod.aldapa.impl.storage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -21,6 +23,7 @@ import es.eurohelp.lod.aldapa.storage.FileStore;
 import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.util.FileUtils;
+import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
  * @author megana
@@ -28,30 +31,36 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class LocalFileStore extends FileStore implements FunctionalFileStore {
 
-    private Set<String> fileNames = null;
+    HashMap<String, String> filesUrls = null;
+    private FileUtils fileUtils = null;
 
     private static final Logger LOGGER = LogManager.getLogger(LocalFileStore.class);
 
-    public LocalFileStore(String directoryPath,String metadataFile) throws IOException {
-        super(directoryPath,metadataFile);
-        fileNames = new TreeSet<String>();
+    public LocalFileStore(String directoryPath, String metadataFile) throws IOException {
+        super(directoryPath, metadataFile);
+        fileUtils = FileUtils.getInstance();
+        if (fileUtils.fileExists(metadataFile)) {
+            InputStream in = fileUtils.getFileInputStream(super.getMetadataFilePath());
+            filesUrls = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(in);
+        } else {
+            fileUtils.getFileInputStream(super.getMetadataFilePath()); 
+            filesUrls = new HashMap<String, String>() ;
+        }
     }
 
     @Override
     public Set<String> getFileNames() {
-        return fileNames;
+        return filesUrls.keySet();
     }
 
     @Override
     public void getFileHTTP(String fileURL, String fileName, boolean rewrite) throws AldapaException {
         try {
-            if (!rewrite && fileNames.contains(fileName)) {
+            if (!rewrite && filesUrls.keySet().contains(fileName)) {
                 throw new FileStoreFileAlreadyStoredException();
             } else {
-                
-                // Update metadata file!!!
-                FileOutputStream metadatafos = super.getMetadataFileOutputStream();
-                
+                String metadataFilePath = super.getMetadataFilePath();
+
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(fileURL);
                 HttpResponse response = httpClient.execute(httpGet);
@@ -62,11 +71,11 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
 
                 try {
                     inputStream = response.getEntity().getContent();
-                    fileOutputStream = FileUtils.getInstance().getFileOutputStream(super.getDirectoryPath() + fileName);
+                    fileOutputStream = fileUtils.getFileOutputStream(super.getDirectoryPath() + fileName);
                     inputStreamToFileOutputstream(inputStream, fileOutputStream);
                 } finally {
-                    
-                    fileNames.add(fileName);
+                    filesUrls.put(fileName, fileURL);
+                    fileUtils.appendContentToFile(metadataFilePath, fileName + ": " + fileURL);
                     if (inputStream != null) {
                         inputStream.close();
                     }
@@ -93,12 +102,12 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see es.eurohelp.lod.aldapa.storage.FunctionalFileStore#getFileURL(java.lang.String)
      */
     @Override
     public String getFileURL(String fileName) {
-        // TODO Auto-generated method stub
-        return null;
+        return filesUrls.get(fileName);
     }
 }

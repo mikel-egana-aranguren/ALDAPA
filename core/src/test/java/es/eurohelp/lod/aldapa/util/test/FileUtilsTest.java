@@ -10,10 +10,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.util.EnumMap;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -36,6 +35,7 @@ public class FileUtilsTest {
     private static final String CREATEFILENAME = "createdFile";
     private static final String PROJECTURI = "http://lod.eurohelp.es/aldapa/project/donosti-movilidad";
     private static final String CATALOGURI = "http://lod.eurohelp.es/aldapa/catalog/donosti-parkings";
+    private static final String METADATAFILENAMEURL= "LocalFileStoreMetadataFileNameURL.yml";
     
 
     @BeforeClass
@@ -109,5 +109,18 @@ public class FileUtilsTest {
                 .contains("<http://lod.eurohelp.es/aldapa/catalog/donosti-parkings> rdf:type dcat:Catalog ;"));
         assertTrue((fileUtils.fileMultipleTokenResolver(MethodRDFFile.ADDCATALOG.getValue(), tokenReplacementMap))
                 .contains("schema:isPartOf <http://lod.eurohelp.es/aldapa/project/donosti-movilidad>"));
+    }
+    
+    @Test
+    public final void testAppend() throws IOException {
+        Instant instant = Instant.now();
+        String timeStamp = String.valueOf(instant.getEpochSecond());
+        
+        fileUtils.appendContentToFile(
+                currentPath + 
+                File.separator + "src" + 
+                File.separator + "test" +
+                File.separator + "resources" + 
+                File.separator + METADATAFILENAMEURL, "calidadAire." + timeStamp + "csv : http://euskadi.eus/calidadAire.csv"); 
     }
 }
