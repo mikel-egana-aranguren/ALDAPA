@@ -42,9 +42,16 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
         if (fileUtils.fileExists(metadataFile)) {
             InputStream in = fileUtils.getFileInputStream(super.getMetadataFilePath());
             filesUrls = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(in);
+            LOGGER.info("Metadata file exists: ");
+            Iterator<String> keysIterator = filesUrls.keySet().iterator();
+            while(keysIterator.hasNext()){
+                String key = keysIterator.next();
+                LOGGER.info(key + " - " + filesUrls.get(key));
+            }
         } else {
             fileUtils.getFileInputStream(super.getMetadataFilePath()); 
-            filesUrls = new HashMap<String, String>() ;
+            filesUrls = new HashMap<String, String>();
+            LOGGER.info("Metadata file does not exist ");
         }
     }
 
@@ -76,6 +83,7 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
                 } finally {
                     filesUrls.put(fileName, fileURL);
                     fileUtils.appendContentToFile(metadataFilePath, fileName + ": " + fileURL);
+                    LOGGER.info("Metadata file updated: " + fileName + " - " + fileURL);
                     if (inputStream != null) {
                         inputStream.close();
                     }
@@ -108,6 +116,7 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
      */
     @Override
     public String getFileURL(String fileName) {
+        LOGGER.info("Retrieve ulr for file " + fileName);
         return filesUrls.get(fileName);
     }
 }

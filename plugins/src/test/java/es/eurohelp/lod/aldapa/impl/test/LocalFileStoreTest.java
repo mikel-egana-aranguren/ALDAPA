@@ -12,6 +12,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,6 +29,8 @@ public class LocalFileStoreTest {
 
     private static final String OUTPUTPATH = "data/LocalFileStore/";
     private static final String METADATAFILE = "FileStoreMetadata.yml";
+    private static final String GIFILE = "gaztelu.csv";
+    private static final String GIURL = "http://www.gipuzkoairekia.eus/eu/datu-irekien-katalogoa/-/openDataSearcher/download/downloadResource/2a126f2e-f8df-4656-b368-b98b0db75277";
     private static final String EJIEFILE = "estaciones.csv";
     private static final String EJIEFILEURL = "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv";
     private static final String CACERESCARRILESBICIFILE = "carrilesBici.csv";
@@ -73,11 +76,31 @@ public class LocalFileStoreTest {
             thrown.expect(FileStoreFileAlreadyStoredException.class);
             thrown.expectMessage("The file has already been saved");
             simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, false);
+            
+            
+            
+            
+            
+            simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, true);
+            
+            simpleFilestore.getFileURL(CACERESCARRILESBICIFILE);
+            
+            
+            
+            
+            
         } catch (IOException e) {
             LOGGER.error(e);
         }
     }
-
+    
+    @After
+    @Test
+    public final void testAlreadyExistingStore () throws IOException{
+        LocalFileStore newSimpleFilestore = new LocalFileStore(OUTPUTPATH,METADATAFILE);
+        newSimpleFilestore.getFileHTTP(GIURL, GIFILE, false);
+    }
+   
     private boolean tokenExists(Iterable<CSVRecord> records, String recordValue, String columnName) {
         boolean tokenFound = false;
         for (CSVRecord record : records) {
