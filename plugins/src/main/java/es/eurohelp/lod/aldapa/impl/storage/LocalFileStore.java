@@ -48,11 +48,13 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
                 String key = keysIterator.next();
                 LOGGER.info(key + " - " + filesUrls.get(key));
             }
+            in.close();
         } else {
-            fileUtils.getFileInputStream(super.getMetadataFilePath());
+            fileUtils.createFile(super.getMetadataFilePath());
             filesUrls = new HashMap<String, String>();
             LOGGER.info("Metadata file does not exist ");
         }
+        LOGGER.info("CONSTRUCTOR " + filesUrls.keySet());
     }
 
     @Override
@@ -81,6 +83,7 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
                     fileOutputStream = fileUtils.getFileOutputStream(super.getDirectoryPath() + fileName);
                     inputStreamToFileOutputstream(inputStream, fileOutputStream);
                 } finally {
+                    LOGGER.info(filesUrls.keySet());
                     if (!filesUrls.keySet().contains(fileName)) {
                         filesUrls.put(fileName, fileURL);
                         fileUtils.appendContentToFile(metadataFilePath, fileName + ": " + fileURL);
@@ -111,11 +114,7 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
             fileOutputStream.write(inByte);
         }
     }
-
-    /*
-     * (non-Javadoc)
-     * @see es.eurohelp.lod.aldapa.storage.FunctionalFileStore#getFileURL(java.lang.String)
-     */
+    
     @Override
     public String getFileURL(String fileName) {
         LOGGER.info("Retrieve ulr for file " + fileName);

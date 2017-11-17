@@ -51,16 +51,16 @@ public class LocalFileStoreTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws IOException {
-        simpleFilestore = new LocalFileStore(OUTPUTPATH, METADATAFILE);
+        simpleFilestore = new LocalFileStore(OUTPUTPATH, currentPath + File.separator + "data" + File.separator + "LocalFileStore" + File.separator + METADATAFILE);
         fileUtils = FileUtils.getInstance();
         Path currentRelativePath = Paths.get("");
         currentPath = currentRelativePath.toAbsolutePath().toString();
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() {
-        fileUtils.deleteElement(currentPath + File.separator + "data" + File.separator + "LocalFileStore");
-    }
+//    @AfterClass
+//    public static void tearDownAfterClass() {
+//        fileUtils.deleteElement(currentPath + File.separator + "data" + File.separator + "LocalFileStore");
+//    }
 
     @Test
     public final void testGetFileHTTPEJIECalidadDelAire() {
@@ -70,6 +70,7 @@ public class LocalFileStoreTest {
             CSVFormat csvFormat = CSVFormat.EXCEL.withHeader().withDelimiter(';');
             Iterable<CSVRecord> records = csvFormat.parse(in);
             boolean tokenFound = tokenExists(records, "AGURAIN", "Name");
+            in.close();
             assertTrue(tokenFound);
             thrown.expect(FileStoreFileAlreadyStoredException.class);
             thrown.expectMessage("The file has already been saved");
@@ -87,6 +88,7 @@ public class LocalFileStoreTest {
             CSVFormat csvFormat = CSVFormat.EXCEL.withHeader().withDelimiter(',');
             Iterable<CSVRecord> records = csvFormat.parse(in);
             boolean tokenFound = tokenExists(records, "Carril bici 0", "rdfs_label");
+            in.close();
             assertTrue(tokenFound);
             thrown.expect(FileStoreFileAlreadyStoredException.class);
             thrown.expectMessage("The file has already been saved");
@@ -100,11 +102,11 @@ public class LocalFileStoreTest {
     @Test
     public final void testGetFileHTTPCarrilesBiciCaceresRewrite() {
         try {
-            simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, false);
             FileReader in = new FileReader(OUTPUTPATH + CACERESCARRILESBICIFILE);
             CSVFormat csvFormat = CSVFormat.EXCEL.withHeader().withDelimiter(',');
             Iterable<CSVRecord> records = csvFormat.parse(in);
             boolean tokenFound = tokenExists(records, "Carril bici 0", "rdfs_label");
+            in.close();
             assertTrue(tokenFound);
             simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, true);
             assertTrue((simpleFilestore.getFileURL(CACERESCARRILESBICIFILE))
@@ -114,7 +116,6 @@ public class LocalFileStoreTest {
         }
     }
 
-    @After
     @Test
     public final void testAlreadyExistingStore() throws IOException {
         LocalFileStore newSimpleFilestore = new LocalFileStore(OUTPUTPATH, METADATAFILE);
