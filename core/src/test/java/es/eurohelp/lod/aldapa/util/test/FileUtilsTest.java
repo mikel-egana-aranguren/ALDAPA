@@ -48,10 +48,9 @@ public class FileUtilsTest {
 
     @AfterClass
     public static void tearDownBeforeClass() throws Exception {
-        File dir = new File(currentPath + File.separator + CREATEDDIRNAME);
-        dir.delete();
-        File createdFile = new File(currentPath + File.separator + CREATEFILENAME);
-        createdFile.delete();
+        fileUtils.createFile(currentPath + File.separator + CREATEDDIRNAME + File.separator + CREATEFILENAME);
+        fileUtils.deleteElement(currentPath + File.separator + CREATEDDIRNAME);
+        fileUtils.deleteElement(currentPath + File.separator + CREATEFILENAME);
     }
 
     @Test
@@ -115,12 +114,14 @@ public class FileUtilsTest {
     public final void testAppend() throws IOException {
         Instant instant = Instant.now();
         String timeStamp = String.valueOf(instant.getEpochSecond());
-        
-        fileUtils.appendContentToFile(
-                currentPath + 
+        String elementPath = currentPath + 
                 File.separator + "src" + 
                 File.separator + "test" +
                 File.separator + "resources" + 
-                File.separator + METADATAFILENAMEURL, "calidadAire." + timeStamp + "csv : http://euskadi.eus/calidadAire.csv"); 
+                File.separator + METADATAFILENAMEURL;
+        
+        fileUtils.appendContentToFile(
+                elementPath, "calidadAire." + timeStamp + "csv : http://euskadi.eus/calidadAire.csv"); 
+        
     }
 }

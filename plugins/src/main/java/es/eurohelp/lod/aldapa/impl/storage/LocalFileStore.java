@@ -44,12 +44,12 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
             filesUrls = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(in);
             LOGGER.info("Metadata file exists: ");
             Iterator<String> keysIterator = filesUrls.keySet().iterator();
-            while(keysIterator.hasNext()){
+            while (keysIterator.hasNext()) {
                 String key = keysIterator.next();
                 LOGGER.info(key + " - " + filesUrls.get(key));
             }
         } else {
-            fileUtils.getFileInputStream(super.getMetadataFilePath()); 
+            fileUtils.getFileInputStream(super.getMetadataFilePath());
             filesUrls = new HashMap<String, String>();
             LOGGER.info("Metadata file does not exist ");
         }
@@ -63,7 +63,7 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
     @Override
     public void getFileHTTP(String fileURL, String fileName, boolean rewrite) throws AldapaException {
         try {
-            if (!rewrite && filesUrls.keySet().contains(fileName)) {
+            if ((rewrite == false) && (filesUrls.keySet().contains(fileName))) {
                 throw new FileStoreFileAlreadyStoredException();
             } else {
                 String metadataFilePath = super.getMetadataFilePath();
@@ -81,9 +81,11 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
                     fileOutputStream = fileUtils.getFileOutputStream(super.getDirectoryPath() + fileName);
                     inputStreamToFileOutputstream(inputStream, fileOutputStream);
                 } finally {
-                    filesUrls.put(fileName, fileURL);
-                    fileUtils.appendContentToFile(metadataFilePath, fileName + ": " + fileURL);
-                    LOGGER.info("Metadata file updated: " + fileName + " - " + fileURL);
+                    if (!filesUrls.keySet().contains(fileName)) {
+                        filesUrls.put(fileName, fileURL);
+                        fileUtils.appendContentToFile(metadataFilePath, fileName + ": " + fileURL);
+                        LOGGER.info("Metadata file updated: " + fileName + " - " + fileURL);
+                    }
                     if (inputStream != null) {
                         inputStream.close();
                     }

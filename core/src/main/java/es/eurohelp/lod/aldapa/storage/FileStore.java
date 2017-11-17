@@ -4,7 +4,6 @@
 package es.eurohelp.lod.aldapa.storage;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import es.eurohelp.lod.aldapa.util.FileUtils;

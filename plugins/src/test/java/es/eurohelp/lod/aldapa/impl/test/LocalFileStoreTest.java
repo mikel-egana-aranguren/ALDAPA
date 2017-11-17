@@ -5,14 +5,18 @@ package es.eurohelp.lod.aldapa.impl.test;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,6 +24,7 @@ import org.junit.rules.ExpectedException;
 
 import es.eurohelp.lod.aldapa.impl.storage.LocalFileStore;
 import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
+import es.eurohelp.lod.aldapa.util.FileUtils;
 
 /**
  * @author megana
@@ -27,6 +32,8 @@ import es.eurohelp.lod.aldapa.storage.FileStoreFileAlreadyStoredException;
  */
 public class LocalFileStoreTest {
 
+    private static FileUtils fileUtils = null;
+    private static String currentPath = null;
     private static final String OUTPUTPATH = "data/LocalFileStore/";
     private static final String METADATAFILE = "FileStoreMetadata.yml";
     private static final String GIFILE = "gaztelu.csv";
@@ -44,9 +51,17 @@ public class LocalFileStoreTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws IOException {
-        simpleFilestore = new LocalFileStore(OUTPUTPATH,METADATAFILE);
+        simpleFilestore = new LocalFileStore(OUTPUTPATH, METADATAFILE);
+        fileUtils = FileUtils.getInstance();
+        Path currentRelativePath = Paths.get("");
+        currentPath = currentRelativePath.toAbsolutePath().toString();
     }
-    
+
+    @AfterClass
+    public static void tearDownAfterClass() {
+        fileUtils.deleteElement(currentPath + File.separator + "data" + File.separator + "LocalFileStore");
+    }
+
     @Test
     public final void testGetFileHTTPEJIECalidadDelAire() {
         try {
@@ -76,31 +91,36 @@ public class LocalFileStoreTest {
             thrown.expect(FileStoreFileAlreadyStoredException.class);
             thrown.expectMessage("The file has already been saved");
             simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, false);
-            
-            
-            
-            
-            
-            simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, true);
-            
-            simpleFilestore.getFileURL(CACERESCARRILESBICIFILE);
-            
-            
-            
-            
-            
         } catch (IOException e) {
             LOGGER.error(e);
         }
     }
-    
+
     @After
     @Test
-    public final void testAlreadyExistingStore () throws IOException{
-        LocalFileStore newSimpleFilestore = new LocalFileStore(OUTPUTPATH,METADATAFILE);
+    public final void testGetFileHTTPCarrilesBiciCaceresRewrite() {
+        try {
+            simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, false);
+            FileReader in = new FileReader(OUTPUTPATH + CACERESCARRILESBICIFILE);
+            CSVFormat csvFormat = CSVFormat.EXCEL.withHeader().withDelimiter(',');
+            Iterable<CSVRecord> records = csvFormat.parse(in);
+            boolean tokenFound = tokenExists(records, "Carril bici 0", "rdfs_label");
+            assertTrue(tokenFound);
+            simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, true);
+            assertTrue((simpleFilestore.getFileURL(CACERESCARRILESBICIFILE))
+                    .equals("http://opendata.caceres.es/GetData/GetData?dataset=om:CarrilBici&format=csv"));
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
+    }
+
+    @After
+    @Test
+    public final void testAlreadyExistingStore() throws IOException {
+        LocalFileStore newSimpleFilestore = new LocalFileStore(OUTPUTPATH, METADATAFILE);
         newSimpleFilestore.getFileHTTP(GIURL, GIFILE, false);
     }
-   
+
     private boolean tokenExists(Iterable<CSVRecord> records, String recordValue, String columnName) {
         boolean tokenFound = false;
         for (CSVRecord record : records) {
