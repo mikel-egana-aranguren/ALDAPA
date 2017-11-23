@@ -114,6 +114,7 @@ public class FileUtils {
     }
 
     public void createFile(String filePath) throws IOException {
+        LOGGER.info("Create file: " + filePath);
         File file = new File(filePath);
         if (!file.exists()) {
             file.createNewFile();

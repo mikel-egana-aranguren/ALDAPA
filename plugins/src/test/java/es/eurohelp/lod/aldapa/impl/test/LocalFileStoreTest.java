@@ -51,10 +51,10 @@ public class LocalFileStoreTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws IOException {
-        simpleFilestore = new LocalFileStore(OUTPUTPATH, currentPath + File.separator + "data" + File.separator + "LocalFileStore" + File.separator + METADATAFILE);
-        fileUtils = FileUtils.getInstance();
         Path currentRelativePath = Paths.get("");
         currentPath = currentRelativePath.toAbsolutePath().toString();
+        simpleFilestore = new LocalFileStore(OUTPUTPATH, currentPath + File.separator + "data" + File.separator + "LocalFileStore" + File.separator + METADATAFILE);
+        fileUtils = FileUtils.getInstance();
     }
 
 //    @AfterClass

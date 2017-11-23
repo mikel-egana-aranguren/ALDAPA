@@ -124,4 +124,9 @@ public class FileUtilsTest {
                 elementPath, "calidadAire." + timeStamp + "csv : http://euskadi.eus/calidadAire.csv"); 
         
     }
+    
+    @Test
+    public final void testCreateFile () throws IOException {
+        fileUtils.createFile(currentPath + File.separator + CREATEDDIRNAME + File.separator + CREATEFILENAME);
+    }
 }
