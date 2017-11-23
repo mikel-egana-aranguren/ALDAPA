@@ -29,6 +29,6 @@ public abstract class FileStore {
     }
     
     public String getMetadataFilePath () {
-        return this.directoryPath +  File.separator + this.metadaFile;
+        return this.metadaFile;
     }
 }
