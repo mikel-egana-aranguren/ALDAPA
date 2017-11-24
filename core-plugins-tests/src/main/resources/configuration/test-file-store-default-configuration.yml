@@ -6,9 +6,10 @@ author: Mikel Egana Aranguren
 # Plugin with actual code for accesing the Triple Store
 pluginClassName: es.eurohelp.lod.aldapa.impl.storage.LocalFileStore
 
-storeDirectory: data/
+# Directory to store CSV files
+storeDirectory: data/LocalFileStore/
+
+# Metadta to keep track of the names and URLs of the stored files
+metadataFile: data/LocalFileStore/Metadata.yml
     
     
-#- url: http://localhost:9999
-#- user: admin 
-#- password: admin
