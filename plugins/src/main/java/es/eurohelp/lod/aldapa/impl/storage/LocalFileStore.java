@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -66,7 +65,7 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
     @Override
     public void getFileHTTP(String fileURL, String fileName, boolean rewrite) throws AldapaException {
         try {
-            if ((rewrite == false) && (filesUrls.keySet().contains(fileName))) {
+            if ((!rewrite) && (filesUrls.keySet().contains(fileName))) {
                 throw new FileStoreFileAlreadyStoredException();
             } else {
                 String metadataFilePath = super.getMetadataFilePath();

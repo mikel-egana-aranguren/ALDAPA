@@ -16,9 +16,6 @@ import es.eurohelp.lod.aldapa.storage.RDF4JConnection;
  */
 public class SPARQLProtocolStore extends RDF4JConnection {
 
-    public SPARQLProtocolStore() {
-    }
-
     /**
      * 
      * The URL of a SPARQL 1.1 endpoint

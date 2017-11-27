@@ -39,7 +39,7 @@ public class FileUtilsTest {
     
 
     @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+    public static void setUpBeforeClass() {
         fileUtils = FileUtils.getInstance();
         Path currentRelativePath = Paths.get("");
         currentPath = currentRelativePath.toAbsolutePath().toString();
@@ -47,7 +47,7 @@ public class FileUtilsTest {
     }
 
     @AfterClass
-    public static void tearDownBeforeClass() throws Exception {
+    public static void tearDownBeforeClass() throws IOException {
         fileUtils.createFile(currentPath + File.separator + CREATEDDIRNAME + File.separator + CREATEFILENAME);
         fileUtils.deleteElement(currentPath + File.separator + CREATEDDIRNAME);
         fileUtils.deleteElement(currentPath + File.separator + CREATEFILENAME);

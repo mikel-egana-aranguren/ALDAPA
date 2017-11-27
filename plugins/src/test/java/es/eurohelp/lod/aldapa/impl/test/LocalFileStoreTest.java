@@ -6,7 +6,6 @@ package es.eurohelp.lod.aldapa.impl.test;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -46,6 +45,7 @@ public class LocalFileStoreTest {
     private static LocalFileStore simpleFilestore;
 
     private static final Logger LOGGER = LogManager.getLogger(LocalFileStoreTest.class);
+    private static final String ALREADYSAVEDMESSAGE = "The file has already been saved";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -73,7 +73,7 @@ public class LocalFileStoreTest {
         in.close();
         assertTrue(tokenFound);
         thrown.expect(FileStoreFileAlreadyStoredException.class);
-        thrown.expectMessage("The file has already been saved");
+        thrown.expectMessage(ALREADYSAVEDMESSAGE);
         simpleFilestore.getFileHTTP(EJIEFILEURL, EJIEFILE, false);
     }
 
@@ -88,7 +88,7 @@ public class LocalFileStoreTest {
             in.close();
             assertTrue(tokenFound);
             thrown.expect(FileStoreFileAlreadyStoredException.class);
-            thrown.expectMessage("The file has already been saved");
+            thrown.expectMessage(ALREADYSAVEDMESSAGE);
             simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, false);
         } catch (IOException e) {
             LOGGER.error(e);
@@ -121,7 +121,7 @@ public class LocalFileStoreTest {
     @Test
     public final void testAlreadyExistingStoreRewriteFalse() throws IOException {
         thrown.expect(FileStoreFileAlreadyStoredException.class);
-        thrown.expectMessage("The file has already been saved");
+        thrown.expectMessage(ALREADYSAVEDMESSAGE);
         simpleFilestore.getFileHTTP(GIURL, GIFILE, true);
         simpleFilestore.getFileHTTP(GIURL, GIFILE, false);
     }

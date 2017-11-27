@@ -136,7 +136,7 @@ public class FileUtils {
         FileInputStream fis = new FileInputStream(new File(fileName));
         int b = fis.read();
         fis.close();
-        return (b == -1);
+        return b == -1;
     }
 
     /**
@@ -222,8 +222,7 @@ public class FileUtils {
             }
             element.delete();
             LOGGER.info("Deleting element: " + element);
-        }
-        else {
+        }else {
             throw new IOException("Element " + element + " does not exist");
         }
     }

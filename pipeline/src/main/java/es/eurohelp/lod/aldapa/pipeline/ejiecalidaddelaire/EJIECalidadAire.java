@@ -16,6 +16,10 @@ import es.eurohelp.lod.aldapa.core.Manager;
  *
  */
 public class EJIECalidadAire {
+    
+    private EJIECalidadAire() {
+        throw new IllegalAccessError("Utility class");
+      }
 
     public static void main(String[] args) {
         // Load the configuration from file configuration.yml
