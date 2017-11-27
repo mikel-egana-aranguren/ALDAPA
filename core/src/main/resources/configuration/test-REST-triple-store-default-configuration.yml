@@ -1,0 +1,11 @@
+# THIS CONFIGURATION
+name: RESTBlazegraphStore
+comment: connects to a REST API of a Blazegraph instance 
+author: Mikel Egana Aranguren
+
+# Plugin with actual code for accesing the Triple Store
+pluginClassName: es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore
+endpointURL: http://172.16.0.81:58080/blazegraph
+dbName: ALDAPARuntime
+    
+    

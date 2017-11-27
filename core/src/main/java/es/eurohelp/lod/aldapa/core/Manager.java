@@ -4,9 +4,12 @@
 package es.eurohelp.lod.aldapa.core;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.EnumMap;
 import java.util.Set;
 
@@ -139,12 +142,13 @@ public class Manager {
      * 
      * @param graphuri
      *            the Named Graph URI, it can be null
-     *            
+     * 
      * @param fileName
      *            the path of the file to write the graph to
      * 
-     * @param format the RDF format (org.eclipse.rdf4j.rio.RDFFormat) of the output file
-     *            
+     * @param format
+     *            the RDF format (org.eclipse.rdf4j.rio.RDFFormat) of the output file
+     * 
      * @throws AldapaException
      */
     public void flushGraph(String graphuri, String fileName, RDFFormat format) throws AldapaException {
@@ -184,11 +188,9 @@ public class Manager {
             LOGGER.info("Catalog uri: " + catalogUri);
 
             // Catalog should not exist
-            EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
-            tokenReplacementMap.put(MethodFileToken.PROJECTURI, projectUri);
-            tokenReplacementMap.put(MethodFileToken.CATALOGURI, catalogUri);
+            String resolvedCatalogExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.CATALOGEXISTS.getValue(),
+                    MethodFileToken.CATALOGURI.getValue(), catalogUri);
 
-            String resolvedCatalogExistsSparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.CATALOGEXISTS.getValue(), tokenReplacementMap);
             Boolean catalogExists = store.execSPARQLBooleanQuery(resolvedCatalogExistsSparql);
             if (!projectExists) {
                 LOGGER.info("Project does not exist: " + projectUri);
@@ -198,6 +200,9 @@ public class Manager {
                 throw new CatalogExistsException();
             } else {
                 // Add catalog
+                EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
+                tokenReplacementMap.put(MethodFileToken.PROJECTURI, projectUri);
+                tokenReplacementMap.put(MethodFileToken.CATALOGURI, catalogUri);
                 String resolvedAddCatalogTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.ADDCATALOG.getValue(), tokenReplacementMap);
 
                 // Add catalog to store
@@ -241,11 +246,9 @@ public class Manager {
             LOGGER.info("Dataset uri: " + datasetUri);
 
             // Dataset should not exist
-            EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
-            tokenReplacementMap.put(MethodFileToken.CATALOGURI, catalogUri);
-            tokenReplacementMap.put(MethodFileToken.DATASETURI, datasetUri);
 
-            String resolvedDatasetExistsSparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.DATASETEXISTS.getValue(), tokenReplacementMap);
+            String resolvedDatasetExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.DATASETEXISTS.getValue(),
+                    MethodFileToken.DATASETURI.getValue(), datasetUri);
 
             Boolean datasetExists = store.execSPARQLBooleanQuery(resolvedDatasetExistsSparql);
             if (!catalogExists) {
@@ -256,6 +259,10 @@ public class Manager {
                 throw new DatasetExistsException();
             } else {
                 // Add dataset
+                EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
+                tokenReplacementMap.put(MethodFileToken.CATALOGURI, catalogUri);
+                tokenReplacementMap.put(MethodFileToken.DATASETURI, datasetUri);
+
                 String resolvedAddDatasetTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.ADDDATASET.getValue(), tokenReplacementMap);
 
                 // Add dataset to store
@@ -308,8 +315,9 @@ public class Manager {
             tokenReplacementMap.put(MethodFileToken.GRAPHURI, graphUri);
 
             String resolvedGraphExistsSparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.NAMEDGRAPHEXISTS.getValue(), tokenReplacementMap);
-
+            
             Boolean graphExists = store.execSPARQLBooleanQuery(resolvedGraphExistsSparql);
+            
             if (!datasetExists) {
                 LOGGER.info("Dataset does not exist: " + datasetUri);
                 throw new DatasetNotFoundException(datasetUri);
@@ -318,7 +326,10 @@ public class Manager {
                 throw new NamedGraphExistsException();
             } else {
                 // Add Named Graph
-                String resolvedAddGraphTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.ADDNAMEDGRAPH.getValue(), tokenReplacementMap);
+                EnumMap<MethodFileToken, String> tokenReplacementMap1 = new EnumMap<>(MethodFileToken.class);
+                tokenReplacementMap1.put(MethodFileToken.DATASETURI, datasetUri);
+                tokenReplacementMap1.put(MethodFileToken.GRAPHURI, graphUri);
+                String resolvedAddGraphTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.ADDNAMEDGRAPH.getValue(), tokenReplacementMap1);
 
                 // Add Named Graph to store
                 InputStream modelInputStream = new ByteArrayInputStream(resolvedAddGraphTTL.getBytes());
@@ -349,7 +360,9 @@ public class Manager {
      */
 
     public void addDataToNamedGraph(String namedGraphURI, String csvFile) throws RDFStoreException {
-        transformer.setDataSource(fileStore.getDirectoryPath() + csvFile);
+        Path currentRelativePath = Paths.get("");
+        String currentPath = currentRelativePath.toAbsolutePath().toString();
+        transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
         LOGGER.info("CSV path: " + csvFile);
         transformer.setModel(new TreeModel());
         store.saveModel(transformer.getTransformedModel(namedGraphURI));
@@ -360,7 +373,8 @@ public class Manager {
      * 
      * Adds the data of a RDF4J Model to the store
      * 
-     * @param model org.eclipse.rdf4j.model.Model
+     * @param model
+     *            org.eclipse.rdf4j.model.Model
      * @throws RDFStoreException
      */
     public void addData(Model model) throws RDFStoreException {
@@ -504,7 +518,9 @@ public class Manager {
     /**
      * 
      * Get all the catalogs pertaining to a given project
-     * @param projectUri the URI of the project
+     * 
+     * @param projectUri
+     *            the URI of the project
      * @return a set containing all the catalog URIs as Strings
      * @throws AldapaException
      */
@@ -572,7 +588,6 @@ public class Manager {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
-
     }
 
     /**
@@ -636,5 +651,13 @@ public class Manager {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
+    }
+    
+    public void getFileHTTP (String url, String fileName) {
+        fileStore.getFileHTTP(url, fileName, false);
+    }
+    
+    public void updateFileHTTP (String url, String fileName) {
+        fileStore.getFileHTTP(url, fileName, true);
     }
 }
