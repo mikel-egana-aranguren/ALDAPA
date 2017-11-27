@@ -51,7 +51,7 @@ public class ConfigurationManagerTest {
         try {
             FunctionalFileStore fileStore = testManager.getFileStore();
             fileStore.getFileHTTP(EJIEFILEURL, EJIEFILE, true);
-            assertEquals("data/", fileStore.getDirectoryPath());
+            assertEquals("data/LocalFileStore/", fileStore.getDirectoryPath());
             assertTrue(Files.exists(Paths.get(fileStore.getDirectoryPath() + EJIEFILE)));
         } catch (AldapaException e) {
             LOGGER.error(e);

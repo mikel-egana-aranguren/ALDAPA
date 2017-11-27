@@ -132,7 +132,7 @@ public class FileUtils {
      * @return true if file is empty
      * @throws IOException
      */
-    public boolean isFileEmpty(String fileName) throws IOException {
+    public boolean fileIsEmpty(String fileName) throws IOException {
         FileInputStream fis = new FileInputStream(new File(fileName));
         int b = fis.read();
         fis.close();

@@ -3,6 +3,7 @@
  */
 package es.eurohelp.lod.aldapa.impl.storage;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +40,7 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
     public LocalFileStore(String directoryPath, String metadataFile) throws IOException {
         super(directoryPath, metadataFile);
         fileUtils = FileUtils.getInstance();
-        if (fileUtils.fileExists(metadataFile)) {
+        if (fileUtils.fileExists(metadataFile) && !fileUtils.fileIsEmpty(metadataFile)) {
             InputStream in = fileUtils.getFileInputStream(super.getMetadataFilePath());
             filesUrls = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(in);
             LOGGER.info("Metadata file exists: ");
@@ -80,7 +81,7 @@ public class LocalFileStore extends FileStore implements FunctionalFileStore {
 
                 try {
                     inputStream = response.getEntity().getContent();
-                    fileOutputStream = fileUtils.getFileOutputStream(super.getDirectoryPath() + fileName);
+                    fileOutputStream = fileUtils.getFileOutputStream(super.getDirectoryPath() + File.separator +fileName);
                     inputStreamToFileOutputstream(inputStream, fileOutputStream);
                 } finally {
                     LOGGER.info("Metadata: " + filesUrls.keySet());

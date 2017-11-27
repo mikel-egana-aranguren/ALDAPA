@@ -108,7 +108,7 @@ public class ManagerTest {
             // There should be no data in the files
             manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testReset-namedgraph-data-deleted.trig", RDFFormat.TRIG);
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "testReset-namedgraph-deleted.ttl", RDFFormat.TURTLE);
-            assertTrue(fileutils.isFileEmpty(TESTDATAOUTPUTDIR + "testReset-namedgraph-deleted.ttl"));
+            assertTrue(fileutils.fileIsEmpty(TESTDATAOUTPUTDIR + "testReset-namedgraph-deleted.ttl"));
         }
     }
 

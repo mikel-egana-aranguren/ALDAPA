@@ -88,7 +88,7 @@ public class FileUtilsTest {
 
     @Test
     public final void testIsFileEmpty() throws IOException {
-        assertFalse(fileUtils.isFileEmpty(
+        assertFalse(fileUtils.fileIsEmpty(
                 currentPath + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + RESOURCENAME));
     }
 

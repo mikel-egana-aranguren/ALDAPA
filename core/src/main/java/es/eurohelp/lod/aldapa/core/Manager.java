@@ -4,9 +4,12 @@
 package es.eurohelp.lod.aldapa.core;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.EnumMap;
 import java.util.Set;
 
@@ -305,10 +308,16 @@ public class Manager {
             LOGGER.info("Graph uri: " + graphUri);
 
             // Graph should not exist
-            String resolvedGraphExistsSparql = fileutils.fileTokenResolver(MethodRDFFile.NAMEDGRAPHEXISTS.getValue(),
-                    MethodFileToken.GRAPHURI.getValue(), graphUri);
 
+            EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
+
+            tokenReplacementMap.put(MethodFileToken.DATASETURI, datasetUri);
+            tokenReplacementMap.put(MethodFileToken.GRAPHURI, graphUri);
+
+            String resolvedGraphExistsSparql = fileutils.fileMultipleTokenResolver(MethodRDFFile.NAMEDGRAPHEXISTS.getValue(), tokenReplacementMap);
+            
             Boolean graphExists = store.execSPARQLBooleanQuery(resolvedGraphExistsSparql);
+            
             if (!datasetExists) {
                 LOGGER.info("Dataset does not exist: " + datasetUri);
                 throw new DatasetNotFoundException(datasetUri);
@@ -317,10 +326,10 @@ public class Manager {
                 throw new NamedGraphExistsException();
             } else {
                 // Add Named Graph
-                EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
-                tokenReplacementMap.put(MethodFileToken.DATASETURI, datasetUri);
-                tokenReplacementMap.put(MethodFileToken.GRAPHURI, graphUri);
-                String resolvedAddGraphTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.ADDNAMEDGRAPH.getValue(), tokenReplacementMap);
+                EnumMap<MethodFileToken, String> tokenReplacementMap1 = new EnumMap<>(MethodFileToken.class);
+                tokenReplacementMap1.put(MethodFileToken.DATASETURI, datasetUri);
+                tokenReplacementMap1.put(MethodFileToken.GRAPHURI, graphUri);
+                String resolvedAddGraphTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.ADDNAMEDGRAPH.getValue(), tokenReplacementMap1);
 
                 // Add Named Graph to store
                 InputStream modelInputStream = new ByteArrayInputStream(resolvedAddGraphTTL.getBytes());
@@ -351,7 +360,9 @@ public class Manager {
      */
 
     public void addDataToNamedGraph(String namedGraphURI, String csvFile) throws RDFStoreException {
-        transformer.setDataSource(fileStore.getDirectoryPath() + csvFile);
+        Path currentRelativePath = Paths.get("");
+        String currentPath = currentRelativePath.toAbsolutePath().toString();
+        transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
         LOGGER.info("CSV path: " + csvFile);
         transformer.setModel(new TreeModel());
         store.saveModel(transformer.getTransformedModel(namedGraphURI));
@@ -640,5 +651,13 @@ public class Manager {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
+    }
+    
+    public void getFileHTTP (String url, String fileName) {
+        fileStore.getFileHTTP(url, fileName, false);
+    }
+    
+    public void updateFileHTTP (String url, String fileName) {
+        fileStore.getFileHTTP(url, fileName, true);
     }
 }

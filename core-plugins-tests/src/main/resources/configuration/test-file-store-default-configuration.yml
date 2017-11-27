@@ -9,7 +9,7 @@ pluginClassName: es.eurohelp.lod.aldapa.impl.storage.LocalFileStore
 # Directory to store CSV files
 storeDirectory: data/LocalFileStore/
 
-# Metadta to keep track of the names and URLs of the stored files
+# Metadata to keep track of the names and URLs of the stored files
 metadataFile: data/LocalFileStore/Metadata.yml
     
     

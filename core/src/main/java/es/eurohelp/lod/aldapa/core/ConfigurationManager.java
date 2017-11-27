@@ -189,8 +189,9 @@ public class ConfigurationManager {
 
             String fileStoreSuperClassName = fileStoreClass.getSuperclass().getName();
             if (fileStoreSuperClassName.equals(ABSTRACTFILESTORE)) {
-                Class[] cArg = new Class[1];
+                Class[] cArg = new Class[2];
                 cArg[0] = String.class;
+                cArg[1] = String.class;
                 String dir = this.getConfigPropertyValue(FILESTORECONFIGFILE, DIRTOKEN);
                 String metadata = this.getConfigPropertyValue(FILESTORECONFIGFILE, METADATATOKEN);
                 fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(dir,metadata);
