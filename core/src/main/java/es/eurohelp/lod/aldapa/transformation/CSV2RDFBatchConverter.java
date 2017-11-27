@@ -7,7 +7,4 @@ package es.eurohelp.lod.aldapa.transformation;
  * @author megana
  *
  */
-public abstract class CSV2RDFBatchConverter {
-    public CSV2RDFBatchConverter() {
-    }
-}
+public abstract class CSV2RDFBatchConverter {}

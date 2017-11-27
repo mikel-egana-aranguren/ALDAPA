@@ -106,8 +106,10 @@ public class LocalFileStoreTest {
             in.close();
             assertTrue(tokenFound);
             simpleFilestore.getFileHTTP(CACERESCARRILESBICIFILEURL, CACERESCARRILESBICIFILE, true);
-            assertTrue((simpleFilestore.getFileURL(CACERESCARRILESBICIFILE))
-                    .equals("http://opendata.caceres.es/GetData/GetData?dataset=om:CarrilBici&format=csv"));
+            assertTrue(
+                    ("http://opendata.caceres.es/GetData/GetData?dataset=om:CarrilBici&format=csv")
+                    .equals((simpleFilestore.getFileURL(CACERESCARRILESBICIFILE)))
+                    );
         } catch (IOException e) {
             LOGGER.error(e);
         }
