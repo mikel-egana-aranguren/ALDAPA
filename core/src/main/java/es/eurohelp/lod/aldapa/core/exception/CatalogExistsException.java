@@ -16,6 +16,7 @@ public class CatalogExistsException extends AldapaException {
     private static String message = "The catalog URI already exists in the RDF Store";
 
     public CatalogExistsException() {
+        super();
     }
 
     /**

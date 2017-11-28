@@ -16,6 +16,7 @@ public class ProjectNotFoundException extends AldapaException {
     private static final String MESSAGE = "The project does not exist in the RDF Store";
 
     public ProjectNotFoundException() {
+        super();
     }
 
     /**

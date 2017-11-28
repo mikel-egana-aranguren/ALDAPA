@@ -16,6 +16,10 @@ import es.eurohelp.lod.aldapa.core.Manager;
  *
  */
 public class EJIECalidadAire {
+    
+    private EJIECalidadAire() {
+        throw new IllegalAccessError("Utility class");
+      }
 
     public static void main(String[] args) {
         // Load the configuration from file configuration.yml
@@ -37,6 +41,10 @@ public class EJIECalidadAire {
         String namedGraphUri = manager.addNamedGraph("Estaciones01", datasetUri);
 
         // Add data to named graph
+        manager.updateFileHTTP(
+                "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv", 
+                "estaciones.csv");
+        
         manager.addDataToNamedGraph(namedGraphUri, "estaciones.csv");
 
         // Validate data

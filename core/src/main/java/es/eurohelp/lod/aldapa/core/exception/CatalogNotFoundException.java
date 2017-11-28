@@ -14,6 +14,7 @@ public class CatalogNotFoundException extends AldapaException {
     private static String message = "The catalog does not exist in the RDF Store";
 
     public CatalogNotFoundException() {
+        super();
     }
 
     /**
