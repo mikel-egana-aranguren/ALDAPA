@@ -158,7 +158,7 @@ public class FileUtils {
     public String fileTokenResolver(String fileName, String token, String replacement) throws IOException {
         InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(fileName);
         String unresolvedString = IOUtils.toString(in, StandardCharsets.UTF_8);
-        return unresolvedString.replaceAll(token, "<" + replacement + ">");
+        return unresolvedString.replaceAll(token, replacement);
     }
 
     /**
@@ -179,7 +179,7 @@ public class FileUtils {
         for (MethodFileToken token : tokenReplacementMap.keySet()) {
             String tokenValue = token.getValue();
             String replacementValue = tokenReplacementMap.get(token);
-            resolvedString = resolvedString.replaceAll(tokenValue, "<" + replacementValue + ">");
+            resolvedString = resolvedString.replaceAll(tokenValue, replacementValue);
         }
         return resolvedString;
     }

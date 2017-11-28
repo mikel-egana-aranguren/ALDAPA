@@ -95,15 +95,15 @@ public class FileUtilsTest {
     @Test
     public final void testFileTokenResolver() throws IOException {
         assertTrue((fileUtils.fileTokenResolver(MethodRDFFile.PROJECTEXISTS.getValue(), MethodFileToken.PROJECTURI.getValue(),
-                PROJECTURI))
+                "<" + PROJECTURI + ">"))
                         .contains("<http://lod.eurohelp.es/aldapa/project/donosti-movilidad> rdf:type foaf:Project ."));
     }
 
     @Test
     public final void testFileMultipleTokenResolver() throws IOException {
         EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
-        tokenReplacementMap.put(MethodFileToken.PROJECTURI, PROJECTURI);
-        tokenReplacementMap.put(MethodFileToken.CATALOGURI, CATALOGURI);            
+        tokenReplacementMap.put(MethodFileToken.PROJECTURI, "<" +  PROJECTURI  + ">");
+        tokenReplacementMap.put(MethodFileToken.CATALOGURI, "<" +  CATALOGURI  + ">");            
         assertTrue((fileUtils.fileMultipleTokenResolver(MethodRDFFile.ADDCATALOG.getValue(), tokenReplacementMap))
                 .contains("<http://lod.eurohelp.es/aldapa/catalog/donosti-parkings> rdf:type dcat:Catalog ;"));
         assertTrue((fileUtils.fileMultipleTokenResolver(MethodRDFFile.ADDCATALOG.getValue(), tokenReplacementMap))

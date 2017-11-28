@@ -9,7 +9,7 @@ The main motivation for ALDAPA is to help us produce RDF at [Eurohelp Consulting
 
 ## Contributions
 
-All contributions are welcome, including issues, new plugins, new pipelines and improvements of ALDAPA core itself. Please note when sending pull requests that we try to stick to [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) as much as possible. 
+All contributions are welcome, including new issues, documentation, new plugins, new pipelines and improvements of ALDAPA core itself. Please note when sending pull requests that we stick to [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html): have a look at the [open issues](https://github.com/mikel-egana-aranguren/ALDAPA/issues).
 
 ---
 [Back to index](index.md)

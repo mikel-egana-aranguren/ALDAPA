@@ -41,7 +41,7 @@ public class EJIECalidadAire {
         String namedGraphUri = manager.addNamedGraph("Estaciones01", datasetUri);
 
         // Add data to named graph
-        manager.getFileHTTP(
+        manager.updateFileHTTP(
                 "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv", 
                 "estaciones.csv");
         

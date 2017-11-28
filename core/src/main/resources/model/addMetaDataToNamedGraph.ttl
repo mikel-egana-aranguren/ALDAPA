@@ -3,7 +3,7 @@ PREFIX csvw: <http://www.w3.org/ns/csvw#>
 
 GRAPH_URI prov:wasGeneratedBy [
     	a prov:Activity ;
-    	prov:wasAssociatedWith  TRANSFORMER_PLUGIN_NAME ;
+    	prov:wasAssociatedWith TRANSFORMER_PLUGIN_NAME ;
     	prov:startedAtTime TRANSFORMER_START_DATE_TIME ;
     	prov:endedAtTime TRANSFORMER_END_DATE_TIME ;
     	prov:qualifiedUsage [ 
