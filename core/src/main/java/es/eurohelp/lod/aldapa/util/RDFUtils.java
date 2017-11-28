@@ -5,7 +5,6 @@ package es.eurohelp.lod.aldapa.util;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.HashSet;
