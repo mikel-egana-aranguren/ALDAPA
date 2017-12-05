@@ -22,6 +22,7 @@ import es.eurohelp.lod.aldapa.util.RDFUtils;
 public class OpenDataEuskadiGuiaComunicacionCargosConverterTest {
 
     private static final String CSVFILE = "data/OpenDataEuskadiGuiaComunicacion/gc_cargos_datos_completos.csv";
+    private static final String OUTPUTTURTLEFILE = "data/OpenDataEuskadiGuiaComunicacion/gc_cargos_datos_completos.ttl";
 
     @Test
     public final void test() throws IOException {
@@ -31,6 +32,6 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverterTest {
         converter.setModel(model);
         Model newModel = converter.getTransformedModel("http://euskadi.eus/graph/guia-comunicacion-cargos");
         assertNotNull(newModel);
-        RDFUtils.writeModel(newModel, CSVFILE, RDFFormat.TURTLE);
+        RDFUtils.writeModel(newModel, OUTPUTTURTLEFILE, RDFFormat.TURTLE);
     }
 }

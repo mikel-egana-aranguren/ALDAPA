@@ -69,21 +69,21 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
             }
 
             String province = record.get("Province");
-            adder.addTriple(stationUri, EXTERNALURI.DBOPROVINCE.getValue(), provinceSelector(province));
+            adder.addTriple(stationUri, EXTERNALPROPERTY.DBOPROVINCE.getValue(), provinceSelector(province));
 
             String town = record.get("Town");
-            adder.addTriple(stationUri, EXTERNALURI.SCHEMALOCATION.getValue(), townSelector(town));
+            adder.addTriple(stationUri, EXTERNALPROPERTY.SCHEMALOCATION.getValue(), townSelector(town));
 
             String address = record.get("Address");
-            adder.addDataTripleXSDString(stationUri, EXTERNALURI.SCHEMAADDRESS.getValue(), address);
+            adder.addDataTripleXSDString(stationUri, EXTERNALPROPERTY.SCHEMAADDRESS.getValue(), address);
 
             String latitude = record.get("Latitude");
-            adder.addDataTripleXSDdouble(stationUri, EXTERNALURI.LATWGS84.getValue(), Double.valueOf(latitude.replace(",", ".")));
+            adder.addDataTripleXSDdouble(stationUri, EXTERNALPROPERTY.LATWGS84.getValue(), Double.valueOf(latitude.replace(",", ".")));
 
             String longitude = record.get("Longitude");
-            adder.addDataTripleXSDdouble(stationUri, EXTERNALURI.LONGWGS84.getValue(), Double.valueOf(longitude.replace(",", ".")));
+            adder.addDataTripleXSDdouble(stationUri, EXTERNALPROPERTY.LONGWGS84.getValue(), Double.valueOf(longitude.replace(",", ".")));
 
-            adder.addRDFTYPETriple(stationUri, EXTERNALURI.SOSASENSOR.getValue());
+            adder.addRDFTYPETriple(stationUri, EXTERNALCLASS.SOSASENSOR.getValue());
         }
         return adder.getModel();
     }
