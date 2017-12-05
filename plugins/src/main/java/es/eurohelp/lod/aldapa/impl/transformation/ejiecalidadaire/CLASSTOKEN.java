@@ -7,8 +7,9 @@ package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-enum CLASSTOKEN {
-    STATION("station"),;
+public enum CLASSTOKEN {
+    STATION("station"),
+    PERSON("person");
 
     public final String classtoken;
 

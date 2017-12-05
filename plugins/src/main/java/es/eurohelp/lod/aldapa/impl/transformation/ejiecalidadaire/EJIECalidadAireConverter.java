@@ -29,10 +29,6 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
 
     private static final Logger LOGGER = LogManager.getLogger(EJIECalidadAireConverter.class);
 
-    /*
-     * (non-Javadoc)
-     * @see es.eurohelp.lod.aldapa.transformation.RDFBatchConverter#setDataSource(java.io.InputStream)
-     */
     @Override
     public void setDataSource(String inPath) throws AldapaException {
         try {
@@ -45,19 +41,11 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see es.eurohelp.lod.aldapa.transformation.RDFBatchConverter#setModel(org.eclipse.rdf4j.model.Model)
-     */
     @Override
     public void setModel(Model model) {
         this.model = model;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see es.eurohelp.lod.aldapa.transformation.RDFBatchConverter#getTransformedModel(java.lang.String)
-     */
     @Override
     public Model getTransformedModel(String namedGraphURI) {
         TripleAdder adder = new TripleAdder(model, namedGraphURI);
