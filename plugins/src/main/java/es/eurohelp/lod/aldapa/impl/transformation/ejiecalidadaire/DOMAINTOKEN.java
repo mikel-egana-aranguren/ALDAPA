@@ -10,7 +10,8 @@ package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
 public enum DOMAINTOKEN {
     EQUIPMENT("equipment"), 
     BUILDING("building"),
-    STAFF("staff");
+    STAFF("staff"),
+    PLACE("place");
 
     public final String domaintoken;
 

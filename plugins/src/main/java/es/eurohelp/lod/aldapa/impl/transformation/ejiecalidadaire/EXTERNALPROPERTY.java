@@ -14,8 +14,13 @@ public enum EXTERNALPROPERTY {
     TIMEMINUTES("http://www.w3.org/2006/time#minutes"),  
     SCHEMALOCATION("http://schema.org/location"), 
     SCHEMAADDRESS("http://schema.org/address"),
-    VCARDFORMATEDNAME("http://www.w3.org/2006/vcard/ns#formattedName"),
-    VCARDADDRESS("http://www.w3.org/2006/vcard/ns#address");
+    VCARDFN("http://www.w3.org/2006/vcard/ns#fn"),
+    VCARDHASADDRESS("http://www.w3.org/2006/vcard/ns#hasAddress"),
+    VCARDSTREETADDRESS("http://www.w3.org/2006/vcard/ns#street-address"),
+    VCARDPOSTALCODE("http://www.w3.org/2006/vcard/ns#postal-code"),
+    VCARDLOCALITY("http://www.w3.org/2006/vcard/ns#locality"),
+    VCARDCOUNTRYNAME("http://www.w3.org/2006/vcard/ns#country-name"),
+;
 
     public final String externaluri;
 

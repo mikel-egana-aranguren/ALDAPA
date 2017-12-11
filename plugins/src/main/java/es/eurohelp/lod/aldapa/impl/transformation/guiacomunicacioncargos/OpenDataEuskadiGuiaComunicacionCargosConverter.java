@@ -62,6 +62,12 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
             String nombre = record.get("Nombre");
             String apellidos = record.get("Apellidos");
 
+            // [LOD] el dataset original usaba una versión antigua de la ontologia vcard, yo me estoy basando en
+            // https://www.w3.org/TR/vcard-rdf/
+
+            // [LOD] JENA tiene una función para importar ontologías y que las propiedades etc esten disponibles como
+            // clases Java
+
             // [LOD] El CSV mezcla dos idiomas (Lanpostua - Cargo), hay que hacer dos grafos y relacionar las URIs
             // mediante owl:sameAs
 
@@ -102,20 +108,48 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
                 // partir de ellas?
                 adder.addRDFTYPETriple(cargoUri, EXTERNALCLASS.SCHEMAPERSON.getValue());
                 adder.addRDFTYPETriple(cargoUri, EXTERNALCLASS.VCARDINDIVIDUAL.getValue());
-                adder.addDataTripleXSDString(cargoUri, EXTERNALPROPERTY.VCARDFORMATEDNAME.getValue(), nombre + apellidos);
+                adder.addDataTripleXSDString(cargoUri, EXTERNALPROPERTY.VCARDFN.getValue(), nombre + apellidos);
 
                 // [LOD] habria que hacer URIs de referencia para todas estas direcciones
                 String calle = record.get("Calle");
                 String codigopostal = record.get("Código Postal");
                 String poblacion = record.get("Población");
-                LOGGER.info(URIUtils.urify(null, null,calle + codigopostal + poblacion));
-                
-                
-                
+                String addressName = URIUtils.urify(null, null, calle + codigopostal + poblacion);
+
                 // [LOD] nada de nodos anónimos en Linked Data para direccion: no tienen por que seguir la NTI ya que
                 // representan una "reificacion" de una relación n-aria, no un recurso
-            }
 
+                // [LOD] Hay direcciones vacias!
+                if (!addressName.isEmpty()) {
+                    String addressURI = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.PLACE.getValue() + "/"
+                            + CLASSTOKEN.ADDRESS.getValue() + "/" + addressName;
+                    LOGGER.info(addressURI);
+                    adder.addTriple(cargoUri, EXTERNALPROPERTY.VCARDHASADDRESS.getValue(), addressURI);
+                    adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDSTREETADDRESS.getValue(), calle);
+                    // [LOD] Algunos cargos no tienen codigo postal
+                    if (!codigopostal.isEmpty()) {
+                        adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDPOSTALCODE.getValue(), codigopostal);
+                    }
+                    // [LOD] en la ontologia VCARD la poblacion es un String, pero igual se puede usar una URI de
+                    // referencia para los lugares?
+                    // [LOD] Algunos cargos no tienen poblacion
+                    if (!poblacion.isEmpty()) {
+                        adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDLOCALITY.getValue(), poblacion);
+                    }
+                    adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDCOUNTRYNAME.getValue(), "España");
+                    
+//                    vcard:telephone <tel:946012231>;
+//                    vcard:tel <tel:946013311> ;
+//                    vcard:email <mailto:esperanza.inurrieta@ehu.es> ;
+//                    vcard:url <http://www.biblioteka.ehu.es> ;
+//                    vcard:title "Directora" ;
+//                    vcard:org "Biblioteca Universitaria. Universidad del País Vasco" ;.
+//                    <tel:946012231> a vcard:Tel, 
+//                    vcard:Pref;rdf:value "946012231" ;.<tel:946013311> a vcard:Fax;rdf:value "946013311" ;.<mailto:esperanza.inurrieta@ehu.es>a vcard:Email .
+                    
+                    
+                }
+            }
         }
 
         // Devolver los dos grafos???
