@@ -20,6 +20,10 @@ public enum EXTERNALPROPERTY {
     VCARDPOSTALCODE("http://www.w3.org/2006/vcard/ns#postal-code"),
     VCARDLOCALITY("http://www.w3.org/2006/vcard/ns#locality"),
     VCARDCOUNTRYNAME("http://www.w3.org/2006/vcard/ns#country-name"),
+    VCARDTEL("http://www.w3.org/2006/vcard/ns#tel"),
+    VCARDEMAIL("http://www.w3.org/2006/vcard/ns#email"),
+    VCARDROLE("http://www.w3.org/2006/vcard/ns#role"),
+    VCARDURL("http://www.w3.org/2006/vcard/ns#url"),
 ;
 
     public final String externaluri;

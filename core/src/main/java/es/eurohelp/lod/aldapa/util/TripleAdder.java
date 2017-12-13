@@ -205,6 +205,11 @@ public class TripleAdder {
         model.add(vf.createIRI(subject), vf.createIRI(prop), vf.createIRI(object), vf.createIRI(ctxt));
     }
 
+    
+    public void addDataTripleLang(String subject, String prop, String value, String lang){
+        model.add(vf.createIRI(subject), vf.createIRI(prop), vf.createLiteral(value,lang), vf.createIRI(ctxt));
+    }
+    
     /**
      * 
      * Retrieve the modified Model

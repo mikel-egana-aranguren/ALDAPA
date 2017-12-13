@@ -6,11 +6,14 @@ package es.eurohelp.lod.aldapa.impl.transformation.guiacomunicacioncargos;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.jena.riot.system.IRIResolver;
+import org.apache.jena.vocabulary.VCARD;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
@@ -66,10 +69,10 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
             // https://www.w3.org/TR/vcard-rdf/
 
             // [LOD] JENA tiene una función para importar ontologías y que las propiedades etc esten disponibles como
-            // clases Java
+            // clases Java, en vez de crearlas a mano, como hago yo
 
-            // [LOD] El CSV mezcla dos idiomas (Lanpostua - Cargo), hay que hacer dos grafos y relacionar las URIs
-            // mediante owl:sameAs
+            // [LOD] Los CSVs en diferentes idiomas son identicos, ya que ambos incluyen dos columnas LanpostuaCargo
+            // Dos grafos?
 
             // [LOD] URI oficial de cada cargo. Esta URI se debería obtener de las instancias de las clases de OWL de la
             // ontología de URIs de referencia
@@ -79,9 +82,7 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
 
             String cargoUri = null;
             if (apellidos.isEmpty()) {
-                // [LOD] En el Excel de cargos hay entidades! (Departamento Foral de Cultura, Oficina de Revisión del
-                // PGOU, Director,Universitario Vasco Navarro, Asociación Cultural Shareak Kultur Elkartea, Bidera
-                // Publizitatea, Sin nombramiento, ... )
+                // [LOD] Hay lineas que no tienen nombre, y entonces cuyando accedemos a nombre aparece el cargo
                 if (!nombre.equals("Departamento Foral de Cultura") && !nombre.equals("Oficina de Revisión del PGOU") && !nombre.equals("Director")
                         && !nombre.equals("Universitario Vasco Navarro") && !nombre.equals("Asociación Cultural Shareak Kultur Elkartea")
                         && !nombre.equals("Bidera Publizitatea") && !nombre.equals("Sin nombramiento") && !nombre.equals(".")
@@ -103,7 +104,6 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
             }
 
             if (cargoUri != null) {
-
                 // [LOD] es necesario un mecanismo como el de JENA para importar ontologias OWL y crear clases Java a
                 // partir de ellas?
                 adder.addRDFTYPETriple(cargoUri, EXTERNALCLASS.SCHEMAPERSON.getValue());
@@ -123,7 +123,6 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
                 if (!addressName.isEmpty()) {
                     String addressURI = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.PLACE.getValue() + "/"
                             + CLASSTOKEN.ADDRESS.getValue() + "/" + addressName;
-                    LOGGER.info(addressURI);
                     adder.addTriple(cargoUri, EXTERNALPROPERTY.VCARDHASADDRESS.getValue(), addressURI);
                     adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDSTREETADDRESS.getValue(), calle);
                     // [LOD] Algunos cargos no tienen codigo postal
@@ -137,23 +136,48 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
                         adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDLOCALITY.getValue(), poblacion);
                     }
                     adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDCOUNTRYNAME.getValue(), "España");
-                    
-//                    vcard:telephone <tel:946012231>;
-//                    vcard:tel <tel:946013311> ;
-//                    vcard:email <mailto:esperanza.inurrieta@ehu.es> ;
-//                    vcard:url <http://www.biblioteka.ehu.es> ;
-//                    vcard:title "Directora" ;
-//                    vcard:org "Biblioteca Universitaria. Universidad del País Vasco" ;.
-//                    <tel:946012231> a vcard:Tel, 
-//                    vcard:Pref;rdf:value "946012231" ;.<tel:946013311> a vcard:Fax;rdf:value "946013311" ;.<mailto:esperanza.inurrieta@ehu.es>a vcard:Email .
-                    
-                    
                 }
+                String telefono = record.get("Teléfono");
+                if (!telefono.isEmpty()) {
+                    adder.addDataTripleXSDString(cargoUri, EXTERNALPROPERTY.VCARDTEL.getValue(), telefono);
+                }
+
+                // [LOD] Para cargo se podria usar hasRole en vez de role y hacer una estructura mas compleja, incluso
+                // con URIs de referencia para cargos, pero en este momento no merece mi esfuerzo
+                
+                
+                String cargo = record.get("Cargo");
+                if(!cargo.isEmpty()){
+                    adder.addDataTripleLang(cargoUri, EXTERNALPROPERTY.VCARDROLE.getValue(), cargo, "es");
+                }
+               
+                String lanpostua = record.get("Lanpostua");
+                if(!lanpostua.isEmpty()){
+                    adder.addDataTripleLang(cargoUri, EXTERNALPROPERTY.VCARDROLE.getValue(), lanpostua, "eu");
+                }
+                
+                
+                // [LOD] con las webs hay todo tipo de errores
+                String web = record.get("Web");
+                if(!web.isEmpty()){
+                    IRIResolver.validateIRI(web);
+
+                        try {
+                            URIUtils.validateURI(web);
+                            LOGGER.info(web);
+                            adder.addTriple(cargoUri, EXTERNALPROPERTY.VCARDURL.getValue(), web);
+                        } catch (URISyntaxException e) {
+                            LOGGER.info("Invalid URI: " + web);
+                        }
+
+
+                }
+                
+                
+                // Otros rdfs:comment
+
             }
         }
-
-        // Devolver los dos grafos???
-
         return adder.getModel();
     }
 }
