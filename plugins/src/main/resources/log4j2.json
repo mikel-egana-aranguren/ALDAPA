@@ -18,7 +18,7 @@
             	"Append": "false",
             	"fileName":"data/OpenDataEuskadiGuiaComunicacion/log",
             	"PatternLayout": {
-               		"pattern":"%m%n"
+               		"pattern":"%C{1.} %m%n"
             	}
         	}
         },

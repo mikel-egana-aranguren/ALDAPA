@@ -12,7 +12,8 @@ import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.junit.Test;
 
-import es.eurohelp.lod.aldapa.impl.transformation.guiacomunicacioncargos.OpenDataEuskadiGuiaComunicacionCargosConverter;
+import es.eurohelp.lod.aldapa.impl.transformation.guiacomunicacion.OpenDataEuskadiGuiaComunicacionCargosConverter;
+import es.eurohelp.lod.aldapa.impl.transformation.guiacomunicacion.OpenDataEuskadiGuiaComunicacionEntidadesConverter;
 import es.eurohelp.lod.aldapa.util.RDFUtils;
 
 /**
@@ -22,22 +23,34 @@ import es.eurohelp.lod.aldapa.util.RDFUtils;
 public class OpenDataEuskadiGuiaComunicacionCargosConverterTest {
 
     private static final String CSVFILEES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_cargos_datos_completos.csv";
-    private static final String OUTPUTTURTLEFILEES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_cargos_datos_completos.ttl";
+    private static final String OUTPUTTURTLEFILEES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_cargos_datos_completos.nquads";
     private static final String CSVFILEEU = "data/OpenDataEuskadiGuiaComunicacion/EU/gc_cargos_datos_completos.csv";
-    private static final String OUTPUTTURTLEFILEEU = "data/OpenDataEuskadiGuiaComunicacion/EU/gc_cargos_datos_completos.ttl";
+    private static final String OUTPUTTURTLEFILEEU = "data/OpenDataEuskadiGuiaComunicacion/EU/gc_cargos_datos_completos.nquads";
+    
+    private static final String CSVFILEENTIDADESES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_entidades_datos_completos.csv";
+    private static final String OUTPUTTURTLEFILEENTIDADESES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_entidades_datos_completos.nquads";
 
     @Test
     public final void test() throws IOException {
         
-        // ES
-        OpenDataEuskadiGuiaComunicacionCargosConverter converter = new OpenDataEuskadiGuiaComunicacionCargosConverter();
-        Model model = new TreeModel();
-        converter.setDataSource(CSVFILEES);
-        converter.setModel(model);
-        Model newModel = converter.getTransformedModel("http://euskadi.eus/graph/guia-comunicacion-cargos");
-        assertNotNull(newModel);
-        RDFUtils.writeModel(newModel, OUTPUTTURTLEFILEES, RDFFormat.NQUADS);
+        // Cargos ES
+        OpenDataEuskadiGuiaComunicacionCargosConverter cargosConverter = new OpenDataEuskadiGuiaComunicacionCargosConverter();
+        Model cargosModel = new TreeModel();
+        cargosConverter.setDataSource(CSVFILEES);
+        cargosConverter.setModel(cargosModel);
+        Model newCargosModel = cargosConverter.getTransformedModel("http://euskadi.eus/graph/guia-comunicacion-cargos");
+        assertNotNull(newCargosModel);
+        RDFUtils.writeModel(newCargosModel, OUTPUTTURTLEFILEES, RDFFormat.NQUADS);
         
-        // EU
+        // Cargos EU ??? 
+        
+        // Entidades ES
+        OpenDataEuskadiGuiaComunicacionEntidadesConverter entidadesConverter = new OpenDataEuskadiGuiaComunicacionEntidadesConverter();
+        Model entidadesModel = new TreeModel();
+        entidadesConverter.setDataSource(CSVFILEENTIDADESES);
+        entidadesConverter.setModel(entidadesModel);
+        Model newEntidadesModel = entidadesConverter.getTransformedModel("http://euskadi.eus/graph/guia-comunicacion-entidades");
+        assertNotNull(newEntidadesModel);
+        RDFUtils.writeModel(newEntidadesModel, OUTPUTTURTLEFILEENTIDADESES, RDFFormat.NQUADS);
     }
 }

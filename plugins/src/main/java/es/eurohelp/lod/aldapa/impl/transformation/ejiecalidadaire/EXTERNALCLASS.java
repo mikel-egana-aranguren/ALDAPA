@@ -9,8 +9,10 @@ package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
  */
 public enum EXTERNALCLASS { 
     SCHEMAPERSON("http://schema.org/Person"),
+    SCHEMAORGANIZATION("http://schema.org/Organization"),
     SOSASENSOR("http://www.w3.org/ns/sosa/Sensor"), 
-    VCARDINDIVIDUAL("http://www.w3.org/1999/02/22-rdf-syntax-ns#Individual");
+    VCARDINDIVIDUAL("http://www.w3.org/2006/vcard/ns#Individual"),
+    VCARDORGANIZATION("http://www.w3.org/2006/vcard/ns#Organization");
 
     public final String externaluri;
 

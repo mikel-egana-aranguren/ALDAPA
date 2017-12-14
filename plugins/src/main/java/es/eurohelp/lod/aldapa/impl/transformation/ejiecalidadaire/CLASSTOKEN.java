@@ -10,7 +10,8 @@ package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
 public enum CLASSTOKEN {
     STATION("station"),
     PERSON("person"),
-    ADDRESS("address");
+    ADDRESS("address"), 
+    ORGANIZATION("organization");
 
     public final String classtoken;
 

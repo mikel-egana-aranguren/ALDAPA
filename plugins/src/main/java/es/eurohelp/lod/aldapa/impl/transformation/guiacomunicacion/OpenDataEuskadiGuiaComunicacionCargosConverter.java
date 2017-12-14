@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.eurohelp.lod.aldapa.impl.transformation.guiacomunicacioncargos;
+package es.eurohelp.lod.aldapa.impl.transformation.guiacomunicacion;
 
 import java.io.File;
 import java.io.IOException;
@@ -110,7 +110,7 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
                 } else {
                     // [LOD] Datos mal, y además euskera mal
                     if (!apellidos.equals("Gipuzkoako Erizaintza Kolegio Oficiala")) {
-                        cargoUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.STAFF.getValue() + "/"
+                        cargoUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.ENTITY.getValue() + "/"
                                 + CLASSTOKEN.PERSON.getValue() + "/" + URIUtils.urify(null, null, nombre + "-" + apellidos);
                     }
                     else{
