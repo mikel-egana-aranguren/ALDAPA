@@ -1883,12 +1883,14 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/fundacion-cursos-de-verano-de-la-universidad-del-pais-vasco-en-san-sebastian
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/festival-internacional-de-folklore-de-portugalete-y-del-pais-vasco
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/lanbide-donostia-san-sebastian-intxaurrondo
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 31 Invalid IRI: donostia-intxaurrondo@lanbide.eus
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 32 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/instituto-vasco-etxepare
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-ingenieros-industriales-de-bizkaia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ilustre-colegio-oficial-de-veterinarios-de-bizkaia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-agentes-de-la-propiedad-inmobiliaria-de-alava-coapi
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/gazteberri
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 37 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 38 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 39 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/asle-donostia-san-sebastian
@@ -1920,14 +1922,22 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 65 inconsistent 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/cope-bilbao
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 67 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-asesor-de-relaciones-con-las-colectividades-vascas
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 68 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 68 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 69 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ilustre-colegio-oficial-de-graduados-sociales-de-alava
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/viceconsejeria-de-salud
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 72 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-superior-de-cooperativas-de-euskadi
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-de-ordenacion-del-territorio-del-pais-vasco
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 74 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 74 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-para-el-estudio-y-racionalizacion-de-la-red-de-transporte-sanitario-de-urgencia
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 75 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 75 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-de-seguridad-publica-de-euskadi
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 76 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 76 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/uned-vitoria-gasteiz
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/academia-vasca-de-policia-y-emergencias
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/museo-de-ciencias-naturales-de-alava
@@ -1948,12 +1958,16 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 93 inconsistent 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/antena-3-television
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 95 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/baiona
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 96 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 97 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/sociedad-coral-de-bilbao
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 99 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/krea-expresion-contemporanea
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-de-seguimiento-para-la-implantacion-del-c-m-b-d
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 101 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 101 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-para-la-promocion-integral-y-participacion-social-del-pueblo-gitano
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 102 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 103 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/debagoieneko-mankomunitatea-garapen-ekonomikorako-agentzia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 105 inconsistent line
@@ -1987,11 +2001,15 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 132 inconsistent
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 133 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/bilbao-exhibition-centre
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-arquitectos-vasco-navarro-bizkaia
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 135 Invalid IRI: www.coavnbiz.org
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-arquitectos-vasco-navarro-navarra
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 136 Invalid IRI: www.coavna.com
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 137 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 138 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 139 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-de-ciencia-tecnologia-e-innovacion
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 140 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 140 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 141 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/diocesis-de-donostia-san-sebastian-obispado
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 143 inconsistent line
@@ -2016,6 +2034,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 161 inconsistent
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 162 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 163 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-de-cooperacion-de-la-reserva-de-la-biosfera-de-urdaibai
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 164 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 164 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ik4-tekniker
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 166 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ceit-ik4-sede-ibaeta
@@ -2090,6 +2110,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/el-correo-el-correo-espanol-el-pueblo-vasco
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-medicos-de-bizkaia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/dato-economico-edicion-bizkaia
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 238 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/subdelegacion-del-gobierno-en-bizkaia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/trupp-publicidad-s-a
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-farmaceuticos-de-bizkaia
@@ -2120,6 +2141,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 265 inconsistent
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/delegacion-territorial-de-industria-y-energia-de-bizkaia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/asociacion-bilbaina-de-amigos-de-la-opera-abao
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/20-minutos
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 268 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/bilbao-periodico-municipal
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/estrategia-empresarial
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 271 inconsistent line
@@ -2179,6 +2201,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-disenadores-de-interior-de-gipuzkoa
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 326 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/behargintza-sestao
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 327 Invalid IRI: www.behargintzasestao.net
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 328 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/euskadiko-kirol-portua-s-a
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-aparejadores-y-arquitectos-tecnicos-de-gipuzkoa
@@ -2305,6 +2328,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 451 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/fundacion-asmoz
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/pamplona
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 453 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/fomento-de-san-sebastian-s-a
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/iraultzen-revista-sindical
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/juntas-generales-de-gipuzkoa
@@ -2486,7 +2510,11 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 632 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 633 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-interdepartamental-de-accion-exterior
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 634 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 634 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-consultiva-de-emakunde-instituto-vasco-de-la-mujer
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 635 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 635 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/eoi-vitoria-escuela-oficial-de-idiomas-de-vitoria-gasteiz
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 637 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 638 inconsistent line
@@ -2507,6 +2535,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 652 inconsistent
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 653 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/instituto-vasco-de-competitividad-orkestra-campus-san-sebastian
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-rector-de-la-agencia-vasca-de-cooperacion-al-desarrollo
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 655 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 655 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 656 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 657 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/instituto-de-estudios-de-ocio-universidad-de-deusto
@@ -2515,13 +2545,25 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 660 inconsistent
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 661 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 662 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comite-cientifico-asesor
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 663 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 663 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 664 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-consultivo-del-plan-de-paz-y-convivencia
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 665 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 665 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-interdepartamental-para-la-igualdad-de-mujeres-y-hombres
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 666 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 666 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 667 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-interinstitucional-para-la-igualdad-de-mujeres-y-hombres
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 668 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 668 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-asesora-de-publicidad-no-sexista-begira
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 669 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 669 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-de-seguimiento-del-acuerdo-interinstitucional-para-la-mejora-en-la-atencion-a-mujeres-victimas-de-maltrato-domestico-y-agresiones-sexuales
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 670 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 670 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 671 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 672 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 673 inconsistent line
@@ -2551,6 +2593,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/centro-vasco-venezolano-de-carabobo
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 698 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/viceconsejeria-de-regimen-juridico
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 699 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 700 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 701 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 702 inconsistent line
@@ -2619,6 +2662,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 764 inconsistent
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ive-instituto-vasco-de-estadistica-eustat
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/parque-tecnologico-de-alava
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-de-seguridad-vial-de-euskadi
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 767 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 767 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/osatek
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/kontsumobide-instituto-vasco-de-consumo-sede-central
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/kontsumobide-servicio-territorial-de-gipuzkoa
@@ -2644,6 +2689,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-vasco-de-economistas-seccion-alava
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/autoridad-vasca-de-la-competencia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-asesor-de-politica-territorial
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 792 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 792 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 793 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 794 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/campus-de-alava
@@ -2742,11 +2789,14 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 887 inconsistent
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 888 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 889 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-de-participacion-de-las-victimas-del-terrorismo
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 890 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 891 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 892 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 893 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-interinstitucional-de-accion-exterior
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 894 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-interinstitucional-de-cooperacion-para-el-desarrollo
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 895 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 896 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 897 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 898 inconsistent line
@@ -2768,9 +2818,13 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 913 inconsistent
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/lanbide-barakaldo-beurko
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 915 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/observatorio-vasco-de-servicios-sociales
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 916 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 916 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 917 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 918 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-vasca-asesora-para-asuntos-taurinos
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 919 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 919 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/oficina-de-bilbao
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/instituto-vasco-de-cualificaciones-y-formacion-profesional
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/el-correo-edicion-alava
@@ -2791,13 +2845,25 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 936 inconsistent
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 937 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 938 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/oficina-publica-de-elecciones-sindicales-y-sus-oficinas-territoriales
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 939 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 939 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comite-etico-de-investigacion-clinica-de-la-comunidad-autonoma-del-pais-vasco
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 940 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 940 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-de-atencion-sociosanitaria
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 941 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 941 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-agentes-comerciales-de-alava
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-coordinadora-del-sistema-de-informacion-sobre-cancer
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 943 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 943 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 944 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comite-asesor-del-voluntariado-de-proteccion-civil
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 945 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 945 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-mixta-de-coordinacion-de-la-seguridad-privada-de-euskadi
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 946 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 946 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 947 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 948 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/alcer-bizkaia
@@ -2897,6 +2963,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1042 inconsisten
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/asociacion-centro-vasco-"eusko-biltzar"
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1044 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ive-oficina-estadistica-de-bilbao-eustat
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1045 Invalid IRI: www.eustat.eus
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/lanbide-errenteria
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/lanbide-sestao
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/lanbide-amurrio
@@ -2948,6 +3015,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1093 inconsisten
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/euskal-sozialistak-socialistas-vascos-sv-es
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/popular-vasco-euskal-talde-popularra-pv-etp
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-asesor-de-conservacion-de-la-naturaleza-del-pais-vasco-naturzaintza
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1096 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1096 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/escuela-superior-de-hosteleria-galdakao
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1098 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1099 inconsistent line
@@ -3178,6 +3247,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1323 inconsisten
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1324 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/eta-kitto-eibarko-astekaria
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/organo-de-colaboracion-entre-el-gobierno-vasco-y-el-secretariado-judicial
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1326 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1326 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/azk-taldea-s-a
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1328 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/museo-vasco-de-gastronomia
@@ -3197,6 +3268,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1342 inconsisten
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/rne-radio-nacional-de-espana-donostia-san-sebastian
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/icr-consultores
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comisiones-de-asistencia-juridica-gratuita
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1345 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1345 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/supperstudio
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/urola-garaiko-industrialdea-s-a
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/g-&-m-tecnicos-de-publicidad-s-a
@@ -3310,29 +3383,40 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/aiara-irratia-radio-ayala
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1457 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-del-voluntariado
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1458 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1459 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1460 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1461 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-ingenieros-en-informatica-del-pais-vasco
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consulado-de-francia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/patronato-de-la-reserva-de-la-biosfera-de-urdaibai
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1464 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1464 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/tolosaldeko-apattaerreka-industria-lurra-s-a-tailsa
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1466 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/oficina-vasca-del-cambio-climatico
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1467 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1467 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ilustre-colegio-oficial-de-geologos-delegacion-del-pais-vasco
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ilustre-colegio-oficial-de-graduados-sociales-de-bizkaia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1470 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-interdepartamental-de-publicidad-institucional
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1471 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1471 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1472 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1473 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1474 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-asesor-de-medio-ambiente-de-la-comunidad-autonoma-del-pais-vasco
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1475 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1475 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1476 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/cadena-100-gipuzkoa
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1478 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/radio-irun-cadena-ser
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1480 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/organo-consultivo-de-puertos-de-euskadi
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1481 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1481 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ilustre-colegio-de-procuradores-de-alava
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/archivo-vasco-de-la-musica-eresbil
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/onda-cero-radio-san-sebastian
@@ -3342,70 +3426,132 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1488 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1489 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-para-el-control-de-calidad-de-la-edificacion
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1490 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1490 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comite-de-bioetica-de-euskadi
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1491 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1491 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-asesor-de-drogodependencias-y-la-comision-interdepartamental-de-drogodependencias
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1492 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1492 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1493 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1494 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1495 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1496 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1497 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-de-seguridad-e-higiene-alimentaria-de-la-comunidad-autonoma-del-pais-vasco
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1498 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1498 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1499 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1500 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/organo-de-coordinacion-tributaria-de-euskadi
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejos-asesores-de-puertos
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1502 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1502 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/autoridad-del-transporte-de-euskadi
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1503 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1503 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-de-control-de-la-publicidad-sanitaria
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1504 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1504 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-de-la-funcion-publica
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1505 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1505 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-asesora-del-protectorado-de-fundaciones
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1506 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1506 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-para-la-promocion-de-la-accesibilidad
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1507 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1507 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/jurados-territoriales-de-expropiacion-forzosa-de-alava-bizkaia-y-gipuzkoa
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1508 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1508 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1509 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1510 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-del-plan-general-de-carreteras-del-pais-vasco
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1511 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1511 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1512 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/berria-delegacion-ipar-euskal-herria
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1514 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1515 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-de-valoracion-seleccion-y-expurgo-de-la-documentacion-clinica-covsedoc
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1516 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1516 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/camara-de-comercio-hispano-portuguesa
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-para-la-acreditacion-de-los-comites-de-etica-asistencial
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1518 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1518 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1519 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comisiones-permanentes-de-control-sanitario-de-las-aguas-de-consumo-publico
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1520 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1520 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-interinstitucional-de-la-obra-publica
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1521 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/organo-interinstitucional-de-servicios-sociales
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1522 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-de-servicios-sociales
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1523 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-asesor-de-mediacion-familiar
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1524 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1525 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1526 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-tecnica-de-adopcion-internacional
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1527 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-permanente-sectorial-para-la-atencion-a-la-infancia-y-la-adolescencia
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1528 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/observatorio-de-infancia-y-adolescencia
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1529 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/foro-para-la-integracion-y-participacion-social-de-las-ciudadanas-y-ciudadanos-inmigrantes-en-el-pais-vasco
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1530 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-de-familia
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1531 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-para-la-inclusion-social
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1532 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-interinstitucional-para-la-inclusion-social
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1533 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-interdepartamental-para-la-inclusion-social
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1534 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-de-formacion-continuada-de-las-profesiones-sanitarias
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1535 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1535 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-de-sanidad-de-euskadi-y-consejos-de-area-de-salud-de-alava-bizkaia-y-gipuzkoa
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1536 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1536 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ehne-bizkaia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ekonomiaz
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/sindicato-medico-de-bizkaia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-de-coordinacion-de-las-policias-locales-del-pais-vasco
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1540 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1540 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1541 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/archivo-general-de-gipuzkoa-historico
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1543 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comisiones-de-coordinacion-de-ambito-local
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1544 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1544 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-de-videovigilancia-y-libertades
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1545 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1545 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/fundacion-euskomedia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/edificio-la-azucarera
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/diputacion-foral-de-gipuzkoa
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1549 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-de-proteccion-civil-de-euskadi
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1550 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1550 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-de-espectaculos-publicos-y-actividades-recreativas
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1551 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1551 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-del-juego
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1552 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1552 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-de-apuestas-de-euskadi
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1553 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1553 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-de-la-ertzaintza
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1554 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1554 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1555 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/publicidad-nervion
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejeros-del-norte
@@ -3667,6 +3813,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1813 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1814 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-vasco-de-cooperacion-al-desarrollo
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1815 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1815 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consulado-de-colombia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/garapen-asociacion-vasca-de-agencias-de-desarrollo
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/etniker-euskalerria-dpto-de-etnografia-del-instituto-labayru
@@ -3692,21 +3840,34 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1837 inconsisten
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/instituto-de-censores-jurados-de-cuentas-de-espana-agrupacion-territorial-del-pais-vasco-sede-en-vitoria
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-ingenieros-de-minas-y-energia-del-pais-vasco-navarra-la-rioja-y-soria
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/instituto-vasco-de-medicina-legal
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1840 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1840 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1841 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1842 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-mixta-de-seguimiento-del-plan-de-informatizacion-de-la-administracion-de-justicia
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1843 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1843 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/consejo-asesor-de-asistencia-juridica-gratuita
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1844 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1844 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/observatorio-vasco-de-la-administracion-de-justicia
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1845 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1845 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comision-para-la-aplicacion-de-los-derechos-profesionales-y-pasivos-del-personal-que-presto-servicios-a-la-comunidad-autonoma-del-pais-vasco
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1846 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1846 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1847 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1848 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/comite-de-valoracion-de-puestos-de-trabajo-de-la-administracion-general-de-la-comunidad-autonoma-de-euskadi-y-sus-organismos-autonomos
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1849 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1849 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1850 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/centro-territorial-de-osalan-de-bizkaia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1852 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1853 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1854 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/observatorio-vasco-de-las-familias
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1855 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ararteko-oficina-de-bizkaia
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ararteko-oficina-de-gipuzkoa
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1858 inconsistent line
@@ -3810,7 +3971,9 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1956 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1957 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/grupo-parlamentario-mixto-gmx
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1958 Invalid IRI: www.congreso.es
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-arquitectos-vasco-navarro-decanato
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1959 Invalid IRI: www.coavn.org
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1960 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1961 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/kontsumobide-servicio-territorial-de-bizkaia

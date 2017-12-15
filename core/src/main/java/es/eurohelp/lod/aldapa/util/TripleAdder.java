@@ -9,6 +9,7 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.impl.TreeModel;
+import org.eclipse.rdf4j.model.vocabulary.OWL;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.RDFS;
 
@@ -70,6 +71,10 @@ public class TripleAdder {
 
     public void addRDFTYPETriple(String subject, String object) {
         model.add(vf.createIRI(subject), RDF.TYPE, vf.createIRI(object), vf.createIRI(ctxt));
+    }
+    
+    public void addOWLSAMEASTriple(String subject, String object) {
+        model.add(vf.createIRI(subject), OWL.SAMEAS, vf.createIRI(object), vf.createIRI(ctxt));
     }
 
     /**

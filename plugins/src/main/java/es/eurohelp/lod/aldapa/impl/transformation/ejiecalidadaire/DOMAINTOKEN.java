@@ -12,7 +12,8 @@ public enum DOMAINTOKEN {
     BUILDING("building"),
     STAFF("staff"),
     PLACE("place"),
-    ENTITY("entity");
+    ENTITY("entity"),
+    AIRQUALITY("air-quality");
 
     public final String domaintoken;
 
