@@ -38,7 +38,7 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverterTest {
         Model cargosModel = new TreeModel();
         cargosConverter.setDataSource(CSVFILEES);
         cargosConverter.setModel(cargosModel);
-        Model newCargosModel = cargosConverter.getTransformedModel("http://euskadi.eus/graph/guia-comunicacion-cargos");
+        Model newCargosModel = cargosConverter.getTransformedModel("http://es.euskadi.eus/graph/guia-comunicacion-cargos");
         assertNotNull(newCargosModel);
         RDFUtils.writeModel(newCargosModel, OUTPUTTURTLEFILEES, RDFFormat.NQUADS);
         
@@ -49,7 +49,7 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverterTest {
         Model entidadesModel = new TreeModel();
         entidadesConverter.setDataSource(CSVFILEENTIDADESES);
         entidadesConverter.setModel(entidadesModel);
-        Model newEntidadesModel = entidadesConverter.getTransformedModel("http://euskadi.eus/graph/guia-comunicacion-entidades");
+        Model newEntidadesModel = entidadesConverter.getTransformedModel("http://es.euskadi.eus/graph/guia-comunicacion-entidades");
         assertNotNull(newEntidadesModel);
         RDFUtils.writeModel(newEntidadesModel, OUTPUTTURTLEFILEENTIDADESES, RDFFormat.NQUADS);
     }

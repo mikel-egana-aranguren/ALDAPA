@@ -15,7 +15,8 @@ public enum CLASSTOKEN {
     ORGANIZATION("organization"),
     ELEMENT("element"),
     MEASSUREMENT("meassurement"),
-    OBSERVATION("observation");
+    OBSERVATION("observation"), 
+    CONTRACT("contract");
 
     public final String classtoken;
 
