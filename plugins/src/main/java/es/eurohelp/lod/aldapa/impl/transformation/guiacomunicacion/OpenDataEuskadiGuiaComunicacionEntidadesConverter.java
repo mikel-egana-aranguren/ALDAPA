@@ -54,7 +54,6 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
 
     @Override
     public Model getTransformedModel(String namedGraphURI) {
-
         TripleAdder adder = new TripleAdder(model, namedGraphURI);
         int lines = 0;
         int count = 0;

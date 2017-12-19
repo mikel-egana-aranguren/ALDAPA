@@ -51,7 +51,6 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
 
     @Override
     public Model getTransformedModel(String namedGraphURI) {
-
         TripleAdder adder = new TripleAdder(model, namedGraphURI);
         int lines = 0;
         int count = 0;
@@ -101,8 +100,7 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
     
                     adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addcargo(recordNumber,adder, record.get("Cargo"), cargoUri);
                     adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addlanpostua(recordNumber,adder, record.get("Lanpostua"), cargoUri);
-                    
-                    // Con las webs hay todo tipo de errores                    
+                                    
                     adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addweb(recordNumber,adder, record.get("Web"), cargoUri);
                     String otros = record.get("Otros");
                     adder.addRDFSCOMMENTTriple(cargoUri, otros, null);
