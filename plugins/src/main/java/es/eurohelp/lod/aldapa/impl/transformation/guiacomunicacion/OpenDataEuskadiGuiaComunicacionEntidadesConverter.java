@@ -5,14 +5,11 @@ package es.eurohelp.lod.aldapa.impl.transformation.guiacomunicacion;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.jena.riot.system.IRIResolver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
@@ -43,7 +40,6 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
     @Override
     public void setDataSource(String inPath) throws AldapaException {
         try {
-            // [LOD] Todos los CSVs van a tener codificación UTF-8?
             parser = CSVParser.parse(new File(inPath), Charset.forName("UTF-8"), CSVFormat.EXCEL.withHeader().withDelimiter(';'));
         } catch (IOException e) {
             LOGGER.error(e);
@@ -70,7 +66,7 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
                 String entidad = record.get("Entidad");
                 String erakundea = record.get("Erakundea");
 
-                // [LOD] URI entidad
+                // URI entidad
                 String entidadUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.ENTITY.getValue() + "/"
                         + CLASSTOKEN.ORGANIZATION.getValue() + "/" + URIUtils.urify(null, null, entidad);
                 LOGGER.info(entidadUri);
@@ -92,42 +88,10 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
                 String poblacion = record.get("Población");
                 String addressName = URIUtils.urify(null, null, calle + codigopostal + poblacion);
 
-                if (!addressName.isEmpty()) {
-                    String addressURI = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.PLACE.getValue() + "/"
-                            + CLASSTOKEN.ADDRESS.getValue() + "/" + addressName;
-                    adder.addTriple(entidadUri, EXTERNALPROPERTY.VCARDHASADDRESS.getValue(), addressURI);
-                    adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDSTREETADDRESS.getValue(), calle);
-                    if (!codigopostal.isEmpty()) {
-                        adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDPOSTALCODE.getValue(), codigopostal);
-                    }
-                    // [LOD] en la ontologia VCARD la poblacion es un String, pero igual se puede usar una URI de
-                    // referencia para los lugares?
-                    if (!poblacion.isEmpty()) {
-                        adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDLOCALITY.getValue(), poblacion);
-                    }
-                    adder.addDataTripleXSDString(addressURI, EXTERNALPROPERTY.VCARDCOUNTRYNAME.getValue(), "España");
-                } else {
-                    LOGGER.info(recordNumber + " Empty address name ");
-                }
+                adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addaddress(recordNumber,adder,calle,codigopostal,poblacion,addressName, entidadUri);
 
-                String telefono = record.get("Teléfono");
-                if (!telefono.isEmpty()) {
-                    adder.addDataTripleXSDString(entidadUri, EXTERNALPROPERTY.VCARDTEL.getValue(), telefono);
-                } else {
-                    LOGGER.info(recordNumber + " Empty telefono ");
-                }
-
-                String web = record.get("Web");
-                if (!web.isEmpty() && !StringUtils.containsWhitespace(web)) {
-                    try {
-                        IRIResolver.validateIRI(web);
-                        URIUtils.validateURI(web);
-                        adder.addTriple(entidadUri, EXTERNALPROPERTY.VCARDURL.getValue(), web);
-                    } catch (Exception e) {
-                        LOGGER.info(recordNumber + " Invalid URI: " + web);
-                        LOGGER.error(e);
-                    }
-                }
+                adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addtelefono(recordNumber,adder, record.get("Teléfono"), entidadUri);
+                adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addweb(recordNumber,adder, record.get("Web"), entidadUri);
 
                 String otros = record.get("Otros");
                 adder.addRDFSCOMMENTTriple(entidadUri, otros, null);

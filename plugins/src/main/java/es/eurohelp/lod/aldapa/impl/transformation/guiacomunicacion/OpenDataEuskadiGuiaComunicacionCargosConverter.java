@@ -6,7 +6,6 @@ package es.eurohelp.lod.aldapa.impl.transformation.guiacomunicacion;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -20,12 +19,8 @@ import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.util.TripleAdder;
 import es.eurohelp.lod.aldapa.util.URIUtils;
-import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.CLASSTOKEN;
-import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.DOMAINTOKEN;
-import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EUSURI;
 import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EXTERNALCLASS;
 import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EXTERNALPROPERTY;
-import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.NTITOKEN;
 
 /**
  * @author megana

@@ -24,8 +24,6 @@ public class OpenDataEuskadiGuiaComunicacionCargosEntidadesConverterTest {
 
     private static final String CSVFILEES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_cargos_datos_completos.csv";
     private static final String OUTPUTTURTLEFILEES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_cargos_datos_completos.nquads";
-    private static final String CSVFILEEU = "data/OpenDataEuskadiGuiaComunicacion/EU/gc_cargos_datos_completos.csv";
-    private static final String OUTPUTTURTLEFILEEU = "data/OpenDataEuskadiGuiaComunicacion/EU/gc_cargos_datos_completos.nquads";
     
     private static final String CSVFILEENTIDADESES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_entidades_datos_completos.csv";
     private static final String OUTPUTTURTLEFILEENTIDADESES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_entidades_datos_completos.nquads";

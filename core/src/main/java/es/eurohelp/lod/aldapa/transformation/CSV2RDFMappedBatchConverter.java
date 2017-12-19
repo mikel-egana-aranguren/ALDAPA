@@ -8,5 +8,4 @@ package es.eurohelp.lod.aldapa.transformation;
  *
  */
 public abstract class CSV2RDFMappedBatchConverter {
-	public CSV2RDFMappedBatchConverter(){}
 }
