@@ -79,7 +79,7 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
                 // Azucena Martinez)
 
                 String cargoUri = OpenDataEuskadiGuiaComunicacionConverterUtils.generateCargoUri(nombre, apellidos, recordNumber);
-                
+
                 if (cargoUri != null) {
                     // Es necesario un mecanismo como el de JENA para importar ontologias OWL y crear clases Java
                     // a partir de ellas?
@@ -88,22 +88,27 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
                     adder.addDataTripleXSDString(cargoUri, EXTERNALPROPERTY.VCARDFN.getValue(), nombre + apellidos);
 
                     // Habria que hacer URIs de referencia para todas estas direcciones
-                    String calle = record.get("Calle");
-                    String codigopostal = record.get("Código Postal");
-                    String poblacion = record.get("Población");
-                    String addressName = URIUtils.urify(null, null, calle + codigopostal + poblacion);
-                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addaddress(recordNumber,adder,calle,codigopostal,poblacion,addressName, cargoUri);
-                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addtelefono(recordNumber,adder, record.get("Teléfono"), cargoUri);
-                    
-                    // Para cargo se podria usar hasRole en vez de role y hacer una estructura mas compleja,
-                    // incluso con URIs de referencia para cargos, pero en este momento no merece mi esfuerzo
-    
-                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addcargo(recordNumber,adder, record.get("Cargo"), cargoUri);
-                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addlanpostua(recordNumber,adder, record.get("Lanpostua"), cargoUri);
-                                    
-                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addweb(recordNumber,adder, record.get("Web"), cargoUri);
-                    String otros = record.get("Otros");
-                    adder.addRDFSCOMMENTTriple(cargoUri, otros, null);
+                    try {
+                        String calle = record.get("Calle");
+                        String codigopostal = record.get("Código Postal");
+                        String poblacion = record.get("Población");
+                        String addressName = URIUtils.urify(null, null, calle + codigopostal + poblacion);
+                        adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addaddress(recordNumber, adder, calle, codigopostal, poblacion,
+                                addressName, cargoUri);
+                        adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addtelefono(recordNumber, adder, record.get("Teléfono"), cargoUri);
+
+                        // Para cargo se podria usar hasRole en vez de role y hacer una estructura mas compleja,
+                        // incluso con URIs de referencia para cargos, pero en este momento no merece mi esfuerzo
+
+                        adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addcargo(recordNumber, adder, record.get("Cargo"), cargoUri);
+                        adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addlanpostua(recordNumber, adder, record.get("Lanpostua"), cargoUri);
+
+                        adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addweb(recordNumber, adder, record.get("Web"), cargoUri);
+                        String otros = record.get("Otros");
+                        adder.addRDFSCOMMENTTriple(cargoUri, otros, null);
+                    } catch (Exception e) {
+                        LOGGER.error(e);
+                    }
                 }
             } else {
                 LOGGER.info(recordNumber + " inconsistent line");
