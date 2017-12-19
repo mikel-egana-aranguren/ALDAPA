@@ -20,7 +20,7 @@ import es.eurohelp.lod.aldapa.util.RDFUtils;
  * @author megana
  *
  */
-public class OpenDataEuskadiGuiaComunicacionCargosConverterTest {
+public class OpenDataEuskadiGuiaComunicacionCargosEntidadesConverterTest {
 
     private static final String CSVFILEES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_cargos_datos_completos.csv";
     private static final String OUTPUTTURTLEFILEES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_cargos_datos_completos.nquads";
@@ -42,7 +42,7 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverterTest {
         assertNotNull(newCargosModel);
         RDFUtils.writeModel(newCargosModel, OUTPUTTURTLEFILEES, RDFFormat.NQUADS);
         
-        // Cargos EU ??? 
+        // Cargos EU? 
         
         // Entidades ES
         OpenDataEuskadiGuiaComunicacionEntidadesConverter entidadesConverter = new OpenDataEuskadiGuiaComunicacionEntidadesConverter();
@@ -52,5 +52,7 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverterTest {
         Model newEntidadesModel = entidadesConverter.getTransformedModel("http://es.euskadi.eus/graph/guia-comunicacion-entidades");
         assertNotNull(newEntidadesModel);
         RDFUtils.writeModel(newEntidadesModel, OUTPUTTURTLEFILEENTIDADESES, RDFFormat.NQUADS);
+        
+        // Entidades EU?
     }
 }

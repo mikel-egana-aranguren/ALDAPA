@@ -21,7 +21,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 58 inconsistent lin
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 59 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 60 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 61 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 64 Invalid nombre: Departamento Foral de Cultura
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 64 Invalid nombre: Departamento Foral de Cultura
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 65 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 66 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 68 inconsistent line
@@ -43,7 +43,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 91 inconsistent lin
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 92 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 94 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 100 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 101 Invalid nombre: Universitario Vasco Navarro
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 101 Invalid nombre: Universitario Vasco Navarro
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 103 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 104 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 105 inconsistent line
@@ -84,14 +84,14 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 176 inconsistent li
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 177 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 178 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 180 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 181 Invalid nombre: Asociación Cultural Shareak Kultur Elkartea
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 181 Invalid nombre: Asociación Cultural Shareak Kultur Elkartea
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 185 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 187 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 188 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 190 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 192 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 193 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 195 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 195 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 200 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 201 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 202 inconsistent line
@@ -159,7 +159,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 315 inconsistent li
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 316 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 317 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 319 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 322 Invalid nombre: Euskal Editorea E.M.
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 322 Invalid nombre: Euskal Editorea E.M.
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 324 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 326 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 327 inconsistent line
@@ -301,9 +301,10 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 592 inconsistent li
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 593 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 594 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 595 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 596 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 596 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 597 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 606 Invalid IRI: www.coavn.org
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 606 Invalid URI: www.coavn.org
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.coavn.org
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 610 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 611 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 612 inconsistent line
@@ -601,9 +602,9 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1157 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1158 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1159 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1161 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1163 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1163 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1165 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1166 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1166 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1167 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1171 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1172 inconsistent line
@@ -631,14 +632,14 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1197 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1198 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1201 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1202 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1207 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1207 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1208 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1209 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1210 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1211 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1212 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1213 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1216 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1216 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1219 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1220 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1221 inconsistent line
@@ -648,7 +649,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1225 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1226 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1230 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1231 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1232 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1232 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1233 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1234 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1237 inconsistent line
@@ -711,7 +712,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1364 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1365 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1370 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1373 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1374 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1374 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1375 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1376 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1377 inconsistent line
@@ -725,7 +726,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1386 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1387 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1389 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1390 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1392 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1392 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1393 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1398 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1399 inconsistent line
@@ -756,7 +757,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1444 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1447 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1448 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1453 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1454 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1454 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1460 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1462 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1463 inconsistent line
@@ -858,7 +859,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1725 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1726 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1727 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1728 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1729 Empty telefono 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1729 Empty telefono 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1733 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1734 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1735 inconsistent line
@@ -931,7 +932,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1889 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1891 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1892 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1898 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1899 Invalid apellidos: Gipuzkoako Erizaintza Kolegio Oficiala
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1899 Invalid apellidos: Gipuzkoako Erizaintza Kolegio Oficiala
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1900 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1902 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1905 inconsistent line
@@ -969,7 +970,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1977 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1978 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1979 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1988 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1996 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 1996 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 1999 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2002 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2003 inconsistent line
@@ -992,7 +993,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2031 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2034 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2035 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2046 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2047 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2047 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2049 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2050 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2051 inconsistent line
@@ -1040,7 +1041,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2162 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2163 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2164 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2166 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2168 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2168 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2171 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2172 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2175 inconsistent line
@@ -1094,7 +1095,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2266 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2267 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2269 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2272 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2273 Invalid nombre: Medioscom
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2273 Invalid nombre: Medioscom
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2274 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2276 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2277 inconsistent line
@@ -1104,7 +1105,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2284 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2285 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2288 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2289 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2293 Invalid nombre: ATRES ADVERTISING
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2293 Invalid nombre: ATRES ADVERTISING
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2297 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2300 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2301 inconsistent line
@@ -1136,7 +1137,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2359 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2360 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2361 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2363 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2365 Invalid nombre: Baigorri Argitaletxe, S.A.
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2365 Invalid nombre: Baigorri Argitaletxe, S.A.
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2367 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2370 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2372 inconsistent line
@@ -1144,43 +1145,43 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2376 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2379 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2385 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2388 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2395 Invalid nombre: .
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2395 Invalid nombre: .
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2398 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2401 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2403 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2404 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2406 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2406 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2407 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2410 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2411 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2412 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2413 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2414 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2415 Invalid nombre: Eset
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2415 Invalid nombre: Eset
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2416 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2417 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2420 Invalid nombre: Equipo K
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2420 Invalid nombre: Equipo K
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2421 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2422 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2425 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2427 Invalid nombre: MUGI, Koop. E.
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2427 Invalid nombre: MUGI, Koop. E.
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2429 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2432 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2434 Invalid nombre: SUA EDIZIOAK
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2434 Invalid nombre: SUA EDIZIOAK
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2436 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2437 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2438 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2439 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2450 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2454 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2454 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2455 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2457 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2458 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2458 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2459 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2460 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2463 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2464 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2465 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2465 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2468 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2469 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2470 inconsistent line
@@ -1190,7 +1191,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2475 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2476 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2481 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2482 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2485 Empty address name 
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2485 Empty address name 
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2494 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2495 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2499 inconsistent line
@@ -1207,7 +1208,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2524 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2525 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2526 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2527 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2533 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2533 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2534 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2544 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2546 inconsistent line
@@ -1246,19 +1247,19 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2610 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2613 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2615 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2616 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2617 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2617 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2618 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2621 Invalid nombre: Sin nombramiento
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2622 Invalid nombre: Sin nombramiento
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2623 Invalid nombre: Sin nombramiento
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2627 Invalid nombre: Sin nombramiento
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2629 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2621 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2622 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2623 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2627 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2629 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2630 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2631 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2631 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2632 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2636 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2638 Invalid nombre: Sin nombramiento
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2644 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2638 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 2644 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2647 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2648 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 2655 inconsistent line
@@ -1539,7 +1540,7 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3166 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3174 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3191 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3192 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3198 Invalid nombre: Sin nombramiento
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 3198 Invalid nombre: Sin nombramiento
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3200 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3204 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3205 inconsistent line
@@ -1786,7 +1787,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3617 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3618 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3619 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3621 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3622 Invalid IRI: www.congreso.es
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 3622 Invalid URI: www.congreso.es
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.congreso.es
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3623 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3624 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3626 inconsistent line
@@ -1799,7 +1801,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3635 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3636 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3639 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3647 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3648 Invalid IRI: www.coavna.com
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 3648 Invalid URI: www.coavna.com
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.coavna.com
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3649 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3650 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3651 inconsistent line
@@ -1811,13 +1814,15 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3661 inconsistent l
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3662 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3664 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3667 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3668 Invalid IRI: www.coavnbiz.org
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 3668 Invalid URI: www.coavnbiz.org
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.coavnbiz.org
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3670 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3671 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3672 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3673 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3674 inconsistent line
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3675 Invalid IRI: www.congreso.es
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils 3675 Invalid URI: www.congreso.es
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionConverterUtils java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.congreso.es
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3678 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3679 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionCargosConverter 3680 inconsistent line
@@ -1883,7 +1888,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/fundacion-cursos-de-verano-de-la-universidad-del-pais-vasco-en-san-sebastian
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/festival-internacional-de-folklore-de-portugalete-y-del-pais-vasco
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/lanbide-donostia-san-sebastian-intxaurrondo
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 31 Invalid IRI: donostia-intxaurrondo@lanbide.eus
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 31 Invalid URI: donostia-intxaurrondo@lanbide.eus
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter java.lang.IllegalArgumentException: Not a valid (absolute) IRI: donostia-intxaurrondo@lanbide.eus
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 32 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/instituto-vasco-etxepare
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-ingenieros-industriales-de-bizkaia
@@ -2001,9 +2007,11 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 132 inconsistent
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 133 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/bilbao-exhibition-centre
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-arquitectos-vasco-navarro-bizkaia
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 135 Invalid IRI: www.coavnbiz.org
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 135 Invalid URI: www.coavnbiz.org
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.coavnbiz.org
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-arquitectos-vasco-navarro-navarra
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 136 Invalid IRI: www.coavna.com
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 136 Invalid URI: www.coavna.com
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.coavna.com
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 137 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 138 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 139 inconsistent line
@@ -2201,7 +2209,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-disenadores-de-interior-de-gipuzkoa
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 326 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/behargintza-sestao
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 327 Invalid IRI: www.behargintzasestao.net
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 327 Invalid URI: www.behargintzasestao.net
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.behargintzasestao.net
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 328 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/euskadiko-kirol-portua-s-a
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-aparejadores-y-arquitectos-tecnicos-de-gipuzkoa
@@ -2963,7 +2972,8 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1042 inconsisten
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/asociacion-centro-vasco-"eusko-biltzar"
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1044 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/ive-oficina-estadistica-de-bilbao-eustat
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1045 Invalid IRI: www.eustat.eus
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1045 Invalid URI: www.eustat.eus
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.eustat.eus
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/lanbide-errenteria
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/lanbide-sestao
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/lanbide-amurrio
@@ -3971,9 +3981,11 @@ e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskad
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1956 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1957 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/grupo-parlamentario-mixto-gmx
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1958 Invalid IRI: www.congreso.es
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1958 Invalid URI: www.congreso.es
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.congreso.es
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/colegio-oficial-de-arquitectos-vasco-navarro-decanato
-e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1959 Invalid IRI: www.coavn.org
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1959 Invalid URI: www.coavn.org
+e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter java.lang.IllegalArgumentException: Not a valid (absolute) IRI: www.coavn.org
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1960 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter 1961 inconsistent line
 e.e.l.a.i.t.g.OpenDataEuskadiGuiaComunicacionEntidadesConverter http://es.euskadi.eus/id/public-sector/entity/organization/kontsumobide-servicio-territorial-de-bizkaia

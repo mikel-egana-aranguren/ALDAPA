@@ -121,14 +121,11 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
                 if (!web.isEmpty() && !StringUtils.containsWhitespace(web)) {
                     try {
                         IRIResolver.validateIRI(web);
-                        try {
-                            URIUtils.validateURI(web);
-                            adder.addTriple(entidadUri, EXTERNALPROPERTY.VCARDURL.getValue(), web);
-                        } catch (URISyntaxException e) {
-                            LOGGER.info(recordNumber + "Invalid URI: " + web);
-                        }
+                        URIUtils.validateURI(web);
+                        adder.addTriple(entidadUri, EXTERNALPROPERTY.VCARDURL.getValue(), web);
                     } catch (Exception e) {
-                        LOGGER.info(recordNumber + " Invalid IRI: " + web);
+                        LOGGER.info(recordNumber + " Invalid URI: " + web);
+                        LOGGER.error(e);
                     }
                 }
 
