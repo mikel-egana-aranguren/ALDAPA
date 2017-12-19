@@ -82,18 +82,23 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
                     adder.addOWLSAMEASTriple(entidadUri, erakundeaUri);
                 }
 
-                String calle = record.get("Calle");
-                String codigopostal = record.get("Código Postal");
-                String poblacion = record.get("Población");
-                String addressName = URIUtils.urify(null, null, calle + codigopostal + poblacion);
+                try {
+                    String calle = record.get("Calle");
+                    String codigopostal = record.get("Código Postal");
+                    String poblacion = record.get("Población");
+                    String addressName = URIUtils.urify(null, null, calle + codigopostal + poblacion);
 
-                adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addaddress(recordNumber,adder,calle,codigopostal,poblacion,addressName, entidadUri);
+                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addaddress(recordNumber, adder, calle, codigopostal, poblacion, addressName,
+                            entidadUri);
 
-                adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addtelefono(recordNumber,adder, record.get("Teléfono"), entidadUri);
-                adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addweb(recordNumber,adder, record.get("Web"), entidadUri);
+                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addtelefono(recordNumber, adder, record.get("Teléfono"), entidadUri);
+                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addweb(recordNumber, adder, record.get("Web"), entidadUri);
 
-                String otros = record.get("Otros");
-                adder.addRDFSCOMMENTTriple(entidadUri, otros, null);
+                    String otros = record.get("Otros");
+                    adder.addRDFSCOMMENTTriple(entidadUri, otros, null);
+                } catch (Exception e) {
+                    LOGGER.error(e);
+                }
 
             } else {
                 LOGGER.info(recordNumber + " inconsistent line");
