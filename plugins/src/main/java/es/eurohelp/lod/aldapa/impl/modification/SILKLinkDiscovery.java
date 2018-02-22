@@ -21,7 +21,8 @@ public class SILKLinkDiscovery {
 			Silk.executeFile(file, null, 8, true);
 			// Si el archivo de configuracion recibido no es un ".xml"
 		} else if (!configurationFile.contains(".xml")) {
-			throw new WrongArgument("El parametro de entrada, el archivo de configuracion de Silk, debe de ser tipo '.xml'");
+			throw new WrongArgument(
+					"El parametro de entrada, el archivo de configuracion de Silk, debe de ser tipo '.xml'");
 		}
 	}
 }
