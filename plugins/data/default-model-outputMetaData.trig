@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 <http://lod.eurohelp.es/aldapa/metadata> {
 	<http://lod.eurohelp.es/aldapa/catalog/CATALOG_NAME> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/PROJECT_NAME> .
@@ -11,63 +10,26 @@
 	
 	<http://lod.eurohelp.es/aldapa/project/PROJECT_NAME> a <http://xmlns.com/foaf/0.1/Project> .
 	
-	_:node1c6ui5rtnx19 a <https://www.w3.org/ns/prov#Activity> .
+	_:node1c6ujid50x19 a <https://www.w3.org/ns/prov#Activity> .
 	
-	_:node1c6ui5rtnx20 a <https://www.w3.org/ns/prov#Usage> .
-	
-	<http://lod.eurohelp.es/aldapa/catalog/CATALOG_NAME> <http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> .
-	
-	<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> <http://www.w3.org/ns/dcat#distribution> <http://lod.eurohelp.es/aldapa/distribution/LINKED_DATA_SERVER_DISTRIBUTION_NAME> , <http://lod.eurohelp.es/aldapa/distribution/RDF_DUMP_DISTRIBUTION_NAME> , <http://lod.eurohelp.es/aldapa/distribution/SPARQL_ENDPOINT_DISTRIBUTION_NAME> .
-	
-	_:node1c6ui5rtnx18 <http://www.w3.org/ns/sparql-service-description#name> <http://lod.eurohelp.es/graph/dataset-graph001> .
-	
-	<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> <http://www.w3.org/ns/sparql-service-description#namedGraph> _:node1c6ui5rtnx18 .
-	
-	_:node1c6ui5rtnx19 <https://www.w3.org/ns/prov#endedAtTime> "2015-02-13T15:12:46"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-	
-	_:node1c6ui5rtnx20 <https://www.w3.org/ns/prov#entity> <http://opendata.euskadi.eus/contenidos/ds_informes_estudios/calidad_aire_2017/es_def/adjuntos/datos_diarios_csv.zip> ;
-		<https://www.w3.org/ns/prov#hadRole> <http://www.w3.org/ns/csvw#csvEncodedTabularData> .
-	
-	_:node1c6ui5rtnx19 <https://www.w3.org/ns/prov#qualifiedUsage> _:node1c6ui5rtnx20 ;
-		<https://www.w3.org/ns/prov#startedAtTime> "2015-02-13T15:12:44"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-		<https://www.w3.org/ns/prov#wasAssociatedWith> <http://lod.eurohelp.es/aldapa/es.eurohelp.lod.aldapa.impl.transformation.HardCodedCSV2RDFEJIECalidadAire> .
-	
-	<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> <https://www.w3.org/ns/prov#wasGeneratedBy> _:node1c6ui5rtnx19 .
-}
-=======
-
-<http://lod.eurohelp.es/aldapa/metadata> {
-	<http://lod.eurohelp.es/aldapa/catalog/CATALOG_NAME> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/PROJECT_NAME> .
-	
-	<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> .
-	
-	<http://lod.eurohelp.es/aldapa/catalog/CATALOG_NAME> a <http://www.w3.org/ns/dcat#Catalog> .
-	
-	<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> a <http://www.w3.org/ns/dcat#Distribution> .
-	
-	<http://lod.eurohelp.es/aldapa/project/PROJECT_NAME> a <http://xmlns.com/foaf/0.1/Project> .
-	
-	_:node1c01empr4x19 a <https://www.w3.org/ns/prov#Activity> .
-	
-	_:node1c01empr4x20 a <https://www.w3.org/ns/prov#Usage> .
+	_:node1c6ujid50x20 a <https://www.w3.org/ns/prov#Usage> .
 	
 	<http://lod.eurohelp.es/aldapa/catalog/CATALOG_NAME> <http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> .
 	
 	<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> <http://www.w3.org/ns/dcat#distribution> <http://lod.eurohelp.es/aldapa/distribution/LINKED_DATA_SERVER_DISTRIBUTION_NAME> , <http://lod.eurohelp.es/aldapa/distribution/RDF_DUMP_DISTRIBUTION_NAME> , <http://lod.eurohelp.es/aldapa/distribution/SPARQL_ENDPOINT_DISTRIBUTION_NAME> .
 	
-	_:node1c01empr4x18 <http://www.w3.org/ns/sparql-service-description#name> <http://lod.eurohelp.es/graph/dataset-graph001> .
+	_:node1c6ujid50x18 <http://www.w3.org/ns/sparql-service-description#name> <http://lod.eurohelp.es/graph/dataset-graph001> .
 	
-	<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> <http://www.w3.org/ns/sparql-service-description#namedGraph> _:node1c01empr4x18 .
+	<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> <http://www.w3.org/ns/sparql-service-description#namedGraph> _:node1c6ujid50x18 .
 	
-	_:node1c01empr4x19 <https://www.w3.org/ns/prov#endedAtTime> "2015-02-13T15:12:46"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+	_:node1c6ujid50x19 <https://www.w3.org/ns/prov#endedAtTime> "2015-02-13T15:12:46"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 	
-	_:node1c01empr4x20 <https://www.w3.org/ns/prov#entity> <http://opendata.euskadi.eus/contenidos/ds_informes_estudios/calidad_aire_2017/es_def/adjuntos/datos_diarios_csv.zip> ;
+	_:node1c6ujid50x20 <https://www.w3.org/ns/prov#entity> <http://opendata.euskadi.eus/contenidos/ds_informes_estudios/calidad_aire_2017/es_def/adjuntos/datos_diarios_csv.zip> ;
 		<https://www.w3.org/ns/prov#hadRole> <http://www.w3.org/ns/csvw#csvEncodedTabularData> .
 	
-	_:node1c01empr4x19 <https://www.w3.org/ns/prov#qualifiedUsage> _:node1c01empr4x20 ;
+	_:node1c6ujid50x19 <https://www.w3.org/ns/prov#qualifiedUsage> _:node1c6ujid50x20 ;
 		<https://www.w3.org/ns/prov#startedAtTime> "2015-02-13T15:12:44"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
 		<https://www.w3.org/ns/prov#wasAssociatedWith> <http://lod.eurohelp.es/aldapa/es.eurohelp.lod.aldapa.impl.transformation.HardCodedCSV2RDFEJIECalidadAire> .
 	
-	<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> <https://www.w3.org/ns/prov#wasGeneratedBy> _:node1c01empr4x19 .
+	<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> <https://www.w3.org/ns/prov#wasGeneratedBy> _:node1c6ujid50x19 .
 }
->>>>>>> branch 'develop' of https://github.com/mikel-egana-aranguren/ALDAPA.git
