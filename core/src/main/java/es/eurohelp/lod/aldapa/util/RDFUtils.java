@@ -5,6 +5,8 @@ package es.eurohelp.lod.aldapa.util;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,5 +49,10 @@ public class RDFUtils {
         Model model = ModelFactory.createDefaultModel();
         model.read(TMPFILE);
         return model;
+    }
+    
+    public static String currentInstantToXSDDateTime () {
+        
+        return LocalDateTime.now(ZoneId.systemDefault()).toString();
     }
 }

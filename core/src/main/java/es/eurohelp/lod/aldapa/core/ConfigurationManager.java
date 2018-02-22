@@ -45,6 +45,7 @@ public class ConfigurationManager {
     private static final String FILESTORECONFIGFILE = "FILE_STORE_CONFIG_FILE";
     private static final String ABSTRACTFILESTORE = "es.eurohelp.lod.aldapa.storage.FileStore";
     private static final String DIRTOKEN = "storeDirectory";
+    private static final String METADATATOKEN = "metadataFile";
 
     // RDF store
     private static final String TRIPLESTORECONFIGFILE = "TRIPLE_STORE_CONFIG_FILE";
@@ -60,6 +61,8 @@ public class ConfigurationManager {
     // RDF validator
     private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
     private static final String ABSTRACTRDFQUALITYVALIDATOR = "es.eurohelp.lod.aldapa.modification.RDFQualityValidator";
+
+
 
     /**
      * The configuration is stored in a HashMap:
@@ -186,10 +189,12 @@ public class ConfigurationManager {
 
             String fileStoreSuperClassName = fileStoreClass.getSuperclass().getName();
             if (fileStoreSuperClassName.equals(ABSTRACTFILESTORE)) {
-                Class[] cArg = new Class[1];
+                Class[] cArg = new Class[2];
                 cArg[0] = String.class;
-                String s = this.getConfigPropertyValue(FILESTORECONFIGFILE, DIRTOKEN);
-                fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(s);
+                cArg[1] = String.class;
+                String dir = this.getConfigPropertyValue(FILESTORECONFIGFILE, DIRTOKEN);
+                String metadata = this.getConfigPropertyValue(FILESTORECONFIGFILE, METADATATOKEN);
+                fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(dir,metadata);
                 LOGGER.info("File Store started ");
             } else {
                 LOGGER.error("ALDAPA cannot initialise class " + fileStoreClass.getName());

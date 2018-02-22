@@ -13,6 +13,7 @@ public class DatasetNotFoundException extends AldapaException {
     private static final String MESSAGE = "The dataset does not exist in the RDF Store";
 
     public DatasetNotFoundException() {
+        super();
     }
 
     /**

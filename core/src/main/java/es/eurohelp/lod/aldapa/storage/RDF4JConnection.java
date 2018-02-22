@@ -24,9 +24,6 @@ public abstract class RDF4JConnection {
     private Repository repo;
     private RepositoryConnection conn;
 
-    public RDF4JConnection() {
-    }
-
     public RDF4JConnection(Repository newRepo) {
         repo = newRepo;
         repo.initialize();

@@ -33,8 +33,29 @@ public interface FunctionalFileStore {
      * @throws ClientProtocolException
      */
     public void getFileHTTP(String fileURL, String fileName, boolean rewrite) throws AldapaException;
-
+    
+    /**
+     * 
+     * Get the URL from which the file was downloaded
+     * 
+     * @param fileName
+     * @return a String with the URL from which the file was downloaded
+     */
+    public String getFileURL(String fileName);
+    
+    /**
+     * 
+     * List the names of the stored files
+     * 
+     * @return a Set of file names
+     * 
+     */
     public Set<String> getFileNames();
 
+    /**
+     * Get the directory where the files are stored
+     * 
+     * @return a String containing the directory path
+     */
     public String getDirectoryPath();
 }
