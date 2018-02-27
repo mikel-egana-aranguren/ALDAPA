@@ -1,11 +1,11 @@
 
-_:node1c01eiujdx2 a <https://www.w3.org/ns/prov#Activity> ;
-	<https://www.w3.org/ns/prov#endedAtTime> "2017-11-28T14:55:44.714"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-	<https://www.w3.org/ns/prov#qualifiedUsage> _:node1c01eiujdx3 ;
-	<https://www.w3.org/ns/prov#startedAtTime> "2017-11-28T14:55:44.695"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+_:node1c7bf59cqx2 a <https://www.w3.org/ns/prov#Activity> ;
+	<https://www.w3.org/ns/prov#endedAtTime> "2018-02-27T12:08:03.916"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<https://www.w3.org/ns/prov#qualifiedUsage> _:node1c7bf59cqx3 ;
+	<https://www.w3.org/ns/prov#startedAtTime> "2018-02-27T12:08:03.885"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
 	<https://www.w3.org/ns/prov#wasAssociatedWith> <http://lod.eurohelp.es/aldapa/plugin/es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EJIECalidadAireConverter> .
 
-_:node1c01eiujdx3 a <https://www.w3.org/ns/prov#Usage> ;
+_:node1c7bf59cqx3 a <https://www.w3.org/ns/prov#Usage> ;
 	<https://www.w3.org/ns/prov#entity> <https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv> ;
 	<https://www.w3.org/ns/prov#hadRole> <http://www.w3.org/ns/csvw#csvEncodedTabularData> .
 
@@ -49,7 +49,17 @@ _:node1c01eiujdx3 a <https://www.w3.org/ns/prov#Usage> ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.247567997964374"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.988024000380936"^^<http://www.w3.org/2001/XMLSchema#double> .
 
-<http://euskadi.eus/graph/estaciones01> <https://www.w3.org/ns/prov#wasGeneratedBy> _:node1c01eiujdx2 .
+<http://eu.euskadi.eus/id/public-sector/geography/town/abantozierbena> <http://www.w3.org/2000/01/rdf-schema#label> "Abanto y Ciérvana-Abanto Zierbena" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/agurain> <http://www.w3.org/2000/01/rdf-schema#label> "Agurain/Salvatierra" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/alonsotegi> <http://www.w3.org/2000/01/rdf-schema#label> "Alonsotegi" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/gasteiz> <http://www.w3.org/2000/01/rdf-schema#label> "Vitoria-Gasteiz" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/getxo> <http://www.w3.org/2000/01/rdf-schema#label> "Getxo" .
+
+<http://euskadi.eus/graph/estaciones01> <https://www.w3.org/ns/prov#wasGeneratedBy> _:node1c7bf59cqx2 .
 
 <http://lod.eurohelp.es/aldapa/catalog/calidadaire> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/euskadimedioambiente> ;
 	a <http://www.w3.org/ns/dcat#Catalog> ;

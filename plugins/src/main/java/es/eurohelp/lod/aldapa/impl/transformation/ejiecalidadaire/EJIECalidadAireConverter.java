@@ -85,6 +85,8 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
 
             String town = record.get("Town");
             adder.addTriple(stationUri, EXTERNALURI.SCHEMALOCATION.getValue(), townSelector(town));
+            
+            adder.addRDFSLABELTriple(townSelector(town), town, "es");
 
             String address = record.get("Address");
             adder.addDataTripleXSDString(stationUri, EXTERNALURI.SCHEMAADDRESS.getValue(), address);
@@ -110,7 +112,7 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
             case "Vitoria-Gasteiz":
                 townUri = EUSPLACEURI.GASTEIZ.getValue();
                 break;
-            case "Abanto y CiÈrvana-Abanto Zierbena":
+            case "Abanto y Ci√©rvana-Abanto Zierbena":
                 townUri = EUSPLACEURI.ABANTOZIERBENA.getValue();
                 break;
             case "Agurain/Salvatierra":
@@ -135,7 +137,7 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
     private String provinceSelector(String province) {
         String provinceURI = null;
         switch (province) {
-            case "Araba/¡lava":
+            case "Araba/√Ålava":
                 provinceURI = EUSPLACEURI.ALAVA.getValue();
                 break;
             case "Bizkaia":

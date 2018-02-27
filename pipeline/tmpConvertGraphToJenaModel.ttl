@@ -49,6 +49,16 @@
 
 <http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://www.w3.org/2000/01/rdf-schema#label> "ALONSOTEGI" .
 
+<http://eu.euskadi.eus/id/public-sector/geography/town/abantozierbena> <http://www.w3.org/2000/01/rdf-schema#label> "Abanto y Ciérvana-Abanto Zierbena" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/agurain> <http://www.w3.org/2000/01/rdf-schema#label> "Agurain/Salvatierra" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/alonsotegi> <http://www.w3.org/2000/01/rdf-schema#label> "Alonsotegi" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/getxo> <http://www.w3.org/2000/01/rdf-schema#label> "Getxo" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/gasteiz> <http://www.w3.org/2000/01/rdf-schema#label> "Vitoria-Gasteiz" .
+
 <http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "42.84901250588428"^^<http://www.w3.org/2001/XMLSchema#double> .
 
 <http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "42.85604797053618"^^<http://www.w3.org/2001/XMLSchema#double> .

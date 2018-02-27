@@ -4,25 +4,50 @@
 package es.eurohelp.lod.aldapa.impl.modification;
 
 import java.io.File;
+import java.io.IOException;
+
+import org.apache.jena.util.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import de.fuberlin.wiwiss.silk.Silk;
-import es.eurohelp.lod.aldapa.core.exception.WrongArgument;
+import es.eurohelp.lod.aldapa.core.exception.SilkWrongArgument;
+import es.eurohelp.lod.aldapa.modification.FunctionalLinkDiscoverer;
+import es.eurohelp.lod.aldapa.modification.LinkDiscoverer;
 
 /**
  * @author megana
  *
  */
-public class SILKLinkDiscovery {
+public class SILKLinkDiscovery extends LinkDiscoverer implements FunctionalLinkDiscoverer {
 
-	public void discoverLinks(String configurationFile) throws Exception {
-		if (configurationFile.contains(".xml")) {
-			File file = new File(configurationFile);
-			// Se ejecuta SILK
-			Silk.executeFile(file, null, 8, true);
-			// Si el archivo de configuracion recibido no es un ".xml"
-		} else if (!configurationFile.contains(".xml")) {
-			throw new WrongArgument(
-					"El parametro de entrada, el archivo de configuracion de Silk, debe de ser tipo '.xml'");
+	private static final Logger LOGGER = LogManager.getLogger(SILKLinkDiscovery.class);
+
+	@Override
+	public boolean discoverLinks(String configurationFile, String resultFilePath) {
+		boolean result = true;
+		if (configurationFile.contains(".xml") && resultFilePath.contains(".nt")) {
+			File configFile = new File(configurationFile);
+			String stringConfFile;
+			try {
+				stringConfFile = FileUtils.readWholeFileAsUTF8(configurationFile);
+				if (stringConfFile.contains(resultFilePath)) {
+					// Se ejecuta Silk
+					Silk.executeFile(configFile, null, 8, true);
+					String silkConfFile = FileUtils.readWholeFileAsUTF8(configurationFile);
+					// Si se han descubierto enlaces, se suben a la triple store
+					if (silkConfFile.length() != 0) {
+						LOGGER.info("Los enlaces se han guardado en la ruta especificada");
+					} else {
+						result = false;
+					}
+				} else {
+					throw new SilkWrongArgument();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		return result;
 	}
 }
