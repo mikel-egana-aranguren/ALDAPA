@@ -61,6 +61,7 @@ public class Manager {
 	private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
 	private static final String TRANSFORMERCONFIGFILE = "TRANSFORMER_CONFIG_FILE";
 	private static final String LINKDISCOVERERCONFIGFILE = "LINK_DISCOVERER_CONFIG_FILE";
+	
 
 	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
 
@@ -704,8 +705,16 @@ public class Manager {
 		LOGGER.info("Link discoverer configuration file: " + configurationFile);
 		
 		String resultFile = configmanager.getConfigPropertyValue(LINKDISCOVERERCONFIGFILE, "silkResultsPath");
+	    	
 		LOGGER.info("Links discovered are saved in: " + resultFile);
 		linkDiscoverer.discoverLinks(configurationFile, resultFile);
+		try {
+			String path = org.apache.jena.util.FileUtils.readWholeFileAsUTF8("data/linkdiscoverer/"+resultFile);
+			store.execSPARQLUpdate("INSERT DATA{ "+path+" }");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return result;
 	}
     

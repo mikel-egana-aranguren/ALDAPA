@@ -82,12 +82,14 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
 
             String province = record.get("Province");
             adder.addTriple(stationUri, EXTERNALURI.DBOPROVINCE.getValue(), provinceSelector(province));
-
+            adder.addRDFTYPETriple(provinceSelector(province), EXTERNALURI.SCHEMAPLACE.getValue());
+            adder.addRDFSLABELTriple(provinceSelector(province), province, "es");
+            
             String town = record.get("Town");
             adder.addTriple(stationUri, EXTERNALURI.SCHEMALOCATION.getValue(), townSelector(town));
-            
+            adder.addRDFTYPETriple(townSelector(town), EXTERNALURI.SCHEMAPLACE.getValue());
             adder.addRDFSLABELTriple(townSelector(town), town, "es");
-
+            
             String address = record.get("Address");
             adder.addDataTripleXSDString(stationUri, EXTERNALURI.SCHEMAADDRESS.getValue(), address);
 

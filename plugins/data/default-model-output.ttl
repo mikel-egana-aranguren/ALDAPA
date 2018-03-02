@@ -1,6 +1,5 @@
 
-<<<<<<< HEAD
-_:node1c6ujid50x2 <http://www.w3.org/ns/sparql-service-description#name> <http://opendata.eurohelp.es/graph/dataset-graph001> .
+_:node1c7jfd7gvx2 <http://www.w3.org/ns/sparql-service-description#name> <http://opendata.eurohelp.es/graph/dataset-graph001> .
 
 <http://lod.eurohelp.es/aldapa/catalog/CATALOG_NAME> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/PROJECT_NAME> ;
 	a <http://www.w3.org/ns/dcat#Catalog> ;
@@ -8,17 +7,6 @@ _:node1c6ujid50x2 <http://www.w3.org/ns/sparql-service-description#name> <http:/
 
 <http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
 	<http://www.w3.org/ns/dcat#distribution> <http://lod.eurohelp.es/aldapa/distribution/LINKED_DATA_SERVER_DISTRIBUTION_NAME> , <http://lod.eurohelp.es/aldapa/distribution/RDF_DUMP_DISTRIBUTION_NAME> , <http://lod.eurohelp.es/aldapa/distribution/SPARQL_ENDPOINT_DISTRIBUTION_NAME> ;
-	<http://www.w3.org/ns/sparql-service-description#namedGraph> _:node1c6ujid50x2 .
-=======
-_:node1c7iv66s6x2 <http://www.w3.org/ns/sparql-service-description#name> <http://opendata.eurohelp.es/graph/dataset-graph001> .
-
-<http://lod.eurohelp.es/aldapa/catalog/CATALOG_NAME> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/PROJECT_NAME> ;
-	a <http://www.w3.org/ns/dcat#Catalog> ;
-	<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> .
-
-<http://lod.eurohelp.es/aldapa/dataset/DATASET_NAME> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
-	<http://www.w3.org/ns/dcat#distribution> <http://lod.eurohelp.es/aldapa/distribution/LINKED_DATA_SERVER_DISTRIBUTION_NAME> , <http://lod.eurohelp.es/aldapa/distribution/RDF_DUMP_DISTRIBUTION_NAME> , <http://lod.eurohelp.es/aldapa/distribution/SPARQL_ENDPOINT_DISTRIBUTION_NAME> ;
-	<http://www.w3.org/ns/sparql-service-description#namedGraph> _:node1c7iv66s6x2 .
->>>>>>> branch 'feature-RDF4Jworkbench' of https://github.com/mikel-egana-aranguren/ALDAPA.git
+	<http://www.w3.org/ns/sparql-service-description#namedGraph> _:node1c7jfd7gvx2 .
 
 <http://lod.eurohelp.es/aldapa/project/PROJECT_NAME> a <http://xmlns.com/foaf/0.1/Project> .
