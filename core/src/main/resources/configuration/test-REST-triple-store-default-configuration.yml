@@ -7,5 +7,3 @@ author: Mikel Egana Aranguren
 pluginClassName: es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore
 endpointURL: http://172.16.0.81:58080/blazegraph
 dbName: ALDAPARuntime
-    
-    

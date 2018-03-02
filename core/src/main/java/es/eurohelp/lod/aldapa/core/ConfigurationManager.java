@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.eclipse.rdf4j.repository.Repository;
+import org.eclipse.rdf4j.repository.http.HTTPRepository;
 
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
@@ -59,15 +61,21 @@ public class ConfigurationManager {
 	// CSV2RDF transformer
 	private static final String TRANSFORMERCONFGIFILE = "TRANSFORMER_CONFIG_FILE";
 	private static final Object ABSTRACTCSV2RDFBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
+	
+	// RDF4JWorkbench
+	private static final String WORKBENCHCONFIGFILE = "WORKBENCH_CONFIG_FILE";
+	private static final String ABSTRACTRDF4JWORKBENCHCONNECTION = "es.eurohelp.lod.aldapa.storage.RDF4JHTTPConnection";
 
 	// RDF validator
 	private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
 	private static final String ABSTRACTRDFQUALITYVALIDATOR = "es.eurohelp.lod.aldapa.modification.RDFQualityValidator";
 
+
 	// Link discoverer
 	private static final String DISCOVERERCONFIGFILE = "LINK_DISCOVERER_CONFIG_FILE";
 	private static final String DISCOVERERRESULTFILE = "DISCOVERER_RESULTS_FILE";
 	private static final String ABSTRACTLINKSDISCOVERER = "es.eurohelp.lod.aldapa.modification.LinkDiscoverer";
+
 
 	/**
 	 * The configuration is stored in a HashMap:
@@ -111,7 +119,7 @@ public class ConfigurationManager {
 			throw new AldapaException(e);
 		}
 	} 
-
+	
 	/**
 	 * 
 	 * Retrieves the only instance of this Singleton class.
@@ -241,6 +249,15 @@ public class ConfigurationManager {
 				rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(endpointURL,
 						dbName);
 				LOGGER.info("File Store started ");
+			} else if (rdfStoreSuperClassName.equals(ABSTRACTRDF4JWORKBENCHCONNECTION)) {
+				Class[] cArg = new Class[1];
+				cArg[0] = HTTPRepository.class;
+				String endpointURL = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, ENDPOINTURLTOKEN);
+				HTTPRepository repo = new HTTPRepository(endpointURL);
+				repo.setUsernameAndPassword("admin", "admin");
+				rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(repo);
+				LOGGER.info("File Store started ");
+				LOGGER.info("RD4J Workbench Database started");
 			} else {
 				throw new CouldNotInitialisePluginException(rdfStoreClass.getName());
 			}
@@ -296,7 +313,7 @@ public class ConfigurationManager {
 		}
 		return validator;
 	}
-
+	
 	/**
 	 * 
 	 * @return a LinkDiscoverer
@@ -321,3 +338,4 @@ public class ConfigurationManager {
 		return linkDiscoverer;
 	}
 }
+

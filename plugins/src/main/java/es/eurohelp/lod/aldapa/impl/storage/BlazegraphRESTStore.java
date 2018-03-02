@@ -263,4 +263,9 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
             throw new AldapaException(e);
         }
     }
+
+	@Override
+	public void commit() {
+		this.commit();
+	}
 }

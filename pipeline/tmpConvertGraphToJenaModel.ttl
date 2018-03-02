@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> .
 
@@ -78,3 +79,5 @@
 <http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0227822073211765"^^<http://www.w3.org/2001/XMLSchema#double> .
 
 <http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0741559961978044"^^<http://www.w3.org/2001/XMLSchema#double> .
+=======
+>>>>>>> branch 'feature-RDF4Jworkbench' of https://github.com/mikel-egana-aranguren/ALDAPA.git

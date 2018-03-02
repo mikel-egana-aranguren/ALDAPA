@@ -708,6 +708,10 @@ public class Manager {
 		linkDiscoverer.discoverLinks(configurationFile, resultFile);
 		return result;
 	}
+    
+    public void commit(){
+    	store.commit();
+    }
 
 	public void getFileHTTP(String url, String fileName) {
 		fileStore.getFileHTTP(url, fileName, false);

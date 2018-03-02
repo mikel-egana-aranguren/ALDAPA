@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 _:node1c7bf59cqx2 a <https://www.w3.org/ns/prov#Activity> ;
 	<https://www.w3.org/ns/prov#endedAtTime> "2018-02-27T12:08:03.916"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
 	<https://www.w3.org/ns/prov#qualifiedUsage> _:node1c7bf59cqx3 ;
@@ -69,3 +70,13 @@ _:node1c7bf59cqx3 a <https://www.w3.org/ns/prov#Usage> ;
 	<http://www.w3.org/ns/sparql-service-description#namedGraph> <http://euskadi.eus/graph/estaciones01> .
 
 <http://lod.eurohelp.es/aldapa/project/euskadimedioambiente> a <http://xmlns.com/foaf/0.1/Project> .
+=======
+<http://lod.eurohelp.es/aldapa/catalog/calidadaire> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/euskadimedioambiente> ;
+	a <http://www.w3.org/ns/dcat#Catalog> ;
+	<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/estaciones> .
+
+<http://lod.eurohelp.es/aldapa/project/euskadimedioambiente> a <http://xmlns.com/foaf/0.1/Project> .
+
+<http://lod.eurohelp.es/aldapa/dataset/estaciones> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
+	<http://www.w3.org/ns/sparql-service-description#namedGraph> <http://euskadi.eus/graph/estaciones01> .
+>>>>>>> branch 'feature-RDF4Jworkbench' of https://github.com/mikel-egana-aranguren/ALDAPA.git
