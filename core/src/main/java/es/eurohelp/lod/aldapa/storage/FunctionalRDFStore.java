@@ -33,6 +33,7 @@ public interface FunctionalRDFStore extends FunctionalSPARQLStore {
 
     public void saveModel(Model model) throws AldapaException;
 
+    public void commit();
     /**
      * 
      * Writes the content of a graph into an RDF file

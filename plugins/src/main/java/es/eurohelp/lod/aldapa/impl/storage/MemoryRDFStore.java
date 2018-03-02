@@ -112,4 +112,9 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
     public void deleteGraph(String graphUri) throws RDFStoreException {
         throw new UnsupportedOperationException("This functionality has not been implemented yet");
     }
+
+	@Override
+	public void commit() {
+		conn.commit();
+	}
 }

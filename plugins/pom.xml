@@ -38,5 +38,10 @@
 			<artifactId>shacl</artifactId>
 			<version>v1.0.0.rc2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.rdf4j</groupId>
+			<artifactId>rdf4j-runtime</artifactId>
+			<version>2.2.4</version>
+		</dependency>
 	</dependencies>
 </project>
