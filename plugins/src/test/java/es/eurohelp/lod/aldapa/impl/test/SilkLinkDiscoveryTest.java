@@ -13,8 +13,8 @@ import es.eurohelp.lod.aldapa.impl.modification.SILKLinkDiscovery;
 
 
 public class SilkLinkDiscoveryTest {
-	private String configurationFile = "data/silk-configuration.xml";
-	private String resultPath = "accepted_links.nt";
+	private String configurationFile = "silk-configuration.xml";
+	private String resultPath = "accepted-links.nt";
 	private SILKLinkDiscovery silk;
 
 	@Before
@@ -24,7 +24,6 @@ public class SilkLinkDiscoveryTest {
 
 	@Test
 	public void testEJIECalidadAireConverter() throws Exception {
-		String silkConfFile = FileUtils.readWholeFileAsUTF8(configurationFile);
 		assertTrue(silk.discoverLinks(configurationFile, resultPath));
 	}
 }

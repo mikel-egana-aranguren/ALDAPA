@@ -25,6 +25,7 @@ public class SILKLinkDiscovery extends LinkDiscoverer implements FunctionalLinkD
 
 	@Override
 	public boolean discoverLinks(String configurationFile, String resultFilePath) {
+		System.out.println(resultFilePath);
 		boolean result = true;
 		if (configurationFile.contains(".xml") && resultFilePath.contains(".nt")) {
 			File configFile = new File(configurationFile);
@@ -36,7 +37,8 @@ public class SILKLinkDiscovery extends LinkDiscoverer implements FunctionalLinkD
 					Silk.executeFile(configFile, null, 8, true);
 					String silkConfFile = FileUtils.readWholeFileAsUTF8(configurationFile);
 					// Si se han descubierto enlaces, se suben a la triple store
-					if (silkConfFile.length() != 0) {
+					String results = FileUtils.readWholeFileAsUTF8(resultFilePath);
+					if (results.length() != 0) {
 						LOGGER.info("Los enlaces se han guardado en la ruta especificada");
 					} else {
 						result = false;

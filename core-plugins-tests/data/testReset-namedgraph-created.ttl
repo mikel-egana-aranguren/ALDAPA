@@ -1,11 +1,11 @@
 
-_:node1c6ujim9px4 a <https://www.w3.org/ns/prov#Activity> ;
-	<https://www.w3.org/ns/prov#endedAtTime> "2018-02-22T12:15:08.223"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-	<https://www.w3.org/ns/prov#qualifiedUsage> _:node1c6ujim9px5 ;
-	<https://www.w3.org/ns/prov#startedAtTime> "2018-02-22T12:15:08.223"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+_:node1c7r3kikqx2 a <https://www.w3.org/ns/prov#Activity> ;
+	<https://www.w3.org/ns/prov#endedAtTime> "2018-03-05T13:54:31.400"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<https://www.w3.org/ns/prov#qualifiedUsage> _:node1c7r3kikqx3 ;
+	<https://www.w3.org/ns/prov#startedAtTime> "2018-03-05T13:54:31.384"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
 	<https://www.w3.org/ns/prov#wasAssociatedWith> <http://lod.eurohelp.es/aldapa/plugin/es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EJIECalidadAireConverter> .
 
-_:node1c6ujim9px5 a <https://www.w3.org/ns/prov#Usage> ;
+_:node1c7r3kikqx3 a <https://www.w3.org/ns/prov#Usage> ;
 	<https://www.w3.org/ns/prov#entity> <https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv> ;
 	<https://www.w3.org/ns/prov#hadRole> <http://www.w3.org/ns/csvw#csvEncodedTabularData> .
 
@@ -49,7 +49,28 @@ _:node1c6ujim9px5 a <https://www.w3.org/ns/prov#Usage> ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.247567997964374"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.988024000380936"^^<http://www.w3.org/2001/XMLSchema#double> .
 
-<http://euskadi.eus/graph/donosti-parkings-febr-001> <https://www.w3.org/ns/prov#wasGeneratedBy> _:node1c6ujim9px4 .
+<http://es.euskadi.eus/id/public-sector/geography/province/alava> a <http://schema.org/Place> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "Araba/Álava" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> a <http://schema.org/Place> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "Bizkaia" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/abantozierbena> a <http://schema.org/Place> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "Abanto y Ciérvana-Abanto Zierbena" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/agurain> a <http://schema.org/Place> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "Agurain/Salvatierra" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/alonsotegi> a <http://schema.org/Place> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "Alonsotegi" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/gasteiz> a <http://schema.org/Place> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "Vitoria-Gasteiz" .
+
+<http://eu.euskadi.eus/id/public-sector/geography/town/getxo> a <http://schema.org/Place> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "Getxo" .
+
+<http://euskadi.eus/graph/donosti-parkings-febr-001> <https://www.w3.org/ns/prov#wasGeneratedBy> _:node1c7r3kikqx2 .
 
 <http://lod.eurohelp.es/aldapa/catalog/donosti-parkings> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/donosti-movilidad> ;
 	a <http://www.w3.org/ns/dcat#Catalog> ;

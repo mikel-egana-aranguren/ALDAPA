@@ -709,7 +709,7 @@ public class Manager {
 		LOGGER.info("Links discovered are saved in: " + resultFile);
 		linkDiscoverer.discoverLinks(configurationFile, resultFile);
 		try {
-			String path = org.apache.jena.util.FileUtils.readWholeFileAsUTF8("data/linkdiscoverer/"+resultFile);
+			String path = org.apache.jena.util.FileUtils.readWholeFileAsUTF8(resultFile);
 			store.execSPARQLUpdate("INSERT DATA{ "+path+" }");
 		} catch (IOException e) {
 			e.printStackTrace();
