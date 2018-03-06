@@ -118,23 +118,19 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
 	 */
 	private String townSelector(String town) {
 		String townUri = null;
-		switch (town) {
-		case "Vitoria-Gasteiz":
+		Collator instance = Collator.getInstance();
+		instance.setStrength(Collator.NO_DECOMPOSITION);
+		if (instance.compare(town, "Vitoria-Gasteiz") == 0) {
 			townUri = EUSPLACEURI.GASTEIZ.getValue();
-			break;
-		case "Abanto y Ci�rvana-Abanto Zierbena":
+		} else if (instance.compare(town, "Abanto y Ciervana-Abanto Zierbena") == 0) {
 			townUri = EUSPLACEURI.ABANTOZIERBENA.getValue();
-			break;
-		case "Agurain/Salvatierra":
+		} else if (instance.compare(town, "Agurain/Salvatierra") == 0) {
 			townUri = EUSPLACEURI.AGURAIN.getValue();
-			break;
-		case "Getxo":
+		} else if (instance.compare(town, "Getxo") == 0) {
 			townUri = EUSPLACEURI.GETXO.getValue();
-			break;
-		case "Alonsotegi":
+		} else if (instance.compare(town, "Alonsotegi") == 0) {
 			townUri = EUSPLACEURI.ALONSOTEGI.getValue();
-			break;
-		default:
+		} else {
 			throw new AldapaException("No town");
 		}
 		return townUri;
