@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.eurohelp.lod.aldapa.impl.storage;
 
 import java.io.BufferedReader;

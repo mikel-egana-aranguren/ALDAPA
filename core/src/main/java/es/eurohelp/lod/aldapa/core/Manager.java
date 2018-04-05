@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.eurohelp.lod.aldapa.core;
 
 import java.io.ByteArrayInputStream;

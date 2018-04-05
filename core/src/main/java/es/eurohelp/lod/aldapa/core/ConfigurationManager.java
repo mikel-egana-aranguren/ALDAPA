@@ -56,7 +56,6 @@ public class ConfigurationManager {
 	private static final String DBNAMETOKEN = "dbName";
 
 	// RDF4JWorkbench
-	private static final String WORKBENCHCONFIGFILE = "WORKBENCH_CONFIG_FILE";
 	private static final String ABSTRACTRDF4JWORKBENCHCONNECTION = "es.eurohelp.lod.aldapa.storage.RDF4JHTTPConnection";
 
 	// CSV2RDF transformer
