@@ -27,7 +27,6 @@ public class RDF4JWorkbench extends RDF4JHTTPConnection implements FunctionalRDF
 	public RDF4JWorkbench(HTTPRepository repo) {
 		super(repo);
 		conn = this.getConn();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -41,8 +40,7 @@ public class RDF4JWorkbench extends RDF4JHTTPConnection implements FunctionalRDF
 			};
 			this.getConn().add(it);
 		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
+			LOGGER.error(e.getMessage());
 		}
 	}
 

@@ -1,8 +1,5 @@
 package es.eurohelp.lod.aldapa.storage;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.eclipse.rdf4j.IsolationLevels;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.TupleQueryResult;
@@ -10,7 +7,6 @@ import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
 
 public abstract class RDF4JHTTPConnection {
-	private static final Logger LOGGER = LogManager.getLogger(RDF4JHTTPConnection.class);
 	private RepositoryConnection conn;
 
 	public RDF4JHTTPConnection(HTTPRepository repo) {

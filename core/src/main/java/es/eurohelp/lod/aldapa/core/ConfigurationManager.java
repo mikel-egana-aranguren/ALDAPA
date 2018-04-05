@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
 
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
