@@ -39,21 +39,19 @@ public class RDF4JWorkbench extends RDF4JHTTPConnection implements FunctionalRDF
     @Override
     public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws AldapaException {
         ModelBuilder builder = new ModelBuilder();
+        String query= "";
         if (graphURI == null) {
-            GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}");
-            while (graphQueryResult.hasNext()) {
-                Statement stmt = graphQueryResult.next();
-                builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
-            }
+            query="CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}";
         } else {
-            GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery(
-                    "CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }");
-            builder.namedGraph(graphURI);
-            while (graphQueryResult.hasNext()) {
-                Statement stmt = graphQueryResult.next();
-                builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
-            }
+            query="CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }";
         }
+        GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery(query);
+        builder.namedGraph(graphURI);
+        while (graphQueryResult.hasNext()) {
+            Statement stmt = graphQueryResult.next();
+            builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
+        }
+        
         Model model = builder.build();
         Rio.write(model, outputstream, rdfformat);
     }
