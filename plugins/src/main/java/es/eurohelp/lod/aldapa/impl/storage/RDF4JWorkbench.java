@@ -3,9 +3,6 @@ package es.eurohelp.lod.aldapa.impl.storage;
 import java.io.FileOutputStream;
 import java.util.Iterator;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
@@ -21,7 +18,6 @@ import es.eurohelp.lod.aldapa.storage.RDF4JHTTPConnection;
 
 public class RDF4JWorkbench extends RDF4JHTTPConnection implements FunctionalRDFStore {
 
-	private static final Logger LOGGER = LogManager.getLogger(RDF4JWorkbench.class);
 	private RepositoryConnection conn;
 
 	public RDF4JWorkbench(HTTPRepository repo) {
@@ -31,7 +27,6 @@ public class RDF4JWorkbench extends RDF4JHTTPConnection implements FunctionalRDF
 
 	@Override
 	public void saveModel(Model model) throws AldapaException {
-		try {
 			Iterable<? extends Statement> it = new Iterable<Statement>() {
 
 				public Iterator<Statement> iterator() {
@@ -39,9 +34,6 @@ public class RDF4JWorkbench extends RDF4JHTTPConnection implements FunctionalRDF
 				}
 			};
 			this.getConn().add(it);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-		}
 	}
 
 	@Override
