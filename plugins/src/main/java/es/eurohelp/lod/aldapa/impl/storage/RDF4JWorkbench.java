@@ -27,13 +27,13 @@ public class RDF4JWorkbench extends RDF4JHTTPConnection implements FunctionalRDF
 
 	@Override
 	public void saveModel(Model model) throws AldapaException {
-			Iterable<? extends Statement> it = new Iterable<Statement>() {
+		Iterable<? extends Statement> it = new Iterable<Statement>() {
 
-				public Iterator<Statement> iterator() {
-					return model.iterator();
-				}
-			};
-			this.getConn().add(it);
+			public Iterator<Statement> iterator() {
+				return model.iterator();
+			}
+		};
+		this.getConn().add(it);
 	}
 
 	@Override
