@@ -42,7 +42,7 @@ public class SILKLinkDiscovery extends LinkDiscoverer implements FunctionalLinkD
                     throw new SilkWrongArgument();
                 }
             } catch (IOException e) {
-                LOGGER.error(e.getMessage());
+                LOGGER.error(e);
             }
             if (results.length() != 0) {
                 LOGGER.info("Los enlaces se han guardado en la ruta especificada");
