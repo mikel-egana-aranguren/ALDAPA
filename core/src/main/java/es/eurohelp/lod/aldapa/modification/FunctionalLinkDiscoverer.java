@@ -8,5 +8,5 @@ package es.eurohelp.lod.aldapa.modification;
  *
  */
 public interface FunctionalLinkDiscoverer {
-	public boolean discoverLinks(String configurationFile, String resultsFile);
+    public boolean discoverLinks(String configurationFile, String resultsFile);
 }

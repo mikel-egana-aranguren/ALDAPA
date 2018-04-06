@@ -31,7 +31,10 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
 
     /*
      * (non-Javadoc)
-     * @see es.eurohelp.lod.aldapa.transformation.RDFBatchConverter#setDataSource(java.io.InputStream)
+     * 
+     * @see
+     * es.eurohelp.lod.aldapa.transformation.RDFBatchConverter#setDataSource(
+     * java.io.InputStream)
      */
     @Override
     public void setDataSource(String inPath) throws AldapaException {
@@ -47,7 +50,10 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
 
     /*
      * (non-Javadoc)
-     * @see es.eurohelp.lod.aldapa.transformation.RDFBatchConverter#setModel(org.eclipse.rdf4j.model.Model)
+     * 
+     * @see
+     * es.eurohelp.lod.aldapa.transformation.RDFBatchConverter#setModel(org.
+     * eclipse.rdf4j.model.Model)
      */
     @Override
     public void setModel(Model model) {
@@ -56,7 +62,9 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
 
     /*
      * (non-Javadoc)
-     * @see es.eurohelp.lod.aldapa.transformation.RDFBatchConverter#getTransformedModel(java.lang.String)
+     * 
+     * @see es.eurohelp.lod.aldapa.transformation.RDFBatchConverter#
+     * getTransformedModel(java.lang.String)
      */
     @Override
     public Model getTransformedModel(String namedGraphURI) {
@@ -70,8 +78,9 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
             }
             process += 1;
             String name = record.get("Name");
-            String stationUri = EUSURI.BASEIDES.getValue() + NTITOKEN.ENVIRONMENT.getValue() + "/" + DOMAINTOKEN.EQUIPMENT.getValue() + "/"
-                    + CLASSTOKEN.STATION.getValue() + "/" + URIUtils.urify(null, null, name);
+            String stationUri = EUSURI.BASEIDES.getValue() + NTITOKEN.ENVIRONMENT.getValue() + "/"
+                    + DOMAINTOKEN.EQUIPMENT.getValue() + "/" + CLASSTOKEN.STATION.getValue() + "/"
+                    + URIUtils.urify(null, null, name);
             adder.addRDFSLABELTriple(stationUri, name, "es");
 
             String comment = record.get("Description");
@@ -84,20 +93,22 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
             adder.addTriple(stationUri, EXTERNALURI.DBOPROVINCE.getValue(), provinceSelector(province));
             adder.addRDFTYPETriple(provinceSelector(province), EXTERNALURI.SCHEMAPLACE.getValue());
             adder.addRDFSLABELTriple(provinceSelector(province), province, "es");
-            
+
             String town = record.get("Town");
             adder.addTriple(stationUri, EXTERNALURI.SCHEMALOCATION.getValue(), townSelector(town));
             adder.addRDFTYPETriple(townSelector(town), EXTERNALURI.SCHEMAPLACE.getValue());
             adder.addRDFSLABELTriple(townSelector(town), town, "es");
-            
+
             String address = record.get("Address");
             adder.addDataTripleXSDString(stationUri, EXTERNALURI.SCHEMAADDRESS.getValue(), address);
 
             String latitude = record.get("Latitude");
-            adder.addDataTripleXSDdouble(stationUri, EXTERNALURI.LATWGS84.getValue(), Double.valueOf(latitude.replace(",", ".")));
+            adder.addDataTripleXSDdouble(stationUri, EXTERNALURI.LATWGS84.getValue(),
+                    Double.valueOf(latitude.replace(",", ".")));
 
             String longitude = record.get("Longitude");
-            adder.addDataTripleXSDdouble(stationUri, EXTERNALURI.LONGWGS84.getValue(), Double.valueOf(longitude.replace(",", ".")));
+            adder.addDataTripleXSDdouble(stationUri, EXTERNALURI.LONGWGS84.getValue(),
+                    Double.valueOf(longitude.replace(",", ".")));
 
             adder.addRDFTYPETriple(stationUri, EXTERNALURI.SOSASENSOR.getValue());
         }
@@ -111,23 +122,23 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
     private String townSelector(String town) {
         String townUri = null;
         switch (town) {
-            case "Vitoria-Gasteiz":
-                townUri = EUSPLACEURI.GASTEIZ.getValue();
-                break;
-            case "Abanto y Ciérvana-Abanto Zierbena":
-                townUri = EUSPLACEURI.ABANTOZIERBENA.getValue();
-                break;
-            case "Agurain/Salvatierra":
-                townUri = EUSPLACEURI.AGURAIN.getValue();
-                break;
-            case "Getxo":
-                townUri = EUSPLACEURI.GETXO.getValue();
-                break;
-            case "Alonsotegi":
-                townUri = EUSPLACEURI.ALONSOTEGI.getValue();
-                break;
-            default:
-                throw new AldapaException("No town");
+        case "Vitoria-Gasteiz":
+            townUri = EUSPLACEURI.GASTEIZ.getValue();
+            break;
+        case "Abanto y CiÃ©rvana-Abanto Zierbena":
+            townUri = EUSPLACEURI.ABANTOZIERBENA.getValue();
+            break;
+        case "Agurain/Salvatierra":
+            townUri = EUSPLACEURI.AGURAIN.getValue();
+            break;
+        case "Getxo":
+            townUri = EUSPLACEURI.GETXO.getValue();
+            break;
+        case "Alonsotegi":
+            townUri = EUSPLACEURI.ALONSOTEGI.getValue();
+            break;
+        default:
+            throw new AldapaException("No town");
         }
         return townUri;
     }
@@ -139,19 +150,19 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
     private String provinceSelector(String province) {
         String provinceURI = null;
         switch (province) {
-            case "Araba/Álava":
-                provinceURI = EUSPLACEURI.ALAVA.getValue();
-                break;
-            case "Bizkaia":
-                provinceURI = EUSPLACEURI.BIZKAIA.getValue();
-                break;
-            case "Gipuzkoa":
-                provinceURI = EUSPLACEURI.GIPUZKOA.getValue();
-                break;
-            default:
-                throw new AldapaException("No province");
+        case "Araba/Ã�lava":
+            provinceURI = EUSPLACEURI.ALAVA.getValue();
+            break;
+        case "Bizkaia":
+            provinceURI = EUSPLACEURI.BIZKAIA.getValue();
+            break;
+        case "Gipuzkoa":
+            provinceURI = EUSPLACEURI.GIPUZKOA.getValue();
+            break;
+        default:
+            throw new AldapaException("No province");
         }
         return provinceURI;
     }
-    
+
 }

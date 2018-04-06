@@ -1,15 +1,15 @@
 package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
 
 public enum EUSPROVINCE {
-	 ARABA("Araba/Álava"), BIZKAIA("Bizkaia");
+    ARABA("Araba/Álava"), BIZKAIA("Bizkaia");
 
-	    public final String eusprovinceuri;
+    public final String eusprovinceuri;
 
-	    private EUSPROVINCE(String eusprovinceuri) {
-	        this.eusprovinceuri = eusprovinceuri;
-	    }
+    private EUSPROVINCE(String eusprovinceuri) {
+        this.eusprovinceuri = eusprovinceuri;
+    }
 
-	    public String getValue() {
-	        return eusprovinceuri;
-	    }
+    public String getValue() {
+        return eusprovinceuri;
+    }
 }

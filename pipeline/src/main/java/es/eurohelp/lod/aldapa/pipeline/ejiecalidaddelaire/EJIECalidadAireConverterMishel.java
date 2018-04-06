@@ -6,43 +6,46 @@ import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.Manager;
 
 public class EJIECalidadAireConverterMishel {
-	public static void main(String[] args) {
-		// Load the configuration from file configuration.yml
-		ConfigurationManager config = ConfigurationManager.getInstance("configurationMishel.yml");
+    private EJIECalidadAireConverterMishel() {
+    }
 
-		// Create a manager with the configuration
-		Manager manager = new Manager(config);
+    public static void main(String[] args) {
+        // Load the configuration from file configuration.yml
+        ConfigurationManager config = ConfigurationManager.getInstance("configurationMishel.yml");
 
-		// Add project
-		String projectUri = manager.addProject("EuskadiMedioAmbiente");
+        // Create a manager with the configuration
+        Manager manager = new Manager(config);
 
-		// Add catalog
-		String catalogUri = manager.addCatalog("CalidadAire", projectUri);
+        // Add project
+        String projectUri = manager.addProject("EuskadiMedioAmbiente");
 
-		// Add dataset
-		String datasetUri = manager.addDataset("Estaciones", catalogUri);
+        // Add catalog
+        String catalogUri = manager.addCatalog("CalidadAire", projectUri);
 
-		// Add namedGraph
-		String namedGraphUri = manager.addNamedGraph("Estaciones01", datasetUri);
+        // Add dataset
+        String datasetUri = manager.addDataset("Estaciones", catalogUri);
 
-		// Add data to named graph
-		manager.updateFileHTTP(
-				"https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv",
-				"estaciones.csv");
+        // Add namedGraph
+        String namedGraphUri = manager.addNamedGraph("Estaciones01", datasetUri);
 
-		manager.addDataToNamedGraph(namedGraphUri, "estaciones.csv");
-		manager.commit();
+        // Add data to named graph
+        manager.updateFileHTTP(
+                "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv",
+                "estaciones.csv");
 
-		// Validate data
-		manager.analyseGraph();
+        manager.addDataToNamedGraph(namedGraphUri, "estaciones.csv");
+        manager.commit();
 
-		// Discover links
-		manager.discoverLinks();
+        // Validate data
+        manager.analyseGraph();
 
-		// Flush backbone
-		manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl", RDFFormat.TURTLE);
+        // Discover links
+        manager.discoverLinks();
 
-		// Flush data from named graph
-		manager.flushGraph(namedGraphUri, "data/EuskadiMedioAmbienteData.ttl", RDFFormat.TURTLE);
-	}
+        // Flush backbone
+        manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl", RDFFormat.TURTLE);
+
+        // Flush data from named graph
+        manager.flushGraph(namedGraphUri, "data/EuskadiMedioAmbienteData.ttl", RDFFormat.TURTLE);
+    }
 }

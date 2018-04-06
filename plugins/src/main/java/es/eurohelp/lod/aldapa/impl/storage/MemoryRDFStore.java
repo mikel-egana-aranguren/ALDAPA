@@ -24,7 +24,8 @@ import es.eurohelp.lod.aldapa.util.MIMEType;
 
 /**
  * 
- * A simple memory store that does not persist data, based on RDF4J. To persist data, use flushGraph.
+ * A simple memory store that does not persist data, based on RDF4J. To persist
+ * data, use flushGraph.
  * 
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
@@ -42,6 +43,7 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
 
     /*
      * (non-Javadoc)
+     * 
      * @see es.eurohelp.opendata.aldapa.storage.RDFStore#stopRDFStore()
      */
     public void stopRDFStore() {
@@ -51,7 +53,10 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
 
     /*
      * (non-Javadoc)
-     * @see es.eurohelp.opendata.aldapa.storage.RDFStore#saveModel(org.openrdf.model.Model)
+     * 
+     * @see
+     * es.eurohelp.opendata.aldapa.storage.RDFStore#saveModel(org.openrdf.model.
+     * Model)
      */
     public void saveModel(Model model) throws RDFStoreException {
         LOGGER.info("Adding model to SailRepository(MemoryStore)");
@@ -71,10 +76,13 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
 
     /*
      * (non-Javadoc)
-     * @see es.eurohelp.opendata.aldapa.storage.RDFStore#flushGraph(java.lang.String, java.io.FileOutputStream,
-     * org.openrdf.rio.RDFFormat)
+     * 
+     * @see
+     * es.eurohelp.opendata.aldapa.storage.RDFStore#flushGraph(java.lang.String,
+     * java.io.FileOutputStream, org.openrdf.rio.RDFFormat)
      */
-    public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws RDFStoreException {
+    public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat)
+            throws RDFStoreException {
 
         LOGGER.info("Format to flush graph: " + rdfformat.getDefaultMIMEType());
 
@@ -84,16 +92,16 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
 
         // Issue 26
         switch (foundtype) {
-            case TURTLE:
-                rdfwriter = new TurtleWriter(outputstream);
-                LOGGER.info("TurtleWriter chosen");
-                break;
-            case TRIG:
-                rdfwriter = new TriGWriter(outputstream);
-                LOGGER.info("TriGWriter chosen");
-                break;
-            default:
-                break;
+        case TURTLE:
+            rdfwriter = new TurtleWriter(outputstream);
+            LOGGER.info("TurtleWriter chosen");
+            break;
+        case TRIG:
+            rdfwriter = new TriGWriter(outputstream);
+            LOGGER.info("TriGWriter chosen");
+            break;
+        default:
+            break;
         }
 
         if (graphURI != null) {
@@ -107,14 +115,16 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
 
     /*
      * (non-Javadoc)
-     * @see es.eurohelp.opendata.aldapa.storage.RDFStore#deleteGraph(java.lang.String)
+     * 
+     * @see es.eurohelp.opendata.aldapa.storage.RDFStore#deleteGraph(java.lang.
+     * String)
      */
     public void deleteGraph(String graphUri) throws RDFStoreException {
         throw new UnsupportedOperationException("This functionality has not been implemented yet");
     }
 
-	@Override
-	public void commit() {
-		conn.commit();
-	}
+    @Override
+    public void commit() {
+        conn.commit();
+    }
 }

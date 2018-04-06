@@ -43,7 +43,8 @@ public class ConfigurationManagerTest {
 
     @Test
     public final void testGetConfigPropertyValue() throws IOException, ConfigurationException {
-        assertEquals("http://lod.eurohelp.es/aldapa/project/", testManager.getConfigPropertyValue(ALDAPACONFIGFILETOKEN, PROJECTBASETOKEN));
+        assertEquals("http://lod.eurohelp.es/aldapa/project/",
+                testManager.getConfigPropertyValue(ALDAPACONFIGFILETOKEN, PROJECTBASETOKEN));
     }
 
     @Test
