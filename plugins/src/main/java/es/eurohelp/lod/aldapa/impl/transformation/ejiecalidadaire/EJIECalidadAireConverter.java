@@ -164,5 +164,4 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
         }
         return provinceURI;
     }
-
 }

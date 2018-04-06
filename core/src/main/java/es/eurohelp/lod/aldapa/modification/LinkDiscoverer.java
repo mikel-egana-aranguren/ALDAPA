@@ -8,6 +8,4 @@ package es.eurohelp.lod.aldapa.modification;
  *
  */
 public abstract class LinkDiscoverer {
-    public LinkDiscoverer() {
-    }
 }
