@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
 
 import java.io.FileReader;
@@ -91,13 +88,9 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
 
             String province = record.get("Province");
             adder.addTriple(stationUri, EXTERNALURI.DBOPROVINCE.getValue(), provinceSelector(province));
-            adder.addRDFTYPETriple(provinceSelector(province), EXTERNALURI.SCHEMAPLACE.getValue());
-            adder.addRDFSLABELTriple(provinceSelector(province), province, "es");
 
             String town = record.get("Town");
             adder.addTriple(stationUri, EXTERNALURI.SCHEMALOCATION.getValue(), townSelector(town));
-            adder.addRDFTYPETriple(townSelector(town), EXTERNALURI.SCHEMAPLACE.getValue());
-            adder.addRDFSLABELTriple(townSelector(town), town, "es");
 
             String address = record.get("Address");
             adder.addDataTripleXSDString(stationUri, EXTERNALURI.SCHEMAADDRESS.getValue(), address);
@@ -125,7 +118,7 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
         case "Vitoria-Gasteiz":
             townUri = EUSPLACEURI.GASTEIZ.getValue();
             break;
-        case "Abanto y Ciérvana-Abanto Zierbena":
+        case "Abanto y Ci�rvana-Abanto Zierbena":
             townUri = EUSPLACEURI.ABANTOZIERBENA.getValue();
             break;
         case "Agurain/Salvatierra":
@@ -150,7 +143,7 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
     private String provinceSelector(String province) {
         String provinceURI = null;
         switch (province) {
-        case "Araba/Álava":
+        case "Araba/�lava":
             provinceURI = EUSPLACEURI.ALAVA.getValue();
             break;
         case "Bizkaia":
