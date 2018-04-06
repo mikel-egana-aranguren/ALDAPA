@@ -712,7 +712,7 @@ public class Manager {
             String path = org.apache.jena.util.FileUtils.readWholeFileAsUTF8(resultFile);
             store.execSPARQLUpdate("INSERT DATA{ " + path + " }");
         } catch (IOException e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error(e);
         }
 
         return result;

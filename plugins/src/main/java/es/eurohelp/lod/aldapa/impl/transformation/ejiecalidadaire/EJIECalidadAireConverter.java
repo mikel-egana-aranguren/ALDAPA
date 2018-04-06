@@ -125,7 +125,7 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
         case "Vitoria-Gasteiz":
             townUri = EUSPLACEURI.GASTEIZ.getValue();
             break;
-        case "Abanto y CiÃ©rvana-Abanto Zierbena":
+        case "Abanto y Ciérvana-Abanto Zierbena":
             townUri = EUSPLACEURI.ABANTOZIERBENA.getValue();
             break;
         case "Agurain/Salvatierra":
@@ -150,7 +150,7 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
     private String provinceSelector(String province) {
         String provinceURI = null;
         switch (province) {
-        case "Araba/Ã�lava":
+        case "Araba/Álava":
             provinceURI = EUSPLACEURI.ALAVA.getValue();
             break;
         case "Bizkaia":
