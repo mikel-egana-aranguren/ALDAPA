@@ -1,7 +1,5 @@
 package es.eurohelp.lod.aldapa.storage;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.TupleQueryResult;
