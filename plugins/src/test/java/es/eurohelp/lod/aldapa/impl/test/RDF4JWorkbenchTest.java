@@ -76,14 +76,14 @@ public class RDF4JWorkbenchTest {
 
     @Test
     public final void ejecutarSPARQLTupleQuery() {
-        TupleQueryResult result = store.execSPARQLTupleQuery(TUPLEQUERY);
-        List<String> bindingNames = result.getBindingNames();
+        TupleQueryResult resultado = store.execSPARQLTupleQuery(TUPLEQUERY);
+        List<String> bindingNames = resultado.getBindingNames();
         boolean contains = false;
-        while (result.hasNext()) {
-            BindingSet bindingSet = result.next();
-            if (bindingSet.getValue(bindingNames.get(0)).toString().equals(SUBJECT)
-                    && bindingSet.getValue(bindingNames.get(1)).toString().equals(PREDICATE)
-                    && bindingSet.getValue(bindingNames.get(2)).toString().equals(OBJECT)) {
+        while (resultado.hasNext()) {
+            BindingSet set = resultado.next();
+            if (set.getValue(bindingNames.get(0)).toString().equals(SUBJECT)
+                    && set.getValue(bindingNames.get(1)).toString().equals(PREDICATE)
+                    && set.getValue(bindingNames.get(2)).toString().equals(OBJECT)) {
                 contains = true;
                 break;
             }

@@ -37,7 +37,7 @@ public class RDF4JWorkbench extends RDF4JHTTPConnection implements FunctionalRDF
     }
 
     @Override
-    public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat RDFFormat) throws AldapaException {
+    public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws AldapaException {
         ModelBuilder modelBuilder = new ModelBuilder();
         if (graphURI == null) {
             GraphQueryResult result = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}");
@@ -54,7 +54,7 @@ public class RDF4JWorkbench extends RDF4JHTTPConnection implements FunctionalRDF
             }
         }
         Model model = modelBuilder.build();
-        Rio.write(model, outputstream, RDFFormat);
+        Rio.write(model, outputstream, rdfformat);
     }
 
     @Override
