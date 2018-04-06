@@ -78,21 +78,7 @@ public class RDF4JWorkbenchTest {
     }
 
     @Test
-    public final void testExecSPARQLGraphQuery() {
-        GraphQueryResult result = store.execSPARQLGraphQuery(GRAPHQUERY);
-        boolean contains = false;
-        while (result.hasNext()) {
-            String resultStmt = result.next().toString();
-            if (resultStmt.equals(STMT)) {
-                contains = true;
-                break;
-            }
-        }
-        assertTrue(contains);
-    }
-
-    @Test
-    public final void testExecSPARQLTupleQuery() {
+    public final void ejecutarSPARQLTupleQuery() {
         TupleQueryResult result = store.execSPARQLTupleQuery(TUPLEQUERY);
         List<String> bindingNames = result.getBindingNames();
         boolean contains = false;
@@ -109,18 +95,18 @@ public class RDF4JWorkbenchTest {
     }
 
     @Test
-    public final void testExecSPARQLUpdate() {
+    public final void ejecutarActualizacionSPARQL() {
         store.execSPARQLUpdate(QUERYDELETE);
     }
 
     @Test
-    public final void testFlushGraph() {
+    public final void flushGraph() {
         try {
-            ModelBuilder builder = new ModelBuilder();
-            builder.namedGraph(ALDAPAFLUSHURI).setNamespace("ex", "http://lod.eurohelp.es/flush")
+            ModelBuilder modelBuilder = new ModelBuilder();
+            modelBuilder.namedGraph(ALDAPAFLUSHURI).setNamespace("ex", "http://lod.eurohelp.es/flush")
                     .subject("ex:Mikelflush").add(RDF.TYPE, "ex:Humanflush")
                     .add(FOAF.FIRST_NAME, "Mikel Egana Aranguren flush flush flush");
-            Model model = builder.build();
+            Model model = modelBuilder.build();
             store.saveModel(model);
             store.flushGraph(ALDAPAFLUSHURI, new FileOutputStream("data/BlazegraphRESTStoreTest-flushNamedGraph.trig"),
                     RDFFormat.TRIG);
@@ -133,11 +119,11 @@ public class RDF4JWorkbenchTest {
     }
 
     @Test
-    public final void testDeleteGraph() {
-        ModelBuilder builder = new ModelBuilder();
-        builder.namedGraph("http://lod.eurohelp.es/graph/aldapa").setNamespace("ex", "http://lod.eurohelp.es/")
+    public final void borrarGrafo() {
+        ModelBuilder modelBuilder = new ModelBuilder();
+        modelBuilder.namedGraph("http://lod.eurohelp.es/graph/aldapa").setNamespace("ex", "http://lod.eurohelp.es/")
                 .subject("ex:Mikel").add(RDF.TYPE, "ex:Human").add(FOAF.FIRST_NAME, "Mikel Egana Aranguren");
-        Model model = builder.build();
+        Model model = modelBuilder.build();
         store.saveModel(model);
         store.deleteGraph("http://lod.eurohelp.es/graph/aldapa");
     }

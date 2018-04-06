@@ -102,19 +102,20 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
     public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat)
             throws RDFStoreException {
         ModelBuilder builder = new ModelBuilder();
-        String query= "";
         if (graphURI == null) {
-            query="CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}";
+            GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}");
+            while (graphQueryResult.hasNext()) {
+                Statement stmt = graphQueryResult.next();
+                builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
+            }
         } else {
-            query="CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }";
+            GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }");
+            builder.namedGraph(graphURI);
+            while (graphQueryResult.hasNext()) {
+                Statement stmt = graphQueryResult.next();
+                builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
+            }
         }
-        GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery(query);
-        builder.namedGraph(graphURI);
-        while (graphQueryResult.hasNext()) {
-            Statement stmt = graphQueryResult.next();
-            builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
-        }
-        
         Model model = builder.build();
         Rio.write(model, outputstream, rdfformat);
     }
