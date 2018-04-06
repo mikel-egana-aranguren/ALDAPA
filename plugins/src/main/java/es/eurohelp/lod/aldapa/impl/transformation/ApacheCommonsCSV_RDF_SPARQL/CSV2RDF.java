@@ -59,11 +59,16 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFB
             lines++;
             if (record.isConsistent()) {
                 count++;
+                Iterator recordIterator = record.iterator();
+                while(recordIterator.hasNext()){
+                    String cellValue = (String) recordIterator.next(); 
+                    LOGGER.info(cellValue);
+                }
             } else {
                 LOGGER.info(recordNumber + " inconsistent line, not processed");
             }
         }
-        LOGGER.info(count + " inconsistent lines from " + lines);
+        LOGGER.info(count + " consistent lines from " + lines);
         return adder.getModel();
     }
 }
