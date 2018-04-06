@@ -65,6 +65,9 @@ public class ConfigurationManager {
     // RDF validator
     private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
     private static final String ABSTRACTRDFQUALITYVALIDATOR = "es.eurohelp.lod.aldapa.modification.RDFQualityValidator";
+    
+    //message
+    private static final String STORE_STARTED = "File Store started";
 
     /**
      * The configuration is stored in a HashMap:
@@ -237,7 +240,7 @@ public class ConfigurationManager {
                 String dbName = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, DBNAMETOKEN);
                 rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(endpointURL,
                         dbName);
-                LOGGER.info("File Store started ");
+                LOGGER.info(STORE_STARTED);
             } else if (rdfStoreSuperClassName.equals(ABSTRACTRDF4JWORKBENCHCONNECTION)) {
                 Class[] cArg = new Class[1];
                 cArg[0] = HTTPRepository.class;
@@ -245,7 +248,7 @@ public class ConfigurationManager {
                 HTTPRepository repo = new HTTPRepository(endpointURL);
                 repo.setUsernameAndPassword("admin", "admin");
                 rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(repo);
-                LOGGER.info("File Store started ");
+                LOGGER.info(STORE_STARTED);
                 LOGGER.info("RD4J Workbench Database started");
             } else {
                 throw new CouldNotInitialisePluginException(rdfStoreClass.getName());

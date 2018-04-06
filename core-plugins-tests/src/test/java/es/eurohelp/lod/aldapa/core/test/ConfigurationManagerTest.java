@@ -63,7 +63,8 @@ public class ConfigurationManagerTest {
         try {
             FunctionalRDFStore rdfStore = testManager.getRDFStore();
             ModelBuilder builder = new ModelBuilder();
-            builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
+            builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist")
+                    .add(FOAF.FIRST_NAME, "Pablo");
             Model model = builder.build();
             rdfStore.saveModel(model);
         } catch (AldapaException e) {
@@ -76,7 +77,8 @@ public class ConfigurationManagerTest {
         try {
             FunctionalRDFStore rdfStore = testManager2.getRDFStore();
             ModelBuilder builder = new ModelBuilder();
-            builder.setNamespace("ex", "http://example.com/").subject("ex:Mikel").add(RDF.TYPE, "ex:Developer").add(FOAF.FIRST_NAME, "Mikel");
+            builder.setNamespace("ex", "http://example.com/").subject("ex:Mikel").add(RDF.TYPE, "ex:Developer")
+                    .add(FOAF.FIRST_NAME, "Mikel");
             Model model = builder.build();
             rdfStore.saveModel(model);
         } catch (AldapaException e) {

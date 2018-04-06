@@ -95,15 +95,18 @@ public class ManagerTest {
         // Reset manager
         manager.reset();
 
-        // After reseting, if we try to add a catalog, it should throw and exception since the project does not
+        // After reseting, if we try to add a catalog, it should throw and
+        // exception since the project does not
         // exist
         thrown.expect(ProjectNotFoundException.class);
-        thrown.expectMessage("The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
+        thrown.expectMessage(
+                "The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
         try {
             manager.addCatalog(CATALOGNAME, PROJECTURI);
         } finally {
             // There should be no data in the files
-            manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testReset-namedgraph-data-deleted.trig", RDFFormat.TRIG);
+            manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testReset-namedgraph-data-deleted.trig",
+                    RDFFormat.TRIG);
             manager.flushGraph(null, TESTDATAOUTPUTDIR + "testReset-namedgraph-deleted.ttl", RDFFormat.TURTLE);
             assertTrue(fileutils.fileIsEmpty(TESTDATAOUTPUTDIR + "testReset-namedgraph-deleted.ttl"));
         }
@@ -120,7 +123,8 @@ public class ManagerTest {
     }
 
     /**
-     * Test method for {@link es.eurohelp.lod.aldapa.core.Manager#addProject(java.lang.String)}.
+     * Test method for
+     * {@link es.eurohelp.lod.aldapa.core.Manager#addProject(java.lang.String)}.
      * 
      * @throws URISyntaxException
      * @throws IOException
@@ -168,7 +172,8 @@ public class ManagerTest {
         manager.addDataset(DATASETNAME, CATALOGURI);
         String namedGraphURI = manager.addNamedGraph(GRAPHNAME, DATASETURI);
         manager.addDataToNamedGraph(namedGraphURI, CSVPATH);
-        manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testAddDataToNamedGraph-data-added.trig", RDFFormat.TRIG);
+        manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "testAddDataToNamedGraph-data-added.trig",
+                RDFFormat.TRIG);
         manager.flushGraph(null, TESTDATAOUTPUTDIR + "testAddDataToNamedGraph-namedgraph-added.ttl", RDFFormat.TURTLE);
     }
 
@@ -180,7 +185,8 @@ public class ManagerTest {
         manager.deleteProject(PROJECTURI);
         manager.flushGraph(null, TESTDATAOUTPUTDIR + "project-deleted.trig", RDFFormat.TRIG);
         thrown.expect(ProjectNotFoundException.class);
-        thrown.expectMessage("The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
+        thrown.expectMessage(
+                "The project does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/project/donosti-movilidad");
         manager.addCatalog(CATALOGNAME, PROJECTURI);
     }
 
@@ -191,7 +197,8 @@ public class ManagerTest {
         manager.deleteCatalog(CATALOGURI);
         manager.flushGraph(null, TESTDATAOUTPUTDIR + "catalog-deleted.trig", RDFFormat.TRIG);
         thrown.expect(CatalogNotFoundException.class);
-        thrown.expectMessage("The catalog does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/catalog/donosti-parkings");
+        thrown.expectMessage(
+                "The catalog does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/catalog/donosti-parkings");
         manager.addDataset(DATASETNAME, CATALOGURI);
     }
 
@@ -202,7 +209,8 @@ public class ManagerTest {
         manager.deleteDataset(DATASETURI);
         manager.flushGraph(null, TESTDATAOUTPUTDIR + "dataset-deleted.trig", RDFFormat.TRIG);
         thrown.expect(DatasetNotFoundException.class);
-        thrown.expectMessage("The dataset does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr");
+        thrown.expectMessage(
+                "The dataset does not exist in the RDF Store: http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr");
         manager.addNamedGraph(GRAPHNAME, DATASETURI);
     }
 
@@ -313,8 +321,10 @@ public class ManagerTest {
         String datasetURI = manager.addDataset(AIRQUALITYDATASETNAME, catalogURI);
         String namedGraphURI = manager.addNamedGraph(ESTACIONESGRAPHNAME, datasetURI);
         manager.addDataToNamedGraph(namedGraphURI, CSVPATH);
-        manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "test-ejie-calidad-aire-namedgraph-created.ttl", RDFFormat.TURTLE);
-        manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "test-ejie-calidad-aire-namedgraph-created.trig", RDFFormat.TRIG);
+        manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "test-ejie-calidad-aire-namedgraph-created.ttl",
+                RDFFormat.TURTLE);
+        manager.flushGraph(namedGraphURI, TESTDATAOUTPUTDIR + "test-ejie-calidad-aire-namedgraph-created.trig",
+                RDFFormat.TRIG);
         manager.analyseGraph();
     }
 
