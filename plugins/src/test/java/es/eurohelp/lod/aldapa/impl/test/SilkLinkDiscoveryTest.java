@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.eurohelp.lod.aldapa.core.exception.SilkLinksNotDiscoveredException;
 import es.eurohelp.lod.aldapa.impl.modification.SILKLinkDiscovery;
 
 public class SilkLinkDiscoveryTest {
@@ -18,7 +19,7 @@ public class SilkLinkDiscoveryTest {
     }
 
     @Test
-    public void testEJIECalidadAireConverter() throws Exception {
+    public void testEJIECalidadAireConverter() throws SilkLinksNotDiscoveredException {
         assertTrue(silk.discoverLinks(configurationFile, resultPath));
     }
 }
