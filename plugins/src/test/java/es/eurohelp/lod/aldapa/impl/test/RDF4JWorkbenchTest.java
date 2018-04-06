@@ -15,7 +15,6 @@ import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.query.BindingSet;
-import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
 import org.eclipse.rdf4j.rio.RDFFormat;
@@ -30,13 +29,10 @@ import es.eurohelp.lod.aldapa.util.YAMLUtils;
 public class RDF4JWorkbenchTest {
     private static final Logger LOGGER = LogManager.getLogger(RDF4JWorkbenchTest.class);
     private static final String BOOLEANQUERYASK = "PREFIX foaf:<http://xmlns.com/foaf/0.1/> PREFIX ex:<http://example.org/> ASK {ex:Picasso foaf:firstName ?name}";
-    private static final String GRAPHQUERY = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "CONSTRUCT {"
-            + "?o <http://example.com/prop> ?s ." + "}" + "WHERE { " + "?s rdf:type ?o . " + "}";
     private static final String TUPLEQUERY = "SELECT * WHERE {?s ?p ?o}";
     private static final String SUBJECT = "http://example.org/Picasso";
     private static final String PREDICATE = "http://xmlns.com/foaf/0.1/firstName";
     private static final String OBJECT = "\"Pablo\"^^<http://www.w3.org/2001/XMLSchema#string>";
-    private static final String STMT = "(http://example.org/Artist, http://example.com/prop, http://example.org/Picasso) [null]";
     private static final String QUERYDELETE = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
             + "PREFIX ex:<http://example.org/> " + "DELETE {" + "?artist rdf:type ex:Artist . " + "}" + "WHERE { "
             + "?artist rdf:type ex:Artist . " + "}";
@@ -76,6 +72,7 @@ public class RDF4JWorkbenchTest {
     public final void testSaveModel() {
         assertTrue(store.execSPARQLBooleanQuery(BOOLEANQUERYASK));
     }
+
 
     @Test
     public final void ejecutarSPARQLTupleQuery() {
