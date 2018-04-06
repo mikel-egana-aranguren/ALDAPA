@@ -115,7 +115,7 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
             }
         }
 
-        LOGGER.info(count + " lineas inconsistentes, de " + lines);
+        LOGGER.info(count + " lineas consistentes, de " + lines);
 
         return adder.getModel();
     }

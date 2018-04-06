@@ -105,7 +105,7 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
             }
         }
 
-        LOGGER.info(count + " lineas inconsistentes, de " + lines);
+        LOGGER.info(count + " lineas consistentes, de " + lines);
 
         return adder.getModel();
     }
