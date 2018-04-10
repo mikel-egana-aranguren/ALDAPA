@@ -112,47 +112,53 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
 		return adder.getModel();
 	}
 
-	/**
-	 * @param town
-	 * @return
-	 */
-	private String townSelector(String town) {
-		String townUri = null;
-		Collator instance = Collator.getInstance();
-		instance.setStrength(Collator.NO_DECOMPOSITION);
-		if (instance.compare(town, "Vitoria-Gasteiz") == 0) {
-			townUri = EUSPLACEURI.GASTEIZ.getValue();
-		} else if (instance.compare(town, "Abanto y Ciervana-Abanto Zierbena") == 0) {
-			townUri = EUSPLACEURI.ABANTOZIERBENA.getValue();
-		} else if (instance.compare(town, "Agurain/Salvatierra") == 0) {
-			townUri = EUSPLACEURI.AGURAIN.getValue();
-		} else if (instance.compare(town, "Getxo") == 0) {
-			townUri = EUSPLACEURI.GETXO.getValue();
-		} else if (instance.compare(town, "Alonsotegi") == 0) {
-			townUri = EUSPLACEURI.ALONSOTEGI.getValue();
-		} else {
-			throw new AldapaException("No town");
-		}
-		return townUri;
-	}
+	   /**
+     * @param town
+     * @return
+     */
+    private String townSelector(String town) {
+        String townUri = null;
+        switch (town) {
+        case "Vitoria-Gasteiz":
+            townUri = EUSPLACEURI.GASTEIZ.getValue();
+            break;
+        case "Abanto y Ciérvana-Abanto Zierbena":
+            townUri = EUSPLACEURI.ABANTOZIERBENA.getValue();
+            break;
+        case "Agurain/Salvatierra":
+            townUri = EUSPLACEURI.AGURAIN.getValue();
+            break;
+        case "Getxo":
+            townUri = EUSPLACEURI.GETXO.getValue();
+            break;
+        case "Alonsotegi":
+            townUri = EUSPLACEURI.ALONSOTEGI.getValue();
+            break;
+        default:
+            throw new AldapaException("No town");
+        }
+        return townUri;
+    }
 
-	/**
-	 * @param province
-	 * @return
-	 */
-	private String provinceSelector(String province) {
-		String provinceURI = null;
-		Collator instance = Collator.getInstance();
-		instance.setStrength(Collator.NO_DECOMPOSITION);
-		if (instance.compare(province, "Araba/Alava") == 0) {
-			provinceURI = EUSPLACEURI.ALAVA.getValue();
-		} else if (instance.compare(province, "Bizkaia") == 0) {
-			provinceURI = EUSPLACEURI.BIZKAIA.getValue();
-		} else if (instance.compare(province, "Gipuzkoa") == 0) {
-			provinceURI = EUSPLACEURI.GIPUZKOA.getValue();
-		} else {
-			throw new AldapaException("No province");
-		}
-		return provinceURI;
-	}
+	 /**
+     * @param province
+     * @return
+     */
+    private String provinceSelector(String province) {
+        String provinceURI = null;
+        switch (province) {
+        case "Araba/Álava":
+            provinceURI = EUSPLACEURI.ALAVA.getValue();
+            break;
+        case "Bizkaia":
+            provinceURI = EUSPLACEURI.BIZKAIA.getValue();
+            break;
+        case "Gipuzkoa":
+            provinceURI = EUSPLACEURI.GIPUZKOA.getValue();
+            break;
+        default:
+            throw new AldapaException("No province");
+        }
+        return provinceURI;
+    }
 }

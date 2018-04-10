@@ -71,5 +71,4 @@ public class GrafterRDFConverter extends CSV2RDFBatchConverter implements Functi
         }
         return adder.getModel();
     }
-
 }
