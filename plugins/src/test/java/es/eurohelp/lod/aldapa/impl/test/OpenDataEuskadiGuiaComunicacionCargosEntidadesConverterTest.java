@@ -22,35 +22,29 @@ import es.eurohelp.lod.aldapa.util.RDFUtils;
  */
 public class OpenDataEuskadiGuiaComunicacionCargosEntidadesConverterTest {
 
-    private static final String CSVFILEES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_cargos_datos_completos.csv";
-    private static final String OUTPUTTURTLEFILEES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_cargos_datos_completos.nquads";
+    private static final String CSVFILE = "data/OpenDataEuskadiGuiaComunicacion/gc_cargos_datos_completos.csv";
+    private static final String OUTPUTTURTLEFILE = "data/OpenDataEuskadiGuiaComunicacion/gc_cargos_datos_completos.nquads";
     
-    private static final String CSVFILEENTIDADESES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_entidades_datos_completos.csv";
-    private static final String OUTPUTTURTLEFILEENTIDADESES = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_entidades_datos_completos.nquads";
+    private static final String CSVFILEENTIDADES = "data/OpenDataEuskadiGuiaComunicacion/gc_entidades_datos_completos.csv";
+    private static final String OUTPUTTURTLEFILEENTIDADES = "data/OpenDataEuskadiGuiaComunicacion/gc_entidades_datos_completos.nquads";
 
     @Test
     public final void test() throws IOException {
         
-        // Cargos ES
         OpenDataEuskadiGuiaComunicacionCargosConverter cargosConverter = new OpenDataEuskadiGuiaComunicacionCargosConverter();
         Model cargosModel = new TreeModel();
-        cargosConverter.setDataSource(CSVFILEES);
+        cargosConverter.setDataSource(CSVFILE);
         cargosConverter.setModel(cargosModel);
-        Model newCargosModel = cargosConverter.getTransformedModel("http://es.euskadi.eus/graph/guia-comunicacion-cargos");
+        Model newCargosModel = cargosConverter.getTransformedModel("http://data.euskadi.eus/graph/guia-de-la-comunicacion-del-gobierno-vasco-datos-de-contacto-de-los-representantes-y-cargos-de-entidades");
         assertNotNull(newCargosModel);
-        RDFUtils.writeModel(newCargosModel, OUTPUTTURTLEFILEES, RDFFormat.NQUADS);
-        
-        // Cargos EU? 
-        
-        // Entidades ES
+        RDFUtils.writeModel(newCargosModel, OUTPUTTURTLEFILE, RDFFormat.NQUADS);
+
         OpenDataEuskadiGuiaComunicacionEntidadesConverter entidadesConverter = new OpenDataEuskadiGuiaComunicacionEntidadesConverter();
         Model entidadesModel = new TreeModel();
-        entidadesConverter.setDataSource(CSVFILEENTIDADESES);
+        entidadesConverter.setDataSource(CSVFILEENTIDADES);
         entidadesConverter.setModel(entidadesModel);
-        Model newEntidadesModel = entidadesConverter.getTransformedModel("http://es.euskadi.eus/graph/guia-comunicacion-entidades");
+        Model newEntidadesModel = entidadesConverter.getTransformedModel("http://data.euskadi.eus/graph/guia-comunicacion-gobierno-vasco-datos-contacto-entidades-euskadi");
         assertNotNull(newEntidadesModel);
-        RDFUtils.writeModel(newEntidadesModel, OUTPUTTURTLEFILEENTIDADESES, RDFFormat.NQUADS);
-        
-        // Entidades EU?
+        RDFUtils.writeModel(newEntidadesModel, OUTPUTTURTLEFILEENTIDADES, RDFFormat.NQUADS);
     }
 }

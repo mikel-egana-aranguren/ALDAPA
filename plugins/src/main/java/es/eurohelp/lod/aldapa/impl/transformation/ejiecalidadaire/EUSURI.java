@@ -8,6 +8,7 @@ package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
  *
  */
 public enum EUSURI {
+    DATAID("http://data.euskadi.eus/id/"),
     BASEIDES("http://es.euskadi.eus/id/"), 
     BASEIDEU("http://eu.euskadi.eus/id/");
 

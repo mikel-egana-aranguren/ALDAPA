@@ -133,9 +133,9 @@ public class OpenDataEuskadiGuiaComunicacionConverterUtils {
         forbiddenStrings.add("Colegio Oficial de Enfermería de Gipuzkoa /");
         forbiddenStrings.add("Gipuzkoako Erizaintza Kolegio Oficiala");        
         if (apellidos.isEmpty()) {
-            // Hay lineas que no tienen nombre, y entonces cuyando accedemos a nombre aparece el cargo
+            // Hay lineas que no tienen nombre, y entonces cuando accedemos a nombre aparece el cargo
             if (!forbiddenStrings.contains(nombre)) {
-                cargoUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.STAFF.getValue() + "/"
+                cargoUri = EUSURI.DATAID.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.STAFF.getValue() + "/"
                         + CLASSTOKEN.PERSON.getValue() + "/" + URIUtils.urify(null, null, nombre);
             } else {
                 LOGGER.info(recordNumber + " Invalid nombre: " + nombre);
@@ -143,7 +143,7 @@ public class OpenDataEuskadiGuiaComunicacionConverterUtils {
         } else {
             // Datos mal, y además euskera mal
             if (!forbiddenStrings.contains(apellidos)) {
-                cargoUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.ENTITY.getValue() + "/"
+                cargoUri = EUSURI.DATAID.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.ENTITY.getValue() + "/"
                         + CLASSTOKEN.PERSON.getValue() + "/" + URIUtils.urify(null, null, nombre + "-" + apellidos);
             } else {
                 LOGGER.info(recordNumber + " Invalid apellidos: " + apellidos);
