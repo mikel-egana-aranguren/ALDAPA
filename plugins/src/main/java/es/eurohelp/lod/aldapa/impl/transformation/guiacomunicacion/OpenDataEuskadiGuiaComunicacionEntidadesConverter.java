@@ -66,7 +66,7 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
                 String erakundea = record.get("Erakundea");
 
                 // URI entidad
-                String entidadUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.ENTITY.getValue() + "/"
+                String entidadUri = EUSURI.DATAID.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.ENTITY.getValue() + "/"
                         + CLASSTOKEN.ORGANIZATION.getValue() + "/" + URIUtils.urify(null, null, entidad);
                 LOGGER.info(entidadUri);
 
@@ -75,12 +75,12 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
                 adder.addDataTripleXSDString(entidadUri, EXTERNALPROPERTY.VCARDFN.getValue(), entidad);
 
                 // [LOD] URI erakunde owl:sameAs URI entidad. Hay valores de Erakunde que son exactamente iguales que
-                // entidad!
-                if (!erakundea.isEmpty() && !erakundea.equals(entidad)) {
-                    String erakundeaUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.ENTITY.getValue() + "/"
-                            + CLASSTOKEN.ORGANIZATION.getValue() + "/" + URIUtils.urify(null, null, erakundea);
-                    adder.addOWLSAMEASTriple(entidadUri, erakundeaUri);
-                }
+                // entidad! --> Ya no vamos a hacer por idioma, asi que comentado queda
+//                if (!erakundea.isEmpty() && !erakundea.equals(entidad)) {
+//                    String erakundeaUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.ENTITY.getValue() + "/"
+//                            + CLASSTOKEN.ORGANIZATION.getValue() + "/" + URIUtils.urify(null, null, erakundea);
+//                    adder.addOWLSAMEASTriple(entidadUri, erakundeaUri);
+//                }
 
                 try {
                     String calle = record.get("Calle");

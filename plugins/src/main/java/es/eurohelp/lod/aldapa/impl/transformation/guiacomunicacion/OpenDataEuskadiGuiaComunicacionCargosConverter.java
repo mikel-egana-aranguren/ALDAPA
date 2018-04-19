@@ -69,8 +69,6 @@ public class OpenDataEuskadiGuiaComunicacionCargosConverter extends CSV2RDFBatch
                 // como clases Java, en vez de crearlas a mano, como hago yo
 
                 // Los CSVs en diferentes idiomas son identicos, ya que ambos incluyen dos columnas Lanpostua
-                // Cargo Dos grafos? Si, por que hay dos DCATs, pero muchos triples se duplican. Esto es un problema en
-                // el caso de literales, no asi en el caso de recursos
 
                 // URI oficial de cada cargo. Esta URI se debería obtener de las instancias de las clases de OWL
                 // de la ontología de URIs de referencia
