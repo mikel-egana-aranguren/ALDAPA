@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -59,10 +60,16 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFB
             lines++;
             if (record.isConsistent()) {
                 count++;
-                Iterator recordIterator = record.iterator();
-                while(recordIterator.hasNext()){
-                    String cellValue = (String) recordIterator.next(); 
-                    LOGGER.info(cellValue);
+                Map<String,String> recordMap = record.toMap();
+                for (Map.Entry<String, String> pair : recordMap.entrySet()) {
+                    LOGGER.info("Record Number: " + recordNumber +" Column: " + pair.getKey() + " -- Cell: " + pair.getValue());
+                    
+                    String columnName = pair.getKey();
+                    String cellValue = pair.getValue();
+                    
+                    
+                    String rowURI = "urn:row" + recordNumber;
+                    // TODO: row --> valorcolumna, valorcolumna-->valor, valorcolumna-->nombrecolumna
                 }
             } else {
                 LOGGER.info(recordNumber + " inconsistent line, not processed");

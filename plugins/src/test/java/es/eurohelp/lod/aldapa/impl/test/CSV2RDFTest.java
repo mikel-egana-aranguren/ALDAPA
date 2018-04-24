@@ -23,8 +23,8 @@ import es.eurohelp.lod.aldapa.util.RDFUtils;
  */
 public class CSV2RDFTest {
 
-    private static final String CSVFILE = "data/OpenDataEuskadiCalidadDelAire/estaciones.csv";
-    private static final String OUTPUTRDFFILE = "data/OpenDataEuskadiCalidadDelAire/estaciones.csv.ApacheCommonsCSV.nquads";
+    private static final String CSVFILE = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_cargos_datos_completos.csv";
+    private static final String OUTPUTRDFFILE = "data/OpenDataEuskadiGuiaComunicacion/ES/gc_entidades_datos_completos.nquads";
     
 
     @Test
@@ -33,7 +33,7 @@ public class CSV2RDFTest {
         Model rdfModel = new TreeModel();
         csv2rdf.setDataSource(CSVFILE);
         csv2rdf.setModel(rdfModel);
-        Model newRDFModel = csv2rdf.getTransformedModel("http://es.euskadi.eus/graph/guia-comunicacion-cargos");
+        Model newRDFModel = csv2rdf.getTransformedModel("http://data.euskadi.eus/graph/cargos");
         assertNotNull(newRDFModel);
         RDFUtils.writeModel(newRDFModel, OUTPUTRDFFILE, RDFFormat.NQUADS);
     }
