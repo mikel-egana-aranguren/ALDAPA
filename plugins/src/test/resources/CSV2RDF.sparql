@@ -1,10 +1,13 @@
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
 CONSTRUCT {
     ?cargo rdfs:label ?nombre
 }
 WHERE {
-    ?row a <urn:Row> ;
-		<urn:col:Nombre> ?nombre .
+    GRAPH <http://data.euskadi.eus/graph/cargos>{
+        ?row <urn:aldapa:csv2rdf:cell> ?cell .
+        ?cell <urn:aldapa:csv2rdf:cellvalue> ?nombre  .
+		?cell <urn:aldapa:csv2rdf:columnname> "Nombre"  .
+    }
 	BIND(URI(CONCAT("http://data.euskadi.eus/id/public-sector/entity/person/", STR(?nombre))) as ?cargo)
 }

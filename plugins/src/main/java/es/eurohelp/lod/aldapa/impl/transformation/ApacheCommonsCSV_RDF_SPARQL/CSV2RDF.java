@@ -15,12 +15,16 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.impl.LinkedHashModel;
+import org.eclipse.rdf4j.query.GraphQueryResult;
 
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.TripleAdder;
 import es.eurohelp.lod.aldapa.util.URIUtils;
+import es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore;
 import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EXTERNALCLASS;
 import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EXTERNALPROPERTY;
 
@@ -52,15 +56,13 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFB
 
     @Override
     public Model getTransformedModel(String namedGraphURI) {
-        TripleAdder adder = new TripleAdder(model, namedGraphURI);
+        TripleAdder adder = new TripleAdder(new LinkedHashModel(), namedGraphURI);
         // TODO: take this from config file? no, pero si ENUM
         String rownumberProp = "urn:aldapa:csv2rdf:rownumber";
         String cellProp = "urn:aldapa:csv2rdf:cell";
         String columnnameProp = "urn:aldapa:csv2rdf:columnname";
         String cellvalueProp = "urn:aldapa:csv2rdf:cellvalue";
-        
-        
-        
+
         int lines = 0;
         int count = 0;
         for (CSVRecord record : parser) {
@@ -68,14 +70,14 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFB
             lines++;
             if (record.isConsistent()) {
                 count++;
-                Map<String,String> recordMap = record.toMap();
+                Map<String, String> recordMap = record.toMap();
                 for (Map.Entry<String, String> pair : recordMap.entrySet()) {
-                    LOGGER.info("Record Number: " + recordNumber +" Column: " + pair.getKey() + " -- Cell: " + pair.getValue());
-                    
+                    LOGGER.info("Record Number: " + recordNumber + " Column: " + pair.getKey() + " -- Cell: " + pair.getValue());
+
                     String columnName = pair.getKey();
-                    String urifiedColumnName = URIUtils.urify(null,null,columnName);
+                    String urifiedColumnName = URIUtils.urify(null, null, columnName);
                     String cellValue = pair.getValue();
-                                        
+
                     String rowURI = "urn:aldapa:csv2rdf:row:" + recordNumber;
                     String cellURI = "urn:aldapa:csv2rdf:cell:row:" + recordNumber + ":column:" + urifiedColumnName;
                     adder.addDataTripleXSDLong(rowURI, rownumberProp, recordNumber);
@@ -89,6 +91,23 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFB
             }
         }
         LOGGER.info(count + " consistent lines from " + lines);
-        return adder.getModel();
+
+        MemoryRDFStore memStore = new MemoryRDFStore();
+        memStore.saveModel(adder.getModel());
+
+        FileUtils fileutils = FileUtils.getInstance();
+
+        try {
+            String csv2rdfSPARQL = fileutils.fileToString("CSV2RDF.sparql");
+            GraphQueryResult queryResult = memStore.execSPARQLGraphQuery(csv2rdfSPARQL);
+            
+            while(queryResult.hasNext()){
+                
+                LOGGER.info("Modified triples: " + model.add(queryResult.next()));
+            }
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
+        return model;
     }
 }
