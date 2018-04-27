@@ -133,6 +133,10 @@ public class TripleAdder {
     public void addDataTripleXSDInt(String subject, String prop, int value) {
         model.add(vf.createIRI(subject), vf.createIRI(prop), vf.createLiteral(value), vf.createIRI(ctxt));
     }
+    
+    public void addDataTripleXSDLong(String subject, String prop, long value) {
+        model.add(vf.createIRI(subject), vf.createIRI(prop), vf.createLiteral(value), vf.createIRI(ctxt));
+    }
 
     /**
      * 

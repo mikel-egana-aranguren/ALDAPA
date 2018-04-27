@@ -53,6 +53,14 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFB
     @Override
     public Model getTransformedModel(String namedGraphURI) {
         TripleAdder adder = new TripleAdder(model, namedGraphURI);
+        // TODO: take this from config file? no, pero si ENUM
+        String rownumberProp = "urn:aldapa:csv2rdf:rownumber";
+        String cellProp = "urn:aldapa:csv2rdf:cell";
+        String columnnameProp = "urn:aldapa:csv2rdf:columnname";
+        String cellvalueProp = "urn:aldapa:csv2rdf:cellvalue";
+        
+        
+        
         int lines = 0;
         int count = 0;
         for (CSVRecord record : parser) {
@@ -65,11 +73,16 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFB
                     LOGGER.info("Record Number: " + recordNumber +" Column: " + pair.getKey() + " -- Cell: " + pair.getValue());
                     
                     String columnName = pair.getKey();
+                    String urifiedColumnName = URIUtils.urify(null,null,columnName);
                     String cellValue = pair.getValue();
-                    
-                    
-                    String rowURI = "urn:row" + recordNumber;
-                    // TODO: row --> valorcolumna, valorcolumna-->valor, valorcolumna-->nombrecolumna
+                                        
+                    String rowURI = "urn:aldapa:csv2rdf:row:" + recordNumber;
+                    String cellURI = "urn:aldapa:csv2rdf:cell:row:" + recordNumber + ":column:" + urifiedColumnName;
+                    adder.addDataTripleXSDLong(rowURI, rownumberProp, recordNumber);
+                    adder.addTriple(rowURI, cellProp, cellURI);
+                    adder.addDataTripleXSDString(cellURI, columnnameProp, columnName);
+                    adder.addDataTripleXSDString(cellURI, cellvalueProp, cellValue);
+
                 }
             } else {
                 LOGGER.info(recordNumber + " inconsistent line, not processed");

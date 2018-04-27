@@ -1,0 +1,14 @@
+<urn:aldapa:csv2rdf:row:999> <urn:aldapa:csv2rdf:cell> <urn:aldapa:csv2rdf:cell:row:999:column:web> .
+<urn:aldapa:csv2rdf:row:999> <urn:aldapa:csv2rdf:rownumber> "999"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<urn:aldapa:csv2rdf:cell:row:999:column:web> <urn:aldapa:csv2rdf:cellvalue> "http://www.euskaletxeacolombia.com.co"  .
+<urn:aldapa:csv2rdf:cell:row:999:column:web> <urn:aldapa:csv2rdf:columnname> "Web"  .
+
+<urn:aldapa:csv2rdf:row:999> <urn:aldapa:csv2rdf:cell> <urn:aldapa:csv2rdf:cell:row:999:column:nombre> . 
+
+<urn:aldapa:csv2rdf:cell:row:999:column:nombre> <urn:aldapa:csv2rdf:cellvalue> "Lina "  .
+<urn:aldapa:csv2rdf:cell:row:999:column:nombre> <urn:aldapa:csv2rdf:columnname> "Nombre"  .
+
+<urn:aldapa:csv2rdf:row:999> <urn:aldapa:csv2rdf:cell> <urn:aldapa:csv2rdf:cell:row:999:column:apellidos> .
+<urn:aldapa:csv2rdf:cell:row:999:column:apellidos> <urn:aldapa:csv2rdf:cellvalue> "Díaz"  .
+<urn:aldapa:csv2rdf:cell:row:999:column:apellidos> <urn:aldapa:csv2rdf:columnname> "Apellidos"  . 
