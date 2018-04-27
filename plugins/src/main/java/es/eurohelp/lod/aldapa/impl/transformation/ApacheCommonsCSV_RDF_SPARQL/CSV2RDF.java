@@ -15,8 +15,12 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Statement;
+import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.LinkedHashModel;
+import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.query.GraphQueryResult;
+import org.eclipse.rdf4j.rio.RDFFormat;
 
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
@@ -27,6 +31,7 @@ import es.eurohelp.lod.aldapa.util.URIUtils;
 import es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore;
 import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EXTERNALCLASS;
 import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EXTERNALPROPERTY;
+import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 
 /**
  * @author megana
@@ -92,18 +97,30 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFB
         }
         LOGGER.info(count + " consistent lines from " + lines);
 
+        
+        FileUtils fileutils = FileUtils.getInstance();
+        ValueFactory vf = SimpleValueFactory.getInstance();
+        
+        
+        
+        
         MemoryRDFStore memStore = new MemoryRDFStore();
         memStore.saveModel(adder.getModel());
-
-        FileUtils fileutils = FileUtils.getInstance();
+        try {
+            // tmp file from config?
+            memStore.flushGraph(null, fileutils.getFileOutputStream("data/CS2RDFtmp.ttl"), RDFFormat.TURTLE);
+        } catch (RDFStoreException e1) {
+            LOGGER.error(e1);
+        } catch (IOException e1) {
+            LOGGER.error(e1);
+        }
 
         try {
             String csv2rdfSPARQL = fileutils.fileToString("CSV2RDF.sparql");
             GraphQueryResult queryResult = memStore.execSPARQLGraphQuery(csv2rdfSPARQL);
-            
-            while(queryResult.hasNext()){
-                
-                LOGGER.info("Modified triples: " + model.add(queryResult.next()));
+            while(queryResult.hasNext()){                
+                Statement stment = queryResult.next();
+                model.add(stment.getSubject(), stment.getPredicate(), stment.getObject(), vf.createIRI(namedGraphURI));
             }
         } catch (IOException e) {
             LOGGER.error(e);
