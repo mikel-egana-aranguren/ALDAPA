@@ -366,6 +366,11 @@ public class Manager {
             Path currentRelativePath = Paths.get("");
             String currentPath = currentRelativePath.toAbsolutePath().toString();
             String startDateTime = RDFUtils.currentInstantToXSDDateTime();
+            
+            // If mapped act differently. This is why the current setting is wrong
+            
+            
+            
             transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
             LOGGER.info("CSV path: " + csvFile);
             transformer.setModel(new TreeModel());
@@ -542,7 +547,6 @@ public class Manager {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
-
     }
 
     /**

@@ -25,6 +25,7 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFMappedBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.TripleAdder;
 import es.eurohelp.lod.aldapa.util.URIUtils;
@@ -37,12 +38,18 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
  * @author megana
  *
  */
-public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFBatchConverter {
+public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFMappedBatchConverter {
 
     private Model model;
     private CSVParser parser;
 
     private static final Logger LOGGER = LogManager.getLogger(CSV2RDF.class);
+    
+    @Override
+    public void setConfiguration(String configurationPath) {
+        // TODO Auto-generated method stub
+        
+    }
 
     @Override
     public void setDataSource(String inPath) throws AldapaException {
@@ -100,9 +107,6 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFB
         
         FileUtils fileutils = FileUtils.getInstance();
         ValueFactory vf = SimpleValueFactory.getInstance();
-        
-        
-        
         
         MemoryRDFStore memStore = new MemoryRDFStore();
         memStore.saveModel(adder.getModel());
