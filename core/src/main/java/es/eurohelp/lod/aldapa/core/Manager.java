@@ -34,6 +34,7 @@ import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFMappedBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.RDFUtils;
 import es.eurohelp.lod.aldapa.util.URIUtils;
@@ -121,7 +122,7 @@ public class Manager {
             } else {
                 // Load addProject.ttl file and resolve tokens
                 String resolvedAddProjectTTL = fileutils.fileTokenResolver(MethodRDFFile.ADDPROJECT.getValue(), MethodFileToken.PROJECTURI.getValue(),
-                        "<" + projectURI+ ">");
+                        "<" + projectURI + ">");
 
                 // Add project to store
                 InputStream modelInputStream = new ByteArrayInputStream(resolvedAddProjectTTL.getBytes());
@@ -366,11 +367,14 @@ public class Manager {
             Path currentRelativePath = Paths.get("");
             String currentPath = currentRelativePath.toAbsolutePath().toString();
             String startDateTime = RDFUtils.currentInstantToXSDDateTime();
-            
-            // If mapped act differently. This is why the current setting is wrong
-            
-            
-            
+
+            // If mapped act differently. This is why the current setting is wrong: Manager should not now about
+            // mapped/not mapped converters
+
+            // Take these from config file
+
+//            transformer.setMapping(null, ';', fileutils.fileToString("CSV2RDF.sparql"));
+
             transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
             LOGGER.info("CSV path: " + csvFile);
             transformer.setModel(new TreeModel());
@@ -381,18 +385,15 @@ public class Manager {
             // Add the metadata about the process
             EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
             tokenReplacementMap.put(MethodFileToken.GRAPHURI, "<" + namedGraphURI + ">");
-            String pluginURI = 
-                    "<" + 
-                            configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "PLUGIN_BASE") +
-                            configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "pluginClassName")
-                            + ">";
-            tokenReplacementMap.put(MethodFileToken.TRANSFORMERPLUGINNAME,pluginURI);
+            String pluginURI = "<" + configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "PLUGIN_BASE")
+                    + configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "pluginClassName") + ">";
+            tokenReplacementMap.put(MethodFileToken.TRANSFORMERPLUGINNAME, pluginURI);
             tokenReplacementMap.put(MethodFileToken.TRANSFORMERSTARTDATETIME, "\"" + startDateTime + "\"^^xsd:dateTime");
             tokenReplacementMap.put(MethodFileToken.TRANSFORMERENDDATETIME, "\"" + endDateTime + "\"^^xsd:dateTime");
             tokenReplacementMap.put(MethodFileToken.CSVURL, "<" + fileStore.getFileURL(csvFile) + ">");
 
             String resolvedAddDatasetTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.ADDMETADATATONAMEDGRAPH.getValue(), tokenReplacementMap);
-            
+
             InputStream modelInputStream = new ByteArrayInputStream(resolvedAddDatasetTTL.getBytes());
             Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
 

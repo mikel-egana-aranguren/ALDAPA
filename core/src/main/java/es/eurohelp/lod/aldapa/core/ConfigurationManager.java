@@ -57,8 +57,8 @@ public class ConfigurationManager {
 
     // CSV2RDF transformer
     private static final String TRANSFORMERCONFGIFILE = "TRANSFORMER_CONFIG_FILE";
-    private static final Object ABSTRACTCSV2RDFBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
-    private static final Object ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFMappedBatchConverter";
+    private static final String ABSTRACTCSV2RDFBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
+    private static final String ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFMappedBatchConverter";
 
     // RDF validator
     private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";

@@ -1,12 +1,3 @@
-# THIS CONFIGURATION
-name: CSV2RDF
-comment: converts a CSV file to RDF through a SPARQL query
-author: Mikel Egana Aranguren
-
-# Plugin with actual code for accesing the Triple Store
-pluginClassName: es.eurohelp.lod.aldapa.impl.transformation.ApacheCommonsCSV_RDF_SPARQL.CSV2RDF
-
-charset:
-format:
-delimiter:
-sparqlcsv2rdf: 
+charset: UTF-8
+delimiter: ;
+sparqlcsv2rdf: CSV2RDF.sparql 
