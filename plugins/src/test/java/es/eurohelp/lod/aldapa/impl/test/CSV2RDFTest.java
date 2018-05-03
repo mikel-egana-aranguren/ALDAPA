@@ -42,7 +42,7 @@ public class CSV2RDFTest {
         
         CSV2RDF csv2rdf = new CSV2RDF();
         Model rdfModel = new TreeModel();
-        csv2rdf.setMapping(null, ';', queryproper);
+        csv2rdf.setMapping(charset, delimiter.charAt(0), queryproper);
         csv2rdf.setDataSource(CSVFILE);
         csv2rdf.setModel(rdfModel);
         Model newRDFModel = csv2rdf.getTransformedModel("http://data.euskadi.eus/graph/cargos");

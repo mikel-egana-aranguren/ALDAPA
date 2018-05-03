@@ -363,53 +363,55 @@ public class Manager {
      */
 
     public void addDataToNamedGraph(String namedGraphURI, String csvFile) throws RDFStoreException {
+
+        // If mapped act differently. This is why the current setting is wrong: Manager should not now about
+        // mapped/not mapped converters
+
         try {
-            // Add the data
-            Path currentRelativePath = Paths.get("");
-            String currentPath = currentRelativePath.toAbsolutePath().toString();
-            String startDateTime = RDFUtils.currentInstantToXSDDateTime();
-
-            // If mapped act differently. This is why the current setting is wrong: Manager should not now about
-            // mapped/not mapped converters
-            
-            try{
-                String querypath = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE,"sparqlcsv2rdf");
-                String queryproper = fileutils.fileToString(querypath);
-                String charset = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "charset");
-                String delimiter = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "delimiter");
-                ((FunctionalCSV2RDFMappedBatchConverter) transformer).setMapping(charset, delimiter.charAt(0), queryproper);
-            }catch(ConfigurationException e){
-                LOGGER.error(e);
-                LOGGER.info("Converter does not have map");
-            }
-
-            transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
-            LOGGER.info("CSV path: " + csvFile);
-            transformer.setModel(new TreeModel());
-            store.saveModel(transformer.getTransformedModel(namedGraphURI));
-            LOGGER.info("Data from CSV saved into graph: " + namedGraphURI);
-            String endDateTime = RDFUtils.currentInstantToXSDDateTime();
-
-            // Add the metadata about the process
-            EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
-            tokenReplacementMap.put(MethodFileToken.GRAPHURI, "<" + namedGraphURI + ">");
-            String pluginURI = "<" + configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "PLUGIN_BASE")
-                    + configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "pluginClassName") + ">";
-            tokenReplacementMap.put(MethodFileToken.TRANSFORMERPLUGINNAME, pluginURI);
-            tokenReplacementMap.put(MethodFileToken.TRANSFORMERSTARTDATETIME, "\"" + startDateTime + "\"^^xsd:dateTime");
-            tokenReplacementMap.put(MethodFileToken.TRANSFORMERENDDATETIME, "\"" + endDateTime + "\"^^xsd:dateTime");
-            tokenReplacementMap.put(MethodFileToken.CSVURL, "<" + fileStore.getFileURL(csvFile) + ">");
-
-            String resolvedAddDatasetTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.ADDMETADATATONAMEDGRAPH.getValue(), tokenReplacementMap);
-
-            InputStream modelInputStream = new ByteArrayInputStream(resolvedAddDatasetTTL.getBytes());
-            Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
-
-            store.saveModel(model);
-            LOGGER.info("PROV metadata added to Named Graph");
+            String querypath = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "sparqlcsv2rdf");
+            String queryproper = fileutils.fileToString(querypath);
+            String charset = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "charset");
+            String delimiter = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "delimiter");
+            ((FunctionalCSV2RDFMappedBatchConverter) transformer).setMapping(charset, delimiter.charAt(0), queryproper);
+        } catch (ConfigurationException e) {
+            LOGGER.error(e);
+            LOGGER.info("Converter does not have map");
         } catch (IOException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
+        } finally {
+            try {
+                // Add the data
+                Path currentRelativePath = Paths.get("");
+                String currentPath = currentRelativePath.toAbsolutePath().toString();
+                String startDateTime = RDFUtils.currentInstantToXSDDateTime();
+
+                transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
+                LOGGER.info("CSV path: " + csvFile);
+                transformer.setModel(new TreeModel());
+                store.saveModel(transformer.getTransformedModel(namedGraphURI));
+                LOGGER.info("Data from CSV saved into graph: " + namedGraphURI);
+                String endDateTime = RDFUtils.currentInstantToXSDDateTime();
+
+                // Add the metadata about the process
+                EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
+                tokenReplacementMap.put(MethodFileToken.GRAPHURI, "<" + namedGraphURI + ">");
+                String pluginURI = "<" + configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "PLUGIN_BASE")
+                        + configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "pluginClassName") + ">";
+                tokenReplacementMap.put(MethodFileToken.TRANSFORMERPLUGINNAME, pluginURI);
+                tokenReplacementMap.put(MethodFileToken.TRANSFORMERSTARTDATETIME, "\"" + startDateTime + "\"^^xsd:dateTime");
+                tokenReplacementMap.put(MethodFileToken.TRANSFORMERENDDATETIME, "\"" + endDateTime + "\"^^xsd:dateTime");
+                tokenReplacementMap.put(MethodFileToken.CSVURL, "<" + fileStore.getFileURL(csvFile) + ">");
+                String resolvedAddDatasetTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.ADDMETADATATONAMEDGRAPH.getValue(),
+                        tokenReplacementMap);
+                InputStream modelInputStream = new ByteArrayInputStream(resolvedAddDatasetTTL.getBytes());
+                Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
+                store.saveModel(model);
+                LOGGER.info("PROV metadata added to Named Graph");
+            } catch (IOException e) {
+                LOGGER.error(e);
+                throw new AldapaException(e);
+            }
         }
     }
 
