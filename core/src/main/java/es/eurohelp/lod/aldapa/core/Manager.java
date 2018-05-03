@@ -381,7 +381,7 @@ public class Manager {
             throw new AldapaException(e);
         } finally {
             try {
-                // Add the data
+                // Add the data 
                 Path currentRelativePath = Paths.get("");
                 String currentPath = currentRelativePath.toAbsolutePath().toString();
                 String startDateTime = RDFUtils.currentInstantToXSDDateTime();
@@ -410,7 +410,6 @@ public class Manager {
                 LOGGER.info("PROV metadata added to Named Graph");
             } catch (IOException e) {
                 LOGGER.error(e);
-                throw new AldapaException(e);
             }
         }
     }
