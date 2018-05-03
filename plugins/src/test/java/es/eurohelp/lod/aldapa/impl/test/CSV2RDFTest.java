@@ -14,7 +14,7 @@ import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.junit.Test;
 
-import es.eurohelp.lod.aldapa.impl.transformation.ApacheCommonsCSV_RDF_SPARQL.CSV2RDF;
+import es.eurohelp.lod.aldapa.impl.transformation.csv2rdfsparql.CSV2RDF;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.RDFUtils;
 import es.eurohelp.lod.aldapa.util.YAMLUtils;

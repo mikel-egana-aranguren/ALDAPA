@@ -252,12 +252,10 @@ public class ConfigurationManager {
             if (converterSuperClassName.equals(ABSTRACTCSV2RDFBATCHCONVERTER)) {
                 converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
                 LOGGER.info("CSV2RDF converter started");
-            } 
-            else if(converterSuperClassName.equals(ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER)){
+            }else if(converterSuperClassName.equals(ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER)){
                 converter = (FunctionalCSV2RDFMappedBatchConverter) converterClass.newInstance();
                 LOGGER.info("CSV2RDF converter started");
-            }
-            else {
+            }else {
                 throw new CouldNotInitialisePluginException(converterClass.getName());
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {

@@ -378,9 +378,9 @@ public class Manager {
                 String charset = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "charset");
                 String delimiter = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "delimiter");
                 ((FunctionalCSV2RDFMappedBatchConverter) transformer).setMapping(charset, delimiter.charAt(0), queryproper);
-            }
-            catch(ConfigurationException e){
-                LOGGER.info("Converter is not mapped");
+            }catch(ConfigurationException e){
+                LOGGER.error(e);
+                LOGGER.info("Converter does not have map");
             }
 
             transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);

@@ -1,12 +1,11 @@
 /**
  * 
  */
-package es.eurohelp.lod.aldapa.impl.transformation.ApacheCommonsCSV_RDF_SPARQL;
+package es.eurohelp.lod.aldapa.impl.transformation.csv2rdfsparql;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.csv.CSVFormat;
@@ -24,14 +23,11 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
-import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFMappedBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.TripleAdder;
 import es.eurohelp.lod.aldapa.util.URIUtils;
 import es.eurohelp.lod.aldapa.impl.storage.MemoryRDFStore;
-import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EXTERNALCLASS;
-import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EXTERNALPROPERTY;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
 
 /**
@@ -91,12 +87,12 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFM
                     String columnName = pair.getKey();
                     String urifiedColumnName = URIUtils.urify(null, null, columnName);
                     String cellValue = pair.getValue();
-                    String rowURI = CSV2RDFproperty.rowURIBase.getValue() + recordNumber;
-                    String cellURI = CSV2RDFproperty.cellURIbase.getValue() + recordNumber + CSV2RDFproperty.column.getValue() + urifiedColumnName;
-                    adder.addDataTripleXSDLong(rowURI, CSV2RDFproperty.rownumberProp.getValue(), recordNumber);
-                    adder.addTriple(rowURI, CSV2RDFproperty.cellProp.getValue(), cellURI);
-                    adder.addDataTripleXSDString(cellURI, CSV2RDFproperty.columnnameProp.getValue(), columnName);
-                    adder.addDataTripleXSDString(cellURI, CSV2RDFproperty.cellvalueProp.getValue(), cellValue);
+                    String rowURI = CSV2RDFproperty.ROWURIBASE.getValue() + recordNumber;
+                    String cellURI = CSV2RDFproperty.CELLURIBASE.getValue() + recordNumber + CSV2RDFproperty.COLUMN.getValue() + urifiedColumnName;
+                    adder.addDataTripleXSDLong(rowURI, CSV2RDFproperty.ROWNUMBERPROP.getValue(), recordNumber);
+                    adder.addTriple(rowURI, CSV2RDFproperty.CELLPROP.getValue(), cellURI);
+                    adder.addDataTripleXSDString(cellURI, CSV2RDFproperty.COLUMNNAMEPROP.getValue(), columnName);
+                    adder.addDataTripleXSDString(cellURI, CSV2RDFproperty.CELLVALUEPROP.getValue(), cellValue);
                 }
             } else {
                 LOGGER.info(recordNumber + " inconsistent line, not processed");
