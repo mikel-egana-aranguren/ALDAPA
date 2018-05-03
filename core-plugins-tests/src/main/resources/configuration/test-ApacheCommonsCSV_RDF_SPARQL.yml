@@ -8,4 +8,4 @@ pluginClassName: es.eurohelp.lod.aldapa.impl.transformation.ApacheCommonsCSV_RDF
 
 charset: UTF-8
 delimiter: ;
-sparqlcsv2rdf: CSV2RDF.sparql 
+sparqlcsv2rdf: configuration/CSV2RDF.sparql 

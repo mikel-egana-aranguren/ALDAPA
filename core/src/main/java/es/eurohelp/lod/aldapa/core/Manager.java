@@ -375,10 +375,15 @@ public class Manager {
 
             
             
-            configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "charset");
-//            delimiter: ;
-//            sparqlcsv2rdf: CSV2RDF.sparql 
             
+            String querypath = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE,"sparqlcsv2rdf");
+            
+            if(querypath != null){
+                String queryproper = fileutils.fileToString(querypath);
+                String charset = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "charset");
+                String delimiter = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "delimiter");
+                ((FunctionalCSV2RDFMappedBatchConverter) transformer).setMapping(null, ';', queryproper);
+            }
 
             transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
             LOGGER.info("CSV path: " + csvFile);

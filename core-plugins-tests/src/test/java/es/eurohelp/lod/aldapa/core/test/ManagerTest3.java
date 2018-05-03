@@ -39,7 +39,7 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
  */
 public class ManagerTest3 {
 
-    private static final String CONFIGFILE = "configuration2.yml";
+    private static final String CONFIGFILE = "configuration3.yml";
 
     private static final String PROJECTNAME = "Donosti movilidad";
     private static final String CATALOGNAME = "Donosti Parkings!!???";
@@ -61,7 +61,7 @@ public class ManagerTest3 {
     private static final String AIRQUALITYDATASETNAME = "air quality";
     private static final String ESTACIONESGRAPHNAME = "estaciones";
 
-    private static final String CSVPATH = "OpenDataEuskadiGuiaComunicacion/gc_entidades_datos_completos.csv"; 
+    private static final String CSVPATH = "gc_entidades_datos_completos.csv"; 
 
     private static Manager manager = null;
     private static ConfigurationManager config = null;
