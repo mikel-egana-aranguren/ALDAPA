@@ -5,9 +5,9 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.Manager;
 
-public class EjieCalidadAireGrafter {
+public class EjieCalidadAire {
     
-    private EjieCalidadAireGrafter() {
+    private EjieCalidadAire() {
     }
     
     public static void main(String[] args) {

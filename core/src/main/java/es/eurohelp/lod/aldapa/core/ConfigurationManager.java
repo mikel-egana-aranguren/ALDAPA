@@ -17,6 +17,7 @@ import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFGrafterConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
@@ -53,11 +54,14 @@ public class ConfigurationManager {
     private static final String ABSTRACTRESTSTORERDF4JCONNECTION = "es.eurohelp.lod.aldapa.storage.RESTStoreRDF4JConnection";
     private static final String ENDPOINTURLTOKEN = "endpointURL";
     private static final String DBNAMETOKEN = "dbName";
-
-    // CSV2RDF transformer
+    
+ // CSV2RDF transformer
     private static final String TRANSFORMERCONFGIFILE = "TRANSFORMER_CONFIG_FILE";
     private static final Object ABSTRACTCSV2RDFBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
 
+    // CSV2RDF transformer Grafter
+    private static final String GRAFTERTRANSFORMERCONFGIFILE = "GRAFTERTRANSFORMER_CONFIG_FILE";
+    
     // RDF validator
     private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
     private static final String ABSTRACTRDFQUALITYVALIDATOR = "es.eurohelp.lod.aldapa.modification.RDFQualityValidator";
@@ -250,6 +254,29 @@ public class ConfigurationManager {
             String converterSuperClassName = converterClass.getSuperclass().getName();
             if (converterSuperClassName.equals(ABSTRACTCSV2RDFBATCHCONVERTER)) {
                 converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
+                LOGGER.info("CSV2RDF converter started");
+            } else {
+                throw new CouldNotInitialisePluginException(converterClass.getName());
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            throw new AldapaException(e);
+        }
+        return converter;
+    }
+    
+    /**
+     * @return a FunctionalCSV2RDFBatchConverter
+     */
+    public FunctionalCSV2RDFGrafterConverter getGrafterTransformer() {
+        FunctionalCSV2RDFGrafterConverter converter = null;
+        try {
+            String converterPluginName = this.getConfigPropertyValue(GRAFTERTRANSFORMERCONFGIFILE, PLUGINCLASSNAME);
+            LOGGER.info("Transformer plugin name: " + converterPluginName);
+            Class<?> converterClass = Class.forName(converterPluginName);
+            String converterSuperClassName = converterClass.getSuperclass().getName();
+            if (converterSuperClassName.equals(ABSTRACTCSV2RDFBATCHCONVERTER)) {
+                converter = (FunctionalCSV2RDFGrafterConverter) converterClass.newInstance();
+                
                 LOGGER.info("CSV2RDF converter started");
             } else {
                 throw new CouldNotInitialisePluginException(converterClass.getName());

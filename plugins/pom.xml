@@ -12,6 +12,20 @@
 	<packaging>jar</packaging>
 	<name>ALDAPA plugins</name>
 	<description>Plugins that implement ALDAPA interfaces, to be used in pipelines</description>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.theoryinpractise</groupId>
+				<artifactId>clojure-maven-plugin</artifactId>
+				<version>1.3.10</version>
+				<configuration>
+					<sourceDirectories>src/main/clojure/pipeline/</sourceDirectories>
+					<testScript>src/test/clojure/test.clj</testScript>
+				</configuration>
+				<extensions>true</extensions>
+			</plugin>
+		</plugins>
+	</build>
 	<repositories>
 		<repository>
 			<id>jitpack.io</id>

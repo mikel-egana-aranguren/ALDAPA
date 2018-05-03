@@ -12,6 +12,3 @@ PLUGIN_BASE: "http://lod.eurohelp.es/aldapa/plugin/"
 
 # DOMAIN URIs (They should change)
 GRAPH_BASE: "http://euskadi.eus/graph/"
-
-
-

@@ -33,7 +33,7 @@ import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
-import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFGrafterConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.RDFUtils;
 import es.eurohelp.lod.aldapa.util.URIUtils;
@@ -49,7 +49,8 @@ public class Manager {
 
     private ConfigurationManager configmanager;
     private FunctionalRDFStore store;
-    private FunctionalCSV2RDFBatchConverter transformer;
+    //private FunctionalCSV2RDFBatchConverter transformer;
+    private FunctionalCSV2RDFGrafterConverter transformer;
     private FileUtils fileutils;
     private FunctionalFileStore fileStore;
     private FunctionalRDFQualityValidator validator;
@@ -78,7 +79,7 @@ public class Manager {
         store = configuredconfigmanager.getRDFStore();
 
         // Initialise CSV2RDF transformer
-        transformer = configuredconfigmanager.getTransformer();
+        transformer = configuredconfigmanager.getGrafterTransformer();
 
         // Initialise RDF quality validator
         validator = configuredconfigmanager.getRDFQualityValidator();
@@ -399,6 +400,63 @@ public class Manager {
         }
     }
 
+    
+    /**
+     * 
+     * Adds data to a named graph, by executing the registered transformation plugin. See model/default-model.trig for
+     * details
+     * 
+     * @param namedGraphURI
+     *            the named Graph URI that will store the data
+     * @param csvFile
+     *            the name of the CSV file with Open Data
+     * @throws RDFStoreException
+     *             a problem with the RDF Store
+     * 
+     */
+
+    public void addDataToNamedGraph(String namedGraphURI, String csvFile, String pipelinePath, String methodToExecute) throws RDFStoreException {
+        try {
+            // Add the data
+            Path currentRelativePath = Paths.get("");
+            String currentPath = currentRelativePath.toAbsolutePath().toString();
+            String startDateTime = RDFUtils.currentInstantToXSDDateTime();
+            transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
+            LOGGER.info("CSV path: " + csvFile);
+            transformer.setModel(new TreeModel());
+            transformer.setPipeline(pipelinePath);
+            transformer.setMainPipelineMethod(methodToExecute);
+            store.saveModel(transformer.getTransformedModel(namedGraphURI));
+            LOGGER.info("Data from CSV saved into graph: " + namedGraphURI);
+            String endDateTime = RDFUtils.currentInstantToXSDDateTime();
+
+            // Add the metadata about the process
+            EnumMap<MethodFileToken, String> tokenReplacementMap = new EnumMap<>(MethodFileToken.class);
+            tokenReplacementMap.put(MethodFileToken.GRAPHURI, "<" + namedGraphURI + ">");
+            String pluginURI = 
+                    "<" + 
+                            configmanager.getConfigPropertyValue(ALDAPACONFIGFILENAME, "PLUGIN_BASE") +
+                            configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "pluginClassName")
+                            + ">";
+            tokenReplacementMap.put(MethodFileToken.TRANSFORMERPLUGINNAME,pluginURI);
+            tokenReplacementMap.put(MethodFileToken.TRANSFORMERSTARTDATETIME, "\"" + startDateTime + "\"^^xsd:dateTime");
+            tokenReplacementMap.put(MethodFileToken.TRANSFORMERENDDATETIME, "\"" + endDateTime + "\"^^xsd:dateTime");
+            tokenReplacementMap.put(MethodFileToken.CSVURL, "<" + fileStore.getFileURL(csvFile) + ">");
+
+            String resolvedAddDatasetTTL = fileutils.fileMultipleTokenResolver(MethodRDFFile.ADDMETADATATONAMEDGRAPH.getValue(), tokenReplacementMap);
+            
+            InputStream modelInputStream = new ByteArrayInputStream(resolvedAddDatasetTTL.getBytes());
+            Model model = Rio.parse(modelInputStream, "", RDFFormat.TURTLE);
+
+            store.saveModel(model);
+            LOGGER.info("PROV metadata added to Named Graph");
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
+    
+    
     /**
      * 
      * Adds the data of a RDF4J Model to the store

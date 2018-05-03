@@ -11,16 +11,14 @@ import org.eclipse.rdf4j.model.Statement;
 import clojure.lang.LazySeq;
 import clojure.lang.RT;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
-import es.eurohelp.lod.aldapa.impl.storage.BlazegraphRESTStore;
 import es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter;
-import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFGrafterConverter;
 import es.eurohelp.lod.aldapa.util.TripleAdder;
 
-public class GrafterRDFConverter extends CSV2RDFBatchConverter implements FunctionalCSV2RDFBatchConverter {
+public class GrafterRDFConverter extends CSV2RDFBatchConverter implements FunctionalCSV2RDFGrafterConverter {
     private static final Logger LOGGER = LogManager.getLogger(GrafterRDFConverter.class);
     private String pipelinePath;
     private String dataSource;
-    private String outputFilePath;
     private String methodToExecute;
     private Model model;
 
@@ -35,10 +33,6 @@ public class GrafterRDFConverter extends CSV2RDFBatchConverter implements Functi
 
     public void setPipeline(String pipeline) {
         this.pipelinePath = pipeline;
-    }
-
-    public void setOutputFile(String output) {
-        this.outputFilePath = output;
     }
 
     @Override

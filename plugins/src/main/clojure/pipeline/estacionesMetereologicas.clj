@@ -1,4 +1,4 @@
-(ns clojureFiles.estacionesMetereologicas
+(ns pipeline.estacionesMetereologicas
     (:require [grafter.tabular :refer [_ add-column add-columns apply-columns
                               build-lookup-table column-names columns
                               derive-column drop-rows graph-fn grep make-dataset
@@ -17,9 +17,8 @@
             [grafter.vocabularies.qb :refer :all]
             [grafter.pipeline :refer [declare-pipeline]]
             [grafter.vocabularies.rdf :refer :all]
-            [AvenidaGasteiz.transform :refer :all]       
-            [AvenidaGasteiz.prefix :refer :all]
-            [AvenidaGasteiz.prefix :refer :all]
+            [pipeline.transform :refer :all]       
+            [pipeline.prefix :refer :all]
             [clojure.string :as str]
               )
      )
@@ -76,7 +75,6 @@
 (defn convert-data-to-graph
   [dataset]
   (-> dataset convert-data make-graph missing-data-filter))
-
 
 (declare-pipeline convert-data-to-graph [Dataset -> (Seq Statement)]
                   {dataset "The data file to convert into a graph."})

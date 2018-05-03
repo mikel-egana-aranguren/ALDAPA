@@ -4,7 +4,7 @@
     [grafter.rdf.protocols :as pr]
     [grafter.rdf :refer [prefixer s]] 
     [grafter.rdf.io :as io ]
-    [AvenidaGasteiz.prefix :refer [base-graph base-domain base-medicion base-estacion]]
+    [clojureFiles.prefix :refer [base-graph base-domain base-medicion base-estacion]]
     )
 )
 

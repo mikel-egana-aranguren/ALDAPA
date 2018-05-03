@@ -15,9 +15,9 @@ import es.eurohelp.lod.aldapa.core.Manager;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-public class EJIECalidadAire {
+public class EJIECalidadAireGrafter {
     
-    private EJIECalidadAire() {
+    private EJIECalidadAireGrafter() {
         throw new IllegalAccessError("Utility class");
       }
 
@@ -45,7 +45,7 @@ public class EJIECalidadAire {
                 "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv", 
                 "estaciones.csv");
         
-        manager.addDataToNamedGraph(namedGraphUri, "estaciones.csv");
+        manager.addDataToNamedGraph(namedGraphUri, "estaciones.csv", "pipeline/estacionesMetereologicas.clj", "convertidor");
 
         // Validate data
         manager.analyseGraph();
