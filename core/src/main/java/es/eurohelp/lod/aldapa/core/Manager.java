@@ -373,7 +373,12 @@ public class Manager {
 
             // Take these from config file
 
-//            transformer.setMapping(null, ';', fileutils.fileToString("CSV2RDF.sparql"));
+            
+            
+            configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "charset");
+//            delimiter: ;
+//            sparqlcsv2rdf: CSV2RDF.sparql 
+            
 
             transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
             LOGGER.info("CSV path: " + csvFile);
