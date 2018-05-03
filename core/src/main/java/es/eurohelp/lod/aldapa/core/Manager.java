@@ -24,6 +24,7 @@ import org.eclipse.rdf4j.rio.Rio;
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogExistsException;
 import es.eurohelp.lod.aldapa.core.exception.CatalogNotFoundException;
+import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetExistsException;
 import es.eurohelp.lod.aldapa.core.exception.DatasetNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
@@ -370,19 +371,16 @@ public class Manager {
 
             // If mapped act differently. This is why the current setting is wrong: Manager should not now about
             // mapped/not mapped converters
-
-            // Take these from config file
-
             
-            
-            
-            String querypath = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE,"sparqlcsv2rdf");
-            
-            if(querypath != null){
+            try{
+                String querypath = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE,"sparqlcsv2rdf");
                 String queryproper = fileutils.fileToString(querypath);
                 String charset = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "charset");
                 String delimiter = configmanager.getConfigPropertyValue(TRANSFORMERCONFIGFILE, "delimiter");
-                ((FunctionalCSV2RDFMappedBatchConverter) transformer).setMapping(null, ';', queryproper);
+                ((FunctionalCSV2RDFMappedBatchConverter) transformer).setMapping(charset, delimiter.charAt(0), queryproper);
+            }
+            catch(ConfigurationException e){
+                LOGGER.info("Converter is not mapped");
             }
 
             transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
