@@ -8,5 +8,5 @@ package es.eurohelp.lod.aldapa.transformation;
  *
  */
 public interface FunctionalCSV2RDFMappedBatchConverter extends FunctionalCSV2RDFBatchConverter {
-    public void setMap(String mapPath);
+    public void setMapping (String charset, char delimiter, String map);
 }

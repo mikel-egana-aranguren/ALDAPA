@@ -17,6 +17,7 @@ import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFMappedBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
@@ -56,12 +57,12 @@ public class ConfigurationManager {
 
     // CSV2RDF transformer
     private static final String TRANSFORMERCONFGIFILE = "TRANSFORMER_CONFIG_FILE";
-    private static final Object ABSTRACTCSV2RDFBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
+    private static final String ABSTRACTCSV2RDFBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
+    private static final String ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFMappedBatchConverter";
 
     // RDF validator
     private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
     private static final String ABSTRACTRDFQUALITYVALIDATOR = "es.eurohelp.lod.aldapa.modification.RDFQualityValidator";
-
 
 
     /**
@@ -251,7 +252,10 @@ public class ConfigurationManager {
             if (converterSuperClassName.equals(ABSTRACTCSV2RDFBATCHCONVERTER)) {
                 converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
                 LOGGER.info("CSV2RDF converter started");
-            } else {
+            }else if(converterSuperClassName.equals(ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER)){
+                converter = (FunctionalCSV2RDFMappedBatchConverter) converterClass.newInstance();
+                LOGGER.info("CSV2RDF converter started");
+            }else {
                 throw new CouldNotInitialisePluginException(converterClass.getName());
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
