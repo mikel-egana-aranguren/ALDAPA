@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Statement;
 
 import clojure.lang.LazySeq;
 import clojure.lang.RT;
@@ -20,7 +19,6 @@ public class GrafterRDFConverter extends CSV2RDFBatchConverter implements Functi
     private String pipelinePath;
     private String dataSource;
     private String methodToExecute;
-    private Model model;
 
     public GrafterRDFConverter() {
         super();
@@ -33,11 +31,6 @@ public class GrafterRDFConverter extends CSV2RDFBatchConverter implements Functi
 
     public void setPipeline(String pipeline) {
         this.pipelinePath = pipeline;
-    }
-
-    @Override
-    public void setModel(Model model) {
-        this.model = model;
     }
 
     public void setMainPipelineMethod(String methodToExecute) {
@@ -55,10 +48,16 @@ public class GrafterRDFConverter extends CSV2RDFBatchConverter implements Functi
             LOGGER.info("Se llama al método que iniciara el pipeline de creacion de RDF");
             LazySeq lazy = (LazySeq) RT.var(this.pipelinePath, this.methodToExecute).invoke(this.dataSource);
             Iterator ite = lazy.iterator();
-            adder = new TripleAdder(this.model, namedGraphURI);
+            adder = new TripleAdder(namedGraphURI);
             while (ite.hasNext()) {
-                Statement statement = (Statement) ite.next();
-                this.model.add(statement);
+                org.openrdf.model.Statement statement = (org.openrdf.model.Statement) ite.next();
+                System.out.println(statement.getSubject().stringValue()+","+statement.getPredicate().stringValue()+","+statement.getObject().stringValue()+"\n------");
+                if(statement.getObject().stringValue().contains("http")){
+                adder.addTriple(statement.getSubject().stringValue(), statement.getPredicate().stringValue(), statement.getObject().stringValue());
+                }
+                else if(!statement.getObject().stringValue().isEmpty()){
+                    adder.addDataTripleXSDString(statement.getSubject().stringValue(), statement.getPredicate().stringValue(), statement.getObject().stringValue());
+                }
             }
         } catch (IOException e) {
             LOGGER.error(e.getMessage());

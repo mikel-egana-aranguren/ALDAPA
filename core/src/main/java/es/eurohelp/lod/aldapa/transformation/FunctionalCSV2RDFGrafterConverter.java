@@ -27,8 +27,6 @@ public interface FunctionalCSV2RDFGrafterConverter {
      */
     public void setDataSource(String filePath) throws AldapaException;
 
-    public void setModel(Model model);
-
     public Model getTransformedModel(String namedGraphURI);
 
     public void setPipeline(String pipeline);

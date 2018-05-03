@@ -369,7 +369,7 @@ public class Manager {
             String startDateTime = RDFUtils.currentInstantToXSDDateTime();
             transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
             LOGGER.info("CSV path: " + csvFile);
-            transformer.setModel(new TreeModel());
+          //  transformer.setModel(new TreeModel());
             store.saveModel(transformer.getTransformedModel(namedGraphURI));
             LOGGER.info("Data from CSV saved into graph: " + namedGraphURI);
             String endDateTime = RDFUtils.currentInstantToXSDDateTime();
@@ -423,7 +423,7 @@ public class Manager {
             String startDateTime = RDFUtils.currentInstantToXSDDateTime();
             transformer.setDataSource(currentPath + File.separator + fileStore.getDirectoryPath() + File.separator + csvFile);
             LOGGER.info("CSV path: " + csvFile);
-            transformer.setModel(new TreeModel());
+          //  transformer.setModel(new TreeModel());
             transformer.setPipeline(pipelinePath);
             transformer.setMainPipelineMethod(methodToExecute);
             store.saveModel(transformer.getTransformedModel(namedGraphURI));

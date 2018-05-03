@@ -1,10 +1,10 @@
-(ns clojureFiles.transform
+(ns pipeline.transform
   (:require 
     [clojure.string :as str]
     [grafter.rdf.protocols :as pr]
     [grafter.rdf :refer [prefixer s]] 
     [grafter.rdf.io :as io ]
-    [clojureFiles.prefix :refer [base-graph base-domain base-medicion base-estacion]]
+    [pipeline.prefix :refer [base-graph base-domain base-medicion base-estacion]]
     )
 )
 

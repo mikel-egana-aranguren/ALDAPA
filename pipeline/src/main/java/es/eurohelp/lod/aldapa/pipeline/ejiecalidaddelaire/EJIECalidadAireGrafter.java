@@ -16,10 +16,10 @@ import es.eurohelp.lod.aldapa.core.Manager;
  *
  */
 public class EJIECalidadAireGrafter {
-    
+
     private EJIECalidadAireGrafter() {
         throw new IllegalAccessError("Utility class");
-      }
+    }
 
     public static void main(String[] args) {
         // Load the configuration from file configuration.yml
@@ -27,28 +27,30 @@ public class EJIECalidadAireGrafter {
 
         // Create a manager with the configuration
         Manager manager = new Manager(config);
-
-        // Add project
-        String projectUri = manager.addProject("EuskadiMedioAmbiente");
-
-        // Add catalog
-        String catalogUri = manager.addCatalog("CalidadAire", projectUri);
-
-        // Add dataset
-        String datasetUri = manager.addDataset("Estaciones", catalogUri);
-
-        // Add namedGraph
-        String namedGraphUri = manager.addNamedGraph("Estaciones01", datasetUri);
-
-        // Add data to named graph
-        manager.updateFileHTTP(
-                "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv", 
-                "estaciones.csv");
-        
-        manager.addDataToNamedGraph(namedGraphUri, "estaciones.csv", "pipeline/estacionesMetereologicas.clj", "convertidor");
+        //
+        // // Add project
+        // String projectUri = manager.addProject("EuskadiMedioAmbiente");
+        //
+        // // Add catalog
+        // String catalogUri = manager.addCatalog("CalidadAire", projectUri);
+        //
+        // // Add dataset
+        // String datasetUri = manager.addDataset("Estaciones", catalogUri);
+        //
+        // // Add namedGraph
+        // String namedGraphUri = manager.addNamedGraph("Estaciones01",
+        // datasetUri);
+        //
+        // // Add data to named graph
+        // manager.updateFileHTTP(
+        // "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv",
+        // "estaciones.csv");
+        //
+        manager.addDataToNamedGraph("http://perri", "estaciones.csv", "pipeline/estacionesMetereologicas.clj",
+                "convertidor");
 
         // Validate data
-        manager.analyseGraph();
+//        manager.analyseGraph();
 
         // Discover links
 
@@ -56,6 +58,7 @@ public class EJIECalidadAireGrafter {
         manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl", RDFFormat.TURTLE);
 
         // Flush data from named graph
-        manager.flushGraph(namedGraphUri, "data/EuskadiMedioAmbienteData.ttl", RDFFormat.TURTLE);
+//         manager.flushGraph(namedGraphUri,
+//         "data/EuskadiMedioAmbienteData.ttl", RDFFormat.TURTLE);
     }
 }

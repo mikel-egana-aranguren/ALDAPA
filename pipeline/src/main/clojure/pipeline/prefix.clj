@@ -1,4 +1,4 @@
-(ns clojureFiles.prefix
+(ns pipeline.prefix
     (:require [grafter.rdf :refer [prefixer]]))
 
 ;; Defines what will be useful for our next data transformations

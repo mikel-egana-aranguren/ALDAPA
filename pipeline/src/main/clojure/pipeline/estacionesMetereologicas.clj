@@ -19,11 +19,12 @@
             [grafter.vocabularies.rdf :refer :all]
             [pipeline.transform :refer :all]       
             [pipeline.prefix :refer :all]
+            [pipeline.prefix :refer :all]
             [clojure.string :as str]
               )
      )
 
-(def make-graph
+	(def make-graph
  (graph-fn [{:keys [
    location Name Description Province Town Address
    CoordenatesX CoordenatesY Latitude Longitude
@@ -43,11 +44,6 @@
                 ]
                
              ))) 
-(defn deaccent [str]
-  "Remove accent from string"
-  ;; http://www.matt-reid.co.uk/blog_post.php?id=69
-  (let [normalized (java.text.Normalizer/normalize str java.text.Normalizer$Form/NFD)]
-    (clojure.string/replace normalized #"\p{InCombiningDiacriticalMarks}+" "")))
 
 
 (defn convert-data
@@ -65,8 +61,8 @@
    "Latitude"  parseValue
    "Longitude" parseValue
    "Address" removeSymbols
-   "Province" deaccent
-   "Town" deaccent
+   "Province" removeSymbols
+   "Town" removeSymbols
 
           })
     (derive-column :location [:Name] base-Location)   
@@ -75,6 +71,7 @@
 (defn convert-data-to-graph
   [dataset]
   (-> dataset convert-data make-graph missing-data-filter))
+
 
 (declare-pipeline convert-data-to-graph [Dataset -> (Seq Statement)]
                   {dataset "The data file to convert into a graph."})

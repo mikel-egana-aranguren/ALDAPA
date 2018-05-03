@@ -1,61 +1,118 @@
 
-_:node1c01eiujdx2 a <https://www.w3.org/ns/prov#Activity> ;
-	<https://www.w3.org/ns/prov#endedAtTime> "2017-11-28T14:55:44.714"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-	<https://www.w3.org/ns/prov#qualifiedUsage> _:node1c01eiujdx3 ;
-	<https://www.w3.org/ns/prov#startedAtTime> "2017-11-28T14:55:44.695"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-	<https://www.w3.org/ns/prov#wasAssociatedWith> <http://lod.eurohelp.es/aldapa/plugin/es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EJIECalidadAireConverter> .
+_:node1ccja8in8x2 a <https://www.w3.org/ns/prov#Activity> ;
+	<https://www.w3.org/ns/prov#endedAtTime> "2018-05-03T17:34:59.310"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<https://www.w3.org/ns/prov#qualifiedUsage> _:node1ccja8in8x3 ;
+	<https://www.w3.org/ns/prov#startedAtTime> "2018-05-03T17:34:51.431"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<https://www.w3.org/ns/prov#wasAssociatedWith> <http://lod.eurohelp.es/aldapa/plugin/es.eurohelp.lod.aldapa.impl.transformation.GrafterRDFConverter> .
 
-_:node1c01eiujdx3 a <https://www.w3.org/ns/prov#Usage> ;
+_:node1ccja8in8x3 a <https://www.w3.org/ns/prov#Usage> ;
 	<https://www.w3.org/ns/prov#entity> <https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv> ;
 	<https://www.w3.org/ns/prov#hadRole> <http://www.w3.org/ns/csvw#csvEncodedTabularData> .
 
-<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> ;
-	<http://schema.org/address> "Plaza Tres de Marzo, s/n" ;
-	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/gasteiz> ;
-	a <http://www.w3.org/ns/sosa/Sensor> ;
-	<http://www.w3.org/2000/01/rdf-schema#label> "3 DE MARZO" ;
-	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "42.85604797053618"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.667784994714487"^^<http://www.w3.org/2001/XMLSchema#double> .
+<http://opendata.euskadi.eus/estacion/3-DE-MARZO;;Araba-�lava;Vitoria-Gasteiz;Plaza-Tres-de-Marzo> a <http://schema.org/Place> .
 
-<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> ;
-	<http://schema.org/address> "Avda. del Minero, 2. Ayuntamiento" ;
-	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/abantozierbena> ;
-	a <http://www.w3.org/ns/sosa/Sensor> ;
-	<http://www.w3.org/2000/01/rdf-schema#label> "ABANTO" ;
-	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.32047399433485"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0741559961978044"^^<http://www.w3.org/2001/XMLSchema#double> .
+<http://opendata.euskadi.eus/estacion/ABANTO;;Bizkaia;Abanto-y-Ci�rvana-Abanto-Zierbena;Avda-del-Minero> a <http://schema.org/Place> .
 
-<http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> ;
-	<http://schema.org/address> "C/ Fueros, 11. Subcomisaría de la Ertzaintza." ;
-	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/agurain> ;
-	a <http://www.w3.org/ns/sosa/Sensor> ;
-	<http://www.w3.org/2000/01/rdf-schema#label> "AGURAIN" ;
-	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "42.84901250588428"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.3937033896081683"^^<http://www.w3.org/2001/XMLSchema#double> .
+<http://opendata.euskadi.eus/estacion/AGURAIN;;Araba-�lava;Agurain-Salvatierra;C-Fueros> a <http://schema.org/Place> .
 
-<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> ;
-	<http://schema.org/address> "Carretera de Galea, s/n " ;
-	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/getxo> ;
-	a <http://www.w3.org/ns/sosa/Sensor> ;
-	<http://www.w3.org/2000/01/rdf-schema#label> "ALGORTA (BBIZI2)" ;
-	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.362055748944286"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0227822073211765"^^<http://www.w3.org/2001/XMLSchema#double> .
+<http://opendata.euskadi.eus/estacion/ALGORTA-BBIZI2;;Bizkaia;Getxo;"Carretera-de-Galea> a <http://schema.org/Place> .
 
-<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> ;
-	<http://schema.org/address> "C/ Baztieta, s/n. Bº Irauregi" ;
-	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/alonsotegi> ;
-	a <http://www.w3.org/ns/sosa/Sensor> ;
-	<http://www.w3.org/2000/01/rdf-schema#label> "ALONSOTEGI" ;
-	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.247567997964374"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.988024000380936"^^<http://www.w3.org/2001/XMLSchema#double> .
+<http://opendata.euskadi.eus/estacion/ALONSOTEGI;;Bizkaia;Alonsotegi;C-Baztieta> a <http://schema.org/Place> .
 
-<http://euskadi.eus/graph/estaciones01> <https://www.w3.org/ns/prov#wasGeneratedBy> _:node1c01eiujdx2 .
+<http://opendata.euskadi.eus/estacion/ARRAIZ-Monte;;Bizkaia;Bilbao;Camino-de-Arraiz> a <http://schema.org/Place> .
 
-<http://lod.eurohelp.es/aldapa/catalog/calidadaire> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/euskadimedioambiente> ;
-	a <http://www.w3.org/ns/dcat#Catalog> ;
-	<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/estaciones> .
+<http://opendata.euskadi.eus/estacion/ATEGORRIETA;;Gipuzkoa;Donostia-San-Sebasti�n;Avda-Ategorrieta> a <http://schema.org/Place> .
 
-<http://lod.eurohelp.es/aldapa/dataset/estaciones> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
-	<http://www.w3.org/ns/sparql-service-description#namedGraph> <http://euskadi.eus/graph/estaciones01> .
+<http://opendata.euskadi.eus/estacion/AV-GASTEIZ;;Araba-�lava;Vitoria-Gasteiz;Avda-Gasteiz> a <http://schema.org/Place> .
 
-<http://lod.eurohelp.es/aldapa/project/euskadimedioambiente> a <http://xmlns.com/foaf/0.1/Project> .
+<http://opendata.euskadi.eus/estacion/AVDA-TOLOSA;;Gipuzkoa;Donostia-San-Sebasti�n;"C-Andrestegi> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/AZPEITIA;;Gipuzkoa;Azpeitia;C-Perdillegi> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/A�ORGA;;Gipuzkoa;Donostia-San-Sebasti�n;Avda-de-A�orga> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/BANDERAS-meteo;;Bizkaia;Bilbao;Monte-Banderas> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/BARAKALDO;;Bizkaia;Barakaldo;C-Hogar-propio> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/BASAURI;;Bizkaia;Basauri;C-Uribarri> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/BEASAIN;;Gipuzkoa;Beasain;Plaza-Gipuzkoa> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/BOROA-METEO;;Bizkaia;Amorebieta-Etxano;Parque-Empresarial-Boroa> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/CASTREJANA;;Bizkaia;Barakaldo;C-Larrazabal> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/DURANGO;;Bizkaia;Durango;C-San-Roque> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/EASO;;Gipuzkoa;Donostia-San-Sebasti�n;Plaza-del-Centenario> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/ELCIEGO;;Araba-�lava;Elciego;C-Gabriel-Celaya> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/ERANDIO;;Bizkaia;Erandio;Avda-Jos�-Luis-Goyoaga> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/EUROPA;;Bizkaia;Bilbao;Parque-Europa-B�-Txurdinaga;507924> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/FARMACIA;;Araba-�lava;Vitoria-Gasteiz;Paseo-Universidad> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/FERIA-meteo;;Bizkaia;Bilbao;C-Rafael-Moreno-Pitxitxi> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/HERNANI;;Gipuzkoa;Hernani;C-Aristizabal> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/JAIZKIBEL;;Gipuzkoa;Hondarribia;Monte-Jaizkibel> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/LARRABETZU;;Bizkaia;Larrabetzu;Barrio-Berrezoaga> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/LAS-CARRERAS;;Bizkaia;Abanto-y-Ci�rvana-Abanto-Zierbena;Plaza-Trinidad> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/LEZO;;Gipuzkoa;Lezo;Plaza-Polantzarene> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/LLODIO;;Araba-�lava;Laudio-Llodio;C-Lamuza> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/LOS-HERRAN;;Araba-�lava;Vitoria-Gasteiz;Parque-Judizmendi-B�-Judizmendi;527682> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/MAZARREDO;;Bizkaia;Bilbao;C-Alameda-Mazarredo> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/MONDRAGON;;Gipuzkoa;Arrasate-Mondrag�n;Plaza-Jose-Mar�a-Arizmendiarrieta> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/MONTORRA;;Bizkaia;Amorebieta-Etxano;Barrio-Montorra-fte-n�5;523021> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/MUNDAKA;;Bizkaia;Mundaka;Camino-Goitiz> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/MUNOA;;Bizkaia;Barakaldo;C-Llano> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/MUSKIZ;;Bizkaia;Muskiz;C-Giba-Fregenal> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/M�-DIAZ-HARO;;Bizkaia;Bilbao;C-M�-D�az-de-Haro> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/NAUTICA;;Bizkaia;Portugalete;C-M�-D�az-de-Haro> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/PAGOETA;;Gipuzkoa;Aia;"Jard�n-Bot�nico-de-Iturraran-Parque-Natural-de-Pagoeta-";568603> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/PUYO;;Gipuzkoa;Donostia-San-Sebasti�n;Camino-de-Puyo> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/SAN-JULIAN;;Bizkaia;Muskiz;Camino-a-Valles> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/SANGRONIZ;;Bizkaia;Sondika;C-Iturrikosolo> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/SANTURCE;;Bizkaia;Santurtzi;"C-Vista-Alegre> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/SERANTES;;Bizkaia;Santurtzi;Camino-Serantes-igoera> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/SESTAO;;Bizkaia;Sestao;Parque-Portopin;500328> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/TOLOSA;;Gipuzkoa;Tolosa;Avda-Martin-Jose-Iraola> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/URKIOLA;;Bizkaia;Abadi�o;Urkiola-auzoa> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/VALDEREJO;;Araba-�lava;Valdegov�a-Gaubea;Ctro-de-Interpretaci�n-Parque-Natural-de-Valderejo;481073> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/ZALLA;;Bizkaia;Zalla;Avda-Kosme-Bibanko-Etxebarria> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/ZELAIETA-PARQUE;;Bizkaia;Amorebieta-Etxano;"Parque-Zelaieta-";521563> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/ZIERBENA-Puerto;;Bizkaia;Zierbena;Puerto-de-Zierbena> a <http://schema.org/Place> .
+
+<http://opendata.euskadi.eus/estacion/ZUMARRAGA;;Gipuzkoa;Zumarraga;"Grupo-Izazpi-3> a <http://schema.org/Place> .
+
+<http://perri> <https://www.w3.org/ns/prov#wasGeneratedBy> _:node1ccja8in8x2 .
