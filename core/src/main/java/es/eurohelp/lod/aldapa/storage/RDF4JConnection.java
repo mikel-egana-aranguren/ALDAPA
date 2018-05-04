@@ -3,8 +3,12 @@
  */
 package es.eurohelp.lod.aldapa.storage;
 
+import java.util.Iterator;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.TupleQueryResult;
@@ -34,6 +38,22 @@ public abstract class RDF4JConnection {
 
     public synchronized RepositoryConnection getConnection() {
         return conn;
+    }
+    
+    public void saveModel(Model model) throws RDFStoreException {
+        LOGGER.info("Adding model to SailRepository(MemoryStore)");
+        // Issue 35
+        Iterator<Statement> modelIterator = model.iterator();
+        while (modelIterator.hasNext()) {
+            Statement stment = modelIterator.next();
+            if (stment.getContext() != null) {
+                LOGGER.info("Adding triple " + stment + " to context " + stment.getContext());
+                conn.add(stment, stment.getContext());
+            } else {
+                LOGGER.info("Adding triple " + stment);
+                conn.add(stment);
+            }
+        }
     }
 
     public void shutdownAtOnce() {
