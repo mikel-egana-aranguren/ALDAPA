@@ -41,7 +41,7 @@ public abstract class RDF4JConnection {
     }
     
     public void saveModel(Model model) throws RDFStoreException {
-        LOGGER.info("Adding model to SailRepository(MemoryStore)");
+        LOGGER.info("Adding model to Repository");
         // Issue 35
         Iterator<Statement> modelIterator = model.iterator();
         while (modelIterator.hasNext()) {

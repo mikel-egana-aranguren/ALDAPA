@@ -27,7 +27,7 @@ public class GraphDBStoreTest {
     static GraphDBStore graphdb = null;
     static final String graphdburl = "http://localhost:7200";
     static final String dbname = "ALDAPAGraphDBConnectionTests"; // This repository should already exist in GraphDB
-    static final String newdbname = "ALDAPAGraphDBConnectionTestsNewDB"; // This repository should already exist in GraphDB
+    static final String newdbname = "ALDAPAGraphDBConnectionTestsNewDB"; 
     static final String systemdbname = "SYSTEM"; 
     
     
@@ -41,22 +41,22 @@ public class GraphDBStoreTest {
         assertNotNull(graphdb);
     }
 
-    @Test
-    public final void testGetDBs() {
-        assertTrue((graphdb.getDBs().contains(systemdbname)));
-        assertTrue((graphdb.getDBs().contains(dbname)));
-    }
-
-    @Test
-    public final void testCreateDB() {
-        try {
-            graphdb.createDB(newdbname);
-        } catch (RDFStoreException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    @Test
+//    public final void testGetDBs() {
+//        assertTrue((graphdb.getDBs().contains(systemdbname)));
+//        assertTrue((graphdb.getDBs().contains(dbname)));
+//    }
+//
+//    @Test
+//    public final void testCreateDB() {
+//        try {
+//            graphdb.createDB(newdbname);
+//        } catch (RDFStoreException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
     
     @Test
     public final void testSaveModel(){
