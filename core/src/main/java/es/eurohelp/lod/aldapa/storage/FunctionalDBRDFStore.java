@@ -3,23 +3,12 @@
  */
 package es.eurohelp.lod.aldapa.storage;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.query.BindingSet;
-import org.eclipse.rdf4j.query.TupleQueryResult;
-import org.eclipse.rdf4j.rio.RDFFormat;
-import org.eclipse.rdf4j.rio.Rio;
 
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
-import es.eurohelp.lod.aldapa.util.FileUtils;
 
 /**
  * @author megana

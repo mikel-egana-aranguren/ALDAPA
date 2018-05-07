@@ -23,17 +23,18 @@ import es.eurohelp.lod.aldapa.impl.storage.GraphDBStore;
 public class GraphDBStoreTest {
 
     static GraphDBStore graphdb = null;
-    static final String graphdburl = "http://localhost:7200";
-    static final String dbname = "ALDAPAGraphDBConnectionTests"; // This repository should already exist in GraphDB
-    static final String deleteQuery = "DELETE DATA { <http://example.org/Picasso> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Artist> . <http://example.org/Picasso> <http://xmlns.com/foaf/0.1/firstName> \"Pablo\" }";
-    static final String askQuery = "ASK WHERE { <http://example.org/Picasso> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Artist> . <http://example.org/Picasso> <http://xmlns.com/foaf/0.1/firstName> \"Pablo\" }";
-    static final String tupleQuery = "SELECT * WHERE { ?s ?p ?o }";
-    static final String graphQuery = "CONSTRUCT { ?s ?p ?o }  WHERE { ?s ?p ?o }";
+    static final String GRAPHDBURL = "http://localhost:7200";
+ // This repository should already exist in GraphDB
+    static final String DBNAME = "ALDAPAGraphDBConnectionTests"; 
+    static final String DELETEQUERY = "DELETE DATA { <http://example.org/Picasso> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Artist> . <http://example.org/Picasso> <http://xmlns.com/foaf/0.1/firstName> \"Pablo\" }";
+    static final String ASKQUERY = "ASK WHERE { <http://example.org/Picasso> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Artist> . <http://example.org/Picasso> <http://xmlns.com/foaf/0.1/firstName> \"Pablo\" }";
+    static final String TUPLEQUERY = "SELECT * WHERE { ?s ?p ?o }";
+    static final String GRAPHQUERY = "CONSTRUCT { ?s ?p ?o }  WHERE { ?s ?p ?o }";
     
     
     @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        graphdb = new GraphDBStore(graphdburl, dbname);
+    public static void setUpBeforeClass() {
+        graphdb = new GraphDBStore(GRAPHDBURL, DBNAME);
     }
 
     @Test
@@ -48,29 +49,28 @@ public class GraphDBStoreTest {
 
     @Test
     public final void testSaveModel(){
-        assertTrue(graphdb.execSPARQLBooleanQuery(askQuery));
+        assertTrue(graphdb.execSPARQLBooleanQuery(ASKQUERY));
     }
     
     @Test
     public final void testRemoveModel(){
-        graphdb.execSPARQLUpdate(deleteQuery);
-        assertFalse(graphdb.execSPARQLBooleanQuery(askQuery));
+        graphdb.execSPARQLUpdate(DELETEQUERY);
+        assertFalse(graphdb.execSPARQLBooleanQuery(ASKQUERY));
     }
     
     @Test
     public final void testTupleQuery(){
-        assertEquals(3,graphdb.execSPARQLTupleQuery(tupleQuery).getBindingNames().size());
+        assertEquals(3,graphdb.execSPARQLTupleQuery(TUPLEQUERY).getBindingNames().size());
     }
     
     @Test
     public final void testGraphQuery(){
-        assertTrue(graphdb.execSPARQLGraphQuery(graphQuery).hasNext());
-
+        assertTrue(graphdb.execSPARQLGraphQuery(GRAPHQUERY).hasNext());
     }
     
     @After
     public final void removeModel() {
-        graphdb.execSPARQLUpdate(deleteQuery);
+        graphdb.execSPARQLUpdate(DELETEQUERY);
     }
     
     private Model createModel (){

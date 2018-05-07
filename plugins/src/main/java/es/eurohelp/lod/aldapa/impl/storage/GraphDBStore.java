@@ -31,10 +31,10 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
  */
 public class GraphDBStore 
 extends DBRDFStore
-implements FunctionalDBRDFStore 
-{
+implements FunctionalDBRDFStore {
 
     private static final Logger LOGGER = LogManager.getLogger(GraphDBStore.class);
+    private static final String TOIMPLEMENT = "Implementation available with new plugin architecture";
     private RemoteRepositoryManager repositoryManager = null;
     private Repository mainrepo = null;
     
@@ -69,27 +69,27 @@ implements FunctionalDBRDFStore
 
     @Override
     public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws AldapaException {
-        throw new AldapaException("Implementation available with new plugin architecture");
+        throw new AldapaException(TOIMPLEMENT);
     }
 
     @Override
     public void deleteGraph(String graphUri) throws AldapaException {
-        throw new AldapaException("Implementation available with new plugin architecture");
+        throw new AldapaException(TOIMPLEMENT);
     }
 
     @Override
     public void createDB(String dbName) throws IOException, RDFStoreException {
-        throw new AldapaException("Implementation available with new plugin architecture");
+        throw new AldapaException(TOIMPLEMENT);
     }
 
     @Override
     public void setDB(String dbName) throws AldapaException {
-        throw new AldapaException("Implementation available with new plugin architecture");
+        throw new AldapaException(TOIMPLEMENT);
     }
 
     @Override
     public void deleteDB(String dbName) throws AldapaException {
-        throw new AldapaException("Implementation available with new plugin architecture");
+        throw new AldapaException(TOIMPLEMENT);
     }
 
     public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException {
