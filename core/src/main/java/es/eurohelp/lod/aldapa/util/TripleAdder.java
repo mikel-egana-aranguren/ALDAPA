@@ -2,6 +2,7 @@
  * 
  */
 package es.eurohelp.lod.aldapa.util;
+import java.util.Date;
 
 import java.math.BigDecimal;
 
@@ -204,6 +205,26 @@ public class TripleAdder {
     public void addTriple(String subject, String prop, String object) {
         model.add(vf.createIRI(subject), vf.createIRI(prop), vf.createIRI(object), vf.createIRI(ctxt));
     }
+    
+    /**
+     * 
+     * Adds a date triple
+     * 
+     * @param subject
+     *            the subject URI
+     * 
+     * @param prop
+     *            the property URI
+     * 
+     * @param object
+     *            the date
+     * 
+     */
+
+    public void addDateTriple(String subject, String prop, Date object) {
+        model.add(vf.createIRI(subject), vf.createIRI(prop), vf.createLiteral(object), vf.createIRI(ctxt));
+    }
+    
 
     /**
      * 

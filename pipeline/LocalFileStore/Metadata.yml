@@ -1,1 +1,2 @@
 estaciones.csv: https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv
+estaciones-pruebas-grafter.csv: htpp://estaciones-pruebas-grafter.csv

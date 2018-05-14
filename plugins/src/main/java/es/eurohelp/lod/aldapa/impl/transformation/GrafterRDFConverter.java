@@ -3,6 +3,8 @@ package es.eurohelp.lod.aldapa.impl.transformation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.eclipse.rdf4j.model.Model;
@@ -54,6 +56,9 @@ public class GrafterRDFConverter extends CSV2RDFBatchConverter implements Functi
                 System.out.println(statement.getSubject().stringValue()+","+statement.getPredicate().stringValue()+","+statement.getObject().stringValue()+"\n------");
                 if(statement.getObject().stringValue().contains("http")){
                 adder.addTriple(statement.getSubject().stringValue(), statement.getPredicate().stringValue(), statement.getObject().stringValue());
+                }
+                else if (statement.getPredicate().toString().contains("date")){
+                 adder.addDateTriple(statement.getSubject().stringValue(), statement.getPredicate().stringValue(), new Date(statement.getObject().stringValue()));   
                 }
                 else if(!statement.getObject().stringValue().isEmpty()){
                     adder.addDataTripleXSDString(statement.getSubject().stringValue(), statement.getPredicate().stringValue(), statement.getObject().stringValue());
