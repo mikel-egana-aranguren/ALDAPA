@@ -68,7 +68,8 @@ public class ConfigurationManager {
     private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
     private static final String ABSTRACTRDFQUALITYVALIDATOR = "es.eurohelp.lod.aldapa.modification.RDFQualityValidator";
 
-
+    //message
+    private static final String STORE_STARTED = "File Store started";
 
     /**
      * The configuration is stored in a HashMap:
@@ -201,7 +202,7 @@ public class ConfigurationManager {
                 String dir = this.getConfigPropertyValue(FILESTORECONFIGFILE, DIRTOKEN);
                 String metadata = this.getConfigPropertyValue(FILESTORECONFIGFILE, METADATATOKEN);
                 fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(dir,metadata);
-                LOGGER.info("File Store started ");
+                LOGGER.info(STORE_STARTED);
             } else {
                 LOGGER.error("ALDAPA cannot initialise class " + fileStoreClass.getName());
                 throw new CouldNotInitialisePluginException(fileStoreClass.getName());
@@ -234,7 +235,7 @@ public class ConfigurationManager {
                 String endpointURL = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, ENDPOINTURLTOKEN);
                 String dbName = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, DBNAMETOKEN);
                 rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(endpointURL, dbName);
-                LOGGER.info("File Store started ");
+                LOGGER.info(STORE_STARTED);
             } else {
                 throw new CouldNotInitialisePluginException(rdfStoreClass.getName());
             }

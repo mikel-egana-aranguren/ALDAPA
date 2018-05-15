@@ -64,7 +64,7 @@ public class GrafterRDFConverter extends CSV2RDFBatchConverter implements Functi
                 }
             }
         } catch (IOException e) {
-            LOGGER.info(e.getMessage());
+            LOGGER.info(e);
         }
         return adder.getModel();
     }
