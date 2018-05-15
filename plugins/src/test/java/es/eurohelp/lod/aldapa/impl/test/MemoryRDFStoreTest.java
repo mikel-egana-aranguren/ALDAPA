@@ -42,19 +42,19 @@ public class MemoryRDFStoreTest {
     private static final String BOOLEANQUERYASK = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> ASK WHERE { ?project rdf:type foaf:Project . }";
     private static final String QUERYDELETE = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> DELETE { ?project rdf:type foaf:Project . } WHERE { ?project rdf:type foaf:Project . }";
     private static final String TRIG = ".trig";
-    
+
     private MemoryRDFStore memStore = null;
 
     private static final Logger LOGGER = LogManager.getLogger(MemoryRDFStoreTest.class);
 
     @Before
     public void setUp() {
-        memStore = new MemoryRDFStore();
+	memStore = new MemoryRDFStore();
     }
 
     @After
     public void tearDown() {
-        memStore.stopRDFStore();
+	memStore.stopRDFStore();
     }
 
     /**
@@ -68,14 +68,14 @@ public class MemoryRDFStoreTest {
      */
     @Test
     public final void testSaveModel() {
-        try {
-            InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
-            Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
-            memStore.saveModel(model);
-            assertNotNull(model);
-        } catch (AldapaException | IOException e) {
-            LOGGER.error(e);
-        }
+	try {
+	    InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
+	    Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
+	    memStore.saveModel(model);
+	    assertNotNull(model);
+	} catch (AldapaException | IOException e) {
+	    LOGGER.error(e);
+	}
     }
 
     /**
@@ -90,15 +90,17 @@ public class MemoryRDFStoreTest {
      */
     @Test
     public final void testFlushNamedGraph() {
-        try {
-            InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
-            Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
-            memStore.saveModel(model);
-            memStore.flushGraph(DATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "Data" + TRIG), RDFFormat.TRIG);
-            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaData" + TRIG), RDFFormat.TRIG);
-        } catch (AldapaException | IOException e) {
-            LOGGER.error(e);
-        }
+	try {
+	    InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
+	    Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
+	    memStore.saveModel(model);
+	    memStore.flushGraph(DATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "Data" + TRIG),
+		    RDFFormat.TRIG);
+	    memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaData" + TRIG),
+		    RDFFormat.TRIG);
+	} catch (AldapaException | IOException e) {
+	    LOGGER.error(e);
+	}
     }
 
     /**
@@ -109,50 +111,51 @@ public class MemoryRDFStoreTest {
      */
     @Test
     public final void testFlushModel() {
-        try {
-            InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILENOGRAPHS);
-            Model model = Rio.parse(inStream, TMPURI, RDFFormat.TURTLE);
-            memStore.saveModel(model);
-            memStore.flushGraph(null, new FileOutputStream(OUTPUTFILENOEXTENSION + ".ttl"), RDFFormat.TURTLE);
-        } catch (AldapaException | IOException e) {
-            LOGGER.error(e);
-        }
+	try {
+	    InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILENOGRAPHS);
+	    Model model = Rio.parse(inStream, TMPURI, RDFFormat.TURTLE);
+	    memStore.saveModel(model);
+	    memStore.flushGraph(null, new FileOutputStream(OUTPUTFILENOEXTENSION + ".ttl"), RDFFormat.TURTLE);
+	} catch (AldapaException | IOException e) {
+	    LOGGER.error(e);
+	}
     }
 
     @Test
     public final void testExecSPARQLBooleanQuery() {
-        try {
-            boolean queryResult = false;
-            InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
-            Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
-            memStore.saveModel(model);
-            queryResult = memStore.execSPARQLBooleanQuery(BOOLEANQUERYASK);
-            assertTrue(queryResult);
-        } catch (AldapaException | IOException e) {
-            LOGGER.error(e);
-        }
+	try {
+	    boolean queryResult = false;
+	    InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
+	    Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
+	    memStore.saveModel(model);
+	    queryResult = memStore.execSPARQLBooleanQuery(BOOLEANQUERYASK);
+	    assertTrue(queryResult);
+	} catch (AldapaException | IOException e) {
+	    LOGGER.error(e);
+	}
     }
 
     @Test
     public final void testexecSPARQLUpdateDelete() {
-        try {
-            InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
-            Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
-            memStore.saveModel(model);
-            memStore.execSPARQLUpdate(QUERYDELETE);
-            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaDataProjectRemoved" + TRIG), RDFFormat.TRIG);
-        } catch (AldapaException | IOException e) {
-            LOGGER.error(e);
-        }
+	try {
+	    InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
+	    Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
+	    memStore.saveModel(model);
+	    memStore.execSPARQLUpdate(QUERYDELETE);
+	    memStore.flushGraph(METADATAGRAPHURI,
+		    new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaDataProjectRemoved" + TRIG), RDFFormat.TRIG);
+	} catch (AldapaException | IOException e) {
+	    LOGGER.error(e);
+	}
     }
 
     @Test
     public final void testexecSPARQLTupleQuery() {
-        memStore.execSPARQLTupleQuery(TUPLEQUERY);
+	memStore.execSPARQLTupleQuery(TUPLEQUERY);
     }
 
     @Test
     public final void testexecSPARQLGraphQuery() {
-        memStore.execSPARQLGraphQuery(GRAPHQUERY);
+	memStore.execSPARQLGraphQuery(GRAPHQUERY);
     }
 }

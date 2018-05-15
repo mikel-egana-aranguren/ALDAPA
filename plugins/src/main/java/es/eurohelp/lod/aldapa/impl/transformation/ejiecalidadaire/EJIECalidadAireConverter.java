@@ -5,7 +5,6 @@ package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.Collator;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;

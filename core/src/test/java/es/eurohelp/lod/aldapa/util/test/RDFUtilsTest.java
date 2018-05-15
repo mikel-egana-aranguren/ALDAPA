@@ -17,6 +17,6 @@ public class RDFUtilsTest {
 
     @Test
     public final void testCurrentInstantToXSDDateTime() {
-        LocalDateTime.parse(RDFUtils.currentInstantToXSDDateTime());
+	LocalDateTime.parse(RDFUtils.currentInstantToXSDDateTime());
     }
 }
