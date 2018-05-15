@@ -83,6 +83,7 @@
 						<exclude>**/*BlazegraphRESTStoreTest.java</exclude>
 						<exclude>**/*SPARQLProtocolStoreTest.java</exclude>
 						<exclude>**/*RDF4JWorkbenchTest.java</exclude>
+						<exclude>**/*GraphDBStoreTest.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

@@ -23,6 +23,6 @@ public class SPARQLProtocolStore extends RDF4JConnection {
      * @param sparqlEndpointURL
      */
     public SPARQLProtocolStore(String sparqlEndpointURL) {
-        super(new SPARQLRepository(sparqlEndpointURL));
+	super(new SPARQLRepository(sparqlEndpointURL));
     }
 }
