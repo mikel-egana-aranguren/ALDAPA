@@ -9,11 +9,7 @@ import es.eurohelp.lod.aldapa.core.ConfigurationManager;
 import es.eurohelp.lod.aldapa.core.Manager;
 
 /**
- * 
- * Example pipeline
- * 
- * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
- *
+ * @author dmuchuari
  */
 public class EJIECalidadAireGrafter {
 
