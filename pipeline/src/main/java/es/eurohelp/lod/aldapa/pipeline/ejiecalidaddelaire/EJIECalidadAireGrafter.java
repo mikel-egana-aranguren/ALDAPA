@@ -49,10 +49,6 @@ public class EJIECalidadAireGrafter {
         manager.addDataToNamedGraph("http://lod.eurohelp.es/catalogo/calidad-del-aire", "estaciones-pruebas-grafter.csv", "pipeline/EstacionesMetereologicas.clj",
                 "create-graph");
 
-        // Validate data
-     //    manager.analyseGraph();
-
-        // Discover links
 
         // Flush backbone
         manager.flushGraph(null, "data/EuskadiMedioAmbienteMetadata.ttl", RDFFormat.TURTLE);

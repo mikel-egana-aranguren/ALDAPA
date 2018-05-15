@@ -70,6 +70,8 @@ public class ConfigurationManager {
 
     //message
     private static final String STORE_STARTED = "File Store started";
+    private static final String CONVERTER_STARTED = "CSV2RDF converter started";
+
 
     /**
      * The configuration is stored in a HashMap:
@@ -257,10 +259,10 @@ public class ConfigurationManager {
             String converterSuperClassName = converterClass.getSuperclass().getName();
             if (converterSuperClassName.equals(ABSTRACTCSV2RDFBATCHCONVERTER)) {
                 converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
-                LOGGER.info("CSV2RDF converter started");
+                LOGGER.info("CONVERTER_STARTED");
             }else if(converterSuperClassName.equals(ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER)){
                 converter = (FunctionalCSV2RDFMappedBatchConverter) converterClass.newInstance();
-                LOGGER.info("CSV2RDF converter started");
+                LOGGER.info("CONVERTER_STARTED");
             }else {
                 throw new CouldNotInitialisePluginException(converterClass.getName());
             }
