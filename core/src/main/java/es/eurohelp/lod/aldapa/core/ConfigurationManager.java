@@ -259,10 +259,10 @@ public class ConfigurationManager {
             String converterSuperClassName = converterClass.getSuperclass().getName();
             if (converterSuperClassName.equals(ABSTRACTCSV2RDFBATCHCONVERTER)) {
                 converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
-                LOGGER.info("CONVERTER_STARTED");
+                LOGGER.info(CONVERTER_STARTED);
             }else if(converterSuperClassName.equals(ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER)){
                 converter = (FunctionalCSV2RDFMappedBatchConverter) converterClass.newInstance();
-                LOGGER.info("CONVERTER_STARTED");
+                LOGGER.info(CONVERTER_STARTED);
             }else {
                 throw new CouldNotInitialisePluginException(converterClass.getName());
             }
