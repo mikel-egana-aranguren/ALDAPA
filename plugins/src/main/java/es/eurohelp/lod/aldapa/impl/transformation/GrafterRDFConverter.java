@@ -3,7 +3,6 @@ package es.eurohelp.lod.aldapa.impl.transformation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -53,19 +52,19 @@ public class GrafterRDFConverter extends CSV2RDFBatchConverter implements Functi
             adder = new TripleAdder(namedGraphURI);
             while (ite.hasNext()) {
                 org.openrdf.model.Statement statement = (org.openrdf.model.Statement) ite.next();
-                System.out.println(statement.getSubject().stringValue()+","+statement.getPredicate().stringValue()+","+statement.getObject().stringValue()+"\n------");
-                if(statement.getObject().stringValue().contains("http")){
-                adder.addTriple(statement.getSubject().stringValue(), statement.getPredicate().stringValue(), statement.getObject().stringValue());
-                }
-                else if (statement.getPredicate().toString().contains("date")){
-                 adder.addDateTriple(statement.getSubject().stringValue(), statement.getPredicate().stringValue(), new Date(statement.getObject().stringValue()));   
-                }
-                else if(!statement.getObject().stringValue().isEmpty()){
-                    adder.addDataTripleXSDString(statement.getSubject().stringValue(), statement.getPredicate().stringValue(), statement.getObject().stringValue());
+                if (statement.getObject().stringValue().contains("http")) {
+                    adder.addTriple(statement.getSubject().stringValue(), statement.getPredicate().stringValue(),
+                            statement.getObject().stringValue());
+                } else if (statement.getPredicate().toString().contains("date")) {
+                    adder.addDateTriple(statement.getSubject().stringValue(), statement.getPredicate().stringValue(),
+                            new Date(statement.getObject().stringValue()));
+                } else if (!statement.getObject().stringValue().isEmpty()) {
+                    adder.addDataTripleXSDString(statement.getSubject().stringValue(),
+                            statement.getPredicate().stringValue(), statement.getObject().stringValue());
                 }
             }
         } catch (IOException e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.info(e.getMessage());
         }
         return adder.getModel();
     }
