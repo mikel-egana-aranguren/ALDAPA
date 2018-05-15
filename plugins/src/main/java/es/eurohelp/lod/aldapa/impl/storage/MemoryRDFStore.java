@@ -4,12 +4,9 @@
 package es.eurohelp.lod.aldapa.impl.storage;
 
 import java.io.FileOutputStream;
-import java.util.Iterator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Statement;
 
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.rio.RDFFormat;
@@ -40,40 +37,12 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
         conn = super.getConnection();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see es.eurohelp.opendata.aldapa.storage.RDFStore#stopRDFStore()
-     */
+
     public void stopRDFStore() {
         super.shutdownAtOnce();
         LOGGER.info("Closing connection and shutting down SailRepository(MemoryStore)");
     }
 
-    /*
-     * (non-Javadoc)
-     * @see es.eurohelp.opendata.aldapa.storage.RDFStore#saveModel(org.openrdf.model.Model)
-     */
-    public void saveModel(Model model) throws RDFStoreException {
-        LOGGER.info("Adding model to SailRepository(MemoryStore)");
-        // Issue 35
-        Iterator<Statement> modelIterator = model.iterator();
-        while (modelIterator.hasNext()) {
-            Statement stment = modelIterator.next();
-            if (stment.getContext() != null) {
-                LOGGER.info("Adding triple " + stment + " to context " + stment.getContext());
-                conn.add(stment, stment.getContext());
-            } else {
-                LOGGER.info("Adding triple " + stment);
-                conn.add(stment);
-            }
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see es.eurohelp.opendata.aldapa.storage.RDFStore#flushGraph(java.lang.String, java.io.FileOutputStream,
-     * org.openrdf.rio.RDFFormat)
-     */
     public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws RDFStoreException {
 
         LOGGER.info("Format to flush graph: " + rdfformat.getDefaultMIMEType());
@@ -105,10 +74,6 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see es.eurohelp.opendata.aldapa.storage.RDFStore#deleteGraph(java.lang.String)
-     */
     public void deleteGraph(String graphUri) throws RDFStoreException {
         throw new UnsupportedOperationException("This functionality has not been implemented yet");
     }

@@ -2,7 +2,7 @@
     "configuration": {
         "status": "error",
         "name": "AldapaLogger",
-        "packages": "es.eurohelp.opendata.aldapa",
+        "packages": "es.eurohelp.lod.aldapa",
         "ThresholdFilter": {
             "level": "debug"
         },

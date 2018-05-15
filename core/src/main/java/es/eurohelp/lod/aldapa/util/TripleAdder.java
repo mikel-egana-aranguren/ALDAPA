@@ -10,6 +10,7 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.impl.TreeModel;
+import org.eclipse.rdf4j.model.vocabulary.OWL;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.RDFS;
 
@@ -72,6 +73,10 @@ public class TripleAdder {
     public void addRDFTYPETriple(String subject, String object) {
         model.add(vf.createIRI(subject), RDF.TYPE, vf.createIRI(object), vf.createIRI(ctxt));
     }
+    
+    public void addOWLSAMEASTriple(String subject, String object) {
+        model.add(vf.createIRI(subject), OWL.SAMEAS, vf.createIRI(object), vf.createIRI(ctxt));
+    }
 
     /**
      * 
@@ -127,6 +132,10 @@ public class TripleAdder {
      */
 
     public void addDataTripleXSDInt(String subject, String prop, int value) {
+        model.add(vf.createIRI(subject), vf.createIRI(prop), vf.createLiteral(value), vf.createIRI(ctxt));
+    }
+    
+    public void addDataTripleXSDLong(String subject, String prop, long value) {
         model.add(vf.createIRI(subject), vf.createIRI(prop), vf.createLiteral(value), vf.createIRI(ctxt));
     }
 
@@ -226,6 +235,11 @@ public class TripleAdder {
     }
     
 
+    
+    public void addDataTripleLang(String subject, String prop, String value, String lang){
+        model.add(vf.createIRI(subject), vf.createIRI(prop), vf.createLiteral(value,lang), vf.createIRI(ctxt));
+    }
+    
     /**
      * 
      * Retrieve the modified Model

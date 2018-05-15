@@ -109,6 +109,7 @@
 					<excludes>
 						<exclude>**/*BlazegraphRESTStoreTest.java</exclude>
 						<exclude>**/*SPARQLProtocolStoreTest.java</exclude>
+						<exclude>**/*GraphDBStoreTest.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
