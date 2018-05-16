@@ -30,52 +30,52 @@ public abstract class RDF4JConnection {
     private RepositoryConnection conn;
 
     public RDF4JConnection(Repository newRepo) {
-	repo = newRepo;
-	repo.initialize();
-	conn = repo.getConnection();
-	conn.begin();
-	LOGGER.info("Starting and connecting to " + repo.getClass().getSimpleName());
+        repo = newRepo;
+        repo.initialize();
+        conn = repo.getConnection();
+        conn.begin();
+        LOGGER.info("Starting and connecting to " + repo.getClass().getSimpleName());
     }
 
     public synchronized RepositoryConnection getConnection() {
-	return conn;
+        return conn;
     }
 
     public void saveModel(Model model) throws RDFStoreException {
-	LOGGER.info("Adding model to Repository");
-	// Issue 35
-	Iterator<Statement> iterator = model.iterator();
-	while (iterator.hasNext()) {
-	    Statement statement = iterator.next();
-	    if (statement.getContext() != null) {
-		LOGGER.info("Adding triple " + statement + " to context " + statement.getContext());
-		conn.add(statement, statement.getContext());
-	    } else {
-		LOGGER.info("Adding triple " + statement);
-		conn.add(statement);
-	    }
-	}
+        LOGGER.info("Adding model to Repository");
+        // Issue 35
+        Iterator<Statement> iterator = model.iterator();
+        while (iterator.hasNext()) {
+            Statement statement = iterator.next();
+            if (statement.getContext() != null) {
+                LOGGER.info("Adding triple " + statement + " to context " + statement.getContext());
+                conn.add(statement, statement.getContext());
+            } else {
+                LOGGER.info("Adding triple " + statement);
+                conn.add(statement);
+            }
+        }
     }
 
     public void shutdownAtOnce() {
-	LOGGER.info("Closing connection and shutting down " + repo.getClass().getSimpleName());
-	conn.close();
-	repo.shutDown();
+        LOGGER.info("Closing connection and shutting down " + repo.getClass().getSimpleName());
+        conn.close();
+        repo.shutDown();
     }
 
     public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException {
-	return conn.prepareGraphQuery(pSPARQLquery).evaluate();
+        return conn.prepareGraphQuery(pSPARQLquery).evaluate();
     }
 
     public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) {
-	return conn.prepareTupleQuery(QueryLanguage.SPARQL, pSPARQLquery).evaluate();
+        return conn.prepareTupleQuery(QueryLanguage.SPARQL, pSPARQLquery).evaluate();
     }
 
     public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException {
-	return conn.prepareBooleanQuery(pSPARQLquery).evaluate();
+        return conn.prepareBooleanQuery(pSPARQLquery).evaluate();
     }
 
     public void execSPARQLUpdate(String pSPARQLquery) {
-	conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery).execute();
+        conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery).execute();
     }
 }
