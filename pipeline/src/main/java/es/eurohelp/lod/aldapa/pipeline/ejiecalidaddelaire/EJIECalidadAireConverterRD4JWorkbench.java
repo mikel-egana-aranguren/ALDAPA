@@ -11,7 +11,7 @@ public class EJIECalidadAireConverterRD4JWorkbench {
 
     public static void main(String[] args) {
         // Load the configuration from file configuration.yml
-        ConfigurationManager config = ConfigurationManager.getInstance("configurationMishel.yml");
+        ConfigurationManager config = ConfigurationManager.getInstance("configurationRDF4Jworkbench.yml");
 
         // Create a manager with the configuration
         Manager manager = new Manager(config);

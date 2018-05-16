@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.lucene.search.postingshighlight.Passage;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
 
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
@@ -24,10 +25,10 @@ import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
  * 
- * A configuration manager holds the configuration properties and prepares the described plugins. The main file should
- * contain pointers to other
- * files, each file having the configuration of each module. See configuration.yml and the folder configuration for
- * details.
+ * A configuration manager holds the configuration properties and prepares the
+ * described plugins. The main file should contain pointers to other files, each
+ * file having the configuration of each module. See configuration.yml and the
+ * folder configuration for details.
  * 
  * @author Mikel Egana Aranguren, Eurohelp consulting S.L.
  * 
@@ -55,6 +56,8 @@ public class ConfigurationManager {
     private static final String ABSTRACTRESTSTORERDF4JCONNECTION = "es.eurohelp.lod.aldapa.storage.RESTStoreRDF4JConnection";
     private static final String ENDPOINTURLTOKEN = "endpointURL";
     private static final String DBNAMETOKEN = "dbName";
+    private static final String DBUSERTOKEN = "user";
+    private static final String DBPASSWORDTOKEN = "password";
 
     // RDF4JWorkbench
     private static final String ABSTRACTRDF4JWORKBENCHCONNECTION = "es.eurohelp.lod.aldapa.storage.RDF4JHTTPConnection";
@@ -67,18 +70,17 @@ public class ConfigurationManager {
     // RDF validator
     private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
     private static final String ABSTRACTRDFQUALITYVALIDATOR = "es.eurohelp.lod.aldapa.modification.RDFQualityValidator";
-    
-    //message
+
+    // message
     private static final String STORE_STARTED = "File Store started";
-
-
 
     /**
      * The configuration is stored in a HashMap:
      * 
      * file name - file content
      * 
-     * The file file content is a HashMap, containing the actual configuration values:
+     * The file file content is a HashMap, containing the actual configuration
+     * values:
      * 
      * config property - config value
      * 
@@ -132,8 +134,8 @@ public class ConfigurationManager {
     }
 
     /**
-     * Loads config properties from the specified file.
-     * If not specified, it will load configuration.yml
+     * Loads config properties from the specified file. If not specified, it
+     * will load configuration.yml
      *
      * @param the
      *            main config file name
@@ -148,7 +150,8 @@ public class ConfigurationManager {
         try {
 
             mainConfigFile = new HashMap<String, HashMap<String, String>>();
-            HashMap<String, String> provisionalMainConfigFile = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(configInStream);
+            HashMap<String, String> provisionalMainConfigFile = (HashMap<String, String>) YAMLUtils
+                    .parseSimpleYAML(configInStream);
 
             for (Map.Entry<String, String> entry : provisionalMainConfigFile.entrySet()) {
                 String key = entry.getKey();
@@ -167,8 +170,8 @@ public class ConfigurationManager {
 
     /**
      * 
-     * Retrieves a configuration value of a given property (eg "pluginClassName") in a file (eg
-     * "TRIPLE_STORE_CONFIG_FILE")
+     * Retrieves a configuration value of a given property (eg
+     * "pluginClassName") in a file (eg "TRIPLE_STORE_CONFIG_FILE")
      * 
      * @param module
      *            (file) name
@@ -176,7 +179,8 @@ public class ConfigurationManager {
      * @param property
      *            the configuration property name.
      * 
-     * @return the configuration value for that property key. <em> null</em> if the property is not found.
+     * @return the configuration value for that property key. <em> null</em> if
+     *         the property is not found.
      * @throws ConfigurationException
      *             a configuration exception
      */
@@ -204,13 +208,15 @@ public class ConfigurationManager {
                 cArg[1] = String.class;
                 String dir = this.getConfigPropertyValue(FILESTORECONFIGFILE, DIRTOKEN);
                 String metadata = this.getConfigPropertyValue(FILESTORECONFIGFILE, METADATATOKEN);
-                fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(dir,metadata);
+                fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(dir,
+                        metadata);
                 LOGGER.info("File Store started ");
             } else {
                 LOGGER.error("ALDAPA cannot initialise class " + fileStoreClass.getName());
                 throw new CouldNotInitialisePluginException(fileStoreClass.getName());
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException
+                | NoSuchMethodException e) {
             throw new AldapaException(e);
         }
         return fileStore;
@@ -245,7 +251,9 @@ public class ConfigurationManager {
                 cArg[0] = HTTPRepository.class;
                 String endpointURL = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, ENDPOINTURLTOKEN);
                 HTTPRepository repo = new HTTPRepository(endpointURL);
-                repo.setUsernameAndPassword("admin", "admin");
+                String user = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, DBUSERTOKEN);
+                String psswd = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, DBPASSWORDTOKEN);
+                repo.setUsernameAndPassword(user, psswd);
                 rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(repo);
                 LOGGER.info(STORE_STARTED);
                 LOGGER.info("RD4J Workbench Database started");
@@ -272,10 +280,10 @@ public class ConfigurationManager {
             if (converterSuperClassName.equals(ABSTRACTCSV2RDFBATCHCONVERTER)) {
                 converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
                 LOGGER.info("CSV2RDF converter started");
-            }else if(converterSuperClassName.equals(ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER)){
+            } else if (converterSuperClassName.equals(ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER)) {
                 converter = (FunctionalCSV2RDFMappedBatchConverter) converterClass.newInstance();
                 LOGGER.info("CSV2RDF converter started");
-            }else {
+            } else {
                 throw new CouldNotInitialisePluginException(converterClass.getName());
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
