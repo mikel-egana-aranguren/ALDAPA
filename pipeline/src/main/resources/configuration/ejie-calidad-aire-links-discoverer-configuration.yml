@@ -1,0 +1,7 @@
+name: LinkDiscovererForTests
+comment: Links discoverer for testing purposes
+author: Mishel Uchuari
+
+pluginClassName: es.eurohelp.lod.aldapa.impl.modification.SILKLinkDiscovery
+silkConfigurationFile: silk-configuration.xml
+silkResultsPath: accepted-links.nt

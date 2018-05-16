@@ -17,7 +17,8 @@ import org.eclipse.rdf4j.repository.RepositoryConnection;
 
 /**
  * 
- * A connection to an RDF4J repository (http://docs.rdf4j.org/programming/#_the_repository_api)
+ * A connection to an RDF4J repository
+ * (http://docs.rdf4j.org/programming/#_the_repository_api)
  * 
  * @author megana
  *
@@ -39,19 +40,19 @@ public abstract class RDF4JConnection {
     public synchronized RepositoryConnection getConnection() {
         return conn;
     }
-    
+
     public void saveModel(Model model) throws RDFStoreException {
         LOGGER.info("Adding model to Repository");
         // Issue 35
-        Iterator<Statement> modelIterator = model.iterator();
-        while (modelIterator.hasNext()) {
-            Statement stment = modelIterator.next();
-            if (stment.getContext() != null) {
-                LOGGER.info("Adding triple " + stment + " to context " + stment.getContext());
-                conn.add(stment, stment.getContext());
+        Iterator<Statement> iterator = model.iterator();
+        while (iterator.hasNext()) {
+            Statement statement = iterator.next();
+            if (statement.getContext() != null) {
+                LOGGER.info("Adding triple " + statement + " to context " + statement.getContext());
+                conn.add(statement, statement.getContext());
             } else {
-                LOGGER.info("Adding triple " + stment);
-                conn.add(stment);
+                LOGGER.info("Adding triple " + statement);
+                conn.add(statement);
             }
         }
     }

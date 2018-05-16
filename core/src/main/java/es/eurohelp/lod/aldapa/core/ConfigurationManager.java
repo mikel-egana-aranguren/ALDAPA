@@ -8,11 +8,13 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.eclipse.rdf4j.repository.http.HTTPRepository;
 
 import es.eurohelp.lod.aldapa.core.exception.AldapaException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationException;
 import es.eurohelp.lod.aldapa.core.exception.ConfigurationFileIOException;
 import es.eurohelp.lod.aldapa.core.exception.CouldNotInitialisePluginException;
+import es.eurohelp.lod.aldapa.modification.FunctionalLinkDiscoverer;
 import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
@@ -60,11 +62,20 @@ public class ConfigurationManager {
     private static final String ABSTRACTCSV2RDFBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
     private static final String ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFMappedBatchConverter";
 
+    // RDF4JWorkbench
+    private static final String ABSTRACTRDF4JWORKBENCHCONNECTION = "es.eurohelp.lod.aldapa.storage.RDF4JHTTPConnection";
+
     // RDF validator
     private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
     private static final String ABSTRACTRDFQUALITYVALIDATOR = "es.eurohelp.lod.aldapa.modification.RDFQualityValidator";
 
+    // Link discoverer
+    private static final String DISCOVERERCONFIGFILE = "LINK_DISCOVERER_CONFIG_FILE";
+    private static final String ABSTRACTLINKSDISCOVERER = "es.eurohelp.lod.aldapa.modification.LinkDiscoverer";
 
+    //message
+    private static final String STORE_STARTED = "File Store started";
+    
     /**
      * The configuration is stored in a HashMap:
      * 
@@ -195,8 +206,9 @@ public class ConfigurationManager {
                 cArg[1] = String.class;
                 String dir = this.getConfigPropertyValue(FILESTORECONFIGFILE, DIRTOKEN);
                 String metadata = this.getConfigPropertyValue(FILESTORECONFIGFILE, METADATATOKEN);
-                fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(dir,metadata);
-                LOGGER.info("File Store started ");
+                fileStore = (FunctionalFileStore) fileStoreClass.getDeclaredConstructor(cArg).newInstance(dir,
+                        metadata);
+                LOGGER.info(STORE_STARTED);
             } else {
                 LOGGER.error("ALDAPA cannot initialise class " + fileStoreClass.getName());
                 throw new CouldNotInitialisePluginException(fileStoreClass.getName());
@@ -228,12 +240,23 @@ public class ConfigurationManager {
                 cArg[1] = String.class;
                 String endpointURL = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, ENDPOINTURLTOKEN);
                 String dbName = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, DBNAMETOKEN);
-                rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(endpointURL, dbName);
-                LOGGER.info("File Store started ");
+                rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(endpointURL,
+                        dbName);
+                LOGGER.info(STORE_STARTED);
+            } else if (rdfStoreSuperClassName.equals(ABSTRACTRDF4JWORKBENCHCONNECTION)) {
+                Class[] cArg = new Class[1];
+                cArg[0] = HTTPRepository.class;
+                String endpointURL = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, ENDPOINTURLTOKEN);
+                HTTPRepository repo = new HTTPRepository(endpointURL);
+                repo.setUsernameAndPassword("admin", "admin");
+                rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(repo);
+                LOGGER.info(STORE_STARTED);
+                LOGGER.info("RD4J Workbench Database started");
             } else {
                 throw new CouldNotInitialisePluginException(rdfStoreClass.getName());
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException
+                | NoSuchMethodException e) {
             throw new AldapaException(e);
         }
         return rdfStore;
@@ -286,5 +309,28 @@ public class ConfigurationManager {
             throw new AldapaException(e);
         }
         return validator;
+    }
+
+    /**
+     * 
+     * @return a LinkDiscoverer
+     */
+    public FunctionalLinkDiscoverer getLinkDiscoverer() {
+        FunctionalLinkDiscoverer linkDiscoverer = null;
+        try {
+            String linkDiscovererPluginName = this.getConfigPropertyValue(DISCOVERERCONFIGFILE, PLUGINCLASSNAME);
+            LOGGER.info("validator plugin name: " + linkDiscovererPluginName);
+            Class<?> linkDiscovererClass = Class.forName(linkDiscovererPluginName);
+            String linkDiscovererSuperClassName = linkDiscovererClass.getSuperclass().getName();
+            if (linkDiscovererSuperClassName.equals(ABSTRACTLINKSDISCOVERER)) {
+                linkDiscoverer = (FunctionalLinkDiscoverer) linkDiscovererClass.newInstance();
+                LOGGER.info("Link discoverer Started");
+            } else {
+                throw new CouldNotInitialisePluginException(linkDiscovererClass.getName());
+            }
+        } catch (Exception e) {
+            throw new AldapaException(e);
+        }
+        return linkDiscoverer;
     }
 }

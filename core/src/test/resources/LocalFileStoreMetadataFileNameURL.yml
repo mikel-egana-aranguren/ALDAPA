@@ -22,6 +22,48 @@ calidadAire.1511877365csv : http://euskadi.eus/calidadAire.csv
 calidadAire.1511877416csv : http://euskadi.eus/calidadAire.csv
 calidadAire.1511877455csv : http://euskadi.eus/calidadAire.csv
 calidadAire.1511877464csv : http://euskadi.eus/calidadAire.csv
+<<<<<<< HEAD
+<<<<<<< HEAD
+calidadAire.1519298095csv : http://euskadi.eus/calidadAire.csv
+=======
+calidadAire.1519907286csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1519908342csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1519908426csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1519909039csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1519979808csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1519979977csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1519980331csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1519980644csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1519981367csv : http://euskadi.eus/calidadAire.csv
+>>>>>>> branch 'feature-RDF4Jworkbench' of https://github.com/mikel-egana-aranguren/ALDAPA.git
+calidadAire.1519998231csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1519998375csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1519999861csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520237824csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520241091csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520242204csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520242750csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520243499csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520244140csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520244590csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520247071csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520248090csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520248435csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520249632csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520250320csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520250415csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520250646csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520251507csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520254482csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520255095csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520255209csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1520255559csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1523016144csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1523016465csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1523016573csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1526312806csv : http://euskadi.eus/calidadAire.csv
+calidadAire.1526313292csv : http://euskadi.eus/calidadAire.csv
+=======
 calidadAire.1513682803csv : http://euskadi.eus/calidadAire.csv
 calidadAire.1525343678csv : http://euskadi.eus/calidadAire.csv
 calidadAire.1525344112csv : http://euskadi.eus/calidadAire.csv
@@ -33,3 +75,5 @@ calidadAire.1525349006csv : http://euskadi.eus/calidadAire.csv
 calidadAire.1525350150csv : http://euskadi.eus/calidadAire.csv
 calidadAire.1525351609csv : http://euskadi.eus/calidadAire.csv
 calidadAire.1525699646csv : http://euskadi.eus/calidadAire.csv
+>>>>>>> refs/remotes/origin/develop
+calidadAire.1526458385csv : http://euskadi.eus/calidadAire.csv

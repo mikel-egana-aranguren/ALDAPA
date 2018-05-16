@@ -46,7 +46,8 @@ import es.eurohelp.lod.aldapa.util.FileUtils;
 
 /**
  * 
- * A wrapper for Blazegraphs's REST API (https://wiki.blazegraph.com/wiki/index.php/REST_API).
+ * A wrapper for Blazegraphs's REST API
+ * (https://wiki.blazegraph.com/wiki/index.php/REST_API).
  * 
  * The SPARQL enpoint queries are excuted through SPARQLProtocolStore
  * 
@@ -65,8 +66,10 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
     private static final Logger LOGGER = LogManager.getLogger(BlazegraphRESTStore.class);
 
     /**
-     * @param blazegraphURL URL of the blazegraph REST endpoint
-     * @param dbName name of the Blazegraph DB (Namespace)
+     * @param blazegraphURL
+     *            URL of the blazegraph REST endpoint
+     * @param dbName
+     *            name of the Blazegraph DB (Namespace)
      * @throws IOException
      * @throws RDFStoreException
      */
@@ -90,7 +93,8 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
 
             HashMap<String, String> httpHeaders = new HashMap<String, String>();
             httpHeaders.put("Content-Type", "application/x-trig");
-            execPOST(blazegraphBaseURL + SLASHNAMESPACE + "/" + blazegraphNSName + "/sparql", stringEntity, httpHeaders);
+            execPOST(blazegraphBaseURL + SLASHNAMESPACE + "/" + blazegraphNSName + "/sparql", stringEntity,
+                    httpHeaders);
         } catch (IOException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
@@ -98,7 +102,8 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
     }
 
     @Override
-    public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws RDFStoreException {
+    public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat)
+            throws RDFStoreException {
         ModelBuilder builder = new ModelBuilder();
         if (graphURI == null) {
             GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o}");
@@ -107,7 +112,8 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
                 builder.add(stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
             }
         } else {
-            GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery("CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }");
+            GraphQueryResult graphQueryResult = super.execSPARQLGraphQuery(
+                    "CONSTRUCT {?s ?p ?o} WHERE { GRAPH <" + graphURI + "> { ?s ?p ?o } }");
             builder.namedGraph(graphURI);
             while (graphQueryResult.hasNext()) {
                 Statement stmt = graphQueryResult.next();
@@ -132,7 +138,8 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
 
     /**
      * 
-     * Creates a Quad Store (No inference): https://wiki.blazegraph.com/wiki/index.php/REST_API#Quads
+     * Creates a Quad Store (No inference):
+     * https://wiki.blazegraph.com/wiki/index.php/REST_API#Quads
      * 
      * @param dbName
      * @throws AldapaException
@@ -140,7 +147,8 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
     @Override
     public void createDB(String dbName) throws AldapaException {
         try {
-            // If this object already created this DB, we stop without executing the HTTP call
+            // If this object already created this DB, we stop without executing
+            // the HTTP call
             if (blazegraphNSName != null && blazegraphNSName.equals(dbName)) {
                 throw new RDFStoreException("DB already exists");
             } else {
@@ -152,7 +160,8 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
                 httpHeaders.put("Content-Type", "application/xml");
                 HttpResponse response = execPOST(completeURL, entity, httpHeaders);
                 int status = response.getStatusLine().getStatusCode();
-                // Even if this object does not hold a db, it might already exist in BlazeGraph itself
+                // Even if this object does not hold a db, it might already
+                // exist in BlazeGraph itself
                 if (status >= 400 && status < 600) {
                     throw new RDFStoreException("Could not create DB due to HTTP error code " + status);
                 } else {
@@ -171,7 +180,8 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
      * Create a DB with a custom XML properties file (e.g.
      * https://wiki.blazegraph.com/wiki/index.php/REST_API#Triples_.2B_Inference_.2B_Truth_Maintenance)
      * 
-     * @param xmlPropsFile an XML with the properties to configure a Blazegraph DB 
+     * @param xmlPropsFile
+     *            an XML with the properties to configure a Blazegraph DB
      */
     public void createDBWtihProps(String xmlPropsFile) {
         throw new AldapaException(new MethodNotSupportedException("Not implemented yet"));
@@ -234,7 +244,8 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
         }
     }
 
-    private CloseableHttpResponse execPOST(String postURL, HttpEntity postEntity, Map<String, String> httpHeaders) throws AldapaException {
+    private CloseableHttpResponse execPOST(String postURL, HttpEntity postEntity, Map<String, String> httpHeaders)
+            throws AldapaException {
         try {
             CloseableHttpClient httpclient = HttpClients.createDefault();
             HttpPost post = new HttpPost(postURL);
@@ -262,5 +273,10 @@ public class BlazegraphRESTStore extends RESTStoreRDF4JConnection implements Fun
             LOGGER.error(e);
             throw new AldapaException(e);
         }
+    }
+
+    @Override
+    public void commit() {
+        this.commit();
     }
 }

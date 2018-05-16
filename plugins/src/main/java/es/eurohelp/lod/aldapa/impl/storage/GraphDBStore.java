@@ -29,23 +29,21 @@ import es.eurohelp.lod.aldapa.storage.RDFStoreException;
  * @author megana
  *
  */
-public class GraphDBStore 
-extends DBRDFStore
-implements FunctionalDBRDFStore {
+public class GraphDBStore extends DBRDFStore implements FunctionalDBRDFStore {
 
     private static final Logger LOGGER = LogManager.getLogger(GraphDBStore.class);
     private static final String TOIMPLEMENT = "Implementation available with new plugin architecture";
     private RemoteRepositoryManager repositoryManager = null;
     private Repository mainrepo = null;
-    
+
     // Issue 63
     public GraphDBStore(String graphdbURL, String dbName) {
         repositoryManager = new RemoteRepositoryManager(graphdbURL);
         repositoryManager.initialize();
         mainrepo = repositoryManager.getRepository(dbName);
     }
-    
-    public void saveModel(Model model) throws AldapaException {  
+
+    public void saveModel(Model model) throws AldapaException {
         RepositoryConnection conn = mainrepo.getConnection();
         // Issue 35
         Iterator<Statement> modelIterator = model.iterator();
@@ -61,7 +59,7 @@ implements FunctionalDBRDFStore {
         }
         conn.close();
     }
-    
+
     @Override
     public Set<String> getDBs() throws AldapaException {
         return repositoryManager.getRepositoryIDs();
@@ -117,5 +115,10 @@ implements FunctionalDBRDFStore {
         RepositoryConnection conn = mainrepo.getConnection();
         conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery).execute();
         conn.close();
+    }
+
+    @Override
+    public void commit() {
+        throw new AldapaException(TOIMPLEMENT);
     }
 }

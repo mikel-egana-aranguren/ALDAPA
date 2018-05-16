@@ -1,4 +1,4 @@
-# THIS CONFIGURATION
+#THIS CONFIGURATION
 name: default
 comment: A configuration suitable for most cases
 author: Mikel Egana Aranguren
@@ -9,9 +9,5 @@ CATALOG_BASE: "http://lod.eurohelp.es/aldapa/catalog/"
 DATASET_BASE: "http://lod.eurohelp.es/aldapa/dataset/"
 PLUGIN_BASE: "http://lod.eurohelp.es/aldapa/plugin/"
 
-
-# DOMAIN URIs (They should change)
+#DOMAIN URIs (They should change)
 GRAPH_BASE: "http://euskadi.eus/graph/"
-
-
-

@@ -1,0 +1,13 @@
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix ns0:   <http://www.w3.org/2006/time#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns1:   <http://lod.eurohelp.es/def/> .
+
+[ a       <http://www.w3.org/ns/shacl#ValidationReport> ;
+  <http://www.w3.org/ns/shacl#conforms>
+          true
+] .

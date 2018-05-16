@@ -30,6 +30,7 @@ import es.eurohelp.lod.aldapa.core.exception.DatasetNotFoundException;
 import es.eurohelp.lod.aldapa.core.exception.NamedGraphExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectExistsException;
 import es.eurohelp.lod.aldapa.core.exception.ProjectNotFoundException;
+import es.eurohelp.lod.aldapa.modification.FunctionalLinkDiscoverer;
 import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
@@ -55,10 +56,12 @@ public class Manager {
     private FileUtils fileutils;
     private FunctionalFileStore fileStore;
     private FunctionalRDFQualityValidator validator;
+    private FunctionalLinkDiscoverer linkDiscoverer;
 
     private static final String ALDAPACONFIGFILENAME = "ALDAPA_CONFIG_FILE";
     private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
     private static final String TRANSFORMERCONFIGFILE = "TRANSFORMER_CONFIG_FILE";
+    private static final String LINKDISCOVERERCONFIGFILE = "LINK_DISCOVERER_CONFIG_FILE";
 
     private static final Logger LOGGER = LogManager.getLogger(Manager.class);
 
@@ -86,6 +89,7 @@ public class Manager {
         validator = configuredconfigmanager.getRDFQualityValidator();
 
         // Initialise link discoverer
+        linkDiscoverer = configuredconfigmanager.getLinkDiscoverer();
     }
 
     /**
@@ -348,7 +352,7 @@ public class Manager {
         }
     }
 
-    /**
+ /**
      * 
      * Adds data to a named graph, by executing the registered transformation plugin. See model/default-model.trig for
      * details
@@ -413,7 +417,28 @@ public class Manager {
             }
         }
     }
-
+    
+        /**
+     * 
+     * Delete a named graph and the triples contained in it
+     * 
+     * @param namedGraphURI
+     *            the named Graph URI
+     * @throws AldapaException
+     */
+    public void deleteNamedGraph(String namedGraphURI) throws AldapaException {
+        try {
+            String resolvedDeleteNamedGraphSparql = fileutils.fileTokenResolver(
+                    MethodRDFFile.DELETENAMEDGRAPH.getValue(), MethodFileToken.GRAPHURI.getValue(),
+                    "<" + namedGraphURI + ">");
+            store.execSPARQLUpdate(resolvedDeleteNamedGraphSparql);
+            LOGGER.info("Named graph and its data deleted: " + namedGraphURI);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
+    
     /**
      * 
      * Adds the data of a RDF4J Model to the store
@@ -428,8 +453,8 @@ public class Manager {
 
     /**
      * 
-     * Delete a project. This will delete a project and all its metadata (Catalogs, Datasets etc.) and the data within
-     * its dataset
+     * Delete a project. This will delete a project and all its metadata
+     * (Catalogs, Datasets etc.) and the data within its dataset
      * 
      * @param projectURI
      *            the project URI
@@ -484,25 +509,7 @@ public class Manager {
         }
     }
 
-    /**
-     * 
-     * Delete a named graph and the triples contained in it
-     * 
-     * @param namedGraphURI
-     *            the named Graph URI
-     * @throws AldapaException
-     */
-    public void deleteNamedGraph(String namedGraphURI) throws AldapaException {
-        try {
-            String resolvedDeleteNamedGraphSparql = fileutils.fileTokenResolver(MethodRDFFile.DELETENAMEDGRAPH.getValue(),
-                    MethodFileToken.GRAPHURI.getValue(), "<" + namedGraphURI + ">");
-            store.execSPARQLUpdate(resolvedDeleteNamedGraphSparql);
-            LOGGER.info("Named graph and its data deleted: " + namedGraphURI);
-        } catch (IOException e) {
-            LOGGER.error(e);
-            throw new AldapaException(e);
-        }
-    }
+
 
     /**
      * 
@@ -514,8 +521,9 @@ public class Manager {
      */
     public void deleteDataFromNamedGraph(String namedGraphURI) throws AldapaException {
         try {
-            String resolvedDataFromNamedGraphSparql = fileutils.fileTokenResolver(MethodRDFFile.DELETEDATAFROMNAMEDGRAPH.getValue(),
-                    MethodFileToken.GRAPHURI.getValue(), "<" + namedGraphURI + ">");
+            String resolvedDataFromNamedGraphSparql = fileutils.fileTokenResolver(
+                    MethodRDFFile.DELETEDATAFROMNAMEDGRAPH.getValue(), MethodFileToken.GRAPHURI.getValue(),
+                    "<" + namedGraphURI + ">");
             store.execSPARQLUpdate(resolvedDataFromNamedGraphSparql);
             LOGGER.info("Data from named graph deleted: " + namedGraphURI);
         } catch (IOException e) {
@@ -557,6 +565,7 @@ public class Manager {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
+
     }
 
     /**
@@ -571,8 +580,8 @@ public class Manager {
 
     public Set<String> getCatalogs(String projectUri) throws AldapaException {
         try {
-            String query = fileutils.fileTokenResolver(MethodRDFFile.GETCATALOGSBYPROJECT.getValue(), MethodFileToken.PROJECTURI.getValue(),
-                    "<" + projectUri + ">");
+            String query = fileutils.fileTokenResolver(MethodRDFFile.GETCATALOGSBYPROJECT.getValue(),
+                    MethodFileToken.PROJECTURI.getValue(), "<" + projectUri + ">");
             return RDFUtils.execTupleQueryToStringSet(store, query);
         } catch (IOException e) {
             LOGGER.error(e);
@@ -607,8 +616,8 @@ public class Manager {
 
     public Set<String> getDatasets(String catalogUri) throws AldapaException {
         try {
-            String query = fileutils.fileTokenResolver(MethodRDFFile.GETDATASETSBYCATALOG.getValue(), MethodFileToken.CATALOGURI.getValue(),
-                    "<" + catalogUri + ">");
+            String query = fileutils.fileTokenResolver(MethodRDFFile.GETDATASETSBYCATALOG.getValue(),
+                    MethodFileToken.CATALOGURI.getValue(), "<" + catalogUri + ">");
             return RDFUtils.execTupleQueryToStringSet(store, query);
         } catch (IOException e) {
             LOGGER.error(e);
@@ -644,8 +653,8 @@ public class Manager {
 
     public Set<String> getNamedGraphs(String datasetUri) throws AldapaException {
         try {
-            String query = fileutils.fileTokenResolver(MethodRDFFile.GETNAMEDGRAPHSBYDATASET.getValue(), MethodFileToken.DATASETURI.getValue(),
-                    "<" + datasetUri + ">");
+            String query = fileutils.fileTokenResolver(MethodRDFFile.GETNAMEDGRAPHSBYDATASET.getValue(),
+                    MethodFileToken.DATASETURI.getValue(), "<" + datasetUri + ">");
             return RDFUtils.execTupleQueryToStringSet(store, query);
         } catch (IOException e) {
             LOGGER.error(e);
@@ -694,6 +703,30 @@ public class Manager {
             LOGGER.error(e);
             throw new AldapaException(e);
         }
+    }
+
+    public boolean discoverLinks() {
+        boolean result = true;
+        String configurationFile = configmanager.getConfigPropertyValue(LINKDISCOVERERCONFIGFILE,
+                "silkConfigurationFile");
+        LOGGER.info("Link discoverer configuration file: " + configurationFile);
+
+        String resultFile = configmanager.getConfigPropertyValue(LINKDISCOVERERCONFIGFILE, "silkResultsPath");
+
+        LOGGER.info("Links discovered are saved in: " + resultFile);
+        linkDiscoverer.discoverLinks(configurationFile, resultFile);
+        try {
+            String path = org.apache.jena.util.FileUtils.readWholeFileAsUTF8(resultFile);
+            store.execSPARQLUpdate("INSERT DATA{ " + path + " }");
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
+
+        return result;
+    }
+
+    public void commit() {
+        store.commit();
     }
 
     public void getFileHTTP(String url, String fileName) {

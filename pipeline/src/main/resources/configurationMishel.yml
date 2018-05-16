@@ -1,0 +1,6 @@
+ALDAPA_CONFIG_FILE: configuration/aldapa-default-configuration.yml
+TRIPLE_STORE_CONFIG_FILE: configuration/RDF4JWorkbench-configuration.yml
+TRANSFORMER_CONFIG_FILE: configuration/ejie-calidad-aire-transformer-configuration.yml
+FILE_STORE_CONFIG_FILE: configuration/FileStore-configuration.yml
+VALIDATOR_CONFIG_FILE: configuration/ejie-calidad-aire-validator-configuration.yml
+LINK_DISCOVERER_CONFIG_FILE: configuration/ejie-calidad-aire-links-discoverer-configuration.yml
