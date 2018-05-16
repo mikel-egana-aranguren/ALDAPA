@@ -19,15 +19,16 @@ import es.eurohelp.lod.aldapa.modification.FunctionalRDFQualityValidator;
 import es.eurohelp.lod.aldapa.storage.FunctionalFileStore;
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFBatchConverter;
+import es.eurohelp.lod.aldapa.transformation.FunctionalCSV2RDFMappedBatchConverter;
 import es.eurohelp.lod.aldapa.util.FileUtils;
 import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
  * 
- * A configuration manager holds the configuration properties and prepares the
- * described plugins. The main file should contain pointers to other files, each
- * file having the configuration of each module. See configuration.yml and the
- * folder configuration for details.
+ * A configuration manager holds the configuration properties and prepares the described plugins. The main file should
+ * contain pointers to other
+ * files, each file having the configuration of each module. See configuration.yml and the folder configuration for
+ * details.
  * 
  * @author Mikel Egana Aranguren, Eurohelp consulting S.L.
  * 
@@ -58,7 +59,8 @@ public class ConfigurationManager {
 
     // CSV2RDF transformer
     private static final String TRANSFORMERCONFGIFILE = "TRANSFORMER_CONFIG_FILE";
-    private static final Object ABSTRACTCSV2RDFBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
+    private static final String ABSTRACTCSV2RDFBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
+    private static final String ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFMappedBatchConverter";
 
     // RDF4JWorkbench
     private static final String ABSTRACTRDF4JWORKBENCHCONNECTION = "es.eurohelp.lod.aldapa.storage.RDF4JHTTPConnection";
@@ -79,8 +81,7 @@ public class ConfigurationManager {
      * 
      * file name - file content
      * 
-     * The file file content is a HashMap, containing the actual configuration
-     * values:
+     * The file file content is a HashMap, containing the actual configuration values:
      * 
      * config property - config value
      * 
@@ -134,15 +135,14 @@ public class ConfigurationManager {
     }
 
     /**
-     * Loads config properties from the specified file. If not specified, it
-     * will load configuration.yml
+     * Loads config properties from the specified file.
+     * If not specified, it will load configuration.yml
      *
      * @param the
      *            main config file name
      * @author acarbajo
      * @throws ConfigurationFileIOException
-     *             expection will occur when any of the configuration
-     *             properties' file is not successfully loaded.
+     *             expection will occur when any of the configuration properties' file is not successfully loaded.
      */
     private void loadProperties(String configurationFileName) throws ConfigurationFileIOException, IOException {
         InputStream configInStream = FileUtils.getInstance().getInputStream(configurationFileName);
@@ -150,8 +150,7 @@ public class ConfigurationManager {
         try {
 
             mainConfigFile = new HashMap<String, HashMap<String, String>>();
-            HashMap<String, String> provisionalMainConfigFile = (HashMap<String, String>) YAMLUtils
-                    .parseSimpleYAML(configInStream);
+            HashMap<String, String> provisionalMainConfigFile = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(configInStream);
 
             for (Map.Entry<String, String> entry : provisionalMainConfigFile.entrySet()) {
                 String key = entry.getKey();
@@ -170,8 +169,8 @@ public class ConfigurationManager {
 
     /**
      * 
-     * Retrieves a configuration value of a given property (eg
-     * "pluginClassName") in a file (eg "TRIPLE_STORE_CONFIG_FILE")
+     * Retrieves a configuration value of a given property (eg "pluginClassName") in a file (eg
+     * "TRIPLE_STORE_CONFIG_FILE")
      * 
      * @param module
      *            (file) name
@@ -179,8 +178,7 @@ public class ConfigurationManager {
      * @param property
      *            the configuration property name.
      * 
-     * @return the configuration value for that property key. <em> null</em> if
-     *         the property is not found.
+     * @return the configuration value for that property key. <em> null</em> if the property is not found.
      * @throws ConfigurationException
      *             a configuration exception
      */
@@ -215,8 +213,7 @@ public class ConfigurationManager {
                 LOGGER.error("ALDAPA cannot initialise class " + fileStoreClass.getName());
                 throw new CouldNotInitialisePluginException(fileStoreClass.getName());
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException
-                | NoSuchMethodException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new AldapaException(e);
         }
         return fileStore;
@@ -278,7 +275,10 @@ public class ConfigurationManager {
             if (converterSuperClassName.equals(ABSTRACTCSV2RDFBATCHCONVERTER)) {
                 converter = (FunctionalCSV2RDFBatchConverter) converterClass.newInstance();
                 LOGGER.info("CSV2RDF converter started");
-            } else {
+            }else if(converterSuperClassName.equals(ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER)){
+                converter = (FunctionalCSV2RDFMappedBatchConverter) converterClass.newInstance();
+                LOGGER.info("CSV2RDF converter started");
+            }else {
                 throw new CouldNotInitialisePluginException(converterClass.getName());
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {

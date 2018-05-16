@@ -84,6 +84,7 @@
 						<exclude>**/*SPARQLProtocolStoreTest.java</exclude>
 						<exclude>**/*RDF4JWorkbenchTest.java</exclude>
 						<exclude>**/SilkLinkDiscoveryTest.java</exclude>
+						<exclude>**/*GraphDBStoreTest.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
