@@ -70,7 +70,7 @@ public class FileUtilsTest {
 
     @Test
     public final void testGetInputStream() throws IOException {
-        assertEquals(412, fileUtils.getInputStream(RESOURCENAME).available());
+        assertEquals(418, fileUtils.getInputStream(RESOURCENAME).available());
     }
 
     @Test
