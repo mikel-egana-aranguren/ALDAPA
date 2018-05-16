@@ -27,15 +27,15 @@ public class EJIECalidadAireConverterTest {
 
     @Before
     public void setUp() {
-	this.converter = new EJIECalidadAireConverter();
-	this.model = new TreeModel();
+        this.converter = new EJIECalidadAireConverter();
+        this.model = new TreeModel();
     }
 
     @Test
     public void testEJIECalidadAireConverter() throws IOException {
-	converter.setDataSource(CSVFILE);
-	converter.setModel(model);
-	Model newModel = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
-	assertNotNull(newModel);
+        converter.setDataSource(CSVFILE);
+        converter.setModel(model);
+        Model newModel = converter.getTransformedModel("http://euskadi.eus/graph/calidad-aire");
+        assertNotNull(newModel);
     }
 }

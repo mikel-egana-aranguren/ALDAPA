@@ -17,6 +17,6 @@ public class CSV2RDFpropertiesTest {
 
     @Test
     public final void testCSV2RDFproperties() {
-	assertEquals("urn:aldapa:csv2rdf:rownumber", CSV2RDFproperty.ROWNUMBERPROP.getValue());
+        assertEquals("urn:aldapa:csv2rdf:rownumber", CSV2RDFproperty.ROWNUMBERPROP.getValue());
     }
 }

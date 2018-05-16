@@ -30,22 +30,22 @@ public class CSV2RDFTest {
 
     @Test
     public final void test() throws IOException {
-	FileUtils fileutils = FileUtils.getInstance();
+        FileUtils fileutils = FileUtils.getInstance();
 
-	InputStream in = fileutils.getInputStream("ApacheCommonsCSV_RDF_SPARQL.yml");
-	HashMap<String, String> keysValues = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(in);
-	String charset = keysValues.get("charset");
-	String delimiter = keysValues.get("delimiter");
-	String querypath = keysValues.get("sparqlcsv2rdf");
-	String queryproper = fileutils.fileToString(querypath);
+        InputStream in = fileutils.getInputStream("ApacheCommonsCSV_RDF_SPARQL.yml");
+        HashMap<String, String> keysValues = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(in);
+        String charset = keysValues.get("charset");
+        String delimiter = keysValues.get("delimiter");
+        String querypath = keysValues.get("sparqlcsv2rdf");
+        String queryproper = fileutils.fileToString(querypath);
 
-	CSV2RDF csv2rdf = new CSV2RDF();
-	Model rdfModel = new TreeModel();
-	csv2rdf.setMapping(charset, delimiter.charAt(0), queryproper);
-	csv2rdf.setDataSource(CSVFILE);
-	csv2rdf.setModel(rdfModel);
-	Model newRDFModel = csv2rdf.getTransformedModel("http://data.euskadi.eus/graph/cargos");
-	assertNotNull(newRDFModel);
-	RDFUtils.writeModel(newRDFModel, OUTPUTRDFFILE, RDFFormat.NQUADS);
+        CSV2RDF csv2rdf = new CSV2RDF();
+        Model rdfModel = new TreeModel();
+        csv2rdf.setMapping(charset, delimiter.charAt(0), queryproper);
+        csv2rdf.setDataSource(CSVFILE);
+        csv2rdf.setModel(rdfModel);
+        Model newRDFModel = csv2rdf.getTransformedModel("http://data.euskadi.eus/graph/cargos");
+        assertNotNull(newRDFModel);
+        RDFUtils.writeModel(newRDFModel, OUTPUTRDFFILE, RDFFormat.NQUADS);
     }
 }

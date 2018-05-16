@@ -9,17 +9,17 @@ package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
  */
 public enum CLASSTOKEN {
     STATION("station"), MEASSUREMENTSTATION("meassurement-station"), PERSON("person"), ADDRESS("address"), ORGANIZATION(
-	    "organization"), ELEMENT(
-		    "element"), MEASSUREMENT("meassurement"), OBSERVATION("observation"), CONTRACT("contract");
+            "organization"), ELEMENT(
+                    "element"), MEASSUREMENT("meassurement"), OBSERVATION("observation"), CONTRACT("contract");
 
     public final String classtoken;
 
     private CLASSTOKEN(String classToken) {
-	this.classtoken = classToken;
+        this.classtoken = classToken;
     }
 
     public String getValue() {
-	return classtoken;
+        return classtoken;
     }
 
 }

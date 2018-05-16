@@ -34,45 +34,45 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
     RepositoryConnection conn;
 
     public MemoryRDFStore() {
-	super();
-	conn = super.getConnection();
+        super();
+        conn = super.getConnection();
     }
 
     public void stopRDFStore() {
-	super.shutdownAtOnce();
-	LOGGER.info("Closing connection and shutting down SailRepository(MemoryStore)");
+        super.shutdownAtOnce();
+        LOGGER.info("Closing connection and shutting down SailRepository(MemoryStore)");
     }
 
     public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat)
-	    throws RDFStoreException {
+            throws RDFStoreException {
 
-	LOGGER.info("Format to flush graph: " + rdfformat.getDefaultMIMEType());
+        LOGGER.info("Format to flush graph: " + rdfformat.getDefaultMIMEType());
 
-	RDFWriter rdfwriter = null;
+        RDFWriter rdfwriter = null;
 
-	MIMEType foundtype = MIMEType.findMIMETypeByValue(rdfformat.getDefaultMIMEType());
+        MIMEType foundtype = MIMEType.findMIMETypeByValue(rdfformat.getDefaultMIMEType());
 
-	// Issue 26
-	switch (foundtype) {
-	case TURTLE:
-	    rdfwriter = new TurtleWriter(outputstream);
-	    LOGGER.info("TurtleWriter chosen");
-	    break;
-	case TRIG:
-	    rdfwriter = new TriGWriter(outputstream);
-	    LOGGER.info("TriGWriter chosen");
-	    break;
-	default:
-	    break;
-	}
+        // Issue 26
+        switch (foundtype) {
+        case TURTLE:
+            rdfwriter = new TurtleWriter(outputstream);
+            LOGGER.info("TurtleWriter chosen");
+            break;
+        case TRIG:
+            rdfwriter = new TriGWriter(outputstream);
+            LOGGER.info("TriGWriter chosen");
+            break;
+        default:
+            break;
+        }
 
-	if (graphURI != null) {
-	    LOGGER.info("Graph URI: " + graphURI);
-	    conn.export(rdfwriter, conn.getValueFactory().createIRI(graphURI));
-	} else {
-	    LOGGER.info("No Graph URI present");
-	    conn.export(rdfwriter);
-	}
+        if (graphURI != null) {
+            LOGGER.info("Graph URI: " + graphURI);
+            conn.export(rdfwriter, conn.getValueFactory().createIRI(graphURI));
+        } else {
+            LOGGER.info("No Graph URI present");
+            conn.export(rdfwriter);
+        }
     }
 
     /*
@@ -82,11 +82,11 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
      * String)
      */
     public void deleteGraph(String graphUri) throws RDFStoreException {
-	throw new UnsupportedOperationException("This functionality has not been implemented yet");
+        throw new UnsupportedOperationException("This functionality has not been implemented yet");
     }
 
     @Override
     public void commit() {
-	conn.commit();
+        conn.commit();
     }
 }

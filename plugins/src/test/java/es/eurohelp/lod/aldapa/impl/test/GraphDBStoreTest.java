@@ -33,49 +33,49 @@ public class GraphDBStoreTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-	graphdb = new GraphDBStore(GRAPHDBURL, DBNAME);
+        graphdb = new GraphDBStore(GRAPHDBURL, DBNAME);
     }
 
     @Test
     public final void testGraphDBStore() {
-	assertNotNull(graphdb);
+        assertNotNull(graphdb);
     }
 
     @Before
     public final void saveModel() {
-	graphdb.saveModel(createModel());
+        graphdb.saveModel(createModel());
     }
 
     @Test
     public final void testSaveModel() {
-	assertTrue(graphdb.execSPARQLBooleanQuery(ASKQUERY));
+        assertTrue(graphdb.execSPARQLBooleanQuery(ASKQUERY));
     }
 
     @Test
     public final void testRemoveModel() {
-	graphdb.execSPARQLUpdate(DELETEQUERY);
-	assertFalse(graphdb.execSPARQLBooleanQuery(ASKQUERY));
+        graphdb.execSPARQLUpdate(DELETEQUERY);
+        assertFalse(graphdb.execSPARQLBooleanQuery(ASKQUERY));
     }
 
     @Test
     public final void testTupleQuery() {
-	assertEquals(3, graphdb.execSPARQLTupleQuery(TUPLEQUERY).getBindingNames().size());
+        assertEquals(3, graphdb.execSPARQLTupleQuery(TUPLEQUERY).getBindingNames().size());
     }
 
     @Test
     public final void testGraphQuery() {
-	assertTrue(graphdb.execSPARQLGraphQuery(GRAPHQUERY).hasNext());
+        assertTrue(graphdb.execSPARQLGraphQuery(GRAPHQUERY).hasNext());
     }
 
     @After
     public final void removeModel() {
-	graphdb.execSPARQLUpdate(DELETEQUERY);
+        graphdb.execSPARQLUpdate(DELETEQUERY);
     }
 
     private Model createModel() {
-	ModelBuilder builder = new ModelBuilder();
-	builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist")
-		.add(FOAF.FIRST_NAME, "Pablo");
-	return builder.build();
+        ModelBuilder builder = new ModelBuilder();
+        builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist")
+                .add(FOAF.FIRST_NAME, "Pablo");
+        return builder.build();
     }
 }

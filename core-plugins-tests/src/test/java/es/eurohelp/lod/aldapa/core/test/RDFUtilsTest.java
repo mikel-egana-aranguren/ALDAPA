@@ -37,34 +37,34 @@ public class RDFUtilsTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-	try {
-	    store = ConfigurationManager.getInstance(CONFIGFILE).getRDFStore();
-	} catch (AldapaException e) {
-	    LOGGER.error(e);
-	}
+        try {
+            store = ConfigurationManager.getInstance(CONFIGFILE).getRDFStore();
+        } catch (AldapaException e) {
+            LOGGER.error(e);
+        }
     }
 
     @Test
     public final void testConvertGraphToJenaModel() {
-	try {
-	    ModelBuilder builder = new ModelBuilder();
-	    builder.setNamespace("ex", "http://example.org/").namedGraph(NAMEDGRAPH).subject("ex:Picasso")
-		    .add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
-	    Model rdf4jModel = builder.build();
-	    store.saveModel(rdf4jModel);
-	    org.apache.jena.rdf.model.Model jenaModel = RDFUtils.convertGraphToJenaModel(store, NAMEDGRAPH);
-	    org.apache.jena.rdf.model.Statement stmt1 = ResourceFactory.createStatement(
-		    ResourceFactory.createResource("http://example.org/Picasso"),
-		    ResourceFactory.createProperty("http://xmlns.com/foaf/0.1/firstName"),
-		    ResourceFactory.createPlainLiteral("Pablo"));
-	    org.apache.jena.rdf.model.Statement stmt2 = ResourceFactory.createStatement(
-		    ResourceFactory.createResource("http://example.org/Picasso"),
-		    ResourceFactory.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
-		    ResourceFactory.createResource("http://example.org/Artist"));
-	    assertTrue(jenaModel.contains(stmt1));
-	    assertTrue(jenaModel.contains(stmt2));
-	} catch (IOException e) {
-	    LOGGER.error(e);
-	}
+        try {
+            ModelBuilder builder = new ModelBuilder();
+            builder.setNamespace("ex", "http://example.org/").namedGraph(NAMEDGRAPH).subject("ex:Picasso")
+                    .add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
+            Model rdf4jModel = builder.build();
+            store.saveModel(rdf4jModel);
+            org.apache.jena.rdf.model.Model jenaModel = RDFUtils.convertGraphToJenaModel(store, NAMEDGRAPH);
+            org.apache.jena.rdf.model.Statement stmt1 = ResourceFactory.createStatement(
+                    ResourceFactory.createResource("http://example.org/Picasso"),
+                    ResourceFactory.createProperty("http://xmlns.com/foaf/0.1/firstName"),
+                    ResourceFactory.createPlainLiteral("Pablo"));
+            org.apache.jena.rdf.model.Statement stmt2 = ResourceFactory.createStatement(
+                    ResourceFactory.createResource("http://example.org/Picasso"),
+                    ResourceFactory.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+                    ResourceFactory.createResource("http://example.org/Artist"));
+            assertTrue(jenaModel.contains(stmt1));
+            assertTrue(jenaModel.contains(stmt2));
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
     }
 }

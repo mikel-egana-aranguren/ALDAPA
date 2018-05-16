@@ -38,87 +38,87 @@ public class GraphDBStore extends DBRDFStore implements FunctionalDBRDFStore {
 
     // Issue 63
     public GraphDBStore(String graphdbURL, String dbName) {
-	repositoryManager = new RemoteRepositoryManager(graphdbURL);
-	repositoryManager.initialize();
-	mainrepo = repositoryManager.getRepository(dbName);
+        repositoryManager = new RemoteRepositoryManager(graphdbURL);
+        repositoryManager.initialize();
+        mainrepo = repositoryManager.getRepository(dbName);
     }
 
     public void saveModel(Model model) throws AldapaException {
-	RepositoryConnection conn = mainrepo.getConnection();
-	// Issue 35
-	Iterator<Statement> modelIterator = model.iterator();
-	while (modelIterator.hasNext()) {
-	    Statement stment = modelIterator.next();
-	    if (stment.getContext() != null) {
-		LOGGER.info("Adding triple " + stment + " to context " + stment.getContext());
-		conn.add(stment, stment.getContext());
-	    } else {
-		LOGGER.info("Adding triple " + stment);
-		conn.add(stment);
-	    }
-	}
-	conn.close();
+        RepositoryConnection conn = mainrepo.getConnection();
+        // Issue 35
+        Iterator<Statement> modelIterator = model.iterator();
+        while (modelIterator.hasNext()) {
+            Statement stment = modelIterator.next();
+            if (stment.getContext() != null) {
+                LOGGER.info("Adding triple " + stment + " to context " + stment.getContext());
+                conn.add(stment, stment.getContext());
+            } else {
+                LOGGER.info("Adding triple " + stment);
+                conn.add(stment);
+            }
+        }
+        conn.close();
     }
 
     @Override
     public Set<String> getDBs() throws AldapaException {
-	return repositoryManager.getRepositoryIDs();
+        return repositoryManager.getRepositoryIDs();
     }
 
     @Override
     public void flushGraph(String graphURI, FileOutputStream outputstream, RDFFormat rdfformat) throws AldapaException {
-	throw new AldapaException(TOIMPLEMENT);
+        throw new AldapaException(TOIMPLEMENT);
     }
 
     @Override
     public void deleteGraph(String graphUri) throws AldapaException {
-	throw new AldapaException(TOIMPLEMENT);
+        throw new AldapaException(TOIMPLEMENT);
     }
 
     @Override
     public void createDB(String dbName) throws IOException, RDFStoreException {
-	throw new AldapaException(TOIMPLEMENT);
+        throw new AldapaException(TOIMPLEMENT);
     }
 
     @Override
     public void setDB(String dbName) throws AldapaException {
-	throw new AldapaException(TOIMPLEMENT);
+        throw new AldapaException(TOIMPLEMENT);
     }
 
     @Override
     public void deleteDB(String dbName) throws AldapaException {
-	throw new AldapaException(TOIMPLEMENT);
+        throw new AldapaException(TOIMPLEMENT);
     }
 
     public GraphQueryResult execSPARQLGraphQuery(String pSPARQLquery) throws RDFStoreException {
-	RepositoryConnection conn = mainrepo.getConnection();
-	GraphQueryResult result = conn.prepareGraphQuery(pSPARQLquery).evaluate();
-	conn.close();
-	return result;
+        RepositoryConnection conn = mainrepo.getConnection();
+        GraphQueryResult result = conn.prepareGraphQuery(pSPARQLquery).evaluate();
+        conn.close();
+        return result;
     }
 
     public TupleQueryResult execSPARQLTupleQuery(String pSPARQLquery) {
-	RepositoryConnection conn = mainrepo.getConnection();
-	TupleQueryResult result = conn.prepareTupleQuery(QueryLanguage.SPARQL, pSPARQLquery).evaluate();
-	conn.close();
-	return result;
+        RepositoryConnection conn = mainrepo.getConnection();
+        TupleQueryResult result = conn.prepareTupleQuery(QueryLanguage.SPARQL, pSPARQLquery).evaluate();
+        conn.close();
+        return result;
     }
 
     public boolean execSPARQLBooleanQuery(String pSPARQLquery) throws RDFStoreException {
-	RepositoryConnection conn = mainrepo.getConnection();
-	boolean result = conn.prepareBooleanQuery(pSPARQLquery).evaluate();
-	conn.close();
-	return result;
+        RepositoryConnection conn = mainrepo.getConnection();
+        boolean result = conn.prepareBooleanQuery(pSPARQLquery).evaluate();
+        conn.close();
+        return result;
     }
 
     public void execSPARQLUpdate(String pSPARQLquery) {
-	RepositoryConnection conn = mainrepo.getConnection();
-	conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery).execute();
-	conn.close();
+        RepositoryConnection conn = mainrepo.getConnection();
+        conn.prepareUpdate(QueryLanguage.SPARQL, pSPARQLquery).execute();
+        conn.close();
     }
 
     @Override
     public void commit() {
-	this.mainrepo.getConnection().commit();
+        this.mainrepo.getConnection().commit();
     }
 }

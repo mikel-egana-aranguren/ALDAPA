@@ -40,59 +40,59 @@ public class SPARQLProtocolStoreTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-	InputStream in = FileUtils.getInstance().getInputStream("BlazegraphRESTStoreTest.yml");
-	HashMap<String, String> keysValues = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(in);
-	String blazegraph = keysValues.get("blazegraph");
-	String endpointUrl = blazegraph + "/namespace/aldapa/sparql";
-	sparqlStore = new SPARQLProtocolStore(endpointUrl);
+        InputStream in = FileUtils.getInstance().getInputStream("BlazegraphRESTStoreTest.yml");
+        HashMap<String, String> keysValues = (HashMap<String, String>) YAMLUtils.parseSimpleYAML(in);
+        String blazegraph = keysValues.get("blazegraph");
+        String endpointUrl = blazegraph + "/namespace/aldapa/sparql";
+        sparqlStore = new SPARQLProtocolStore(endpointUrl);
     }
 
     @Test
     public final void testSPARQLProtocolStore() {
-	assertNotNull(sparqlStore);
+        assertNotNull(sparqlStore);
     }
 
     @Test
     public final void testExecSPARQLGraphQuery() {
-	sparqlStore.execSPARQLUpdate(UPDATEQUERY);
-	GraphQueryResult result = sparqlStore.execSPARQLGraphQuery(GRAPHQUERY);
-	boolean contains = false;
-	while (result.hasNext()) {
-	    if (result.next().toString().contains(STMT)) {
-		contains = true;
-		break;
-	    }
-	}
-	assertTrue(contains);
+        sparqlStore.execSPARQLUpdate(UPDATEQUERY);
+        GraphQueryResult result = sparqlStore.execSPARQLGraphQuery(GRAPHQUERY);
+        boolean contains = false;
+        while (result.hasNext()) {
+            if (result.next().toString().contains(STMT)) {
+                contains = true;
+                break;
+            }
+        }
+        assertTrue(contains);
     }
 
     @Test
     public final void testExecSPARQLTupleQuery() {
-	sparqlStore.execSPARQLUpdate(UPDATEQUERY);
-	TupleQueryResult result = sparqlStore.execSPARQLTupleQuery(TUPLEQUERY);
-	List<String> bindingNames = result.getBindingNames();
-	boolean contains = false;
-	while (result.hasNext()) {
-	    BindingSet bindingSet = result.next();
-	    if (bindingSet.getValue(bindingNames.get(0)).toString().equals(SUBJECT)
-		    && bindingSet.getValue(bindingNames.get(1)).toString().equals(PREDICATE)
-		    && bindingSet.getValue(bindingNames.get(2)).toString().equals(OBJECT)) {
-		contains = true;
-		break;
-	    }
-	}
-	assertTrue(contains);
+        sparqlStore.execSPARQLUpdate(UPDATEQUERY);
+        TupleQueryResult result = sparqlStore.execSPARQLTupleQuery(TUPLEQUERY);
+        List<String> bindingNames = result.getBindingNames();
+        boolean contains = false;
+        while (result.hasNext()) {
+            BindingSet bindingSet = result.next();
+            if (bindingSet.getValue(bindingNames.get(0)).toString().equals(SUBJECT)
+                    && bindingSet.getValue(bindingNames.get(1)).toString().equals(PREDICATE)
+                    && bindingSet.getValue(bindingNames.get(2)).toString().equals(OBJECT)) {
+                contains = true;
+                break;
+            }
+        }
+        assertTrue(contains);
     }
 
     @Test
     public final void testExecSPARQLBooleanQuery() {
-	sparqlStore.execSPARQLUpdate(UPDATEQUERY);
-	assertTrue(sparqlStore.execSPARQLBooleanQuery(BOOLEANQUERY));
+        sparqlStore.execSPARQLUpdate(UPDATEQUERY);
+        assertTrue(sparqlStore.execSPARQLBooleanQuery(BOOLEANQUERY));
     }
 
     @Test
     public final void testExecSPARQLUpdate() {
-	sparqlStore.execSPARQLUpdate(UPDATEQUERY2);
-	assertTrue(sparqlStore.execSPARQLBooleanQuery(BOOLEANQUERY2));
+        sparqlStore.execSPARQLUpdate(UPDATEQUERY2);
+        assertTrue(sparqlStore.execSPARQLBooleanQuery(BOOLEANQUERY2));
     }
 }
