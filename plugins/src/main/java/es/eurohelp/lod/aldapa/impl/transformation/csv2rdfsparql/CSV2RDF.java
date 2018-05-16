@@ -59,7 +59,8 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFM
     @Override
     public void setDataSource(String inPath) throws AldapaException {
         try {
-            parser = CSVParser.parse(new File(inPath), Charset.forName(charset), CSVFormat.EXCEL.withHeader().withDelimiter(delimiter));
+            parser = CSVParser.parse(new File(inPath), Charset.forName(charset),
+                    CSVFormat.EXCEL.withHeader().withDelimiter(delimiter));
         } catch (IOException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
@@ -83,12 +84,14 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFM
                 count++;
                 Map<String, String> recordMap = record.toMap();
                 for (Map.Entry<String, String> pair : recordMap.entrySet()) {
-                    LOGGER.info("Record Number: " + recordNumber + " Column: " + pair.getKey() + " -- Cell: " + pair.getValue());
+                    LOGGER.info("Record Number: " + recordNumber + " Column: " + pair.getKey() + " -- Cell: "
+                            + pair.getValue());
                     String columnName = pair.getKey();
                     String urifiedColumnName = URIUtils.urify(null, null, columnName);
                     String cellValue = pair.getValue();
                     String rowURI = CSV2RDFproperty.ROWURIBASE.getValue() + recordNumber;
-                    String cellURI = CSV2RDFproperty.CELLURIBASE.getValue() + recordNumber + CSV2RDFproperty.COLUMN.getValue() + urifiedColumnName;
+                    String cellURI = CSV2RDFproperty.CELLURIBASE.getValue() + recordNumber
+                            + CSV2RDFproperty.COLUMN.getValue() + urifiedColumnName;
                     adder.addDataTripleXSDLong(rowURI, CSV2RDFproperty.ROWNUMBERPROP.getValue(), recordNumber);
                     adder.addTriple(rowURI, CSV2RDFproperty.CELLPROP.getValue(), cellURI);
                     adder.addDataTripleXSDString(cellURI, CSV2RDFproperty.COLUMNNAMEPROP.getValue(), columnName);
@@ -113,7 +116,6 @@ public class CSV2RDF extends CSV2RDFBatchConverter implements FunctionalCSV2RDFM
         } catch (IOException e1) {
             LOGGER.error(e1);
         }
-
 
         GraphQueryResult queryResult = memStore.execSPARQLGraphQuery(csv2rdfSPARQL);
         while (queryResult.hasNext()) {

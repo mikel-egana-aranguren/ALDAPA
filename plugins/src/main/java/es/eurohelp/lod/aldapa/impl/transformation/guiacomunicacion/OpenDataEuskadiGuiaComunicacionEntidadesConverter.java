@@ -30,7 +30,8 @@ import es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.NTITOKEN;
  * @author megana
  *
  */
-public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBatchConverter implements FunctionalCSV2RDFBatchConverter {
+public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBatchConverter
+        implements FunctionalCSV2RDFBatchConverter {
 
     private Model model;
     private CSVParser parser;
@@ -40,7 +41,8 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
     @Override
     public void setDataSource(String inPath) throws AldapaException {
         try {
-            parser = CSVParser.parse(new File(inPath), Charset.forName("UTF-8"), CSVFormat.EXCEL.withHeader().withDelimiter(';'));
+            parser = CSVParser.parse(new File(inPath), Charset.forName("UTF-8"),
+                    CSVFormat.EXCEL.withHeader().withDelimiter(';'));
         } catch (IOException e) {
             LOGGER.error(e);
             throw new AldapaException(e);
@@ -66,19 +68,22 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
                 String erakundea = record.get("Erakundea");
 
                 // URI entidad
-                String entidadUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.ENTITY.getValue() + "/"
-                        + CLASSTOKEN.ORGANIZATION.getValue() + "/" + URIUtils.urify(null, null, entidad);
+                String entidadUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/"
+                        + DOMAINTOKEN.ENTITY.getValue() + "/" + CLASSTOKEN.ORGANIZATION.getValue() + "/"
+                        + URIUtils.urify(null, null, entidad);
                 LOGGER.info(entidadUri);
 
                 adder.addRDFTYPETriple(entidadUri, EXTERNALCLASS.SCHEMAORGANIZATION.getValue());
                 adder.addRDFTYPETriple(entidadUri, EXTERNALCLASS.VCARDORGANIZATION.getValue());
                 adder.addDataTripleXSDString(entidadUri, EXTERNALPROPERTY.VCARDFN.getValue(), entidad);
 
-                // [LOD] URI erakunde owl:sameAs URI entidad. Hay valores de Erakunde que son exactamente iguales que
+                // [LOD] URI erakunde owl:sameAs URI entidad. Hay valores de
+                // Erakunde que son exactamente iguales que
                 // entidad!
                 if (!erakundea.isEmpty() && !erakundea.equals(entidad)) {
-                    String erakundeaUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/" + DOMAINTOKEN.ENTITY.getValue() + "/"
-                            + CLASSTOKEN.ORGANIZATION.getValue() + "/" + URIUtils.urify(null, null, erakundea);
+                    String erakundeaUri = EUSURI.BASEIDES.getValue() + NTITOKEN.PUBLICSECTOR.getValue() + "/"
+                            + DOMAINTOKEN.ENTITY.getValue() + "/" + CLASSTOKEN.ORGANIZATION.getValue() + "/"
+                            + URIUtils.urify(null, null, erakundea);
                     adder.addOWLSAMEASTriple(entidadUri, erakundeaUri);
                 }
 
@@ -88,11 +93,13 @@ public class OpenDataEuskadiGuiaComunicacionEntidadesConverter extends CSV2RDFBa
                     String poblacion = record.get("Población");
                     String addressName = URIUtils.urify(null, null, calle + codigopostal + poblacion);
 
-                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addaddress(recordNumber, adder, calle, codigopostal, poblacion, addressName,
-                            entidadUri);
+                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addaddress(recordNumber, adder, calle,
+                            codigopostal, poblacion, addressName, entidadUri);
 
-                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addtelefono(recordNumber, adder, record.get("Teléfono"), entidadUri);
-                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addweb(recordNumber, adder, record.get("Web"), entidadUri);
+                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addtelefono(recordNumber, adder,
+                            record.get("Teléfono"), entidadUri);
+                    adder = OpenDataEuskadiGuiaComunicacionConverterUtils.addweb(recordNumber, adder, record.get("Web"),
+                            entidadUri);
 
                     String otros = record.get("Otros");
                     adder.addRDFSCOMMENTTriple(entidadUri, otros, null);

@@ -67,4 +67,6 @@ public class RDF4JWorkbench extends RDF4JHTTPConnection implements FunctionalRDF
     public void commit() {
         conn.commit();
     }
+
 }
+

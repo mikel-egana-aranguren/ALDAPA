@@ -417,28 +417,7 @@ public class Manager {
             }
         }
     }
-    
-        /**
-     * 
-     * Delete a named graph and the triples contained in it
-     * 
-     * @param namedGraphURI
-     *            the named Graph URI
-     * @throws AldapaException
-     */
-    public void deleteNamedGraph(String namedGraphURI) throws AldapaException {
-        try {
-            String resolvedDeleteNamedGraphSparql = fileutils.fileTokenResolver(
-                    MethodRDFFile.DELETENAMEDGRAPH.getValue(), MethodFileToken.GRAPHURI.getValue(),
-                    "<" + namedGraphURI + ">");
-            store.execSPARQLUpdate(resolvedDeleteNamedGraphSparql);
-            LOGGER.info("Named graph and its data deleted: " + namedGraphURI);
-        } catch (IOException e) {
-            LOGGER.error(e);
-            throw new AldapaException(e);
-        }
-    }
-    
+
     /**
      * 
      * Adds the data of a RDF4J Model to the store
@@ -509,6 +488,27 @@ public class Manager {
         }
     }
 
+
+    /**
+     * 
+     * Delete a named graph and the triples contained in it
+     * 
+     * @param namedGraphURI
+     *            the named Graph URI
+     * @throws AldapaException
+     */
+    public void deleteNamedGraph(String namedGraphURI) throws AldapaException {
+        try {
+            String resolvedDeleteNamedGraphSparql = fileutils.fileTokenResolver(
+                    MethodRDFFile.DELETENAMEDGRAPH.getValue(), MethodFileToken.GRAPHURI.getValue(),
+                    "<" + namedGraphURI + ">");
+            store.execSPARQLUpdate(resolvedDeleteNamedGraphSparql);
+            LOGGER.info("Named graph and its data deleted: " + namedGraphURI);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AldapaException(e);
+        }
+    }
 
 
     /**

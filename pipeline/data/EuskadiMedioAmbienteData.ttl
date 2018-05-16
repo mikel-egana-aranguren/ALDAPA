@@ -8,7 +8,7 @@
 	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.667784994714487"^^<http://www.w3.org/2001/XMLSchema#double> .
 
 <http://es.euskadi.eus/id/public-sector/geography/province/alava> a <http://schema.org/Place> ;
-	<http://www.w3.org/2000/01/rdf-schema#label> "Araba/Álava" .
+	<http://www.w3.org/2000/01/rdf-schema#label> "Araba/Ã�lava" .
 
 <http://eu.euskadi.eus/id/public-sector/geography/town/gasteiz> a <http://schema.org/Place> ;
 	<http://www.w3.org/2000/01/rdf-schema#label> "Vitoria-Gasteiz" .
@@ -25,11 +25,11 @@
 	<http://www.w3.org/2000/01/rdf-schema#label> "Bizkaia" .
 
 <http://eu.euskadi.eus/id/public-sector/geography/town/abantozierbena> a <http://schema.org/Place> ;
-	<http://www.w3.org/2000/01/rdf-schema#label> "Abanto y Ciérvana-Abanto Zierbena" .
+	<http://www.w3.org/2000/01/rdf-schema#label> "Abanto y CiÃ©rvana-Abanto Zierbena" .
 
 <http://es.euskadi.eus/id/environment/equipment/station/agurain> a <http://www.w3.org/ns/sosa/Sensor> ;
 	<http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> ;
-	<http://schema.org/address> "C/ Fueros, 11. Subcomisaría de la Ertzaintza." ;
+	<http://schema.org/address> "C/ Fueros, 11. SubcomisarÃ­a de la Ertzaintza." ;
 	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/agurain> ;
 	<http://www.w3.org/2000/01/rdf-schema#label> "AGURAIN" ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "42.84901250588428"^^<http://www.w3.org/2001/XMLSchema#double> ;
@@ -51,7 +51,7 @@
 
 <http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> a <http://www.w3.org/ns/sosa/Sensor> ;
 	<http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> ;
-	<http://schema.org/address> "C/ Baztieta, s/n. Bº Irauregi" ;
+	<http://schema.org/address> "C/ Baztieta, s/n. BÂº Irauregi" ;
 	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/alonsotegi> ;
 	<http://www.w3.org/2000/01/rdf-schema#label> "ALONSOTEGI" ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.247567997964374"^^<http://www.w3.org/2001/XMLSchema#double> ;

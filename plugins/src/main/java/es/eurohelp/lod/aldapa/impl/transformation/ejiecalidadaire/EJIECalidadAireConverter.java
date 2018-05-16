@@ -58,8 +58,9 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
             }
             process += 1;
             String name = record.get("Name");
-            String stationUri = EUSURI.BASEIDES.getValue() + NTITOKEN.ENVIRONMENT.getValue() + "/" + DOMAINTOKEN.EQUIPMENT.getValue() + "/"
-                    + CLASSTOKEN.STATION.getValue() + "/" + URIUtils.urify(null, null, name);
+            String stationUri = EUSURI.BASEIDES.getValue() + NTITOKEN.ENVIRONMENT.getValue() + "/"
+                    + DOMAINTOKEN.EQUIPMENT.getValue() + "/" + CLASSTOKEN.STATION.getValue() + "/"
+                    + URIUtils.urify(null, null, name);
             adder.addRDFSLABELTriple(stationUri, name, "es");
 
             String comment = record.get("Description");
@@ -78,10 +79,12 @@ public class EJIECalidadAireConverter extends CSV2RDFBatchConverter implements F
             adder.addDataTripleXSDString(stationUri, EXTERNALPROPERTY.SCHEMAADDRESS.getValue(), address);
 
             String latitude = record.get("Latitude");
-            adder.addDataTripleXSDdouble(stationUri, EXTERNALPROPERTY.LATWGS84.getValue(), Double.valueOf(latitude.replace(",", ".")));
+            adder.addDataTripleXSDdouble(stationUri, EXTERNALPROPERTY.LATWGS84.getValue(),
+                    Double.valueOf(latitude.replace(",", ".")));
 
             String longitude = record.get("Longitude");
-            adder.addDataTripleXSDdouble(stationUri, EXTERNALPROPERTY.LONGWGS84.getValue(), Double.valueOf(longitude.replace(",", ".")));
+            adder.addDataTripleXSDdouble(stationUri, EXTERNALPROPERTY.LONGWGS84.getValue(),
+                    Double.valueOf(longitude.replace(",", ".")));
 
             adder.addRDFTYPETriple(stationUri, EXTERNALCLASS.SOSASENSOR.getValue());
         }

@@ -24,7 +24,8 @@ import es.eurohelp.lod.aldapa.util.MIMEType;
 
 /**
  * 
- * A simple memory store that does not persist data, based on RDF4J. To persist data, use flushGraph.
+ * A simple memory store that does not persist data, based on RDF4J. To persist
+ * data, use flushGraph.
  * 
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
@@ -39,7 +40,6 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
         super();
         conn = super.getConnection();
     }
-
 
     public void stopRDFStore() {
         super.shutdownAtOnce();
@@ -73,16 +73,16 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
 
         // Issue 26
         switch (foundtype) {
-            case TURTLE:
-                rdfwriter = new TurtleWriter(outputstream);
-                LOGGER.info("TurtleWriter chosen");
-                break;
-            case TRIG:
-                rdfwriter = new TriGWriter(outputstream);
-                LOGGER.info("TriGWriter chosen");
-                break;
-            default:
-                break;
+        case TURTLE:
+            rdfwriter = new TurtleWriter(outputstream);
+            LOGGER.info("TurtleWriter chosen");
+            break;
+        case TRIG:
+            rdfwriter = new TriGWriter(outputstream);
+            LOGGER.info("TriGWriter chosen");
+            break;
+        default:
+            break;
         }
 
         if (graphURI != null) {
@@ -94,7 +94,6 @@ public class MemoryRDFStore extends MemoryStoreRDF4JConnection implements Functi
         }
     }
 
-  
     public void deleteGraph(String graphUri) throws RDFStoreException {
         throw new UnsupportedOperationException("This functionality has not been implemented yet");
     }

@@ -20,7 +20,8 @@ import es.eurohelp.lod.aldapa.util.YAMLUtils;
 public class YAMLUtilsTest {
 
     /**
-     * Test method for {@link es.eurohelp.lod.aldapa.util.YAMLUtils#parseSimpleYAML(java.io.InputStream)}.
+     * Test method for
+     * {@link es.eurohelp.lod.aldapa.util.YAMLUtils#parseSimpleYAML(java.io.InputStream)}.
      */
     @Test
     public final void testParseSimpleYAML() {

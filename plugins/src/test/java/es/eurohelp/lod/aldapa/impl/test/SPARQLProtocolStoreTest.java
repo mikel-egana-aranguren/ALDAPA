@@ -35,7 +35,7 @@ public class SPARQLProtocolStoreTest {
     private static final String SUBJECT = "http://blazegraph.com/blazegraph";
     private static final String PREDICATE = "http://blazegraph.com/implements";
     private static final String OBJECT = "http://example.com/testing";
-    
+
     private static SPARQLProtocolStore sparqlStore;
 
     @BeforeClass

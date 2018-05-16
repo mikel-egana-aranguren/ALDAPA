@@ -18,7 +18,8 @@ public interface FunctionalDBRDFStore extends FunctionalRDFStore {
 
     /**
      * 
-     * Create a DataBase (Stardog) / Namespace (Blazegraph)/ whatever within the store
+     * Create a DataBase (Stardog) / Namespace (Blazegraph)/ whatever within the
+     * store
      * 
      * @param dbName
      * @throws IOException
@@ -38,7 +39,7 @@ public interface FunctionalDBRDFStore extends FunctionalRDFStore {
     void setDB(String dbName) throws AldapaException;
 
     void deleteDB(String dbName) throws AldapaException;
-    
+
     public Set<String> getDBs() throws AldapaException;
 
 }

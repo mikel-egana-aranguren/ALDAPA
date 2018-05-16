@@ -25,10 +25,10 @@ import es.eurohelp.lod.aldapa.util.YAMLUtils;
 
 /**
  * 
- * A configuration manager holds the configuration properties and prepares the described plugins. The main file should
- * contain pointers to other
- * files, each file having the configuration of each module. See configuration.yml and the folder configuration for
- * details.
+ * A configuration manager holds the configuration properties and prepares the
+ * described plugins. The main file should contain pointers to other files, each
+ * file having the configuration of each module. See configuration.yml and the
+ * folder configuration for details.
  * 
  * @author Mikel Egana Aranguren, Eurohelp consulting S.L.
  * 
@@ -56,14 +56,16 @@ public class ConfigurationManager {
     private static final String ABSTRACTRESTSTORERDF4JCONNECTION = "es.eurohelp.lod.aldapa.storage.RESTStoreRDF4JConnection";
     private static final String ENDPOINTURLTOKEN = "endpointURL";
     private static final String DBNAMETOKEN = "dbName";
+    private static final String DBUSERTOKEN = "user";
+    private static final String DBPASSWORDTOKEN = "password";
+
+    // RDF4JWorkbench
+    private static final String ABSTRACTRDF4JWORKBENCHCONNECTION = "es.eurohelp.lod.aldapa.storage.RDF4JHTTPConnection";
 
     // CSV2RDF transformer
     private static final String TRANSFORMERCONFGIFILE = "TRANSFORMER_CONFIG_FILE";
     private static final String ABSTRACTCSV2RDFBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFBatchConverter";
     private static final String ABSTRACTCSV2RDFMAPPEDBATCHCONVERTER = "es.eurohelp.lod.aldapa.transformation.CSV2RDFMappedBatchConverter";
-
-    // RDF4JWorkbench
-    private static final String ABSTRACTRDF4JWORKBENCHCONNECTION = "es.eurohelp.lod.aldapa.storage.RDF4JHTTPConnection";
 
     // RDF validator
     private static final String VALIDATORCONFIGFILE = "VALIDATOR_CONFIG_FILE";
@@ -142,7 +144,7 @@ public class ConfigurationManager {
      *            main config file name
      * @author acarbajo
      * @throws ConfigurationFileIOException
-     *             expection will occur when any of the configuration properties' file is not successfully loaded.
+     *             exception will occur when any of the configuration properties' file is not successfully loaded.
      */
     private void loadProperties(String configurationFileName) throws ConfigurationFileIOException, IOException {
         InputStream configInStream = FileUtils.getInstance().getInputStream(configurationFileName);
@@ -248,7 +250,9 @@ public class ConfigurationManager {
                 cArg[0] = HTTPRepository.class;
                 String endpointURL = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, ENDPOINTURLTOKEN);
                 HTTPRepository repo = new HTTPRepository(endpointURL);
-                repo.setUsernameAndPassword("admin", "admin");
+                String user = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, DBUSERTOKEN);
+                String psswd = this.getConfigPropertyValue(TRIPLESTORECONFIGFILE, DBPASSWORDTOKEN);
+                repo.setUsernameAndPassword(user, psswd);
                 rdfStore = (FunctionalRDFStore) rdfStoreClass.getDeclaredConstructor(cArg).newInstance(repo);
                 LOGGER.info(STORE_STARTED);
                 LOGGER.info("RD4J Workbench Database started");

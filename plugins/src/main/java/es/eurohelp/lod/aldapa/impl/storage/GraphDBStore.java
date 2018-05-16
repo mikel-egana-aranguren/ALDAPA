@@ -119,6 +119,7 @@ public class GraphDBStore extends DBRDFStore implements FunctionalDBRDFStore {
 
     @Override
     public void commit() {
-        throw new AldapaException(TOIMPLEMENT);
+        this.mainrepo.getConnection().commit();
     }
+
 }

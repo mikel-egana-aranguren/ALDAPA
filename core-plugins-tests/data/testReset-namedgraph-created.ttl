@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 _:node1c7r3kikqx2 a <https://www.w3.org/ns/prov#Activity> ;
 	<https://www.w3.org/ns/prov#endedAtTime> "2018-03-05T13:54:31.400"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
@@ -27,7 +27,7 @@ _:node1c7r3kikqx3 a <https://www.w3.org/ns/prov#Usage> ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0741559961978044"^^<http://www.w3.org/2001/XMLSchema#double> .
 
 <http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> ;
-	<http://schema.org/address> "C/ Fueros, 11. Subcomisaría de la Ertzaintza." ;
+	<http://schema.org/address> "C/ Fueros, 11. SubcomisarÃ­a de la Ertzaintza." ;
 	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/agurain> ;
 	a <http://www.w3.org/ns/sosa/Sensor> ;
 	<http://www.w3.org/2000/01/rdf-schema#label> "AGURAIN" ;
@@ -43,7 +43,7 @@ _:node1c7r3kikqx3 a <https://www.w3.org/ns/prov#Usage> ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0227822073211765"^^<http://www.w3.org/2001/XMLSchema#double> .
 
 <http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> ;
-	<http://schema.org/address> "C/ Baztieta, s/n. Bº Irauregi" ;
+	<http://schema.org/address> "C/ Baztieta, s/n. BÂº Irauregi" ;
 	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/alonsotegi> ;
 	a <http://www.w3.org/ns/sosa/Sensor> ;
 	<http://www.w3.org/2000/01/rdf-schema#label> "ALONSOTEGI" ;
@@ -51,13 +51,13 @@ _:node1c7r3kikqx3 a <https://www.w3.org/ns/prov#Usage> ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.988024000380936"^^<http://www.w3.org/2001/XMLSchema#double> .
 
 <http://es.euskadi.eus/id/public-sector/geography/province/alava> a <http://schema.org/Place> ;
-	<http://www.w3.org/2000/01/rdf-schema#label> "Araba/Álava" .
+	<http://www.w3.org/2000/01/rdf-schema#label> "Araba/Ã�lava" .
 
 <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> a <http://schema.org/Place> ;
 	<http://www.w3.org/2000/01/rdf-schema#label> "Bizkaia" .
 
 <http://eu.euskadi.eus/id/public-sector/geography/town/abantozierbena> a <http://schema.org/Place> ;
-	<http://www.w3.org/2000/01/rdf-schema#label> "Abanto y Ciérvana-Abanto Zierbena" .
+	<http://www.w3.org/2000/01/rdf-schema#label> "Abanto y CiÃ©rvana-Abanto Zierbena" .
 
 <http://eu.euskadi.eus/id/public-sector/geography/town/agurain> a <http://schema.org/Place> ;
 	<http://www.w3.org/2000/01/rdf-schema#label> "Agurain/Salvatierra" .
@@ -81,7 +81,6 @@ _:node1c7r3kikqx3 a <https://www.w3.org/ns/prov#Usage> ;
 	<http://www.w3.org/ns/sparql-service-description#namedGraph> <http://euskadi.eus/graph/donosti-parkings-febr-001> .
 
 <http://lod.eurohelp.es/aldapa/project/donosti-movilidad> a <http://xmlns.com/foaf/0.1/Project> .
-=======
 
 _:node1cctcjd5fx4 a <https://www.w3.org/ns/prov#Activity> ;
 	<https://www.w3.org/ns/prov#endedAtTime> "2018-05-07T15:28:08.107"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
@@ -110,7 +109,7 @@ _:node1cctcjd5fx5 a <https://www.w3.org/ns/prov#Usage> ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0741559961978044"^^<http://www.w3.org/2001/XMLSchema#double> .
 
 <http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> ;
-	<http://schema.org/address> "C/ Fueros, 11. Subcomisaría de la Ertzaintza." ;
+	<http://schema.org/address> "C/ Fueros, 11. SubcomisarÃ­a de la Ertzaintza." ;
 	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/agurain> ;
 	a <http://www.w3.org/ns/sosa/Sensor> ;
 	<http://www.w3.org/2000/01/rdf-schema#label> "AGURAIN" ;
@@ -126,7 +125,7 @@ _:node1cctcjd5fx5 a <https://www.w3.org/ns/prov#Usage> ;
 	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0227822073211765"^^<http://www.w3.org/2001/XMLSchema#double> .
 
 <http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> ;
-	<http://schema.org/address> "C/ Baztieta, s/n. Bº Irauregi" ;
+	<http://schema.org/address> "C/ Baztieta, s/n. BÂº Irauregi" ;
 	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/alonsotegi> ;
 	a <http://www.w3.org/ns/sosa/Sensor> ;
 	<http://www.w3.org/2000/01/rdf-schema#label> "ALONSOTEGI" ;
@@ -143,4 +142,64 @@ _:node1cctcjd5fx5 a <https://www.w3.org/ns/prov#Usage> ;
 	<http://www.w3.org/ns/sparql-service-description#namedGraph> <http://euskadi.eus/graph/donosti-parkings-febr-001> .
 
 <http://lod.eurohelp.es/aldapa/project/donosti-movilidad> a <http://xmlns.com/foaf/0.1/Project> .
->>>>>>> refs/remotes/origin/develop
+
+_:node1cdi6qoksx4 a <https://www.w3.org/ns/prov#Activity> ;
+	<https://www.w3.org/ns/prov#endedAtTime> "2018-05-15T17:31:20.834"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<https://www.w3.org/ns/prov#qualifiedUsage> _:node1cdi6qoksx5 ;
+	<https://www.w3.org/ns/prov#startedAtTime> "2018-05-15T17:31:20.819"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<https://www.w3.org/ns/prov#wasAssociatedWith> <http://lod.eurohelp.es/aldapa/plugin/es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire.EJIECalidadAireConverter> .
+
+_:node1cdi6qoksx5 a <https://www.w3.org/ns/prov#Usage> ;
+	<https://www.w3.org/ns/prov#entity> <https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv> ;
+	<https://www.w3.org/ns/prov#hadRole> <http://www.w3.org/ns/csvw#csvEncodedTabularData> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/3-de-marzo> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> ;
+	<http://schema.org/address> "Plaza Tres de Marzo, s/n" ;
+	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/gasteiz> ;
+	a <http://www.w3.org/ns/sosa/Sensor> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "3 DE MARZO" ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "42.85604797053618"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.667784994714487"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/abanto> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> ;
+	<http://schema.org/address> "Avda. del Minero, 2. Ayuntamiento" ;
+	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/abantozierbena> ;
+	a <http://www.w3.org/ns/sosa/Sensor> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "ABANTO" ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.32047399433485"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0741559961978044"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/agurain> <http://dbpedia.org/ontology/province> <http://es.euskadi.eus/id/public-sector/geography/province/alava> ;
+	<http://schema.org/address> "C/ Fueros, 11. SubcomisarÃ­a de la Ertzaintza." ;
+	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/agurain> ;
+	a <http://www.w3.org/ns/sosa/Sensor> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "AGURAIN" ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "42.84901250588428"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.3937033896081683"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/algorta-bbizi2> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> ;
+	<http://schema.org/address> "Carretera de Galea, s/n " ;
+	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/getxo> ;
+	a <http://www.w3.org/ns/sosa/Sensor> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "ALGORTA (BBIZI2)" ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.362055748944286"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-3.0227822073211765"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://es.euskadi.eus/id/environment/equipment/station/alonsotegi> <http://dbpedia.org/ontology/province> <http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia> ;
+	<http://schema.org/address> "C/ Baztieta, s/n. BÂº Irauregi" ;
+	<http://schema.org/location> <http://eu.euskadi.eus/id/public-sector/geography/town/alonsotegi> ;
+	a <http://www.w3.org/ns/sosa/Sensor> ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "ALONSOTEGI" ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#lat> "43.247567997964374"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#long> "-2.988024000380936"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://euskadi.eus/graph/donosti-parkings-febr-001> <https://www.w3.org/ns/prov#wasGeneratedBy> _:node1cdi6qoksx4 .
+
+<http://lod.eurohelp.es/aldapa/catalog/donosti-parkings> <http://schema.org/isPartOf> <http://lod.eurohelp.es/aldapa/project/donosti-movilidad> ;
+	a <http://www.w3.org/ns/dcat#Catalog> ;
+	<http://www.w3.org/ns/dcat#dataset> <http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr> .
+
+<http://lod.eurohelp.es/aldapa/dataset/donosti-parkings-febr> a <http://rdfs.org/ns/void#Dataset> , <http://schema.org/Distribution> , <http://www.w3.org/ns/dcat#Distribution> ;
+	<http://www.w3.org/ns/sparql-service-description#namedGraph> <http://euskadi.eus/graph/donosti-parkings-febr-001> .
+
+<http://lod.eurohelp.es/aldapa/project/donosti-movilidad> a <http://xmlns.com/foaf/0.1/Project> .
