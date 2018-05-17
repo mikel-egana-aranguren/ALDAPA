@@ -18,7 +18,7 @@ This project is funded by the Torres Quevedo Program (PTQ-14-07198) of the Spani
 
 ---
 
-[![Build Status](https://travis-ci.org/mikel-egana-aranguren/ALDAPA.svg?branch=develop)](https://travis-ci.org/mikel-egana-aranguren/ALDAPA) 
+[![Build Status](https://travis-ci.org/mikel-egana-aranguren/ALDAPA.svg?branch=release-0.0.7)](https://travis-ci.org/mikel-egana-aranguren/ALDAPA) 
 [![codecov](https://codecov.io/gh/mikel-egana-aranguren/ALDAPA/branch/develop/graph/badge.svg)](https://codecov.io/gh/mikel-egana-aranguren/ALDAPA) 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://github.com/mikel-egana-aranguren/ALDAPA/blob/master/LICENSE)  
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b07a17dfb28a4e0784cbefcc9cfb8692)](https://www.codacy.com/app/mikel-egana-aranguren/ALDAPA?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mikel-egana-aranguren/ALDAPA&amp;utm_campaign=Badge_Grade)

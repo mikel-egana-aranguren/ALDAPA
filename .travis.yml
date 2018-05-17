@@ -10,7 +10,7 @@ script:
 
 branches:
   only:
-  - develop
+  - release-0.0.7
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
