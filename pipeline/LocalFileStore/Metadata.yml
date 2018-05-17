@@ -1,0 +1,2 @@
+estaciones.csv: https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv
+parkings.csv: https://github.com/mishel-uchuari/Replicate-LinkedOpenData-Datasets/blob/pipeline-parkingsrdfcreator/CSVToRDFParkings/newdata/parkings.csv

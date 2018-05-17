@@ -13,6 +13,7 @@ public class CouldNotInitialisePluginException extends AldapaException {
     private static String message = "ALDAPA cannot initialise class";
 
     public CouldNotInitialisePluginException() {
+        super();
     }
 
     /**

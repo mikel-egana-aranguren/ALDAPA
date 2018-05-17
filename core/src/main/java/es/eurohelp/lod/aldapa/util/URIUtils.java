@@ -62,7 +62,7 @@ public class URIUtils {
 
         // Main replacement and collapse contigous replacement characters
         if (regexp == null) {
-            regularExpression = "\\(|\\)|\\s|\\/|\\.|:|!|\\?|\\[|\\]|;|\\+|_|\\*|ª|º";
+            regularExpression = "\\(|\\)|\\s|\\/|\\.|:|!|\\?|\\[|\\]|;|\\+|_|\\*|ª|º|,";
         } else {
             regularExpression = regexp;
         }

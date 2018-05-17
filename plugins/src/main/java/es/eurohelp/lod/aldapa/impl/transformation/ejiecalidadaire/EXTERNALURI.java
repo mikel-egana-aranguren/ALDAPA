@@ -10,7 +10,7 @@ package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
 enum EXTERNALURI {
     LATWGS84("http://www.w3.org/2003/01/geo/wgs84_pos#lat"), LONGWGS84("http://www.w3.org/2003/01/geo/wgs84_pos#long"), TIMEMINUTES(
             "http://www.w3.org/2006/time#minutes"), DBOPROVINCE("http://dbpedia.org/ontology/province"), SCHEMALOCATION(
-                    "http://schema.org/location"), SCHEMAADDRESS("http://schema.org/address"), SOSASENSOR("http://www.w3.org/ns/sosa/Sensor");
+                    "http://schema.org/location"), SCHEMAADDRESS("http://schema.org/address"), SOSASENSOR("http://www.w3.org/ns/sosa/Sensor"), SCHEMAPLACE("http://schema.org/Place");
 
     public final String externaluri;
 

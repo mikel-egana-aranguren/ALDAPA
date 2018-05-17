@@ -32,11 +32,13 @@ public class ConfigurationManagerTest {
 
     private static final String CONFIGFILE = "configuration.yml";
     private static final String CONFIGFILE2 = "configuration2.yml";
+    private static final String CONFIGFILE3 = "configuration3.yml";
     private static final String EJIEFILE = "estaciones.csv";
     private static final String EJIEFILEURL = "https://raw.githubusercontent.com/opendata-euskadi/LOD-datasets/master/calidad-aire-en-euskadi-2017/estaciones.csv";
     private static final String CSVFILE = "data/OpenDataEuskadiCalidadDelAire/estaciones.csv";
     private static ConfigurationManager testManager;
     private static ConfigurationManager testManager2;
+    private static ConfigurationManager testManager3;
 
     private static final Logger LOGGER = LogManager.getLogger(ConfigurationManagerTest.class);
 
@@ -44,6 +46,7 @@ public class ConfigurationManagerTest {
     public static void setUpBeforeClass() {
         testManager = ConfigurationManager.getInstance(CONFIGFILE);
         testManager2 = ConfigurationManager.getInstance(CONFIGFILE2);
+        testManager3 = ConfigurationManager.getInstance(CONFIGFILE3);
     }
 
     @Test
@@ -51,7 +54,7 @@ public class ConfigurationManagerTest {
         try {
             FunctionalFileStore fileStore = testManager.getFileStore();
             fileStore.getFileHTTP(EJIEFILEURL, EJIEFILE, true);
-            assertEquals("data/", fileStore.getDirectoryPath());
+            assertEquals("data/LocalFileStore/", fileStore.getDirectoryPath());
             assertTrue(Files.exists(Paths.get(fileStore.getDirectoryPath() + EJIEFILE)));
         } catch (AldapaException e) {
             LOGGER.error(e);
@@ -63,7 +66,8 @@ public class ConfigurationManagerTest {
         try {
             FunctionalRDFStore rdfStore = testManager.getRDFStore();
             ModelBuilder builder = new ModelBuilder();
-            builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
+            builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist")
+                    .add(FOAF.FIRST_NAME, "Pablo");
             Model model = builder.build();
             rdfStore.saveModel(model);
         } catch (AldapaException e) {
@@ -76,12 +80,23 @@ public class ConfigurationManagerTest {
         try {
             FunctionalRDFStore rdfStore = testManager2.getRDFStore();
             ModelBuilder builder = new ModelBuilder();
-            builder.setNamespace("ex", "http://example.com/").subject("ex:Mikel").add(RDF.TYPE, "ex:Developer").add(FOAF.FIRST_NAME, "Mikel");
+            builder.setNamespace("ex", "http://example.com/").subject("ex:Mikel").add(RDF.TYPE, "ex:Developer")
+                    .add(FOAF.FIRST_NAME, "Mikel");
             Model model = builder.build();
             rdfStore.saveModel(model);
         } catch (AldapaException e) {
             LOGGER.error(e);
         }
+    }
+
+    @Test
+    public void testRDF4JWorkbench() {
+        FunctionalRDFStore rdfStore = testManager3.getRDFStore();
+        ModelBuilder builder = new ModelBuilder();
+        builder.setNamespace("ex", "http://example.com/").subject("ex:Mikel").add(RDF.TYPE, "ex:Developer")
+                .add(FOAF.FIRST_NAME, "Mikel");
+        Model model = builder.build();
+        rdfStore.saveModel(model);
     }
 
     @Test

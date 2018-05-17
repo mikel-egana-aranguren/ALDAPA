@@ -13,6 +13,7 @@ public class NamedGraphExistsException extends AldapaException {
     private static final String MESSAGE = "The Named Graph URI already exists in the RDF Store";
 
     public NamedGraphExistsException() {
+        super();
     }
 
     /**

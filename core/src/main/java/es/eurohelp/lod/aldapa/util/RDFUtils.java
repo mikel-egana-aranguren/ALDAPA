@@ -5,6 +5,9 @@ package es.eurohelp.lod.aldapa.util;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +18,7 @@ import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.Rio;
 
 import es.eurohelp.lod.aldapa.storage.FunctionalRDFStore;
 import es.eurohelp.lod.aldapa.storage.RDFStoreException;
@@ -47,5 +51,18 @@ public class RDFUtils {
         Model model = ModelFactory.createDefaultModel();
         model.read(TMPFILE);
         return model;
+    }
+
+    public static String currentInstantToXSDDateTime() {
+        return LocalDateTime.now(ZoneId.systemDefault()).toString();
+    }
+
+    public static void writeModel(org.eclipse.rdf4j.model.Model model, String pathToFile, RDFFormat rdfFormat) throws IOException {
+        FileOutputStream out = new FileOutputStream(pathToFile);
+        try {
+            Rio.write(model, out, rdfFormat);
+        } finally {
+            out.close();
+        }
     }
 }

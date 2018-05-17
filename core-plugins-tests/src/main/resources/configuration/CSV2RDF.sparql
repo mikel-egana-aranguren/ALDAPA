@@ -1,0 +1,18 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+CONSTRUCT {
+    ?cargoURI rdfs:label ?NombreApellidos
+}
+WHERE {
+    GRAPH <http://data.euskadi.eus/graph/cargos>{
+        ?row <urn:aldapa:csv2rdf:cell> ?cellNombre .
+        	?cellNombre <urn:aldapa:csv2rdf:cellvalue> ?nombre  ;
+			<urn:aldapa:csv2rdf:columnname> "Nombre"  .
+        ?row <urn:aldapa:csv2rdf:cell> ?cellApellidos .
+        	?cellApellidos <urn:aldapa:csv2rdf:cellvalue> ?apellidos  ;
+			<urn:aldapa:csv2rdf:columnname> "Apellidos" .
+    }
+    BIND(CONCAT(STR(?nombre),STR(?apellidos)) AS ?NombreApellidos)
+    BIND(REPLACE(LCASE(STR(?NombreApellidos)), "\\s", "") AS ?NombreApellidosURIFied)
+	BIND(URI(CONCAT("http://data.euskadi.eus/id/public-sector/entity/person/", ?NombreApellidosURIFied)) as ?cargoURI)
+}

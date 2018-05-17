@@ -7,7 +7,7 @@ package es.eurohelp.lod.aldapa.impl.transformation.ejiecalidadaire;
  * @author Mikel Egana Aranguren, Eurohelp Consulting S.L.
  *
  */
-enum EUSPLACEURI {
+public enum EUSPLACEURI {
     ARABA("http://eu.euskadi.eus/id/public-sector/geography/province/araba"), BIZKAIA(
             "http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia"), GIPUZKOA(
                     "http://eu.euskadi.eus/id/public-sector/geography/province/bizkaia"), ALAVA(

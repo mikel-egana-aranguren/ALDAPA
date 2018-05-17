@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.eurohelp.lod.aldapa.impl.test;
 
 import static org.junit.Assert.*;
@@ -44,8 +41,9 @@ public class BlazegraphRESTStoreTest {
     private static final String GRAPHQUERY = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "CONSTRUCT {"
             + "?o <http://example.com/prop> ?s ." + "}" + "WHERE { " + "?s rdf:type ?o . " + "}";
     private static final String BOOLEANQUERYASK = "PREFIX foaf:<http://xmlns.com/foaf/0.1/> PREFIX ex:<http://example.org/> ASK {ex:Picasso foaf:firstName ?name}";
-    private static final String QUERYDELETE = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + "PREFIX ex:<http://example.org/> "
-            + "DELETE {" + "?artist rdf:type ex:Artist . " + "}" + "WHERE { " + "?artist rdf:type ex:Artist . " + "}";
+    private static final String QUERYDELETE = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+            + "PREFIX ex:<http://example.org/> " + "DELETE {" + "?artist rdf:type ex:Artist . " + "}" + "WHERE { "
+            + "?artist rdf:type ex:Artist . " + "}";
     private static final String STMT = "(http://example.org/Artist, http://example.com/prop, http://example.org/Picasso)";
     private static final String SUBJECT = "http://example.org/Picasso";
     private static final String PREDICATE = "http://xmlns.com/foaf/0.1/firstName";
@@ -70,7 +68,8 @@ public class BlazegraphRESTStoreTest {
 
             store = new BlazegraphRESTStore(blazegraph, DBNAME);
             ModelBuilder builder = new ModelBuilder();
-            builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist").add(FOAF.FIRST_NAME, "Pablo");
+            builder.setNamespace("ex", "http://example.org/").subject("ex:Picasso").add(RDF.TYPE, "ex:Artist")
+                    .add(FOAF.FIRST_NAME, "Pablo");
             Model model = builder.build();
             store.saveModel(model);
         } catch (AldapaException | IOException e) {
@@ -155,13 +154,15 @@ public class BlazegraphRESTStoreTest {
     public final void testFlushGraph() {
         try {
             ModelBuilder builder = new ModelBuilder();
-            builder.namedGraph(ALDAPAFLUSHURI).setNamespace("ex", "http://lod.eurohelp.es/flush").subject("ex:Mikelflush")
-                    .add(RDF.TYPE, "ex:Humanflush").add(FOAF.FIRST_NAME, "Mikel Egana Aranguren flush flush flush");
+            builder.namedGraph(ALDAPAFLUSHURI).setNamespace("ex", "http://lod.eurohelp.es/flush")
+                    .subject("ex:Mikelflush").add(RDF.TYPE, "ex:Humanflush")
+                    .add(FOAF.FIRST_NAME, "Mikel Egana Aranguren flush flush flush");
             Model model = builder.build();
             store.saveModel(model);
             store.flushGraph(ALDAPAFLUSHURI, new FileOutputStream("data/BlazegraphRESTStoreTest-flushNamedGraph.trig"),
                     RDFFormat.TRIG);
-            store.flushGraph(null, new FileOutputStream("data/BlazegraphRESTStoreTest-flushNullGraph.ttl"), RDFFormat.TURTLE);
+            store.flushGraph(null, new FileOutputStream("data/BlazegraphRESTStoreTest-flushNullGraph.ttl"),
+                    RDFFormat.TURTLE);
             store.deleteGraph(ALDAPAFLUSHURI);
         } catch (AldapaException | IOException e) {
             LOGGER.error(e);
@@ -171,8 +172,8 @@ public class BlazegraphRESTStoreTest {
     @Test
     public final void testDeleteGraph() {
         ModelBuilder builder = new ModelBuilder();
-        builder.namedGraph("http://lod.eurohelp.es/graph/aldapa").setNamespace("ex", "http://lod.eurohelp.es/").subject("ex:Mikel")
-                .add(RDF.TYPE, "ex:Human").add(FOAF.FIRST_NAME, "Mikel Egana Aranguren");
+        builder.namedGraph("http://lod.eurohelp.es/graph/aldapa").setNamespace("ex", "http://lod.eurohelp.es/")
+                .subject("ex:Mikel").add(RDF.TYPE, "ex:Human").add(FOAF.FIRST_NAME, "Mikel Egana Aranguren");
         Model model = builder.build();
         store.saveModel(model);
         store.deleteGraph("http://lod.eurohelp.es/graph/aldapa");

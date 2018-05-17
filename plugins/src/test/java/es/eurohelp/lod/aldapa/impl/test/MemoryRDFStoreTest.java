@@ -42,7 +42,7 @@ public class MemoryRDFStoreTest {
     private static final String BOOLEANQUERYASK = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> ASK WHERE { ?project rdf:type foaf:Project . }";
     private static final String QUERYDELETE = "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> DELETE { ?project rdf:type foaf:Project . } WHERE { ?project rdf:type foaf:Project . }";
     private static final String TRIG = ".trig";
-    
+
     private MemoryRDFStore memStore = null;
 
     private static final Logger LOGGER = LogManager.getLogger(MemoryRDFStoreTest.class);
@@ -94,8 +94,10 @@ public class MemoryRDFStoreTest {
             InputStream inStream = FileUtils.getInstance().getInputStream(INPUTFILEGRAPHS);
             Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
             memStore.saveModel(model);
-            memStore.flushGraph(DATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "Data" + TRIG), RDFFormat.TRIG);
-            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaData" + TRIG), RDFFormat.TRIG);
+            memStore.flushGraph(DATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "Data" + TRIG),
+                    RDFFormat.TRIG);
+            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaData" + TRIG),
+                    RDFFormat.TRIG);
         } catch (AldapaException | IOException e) {
             LOGGER.error(e);
         }
@@ -140,7 +142,8 @@ public class MemoryRDFStoreTest {
             Model model = Rio.parse(inStream, TMPURI, RDFFormat.TRIG);
             memStore.saveModel(model);
             memStore.execSPARQLUpdate(QUERYDELETE);
-            memStore.flushGraph(METADATAGRAPHURI, new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaDataProjectRemoved" + TRIG), RDFFormat.TRIG);
+            memStore.flushGraph(METADATAGRAPHURI,
+                    new FileOutputStream(OUTPUTFILENOEXTENSION + "MetaDataProjectRemoved" + TRIG), RDFFormat.TRIG);
         } catch (AldapaException | IOException e) {
             LOGGER.error(e);
         }

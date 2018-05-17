@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.eurohelp.lod.aldapa.core.test;
 
 import static org.junit.Assert.*;
@@ -43,7 +40,8 @@ public class ConfigurationManagerTest {
 
     @Test
     public final void testGetConfigPropertyValue() throws IOException, ConfigurationException {
-        assertEquals("http://lod.eurohelp.es/aldapa/project/", testManager.getConfigPropertyValue(ALDAPACONFIGFILETOKEN, PROJECTBASETOKEN));
+        assertEquals("http://lod.eurohelp.es/aldapa/project/",
+                testManager.getConfigPropertyValue(ALDAPACONFIGFILETOKEN, PROJECTBASETOKEN));
     }
 
     @Test
