@@ -5,8 +5,7 @@ sudo: false
 jdk: oraclejdk8
 
 script: 
-- mvn clean
-- mvn install -U
+- mvn -U clean install
 - mvn cobertura:cobertura
 
 branches:
